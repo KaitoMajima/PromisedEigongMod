@@ -1,4 +1,6 @@
-﻿namespace PromisedEigong;
+﻿using UnityEngine.SceneManagement;
+
+namespace PromisedEigong;
 
 using HarmonyLib;
 using I2.Loc;
@@ -7,7 +9,7 @@ using UnityEngine;
 using static PromisedEigongModGlobalSettings.EigongLocs;
 using static PromisedEigongModGlobalSettings.EigongTitle;
 using static PromisedEigongModGlobalSettings.EigongRefs;
-using static PromisedEigongModGlobalSettings.EigongAttackRefs;
+using static PromisedEigongModGlobalSettings.EigongAttackAnimationRefs;
 using static PromisedEigongModGlobalSettings.EigongDamageBoost;
 
 [HarmonyPatch]
@@ -48,33 +50,53 @@ public class Patches {
     [HarmonyPatch(typeof(PlayerHealth), "ReceiveDamage")]
     static void EigongBoostDamage (PlayerHealth __instance, ref DamageDealer damageDealer)
     {
-        if (damageDealer.Owner.currentPlayingAnimatorState == EIGONG_TALISMAN_ATTACK_1 ||
-            damageDealer.Owner.currentPlayingAnimatorState == EIGONG_TALISMAN_ATTACK_2)
+        if (damageDealer.Owner.name != BIND_MONSTER_EIGONG_NAME)
+            return;
+
+        switch (damageDealer.Owner.currentPlayingAnimatorState)
         {
-            var parentScalarSource = damageDealer.GetComponentInParent<DamageScalarSource>();
-            var invoker = AccessTools.FieldRefAccess<MonsterStat, float>("BaseAttackValue");
-            var valueGet = invoker.Invoke(parentScalarSource.BindMonster.monsterStat);
-            invoker.Invoke(parentScalarSource.BindMonster.monsterStat) = valueGet *= EIGONG_TALISMAN_BOOST;
-            
-            ToastManager.Toast("Hit by Talisman!");
-            ToastManager.Toast("Base damage:" + parentScalarSource.BindMonster._monsterStat.AttackValue);
-            ToastManager.Toast("Final damage:" + damageDealer.DamageAmount);
+            case EIGONG_FOO_ATTACK_1 or EIGONG_FOO_ATTACK_2:
+            {
+                BoostAttack(damageDealer, EIGONG_FOO_BOOST);
+                break;
+            }
+            case EIGONG_CRIMSON_BALL_ATTACK:
+            {
+                BoostAttack(damageDealer, EIGONG_CRIMSON_BALL_BOOST);
+                break;
+            }
+            default:
+            {
+                BoostAttack(damageDealer, EIGONG_DEFAULT_ATTACK_BOOST);
+                break;
+            }
         }
     }
-    
+
     [HarmonyPostfix]
     [HarmonyPatch(typeof(PlayerHealth), "ReceiveDamage")]
     static void RevertBoostedDamage (PlayerHealth __instance, ref DamageDealer damageDealer)
     {
-        if (damageDealer.Owner.currentPlayingAnimatorState == EIGONG_TALISMAN_ATTACK_1 ||
-            damageDealer.Owner.currentPlayingAnimatorState == EIGONG_TALISMAN_ATTACK_2)
+        if (damageDealer.Owner.name != BIND_MONSTER_EIGONG_NAME)
+            return;
+
+        switch (damageDealer.Owner.currentPlayingAnimatorState)
         {
-            var parentScalarSource = damageDealer.GetComponentInParent<DamageScalarSource>();
-            var invoker = AccessTools.FieldRefAccess<MonsterStat, float>("BaseAttackValue");
-            var valueGet = invoker.Invoke(parentScalarSource.BindMonster.monsterStat);
-            invoker.Invoke(parentScalarSource.BindMonster.monsterStat) = valueGet /= EIGONG_TALISMAN_BOOST;
-            
-            ToastManager.Toast("Reverted Base Damage:" + parentScalarSource.BindMonster._monsterStat.AttackValue);
+            case EIGONG_FOO_ATTACK_1 or EIGONG_FOO_ATTACK_2:
+            {
+                BoostAttack(damageDealer, EIGONG_FOO_BOOST, revert: true);
+                break;
+            }
+            case EIGONG_CRIMSON_BALL_ATTACK:
+            {
+                BoostAttack(damageDealer, EIGONG_CRIMSON_BALL_BOOST, revert: true);
+                break;
+            }
+            default:
+            {
+                BoostAttack(damageDealer, EIGONG_DEFAULT_ATTACK_BOOST, revert: true);
+                break;
+            }
         }
     }
     
@@ -82,8 +104,35 @@ public class Patches {
     [HarmonyPatch(typeof(PlayerHealth), "ReceiveDOT_Damage")]
     static void EigongBoostFireDamage (ref float damageValue)
     {
-        //Check if Eigong
+        Scene activeScene = SceneManager.GetActiveScene();
+
+        if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
+            return;
+        
         damageValue *= EIGONG_FIRE_BOOST;
-        ToastManager.Toast("DOT Amount:" + damageValue);
+    }
+    
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(PlayerHealth), "ReceiveRecoverableDamage")]
+    static void EigongBoostRecoverableDamage (PlayerHealth __instance, ref float damage)
+    {
+        Scene activeScene = SceneManager.GetActiveScene();
+
+        if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
+            return;
+
+        damage *= EIGONG_EARLY_DEFLECT_BOOST;
+    }
+    
+    static void BoostAttack (DamageDealer damageDealer, float damageBoost, bool revert = false)
+    {
+        var parentScalarSource = damageDealer.GetComponentInParent<DamageScalarSource>();
+        var invoker = AccessTools.FieldRefAccess<MonsterStat, float>("BaseAttackValue");
+        var valueGet = invoker.Invoke(parentScalarSource.BindMonster.monsterStat);
+
+        if (revert)
+            invoker.Invoke(parentScalarSource.BindMonster.monsterStat) = valueGet / damageBoost;
+        else
+            invoker.Invoke(parentScalarSource.BindMonster.monsterStat) = valueGet * damageBoost;
     }
 }
