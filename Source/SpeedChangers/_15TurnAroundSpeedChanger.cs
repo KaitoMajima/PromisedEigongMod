@@ -2,11 +2,11 @@
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSpeed;
 
-public class ChargeWaveSpeedChanger : BaseSpeedChanger
+public class _15TurnAroundSpeedChanger : BaseSpeedChanger
 {
     public override bool IsSpecifiedAttack (string attack) 
-        => attack == ATTACK11_GIANT_CHARGE_WAVE;
+        => attack == ATTACK15_TURN_AROUND_BRIGHT_EYES;
 
-    public override float GetSpeed (BossGeneralState state) 
-        => ATTACK11_GIANT_CHARGE_WAVE_SPEED;
+    public override float GetSpeed (BossGeneralState state)
+        => ATTACK15_TURN_AROUND_BRIGHT_EYES_SPEED;
 }

@@ -38,6 +38,9 @@
         <Reference Include="I2">
             <HintPath>$(DllPath)/I2.dll</HintPath>
         </Reference>
+        <Reference Include="2dFX">
+            <HintPath>$(DllPath)/2dFx.dll</HintPath>
+        </Reference>
     </ItemGroup>
 
     <ItemGroup>

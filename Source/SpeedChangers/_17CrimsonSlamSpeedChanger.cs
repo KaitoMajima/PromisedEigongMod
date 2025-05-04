@@ -2,11 +2,11 @@
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSpeed;
 
-public class QuickFooSpeedChanger : BaseSpeedChanger
+public class _17CrimsonSlamSpeedChanger : BaseSpeedChanger
 {
     public override bool IsSpecifiedAttack (string attack) 
-        => attack == ATTACK16_QUICK_FOO;
+        => attack == ATTACK17_CRIMSON_SLAM;
 
     public override float GetSpeed (BossGeneralState state)
-        => ATTACK16_QUICK_FOO_SPEED;
+        => ATTACK17_CRIMSON_SLAM_SPEED;
 }

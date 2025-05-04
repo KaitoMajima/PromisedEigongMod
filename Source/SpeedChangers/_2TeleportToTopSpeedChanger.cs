@@ -2,11 +2,11 @@
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSpeed;
 
-public class ThrustDelaySpeedChanger : BaseSpeedChanger
+public class _2TeleportToTopSpeedChanger : BaseSpeedChanger
 {
     public override bool IsSpecifiedAttack (string attack) 
-        => attack == ATTACK3_THRUST_DELAY;
+        => attack == ATTACK2_TELEPORT_TO_TOP;
 
     public override float GetSpeed (BossGeneralState state)
-        => ATTACK3_THRUST_DELAY_SPEED;
+        => ATTACK2_TELEPORT_TO_TOP_SPEED;
 }

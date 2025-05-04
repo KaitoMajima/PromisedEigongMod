@@ -1,4 +1,5 @@
-﻿using UnityEngine.SceneManagement;
+﻿using System;
+using UnityEngine.SceneManagement;
 
 namespace PromisedEigong;
 
@@ -13,8 +14,16 @@ using static PromisedEigongModGlobalSettings.EigongAttackAnimationRefs;
 using static PromisedEigongModGlobalSettings.EigongDamageBoost;
 
 [HarmonyPatch]
-public class Patches {
-    
+public class Patches
+{
+    public static Action<SpriteRenderer> OnFoundTaiDanger;
+    public static Action<ParticleSystem> OnFoundJieChuanFireParticles;
+    public static Action<SpriteRenderer> OnFoundJieChuanFireImage;
+    public static Action<SpriteRenderer> OnFoundFooExplosionSprite;
+    public static Action<SpriteRenderer> OnFoundFooSprite;
+    public static Action<SpriteRenderer> OnFoundCrimsonGeyserSprite;
+    public static Action<SpriteRenderer> OnFoundCrimsonPillarSprite;
+        
     [HarmonyPostfix]
     [HarmonyPatch(typeof(LocalizationManager), "GetTranslation")]
     static void ChangeEigongName (string Term, ref string __result)
@@ -122,6 +131,82 @@ public class Patches {
             return;
 
         damage *= EIGONG_EARLY_DEFLECT_BOOST;
+    }
+    
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(GameLevel), "Awake")]
+    static void AddBackgroundChanger (GameLevel __instance)
+    {
+        Scene activeScene = SceneManager.GetActiveScene();
+
+        if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
+            return;
+
+        __instance.AddComp(typeof(RootPinnacleBackgroundChanger));
+    }
+    
+    [HarmonyPostfix]
+    [HarmonyPatch(typeof(PoolObject), "EnterLevelAwake")]
+    static void PoolHijack (PoolObject __instance)
+    {
+        Scene activeScene = SceneManager.GetActiveScene();
+        
+        if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
+            return;
+        
+        var taiDangerObjName = "Effect_TaiDanger(Clone)";
+
+        if (__instance.name == taiDangerObjName)
+            OnFoundTaiDanger?.Invoke(__instance.GetComponentInChildren<SpriteRenderer>());
+
+        var jiechuanFire = "Fire_FX_damage_Long jiechuan(Clone)";
+
+        if (__instance.name == jiechuanFire)
+        {
+            OnFoundJieChuanFireParticles?.Invoke(__instance.GetComponentInChildren<ParticleSystem>());
+            var sprites = __instance.GetComponentsInChildren<SpriteRenderer>();
+            foreach (var sprite in sprites)
+            {
+                if (sprite.name == "Light")
+                    OnFoundJieChuanFireImage?.Invoke(sprite);
+            }
+        }
+
+        var fooExplosionObjName = "Fx_YiGong Foo Explosion_pool obj(Clone)";
+        
+        if (__instance.name == fooExplosionObjName)
+        {
+            var sprites = __instance.GetComponentsInChildren<SpriteRenderer>(true);
+            foreach (var sprite in sprites)
+                OnFoundFooExplosionSprite?.Invoke(sprite);
+        }
+
+        var fooName = "Fx_YiGong 貼符(Clone)";
+        
+        if (__instance.name == fooName)
+        {
+            var sprites = __instance.GetComponentsInChildren<SpriteRenderer>(true);
+            foreach (var sprite in sprites)
+                OnFoundFooSprite?.Invoke(sprite);
+        }
+        
+        var crimsonGeyserName = "Fx_YiGong Upper12_pool obj(Clone)";
+        
+        if (__instance.name == crimsonGeyserName)
+        {
+            var sprites = __instance.GetComponentsInChildren<SpriteRenderer>(true);
+            foreach (var sprite in sprites)
+                OnFoundCrimsonGeyserSprite?.Invoke(sprite);
+        }
+        
+        var crimsonGeyserPillarName = "FireExplosionPillar_FX_damage(Clone)";
+        
+        if (__instance.name == crimsonGeyserPillarName)
+        {
+            var sprites = __instance.GetComponentsInChildren<SpriteRenderer>(true);
+            foreach (var sprite in sprites)
+                OnFoundCrimsonPillarSprite?.Invoke(sprite);
+        }
     }
     
     static void BoostAttack (DamageDealer damageDealer, float damageBoost, bool revert = false)

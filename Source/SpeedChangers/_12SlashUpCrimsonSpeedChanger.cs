@@ -2,11 +2,11 @@
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSpeed;
 
-public class TeleportToTopSpeedChanger : BaseSpeedChanger
+public class _12SlashUpCrimsonSpeedChanger : BaseSpeedChanger
 {
     public override bool IsSpecifiedAttack (string attack) 
-        => attack == ATTACK2_TELEPORT_TO_TOP;
+        => attack == ATTACK12_SLASH_UP_CRIMSON;
 
     public override float GetSpeed (BossGeneralState state)
-        => ATTACK2_TELEPORT_TO_TOP_SPEED;
+        => ATTACK12_SLASH_UP_CRIMSON_SPEED;
 }

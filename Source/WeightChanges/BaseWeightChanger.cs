@@ -9,23 +9,19 @@ using UnityEngine;
 
 public abstract class BaseWeightChanger
 {
-    protected virtual WeightReplaceMode WeightReplaceMode => WeightReplaceMode.Replace;
+    protected virtual WeightReplaceMode WeightReplaceMode { get; set; } = WeightReplaceMode.Replace;
     
     protected LinkNextMoveStateWeight targetStateWeight = new();
     protected List<BossGeneralState> bossStates = new();
 
-    public virtual void ChangeAttackWeight ()
-    {
-        ProcessWeight();
-    }
+    public abstract void ChangeAttackWeight ();
 
-    protected virtual void ProcessWeight ()
+    protected virtual void ProcessCurrentWeight ()
     {
         var attackWeights = new List<AttackWeight>();
         
         foreach (var bossState in bossStates)
             attackWeights.Add(CreateWeight(bossState));
-        
         
         switch (WeightReplaceMode)
         {
@@ -53,6 +49,11 @@ public abstract class BaseWeightChanger
     {
         BossGeneralState bossState = GameObject.Find(path).GetComponent<BossGeneralState>();
         bossStates.Add(bossState);
+    }
+
+    protected void SetWeightRandomness (bool isRandom)
+    {
+        targetStateWeight.IsRandom = isRandom;
     }
 
     protected AttackWeight CreateWeight (BossGeneralState bossState, int specifiedWeight = 1) =>

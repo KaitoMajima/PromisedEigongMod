@@ -2,11 +2,11 @@
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSpeed;
 
-public class StarterSpeedChanger : BaseSpeedChanger
+public class _7TeleportForwardSpeedChanger : BaseSpeedChanger
 {
     public override bool IsSpecifiedAttack (string attack) 
-        => attack == ATTACK9_STARTER;
+        => attack == ATTACK7_TELEPORT_FORWARD;
 
     public override float GetSpeed (BossGeneralState state)
-        => ATTACK9_STARTER_SPEED;
+        => ATTACK7_TELEPORT_FORWARD_SPEED;
 }

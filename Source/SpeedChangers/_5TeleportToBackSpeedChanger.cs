@@ -2,11 +2,11 @@
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSpeed;
 
-public class JumpBackSpeedChanger : BaseSpeedChanger
+public class _5TeleportToBackSpeedChanger : BaseSpeedChanger
 {
     public override bool IsSpecifiedAttack (string attack) 
-        => attack == JUMP_BACK;
+        => attack == ATTACK5_TELEPORT_TO_BACK;
 
     public override float GetSpeed (BossGeneralState state)
-        => JUMP_BACK_SPEED;
+        => ATTACK5_TELEPORT_TO_BACK_SPEED;
 }

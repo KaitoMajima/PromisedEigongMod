@@ -2,11 +2,11 @@
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSpeed;
 
-public class SlowStarterSpeedChanger : BaseSpeedChanger
+public class _8LongChargeSpeedChanger : BaseSpeedChanger
 {
     public override bool IsSpecifiedAttack (string attack) 
-        => attack == ATTACK1_SLOW_STARTER;
+        => attack == ATTACK8_LONG_CHARGE;
 
-    public override float GetSpeed (BossGeneralState state)
-        => ATTACK1_SLOW_STARTER_SPEED;
+    public override float GetSpeed (BossGeneralState state) 
+        => ATTACK8_LONG_CHARGE_SPEED;
 }
