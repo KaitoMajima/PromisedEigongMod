@@ -18,6 +18,8 @@ using static PromisedEigongModGlobalSettings.EigongDamageBoost;
 [HarmonyPatch]
 public class Patches
 {
+    public static Action OnTitleScreenMenuLoaded;
+    
     public static Action<SpriteRenderer> OnFoundTaiDanger;
     public static Action<ParticleSystem> OnFoundJieChuanFireParticles;
     public static Action<SpriteRenderer> OnFoundJieChuanFireImage;
@@ -147,7 +149,16 @@ public class Patches
     [HarmonyPatch(typeof(ApplicationCore), "Awake")]
     static bool ToastAwake (ApplicationCore __instance)
     {
-        KLog.Info("KLOG: Scene that is calling Application Core in: " + __instance.gameObject.scene.name);
+        KLog.Info("Scene that is calling Application Core in: " + __instance.gameObject.scene.name);
+        return true;
+    }
+    
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(StartMenuLogic), "Awake")]
+    static bool ToastAwake (StartMenuLogic __instance)
+    {
+        KLog.Info("Scene Loaded: " + __instance.gameObject.scene.name);
+        OnTitleScreenMenuLoaded?.Invoke();
         return true;
     }
     

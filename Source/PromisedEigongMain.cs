@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NineSolsAPI.Preload;
+using PromisedEigong.Core;
 using PromisedEigong.SpeedChangers;
 using PromisedEigong.WeightChanges;
 using UnityEngine;
@@ -35,22 +36,22 @@ public class PromisedEigongMain : BaseUnityPlugin
     BossGeneralState currentBossState;
     bool hasInitialized;
     bool hasFinishedInitializing;
+    bool hasAlreadyPreloaded;
+    KCore kCore;
 
     void Awake () 
     {
         KLog.Init(Logger);
         RCGLifeCycle.DontDestroyForever(gameObject);
         harmony = Harmony.CreateAndPatchAll(typeof(PromisedEigongMain).Assembly);
-        KLog.Info($"KLOG! {MyPluginInfo.PLUGIN_NAME}: Loaded.");
-        KLog.Info($"KLOG! Version: {MyPluginInfo.PLUGIN_VERSION}");
+        KLog.Info($"{MyPluginInfo.PLUGIN_NAME}: Loaded.");
+        KLog.Info($"Version: {MyPluginInfo.PLUGIN_VERSION}");
         ToastManager.Toast($"TOAST! {MyPluginInfo.PLUGIN_NAME}: Loaded.");
-        NineSolsAPICore.Preloader.AddPreloadClass(this);
-        AddPoolObjectListeners();
-    }
-
-    void Start ()
-    {
-        
+        kCore = new KCore();
+        kCore.Setup(this);
+        kCore.MainAwake();
+        kCore.Preloader.AddPreloadClass(this);
+        AddListeners();
     }
 
     void Update ()
@@ -89,8 +90,9 @@ public class PromisedEigongMain : BaseUnityPlugin
             hasFinishedInitializing = true;
     }
     
-    void AddPoolObjectListeners ()
+    void AddListeners ()
     {
+        Patches.OnTitleScreenMenuLoaded += HandleTitleScreenMenuLoaded;
         Patches.OnFoundTaiDanger += HandleTaiDangerFound;
         Patches.OnFoundJieChuanFireParticles += HandleJieChuanFireParticlesFound;
         Patches.OnFoundJieChuanFireImage += HandleJieChuanFireImageFound;
@@ -280,6 +282,15 @@ public class PromisedEigongMain : BaseUnityPlugin
         var chargeWaveGlow2EffectShiftFx = chargeWaveGlow2Effect.AddComponent<_2dxFX_ColorChange>();
         chargeWaveGlow2EffectShiftFx._HueShift = EIGONG_CHARACTER_SWORD_EFFECT_SHIFT;
         chargeWaveGlow2EffectShiftFx._ValueBrightness = EIGONG_CHARACTER_SWORD_VALUE_BRIGHTNESS;
+    }
+    
+    void HandleTitleScreenMenuLoaded ()
+    {
+        if (hasAlreadyPreloaded)
+            return;
+        
+        kCore.StartPreloading();
+        hasAlreadyPreloaded = true;
     }
     
     void HandleTaiDangerFound (SpriteRenderer sprite)
