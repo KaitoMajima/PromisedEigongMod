@@ -14,6 +14,7 @@ public static class PromisedEigongModGlobalSettings
     {
         public const string SCENE_NORMAL_ENDING_EIGONG = "A11_S0_Boss_YiGung_回蓬萊";
         public const string SCENE_TRUE_ENDING_EIGONG = "A11_S0_Boss_YiGung";
+        public const string NEW_KUNLUN = "AG_ST_Hub";
         public const string BIND_MONSTER_EIGONG_NAME = "Boss_Yi Gung";
     }
 
@@ -39,6 +40,16 @@ public static class PromisedEigongModGlobalSettings
 
         public static readonly BlendMode RED_BLEND_MODE = BlendMode.LinearDodge;
         public static readonly BlendMode BLUE_BLEND_MODE = BlendMode.SoftLight;
+    }
+
+    public static class NewKunlunBackground
+    {
+        public const string PROGRESS_BAR = 
+            "AG_ST_Hub/Room/Prefab/SimpleCutSceneFSM_古樹核心解封程度/" +
+            "FSM Animator/View/HubSPWall/BigScreen/CONTENT/80/進度/進度條";
+
+        public const float BAR_WIDTH = 89;
+        public static readonly Color BAR_COLOR = new(1, 0.3f, 0.3f);
     }
 
     public static class EigongColors
@@ -143,6 +154,7 @@ public static class PromisedEigongModGlobalSettings
     public static class EigongTitle
     {
         public const string EIGONG_TITLE = "Promised Eigong";
+        public const string ROOT_PROGRESS_TEXT = "Root Decryption Progress: <color=#FF0000>ERROR ERROR 99% ERROR ERROR</color>";
     }
     
     public static class EigongHealth
@@ -151,9 +163,9 @@ public static class PromisedEigongModGlobalSettings
         public const int EIGONG_PHASE_2_HEALTH_VALUE = 7777;
         public const int EIGONG_PHASE_3_HEALTH_VALUE = 9999;
 
-        public const float DEBUG_PHASE_1_MULTIPLIER = 1f;
-        public const float DEBUG_PHASE_2_MULTIPLIER = 1f;
-        public const float DEBUG_PHASE_3_MULTIPLIER = 1f;
+        public const float DEBUG_PHASE_1_MULTIPLIER = 0.1f;
+        public const float DEBUG_PHASE_2_MULTIPLIER = 0.1f;
+        public const float DEBUG_PHASE_3_MULTIPLIER = 0.1f;
     }
 
     public static class EigongDamageReduction

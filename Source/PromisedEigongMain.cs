@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NineSolsAPI.Preload;
 using PromisedEigong.SpeedChangers;
 using PromisedEigong.WeightChanges;
 using UnityEngine;
@@ -25,22 +26,31 @@ public class PromisedEigongMain : BaseUnityPlugin
     Harmony harmony = null!;
     
     FieldRef<MonsterStat, float> HealthFieldRef => FieldRefAccess<MonsterStat, float>("BaseHealthValue");
-
-
+    
+    [Preload("結局演出_大爆炸 P2", "GameLevel/Room/3DBG Master 背景/BIGBAD")]
+    GameObject? preloadedObject;
+    
+    GameObject instantiatedObject;
+    
     BossGeneralState currentBossState;
     bool hasInitialized;
     bool hasFinishedInitializing;
 
     void Awake () 
     {
-        Log.Init(Logger);
+        KLog.Init(Logger);
         RCGLifeCycle.DontDestroyForever(gameObject);
         harmony = Harmony.CreateAndPatchAll(typeof(PromisedEigongMain).Assembly);
-        Logger.LogInfo($"{MyPluginInfo.PLUGIN_NAME}: Loaded.");
-        Logger.LogInfo($"Version: {MyPluginInfo.PLUGIN_VERSION}");
-        ToastManager.Toast($"{MyPluginInfo.PLUGIN_NAME}: Loaded.");
-        
+        KLog.Info($"KLOG! {MyPluginInfo.PLUGIN_NAME}: Loaded.");
+        KLog.Info($"KLOG! Version: {MyPluginInfo.PLUGIN_VERSION}");
+        ToastManager.Toast($"TOAST! {MyPluginInfo.PLUGIN_NAME}: Loaded.");
+        NineSolsAPICore.Preloader.AddPreloadClass(this);
         AddPoolObjectListeners();
+    }
+
+    void Start ()
+    {
+        
     }
 
     void Update ()
@@ -49,6 +59,13 @@ public class PromisedEigongMain : BaseUnityPlugin
 
         if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
             return;
+        
+        if (preloadedObject != null && instantiatedObject == null)
+        {
+            Transform bgMasterTransform = GameObject.Find("GameLevel/Room/3DBG Master 背景").transform;
+            instantiatedObject = Instantiate(preloadedObject, bgMasterTransform);
+            instantiatedObject.SetActive(true);
+        }
         
         StartInitialization();
         ChangeEigongHealth();

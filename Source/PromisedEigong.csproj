@@ -41,6 +41,17 @@
         <Reference Include="2dFX">
             <HintPath>$(DllPath)/2dFx.dll</HintPath>
         </Reference>
+        <Reference Include="Shapes">
+            <HintPath>$(DllPath)/ShapesRuntime.dll</HintPath>
+        </Reference>
+        <Reference Include="barbaro.autoattributes.Runtime.dll">
+            <HintPath>$(DllPath)/barbaro.autoattributes.Runtime.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.UI">
+            <HintPath>$(DllPath)/UnityEngine.UI.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
     </ItemGroup>
 
     <ItemGroup>

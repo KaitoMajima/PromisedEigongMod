@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using BepInEx.Logging;
+using NineSolsAPI;
 using UnityEngine.SceneManagement;
 
 namespace PromisedEigong;
 
 using HarmonyLib;
 using I2.Loc;
-using NineSolsAPI;
 using UnityEngine;
 using static PromisedEigongModGlobalSettings.EigongLocs;
 using static PromisedEigongModGlobalSettings.EigongTitle;
@@ -30,6 +32,14 @@ public class Patches
     {
         if (Term == EIGONG_TITLE_LOC)
             __result = EIGONG_TITLE;
+    }
+
+    [HarmonyPostfix]
+    [HarmonyPatch(typeof(LocalizationManager), "GetTranslation")]
+    static void ChangeRootProgressText (string Term, ref string __result)
+    {
+        if (Term == "AG_ST_Hub/M322_AG_ST_古樹解封進度_Bubble00")
+            __result = ROOT_PROGRESS_TEXT;
     }
 
     [HarmonyPrefix]
@@ -134,15 +144,36 @@ public class Patches
     }
     
     [HarmonyPrefix]
+    [HarmonyPatch(typeof(ApplicationCore), "Awake")]
+    static bool ToastAwake (ApplicationCore __instance)
+    {
+        KLog.Info("KLOG: Scene that is calling Application Core in: " + __instance.gameObject.scene.name);
+        return true;
+    }
+    
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(RuntimeInitHandler), "LoadCore")]
+    static bool KillLogo ()
+    {
+        string name = SceneManager.GetActiveScene().name;
+        return name != "Logo";
+    }
+    
+    [HarmonyPrefix]
     [HarmonyPatch(typeof(GameLevel), "Awake")]
-    static void AddBackgroundChanger (GameLevel __instance)
+    static void AddGameLevelComponents (GameLevel __instance)
     {
         Scene activeScene = SceneManager.GetActiveScene();
 
-        if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
-            return;
-
-        __instance.AddComp(typeof(RootPinnacleBackgroundChanger));
+        switch (activeScene.name)
+        {
+            case NEW_KUNLUN:
+                __instance.AddComp(typeof(NewKunlunRoomChanger));
+                break;
+            case SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG:
+                __instance.AddComp(typeof(RootPinnacleBackgroundChanger));
+                break;
+        }
     }
     
     [HarmonyPostfix]

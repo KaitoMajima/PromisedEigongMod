@@ -13,12 +13,12 @@ public class RootPinnacleBackgroundChanger : MonoBehaviour
         ChangeBackground();
         ChangeCutsceneEigong();
     }
-    
+
     void ChangeBackground ()
     {
         var animatorRef = GameObject.Find(ANIMATOR_REF);
         animatorRef.GetComponent<Animator>().enabled = false;
-        
+
         var redFade = GameObject.Find(RED_FX);
         var greenFade = GameObject.Find(GREEN_FX);
         var blackFade = GameObject.Find(BLACK_FX);
@@ -46,7 +46,7 @@ public class RootPinnacleBackgroundChanger : MonoBehaviour
         swordCutsceneRGBfx._HueShift = EIGONG_CHARACTER_SWORD_EFFECT_SHIFT;
         swordCutsceneRGBfx._ValueBrightness = EIGONG_CHARACTER_SWORD_VALUE_BRIGHTNESS;
         swordCutsceneRGBfx._Saturation = EIGONG_SWORD_SATURATION;
-        
+
         var eigongCutsceneBody = GameObject.Find(EIGONG_CUTSCENE_BODY);
         var burningCutsceneFx = eigongCutsceneBody.AddComponent<_2dxFX_BurningFX>();
         burningCutsceneFx.Colors = EIGONG_BURNING_FX_STRENGTH;
