@@ -8,14 +8,36 @@ public static class PromisedEigongModGlobalSettings
     public static class EigongLocs
     {
         public const string EIGONG_TITLE_LOC = "Characters/NameTag_YiKong"; 
+        public const string ROOT_PROGRESS_LOC = "AG_ST_Hub/M322_AG_ST_古樹解封進度_Bubble00"; 
     }
 
     public static class EigongRefs
     {
         public const string SCENE_NORMAL_ENDING_EIGONG = "A11_S0_Boss_YiGung_回蓬萊";
         public const string SCENE_TRUE_ENDING_EIGONG = "A11_S0_Boss_YiGung";
-        public const string NEW_KUNLUN = "AG_ST_Hub";
+        public const string SCENE_NEW_KUNLUN = "AG_ST_Hub";
+        
         public const string BIND_MONSTER_EIGONG_NAME = "Boss_Yi Gung";
+
+        public const string BG_MASTER_TRANSFORM =
+            "GameLevel/Room/3DBG Master 背景/3D 大背景/3DBG ScaleCompress/Scene BG_YiGungBoosFight";
+
+        public const string BOSS_AMBIENCE_SOURCE =
+            "GameLevel/Room/Prefab/EventBinder/General Boss Fight FSM Object Variant/FSM Animator/LogicRoot/Boss三階BGM/BGM_Boss_A11_P3";
+
+        public const string PO_VFX_TAI_DANGER = "Effect_TaiDanger(Clone)";
+        public const string PO_VFX_JIECHUAN_FIRE = "Fire_FX_damage_Long jiechuan(Clone)";
+        public const string PO_VFX_JIECHUAN_FIRE_IMAGE = "Light";
+        public const string PO_VFX_EIGONG_FOO_EXPLOSION = "Fx_YiGong Foo Explosion_pool obj(Clone)";
+        public const string PO_VFX_EIGONG_FOO = "Fx_YiGong 貼符(Clone)";
+        public const string PO_VFX_EIGONG_CRIMSON_GEYSER = "Fx_YiGong Upper12_pool obj(Clone)";
+        public const string PO_VFX_EIGONG_CRIMSON_PILLAR = "FireExplosionPillar_FX_damage(Clone)";
+    }
+
+    public static class EigongPreloadRefs
+    {
+        public const string BIG_BAD_SCENE = "結局演出_大爆炸 P2";
+        public const string BIG_BAD_PATH = "GameLevel/Room/3DBG Master 背景/BIGBAD";
     }
 
     public static class EigongBackground
@@ -40,6 +62,12 @@ public static class PromisedEigongModGlobalSettings
 
         public static readonly BlendMode RED_BLEND_MODE = BlendMode.LinearDodge;
         public static readonly BlendMode BLUE_BLEND_MODE = BlendMode.SoftLight;
+    }
+
+    public static class EigongOST
+    {
+        public const string PHASE1_2_OST = "BGM_Boss_A11_P3";
+        public const string PHASE3_OST = "BGM_EndCredit_NineSols";
     }
 
     public static class NewKunlunBackground
@@ -86,7 +114,7 @@ public static class PromisedEigongModGlobalSettings
         public static readonly Color FIRE_LIGHT_COLOR = new(0f, 0.77f, 0.99f);
         public const float EIGONG_BURNING_FX_STRENGTH = 0.53f;
         public const float EIGONG_CHARACTER_SWORD_EFFECT_SHIFT = 522;
-        public static readonly float EIGONG_SWORD_SATURATION = 5f;
+        public const float EIGONG_SWORD_SATURATION = 5f;
         public const float EIGONG_CHARACTER_SWORD_VALUE_BRIGHTNESS = 2.2f;
         public const float EIGONG_TAI_DANGER_VALUE_BRIGHTNESS = 5f;
     }
@@ -163,9 +191,10 @@ public static class PromisedEigongModGlobalSettings
         public const int EIGONG_PHASE_2_HEALTH_VALUE = 7777;
         public const int EIGONG_PHASE_3_HEALTH_VALUE = 9999;
 
+        public const float DEBUG_BASE_MULTIPLIER = 1f;
         public const float DEBUG_PHASE_1_MULTIPLIER = 0.1f;
         public const float DEBUG_PHASE_2_MULTIPLIER = 0.1f;
-        public const float DEBUG_PHASE_3_MULTIPLIER = 0.1f;
+        public const float DEBUG_PHASE_3_MULTIPLIER = 1f;
     }
 
     public static class EigongDamageReduction

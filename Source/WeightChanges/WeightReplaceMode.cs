@@ -1,4 +1,4 @@
-﻿namespace PromisedEigong;
+﻿namespace PromisedEigong.WeightChanges;
 
 public enum WeightReplaceMode
 {

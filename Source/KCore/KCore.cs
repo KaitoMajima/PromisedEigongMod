@@ -1,21 +1,16 @@
-﻿#nullable enable
-using BepInEx.Logging;
-using NineSolsAPI;
-
-namespace PromisedEigong.Core;
+﻿namespace PromisedEigong.Core;
 
 using BepInEx;
 using HarmonyLib;
 using System;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
 public class KCore
 {
-    public static PromisedEigongMain Main { get; private set; }
-    
+    internal static PromisedEigongMain Main { get; private set; }
     internal KPreload Preloader => Instance.preloader;
+    
     internal static KCore Instance;
     KPreload preloader;
     Harmony harmony;
@@ -45,7 +40,7 @@ public class KCore
         }
         catch (Exception ex)
         {
-            KLog.Error($"Failed to initialized modding API: {ex}");
+            KLog.Error($"Failed to initialize modding API: {ex}");
         }
     
         KLog.Info("K API loaded");
@@ -53,6 +48,7 @@ public class KCore
 
     internal void StartPreloading ()
     {
+        KLog.Info("Preloading starting!");
         Main.StartCoroutine(preloader.Preload());
     }
 
@@ -64,7 +60,7 @@ public class KCore
         SceneManager.LoadScene("TitleScreenMenu");
     }
 
-    void OnDestroy ()
+    internal void OnDestroy ()
     {
         preloader.Unload();
         harmony.UnpatchSelf();

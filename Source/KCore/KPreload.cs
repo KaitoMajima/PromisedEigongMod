@@ -1,4 +1,6 @@
-﻿namespace PromisedEigong.Core;
+﻿//Thanks to jakobhellermann for the preloading logic!
+
+namespace PromisedEigong.Core;
 
 using System;
 using System.Collections;

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class KUtils
 {
-    internal static GameObject? GetGameObjectFromArray(GameObject[] objects, string objName)
+    internal static GameObject? GetGameObjectFromArray (GameObject[] objects, string objName)
     {
         string n = String.Empty;
         int length = objName.IndexOf('/');

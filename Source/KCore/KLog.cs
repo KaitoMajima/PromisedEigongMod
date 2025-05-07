@@ -1,7 +1,6 @@
 ﻿using BepInEx.Logging;
 
-#nullable enable
-namespace NineSolsAPI;
+namespace PromisedEigong.Core;
 
 static class KLog
 {

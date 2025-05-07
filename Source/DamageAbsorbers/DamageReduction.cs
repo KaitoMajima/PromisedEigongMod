@@ -2,9 +2,9 @@ namespace PromisedEigong;
 
 using static PromisedEigongModGlobalSettings.EigongDamageReduction;
 
-public static class DamageScaler
+public static class DamageReduction
 {
-    public static float GetScaledPostureDamage ()
+    public static float GetReducedPostureDamage ()
     {
         float postureDamageReduction = EIGONG_POSTURE_DAMAGE_DR;
 
@@ -19,7 +19,7 @@ public static class DamageScaler
         return CalculateDamageReduction(postureDamageReduction);
     }
 
-    public static float GetScaledDirectDamage (EffectDetailType detailType)
+    public static float GetReducedDirectDamage (EffectDetailType detailType)
     {
         var player = Player.i;
         float directDamageReduction;

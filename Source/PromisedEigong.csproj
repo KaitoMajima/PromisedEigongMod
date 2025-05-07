@@ -50,8 +50,23 @@
         </Reference>
         <Reference Include="UnityEngine.UI">
             <HintPath>$(DllPath)/UnityEngine.UI.dll</HintPath>
-            <Private>false</Private>
         </Reference>
+        <Reference Include="Ak.Wwise.Api.WAAPI">
+            <HintPath>$(DllPath)/Ak.Wwise.Api.WAAPI.dll</HintPath>
+        </Reference>
+        <Reference Include="AK.Wwise.Unity.API">
+            <HintPath>$(DllPath)/AK.Wwise.Unity.API.dll</HintPath>
+        </Reference>
+        <Reference Include="AK.Wwise.Unity.API.WwiseTypes">
+            <HintPath>$(DllPath)/AK.Wwise.Unity.API.WwiseTypes.dll</HintPath>
+        </Reference>
+        <Reference Include="AK.Wwise.Unity.MonoBehaviour">
+            <HintPath>$(DllPath)/AK.Wwise.Unity.MonoBehaviour.dll</HintPath>
+        </Reference>
+        <Reference Include="AK.Wwise.Unity.Timeline">
+            <HintPath>$(DllPath)/AK.Wwise.Unity.Timeline.dll</HintPath>
+        </Reference>
+
     </ItemGroup>
 
     <ItemGroup>
