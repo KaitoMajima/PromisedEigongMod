@@ -343,7 +343,7 @@ public class PromisedEigongMain : BaseUnityPlugin
             sprite.gameObject, 
             EIGONG_CHARACTER_SWORD_EFFECT_SHIFT, 
             null,
-            EIGONG_CHARACTER_SWORD_VALUE_BRIGHTNESS,
+            EIGONG_TAI_DANGER_VALUE_BRIGHTNESS,
             isLit: false
         );
     }
@@ -354,7 +354,7 @@ public class PromisedEigongMain : BaseUnityPlugin
             sprite.gameObject, 
             EIGONG_CHARACTER_SWORD_EFFECT_SHIFT, 
             null,
-            EIGONG_CHARACTER_SWORD_VALUE_BRIGHTNESS,
+            EIGONG_TAI_DANGER_VALUE_BRIGHTNESS,
             isLit: false
         );
     }
@@ -365,7 +365,7 @@ public class PromisedEigongMain : BaseUnityPlugin
             sprite.gameObject, 
             EIGONG_CHARACTER_SWORD_EFFECT_SHIFT, 
             null,
-            EIGONG_CHARACTER_SWORD_VALUE_BRIGHTNESS,
+            EIGONG_TAI_DANGER_VALUE_BRIGHTNESS,
             isLit: false
         );
     }
@@ -376,7 +376,7 @@ public class PromisedEigongMain : BaseUnityPlugin
             sprite.gameObject, 
             EIGONG_CHARACTER_SWORD_EFFECT_SHIFT, 
             null,
-            EIGONG_CHARACTER_SWORD_VALUE_BRIGHTNESS,
+            EIGONG_TAI_DANGER_VALUE_BRIGHTNESS,
             isLit: false
         );
     }

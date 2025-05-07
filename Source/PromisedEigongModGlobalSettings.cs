@@ -208,6 +208,11 @@ public static class PromisedEigongModGlobalSettings
         public const float EIGONG_FOO_DR = 0.2f;
         public const float EIGONG_DEFAULT_DR = 0;
     }
+    
+    public static class EigongProperties
+    {
+        public const bool EIGONG_FORBID_STUNNING = true;
+    }
 
     public static class EigongDamageBoost
     {
