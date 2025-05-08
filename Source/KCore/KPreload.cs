@@ -20,7 +20,6 @@ public class KPreload (Action<float> onProgress)
     public static bool IsPreloading;
     
     Dictionary<string, List<(string, IPreloadTarget)>> preloadTypes = new();
-    bool preloaded;
     List<(GameObject, IPreloadTarget)> preloadObjs = new();
     List<AsyncOperation> preloadOperationQueue = new();
     List<AsyncOperation> inProgressLoads = new();
@@ -165,7 +164,6 @@ public class KPreload (Action<float> onProgress)
         {
             DestroyAllGameObjects.DestroyingAll = false;
             IsPreloading = false;
-            preloaded = true;
             inProgressLoads.Clear();
             inProgressUnloads.Clear();
             preloadOperationQueue.Clear();
@@ -177,7 +175,7 @@ public class KPreload (Action<float> onProgress)
 
     internal IEnumerator Preload (ICoroutineRunner coroutineRunner)
     {
-        if (!preloaded || SceneManager.GetActiveScene().name == "TitleScreenMenu")
+        if (SceneManager.GetActiveScene().name == "TitleScreenMenu")
             yield return DoPreload(coroutineRunner);
         onProgress(1f);
     }

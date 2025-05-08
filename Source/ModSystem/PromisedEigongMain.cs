@@ -1,17 +1,22 @@
-﻿using PromisedEigong.Effects;
+﻿using UnityEngine;
+
+namespace PromisedEigong.ModSystem;
+
 using UnityEngine.SceneManagement;
-
-namespace PromisedEigong;
-
+using Effects;
 using BepInEx.Configuration;
 using Core;
-using ModSystem;
 using BepInEx;
 using HarmonyLib;
 using NineSolsAPI;
 
 [BepInDependency(NineSolsAPICore.PluginGUID)]
-[BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
+[BepInPlugin(
+    PromisedEigong.MyPluginInfo.PLUGIN_GUID, 
+    PromisedEigong.MyPluginInfo.PLUGIN_NAME,
+    PromisedEigong.MyPluginInfo.PLUGIN_VERSION
+    )
+]
 public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
 {
     public static PromisedEigongMain Instance { get; private set; }
@@ -21,6 +26,7 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
     Harmony harmony = null!;
 
     ConfigEntry<bool> isUsingHotReload;
+    bool canPreload = true;
 
     void Awake ()
     {
@@ -41,8 +47,8 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
 
     void DisplayLoadedVersion ()
     {
-        ToastManager.Toast($"{MyPluginInfo.PLUGIN_NAME}: Loaded.");
-        ToastManager.Toast($"Version: {MyPluginInfo.PLUGIN_VERSION}");
+        ToastManager.Toast($"{PromisedEigong.MyPluginInfo.PLUGIN_NAME}: Loaded.");
+        ToastManager.Toast($"Version: {PromisedEigong.MyPluginInfo.PLUGIN_VERSION}");
     }
 
     void InitializeSubmodels ()
@@ -63,18 +69,23 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
     void AddListeners ()
     {
         SystemPatches.OnTitleScreenMenuLoaded += HandleTitleScreenMenuLoaded;
+        SystemPatches.OnTitleScreenMenuUnloaded += HandleTitleScreenMenuUnloaded;
         PreloadingManager.OnLoadingDone += HandlePreloadingDone;
-    }
-    
-    void RemoveListeners ()
-    {
-        SystemPatches.OnTitleScreenMenuLoaded -= HandleTitleScreenMenuLoaded;
-        PreloadingManager.OnLoadingDone -= HandlePreloadingDone;
     }
 
     void HandleTitleScreenMenuLoaded ()
     {
+        KLog.Info("Trying to preload, is preload scene? " + canPreload);
+        if (!canPreload)
+            return;
+        
         PreloadingManager.StartPreloading();
+        canPreload = false;
+    }
+    
+    void HandleTitleScreenMenuUnloaded ()
+    {
+        canPreload = true;
     }
     
     void HandlePreloadingDone ()
@@ -84,8 +95,8 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
 
     void OnDestroy () 
     {
-        RemoveListeners();
         harmony.UnpatchSelf();
-        PreloadingManager.OnDestroy();
+        PreloadingManager.Dispose();
+        EffectsManager.Dispose();
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace PromisedEigong.ModSystem;
+﻿using PromisedEigong.PreloadObjectHandlers;
+
+namespace PromisedEigong.ModSystem;
 
 using NineSolsAPI;
 using Effects;
@@ -11,7 +13,7 @@ using static HarmonyLib.AccessTools;
 using static PromisedEigongModGlobalSettings.EigongRefs;
 using static PromisedEigongModGlobalSettings.EigongHealth;
 using static PromisedEigongModGlobalSettings.EigongOST;
-using static PromisedEigongModGlobalSettings.EigongLogging;
+using static PromisedEigongModGlobalSettings.EigongDebug;
 
 public class EigongWrapper : MonoBehaviour
 {
@@ -74,11 +76,13 @@ public class EigongWrapper : MonoBehaviour
 
     void SpawnBigBad ()
     {
-        if (PreloadingManager.BigBad == null || instantiatedBigBad != null)
+        ToastManager.Toast("the preloaded bigbad " + PreloadingManagerBigBad);
+        if (PreloadingManagerBigBad == null)
             return;
         Transform bgMasterTransform = 
             GameObject.Find(BG_MASTER_TRANSFORM).transform;
         instantiatedBigBad = Instantiate(PreloadingManagerBigBad, bgMasterTransform);
+        instantiatedBigBad.AddComponent<BigBadHandler>();
         instantiatedBigBad.SetActive(true);
     }
     

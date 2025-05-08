@@ -1,7 +1,7 @@
+namespace PromisedEigong;
+
 using BlendModes;
 using UnityEngine;
-
-namespace PromisedEigong;
 
 public static class PromisedEigongModGlobalSettings
 {
@@ -52,6 +52,24 @@ public static class PromisedEigongModGlobalSettings
             "GameLevel/Room/3DBG Master 背景/3D 大背景/3DBG ScaleCompress/Scene BG_YiGungBoosFight/Directional Light";
         public const string ANIMATOR_REF = "GameLevel/CameraCore/DockObj/全畫面遮色";
 
+        public const string BIG_BAD_OBJ =
+            "GameLevel/Room/3DBG Master 背景/3D 大背景/3DBG ScaleCompress/Scene BG_YiGungBoosFight/BIGBAD(Clone)(Clone)/";
+        
+        public const string BIG_BAD_NECKVINES =
+            BIG_BAD_OBJ + "BIGBAD_ANIM/MORPH_GUYS/NECKVINES";
+        public const string BIG_BAD_NECKVINES_PARENT =
+            BIG_BAD_OBJ + "BIGBAD_ANIM/MORPH_GUYS";
+        public const string BIG_BAD_STATIC_OBJS =
+            BIG_BAD_OBJ + "BIGBAD_ANIM/STATIC_OBJS";
+        public const string BIG_BAD_STATIC_OBJS_PARENT =
+            BIG_BAD_OBJ + "BIGBAD_ANIM/STATIC_OBJS";
+        public const string BIG_BAD_MEATBALL_1 =
+            BIG_BAD_OBJ + "HighEndFX(Disable for Switch)/P_MeatBall (1)";
+        public const string BIG_BAD_MEATBALL_2 =
+            BIG_BAD_OBJ + "HighEndFX(Disable for Switch)/P_MeatBall (2)";
+        public const string BIG_BAD_MEATBALL_PARENT =
+            BIG_BAD_OBJ + "HighEndFX(Disable for Switch)";
+
         public static readonly Color RED_COLOR = new(1f, 0f, 0.0f, 0.3129f);
         public static readonly Color GREEN_COLOR = new( 0.607f, 0f, 0f, 0.4128f);
         public static readonly Color BLACK_COLOR = new( 0f, 0f, 0f, 1f);
@@ -62,6 +80,13 @@ public static class PromisedEigongModGlobalSettings
 
         public static readonly BlendMode RED_BLEND_MODE = BlendMode.LinearDodge;
         public static readonly BlendMode BLUE_BLEND_MODE = BlendMode.SoftLight;
+
+        public static readonly Vector3 BIG_BAD_NECKVINES_ROTATION = new(0, 180, 0);
+        public static readonly Vector3 BIG_BAD_STATIC_OBJS_POSITION = new(0, 0, 48.4f);
+        public static readonly Vector3 BIG_BAD_STATIC_OBJS_ROTATION = new(0, 187.01F, 0);
+        public static readonly Vector3 BIG_BAD_MEATBALL_ROTATION = new(0, 180, 0);
+        public static readonly Vector3 BIG_BAD_MEATBALL_2_SHAPE_POSITION = new(0, 17, 0);
+        public static readonly Vector3 BIG_BAD_MEATBALL_2_SHAPE_SCALE = new(5.5f, 4, 5.5f);
     }
 
     public static class EigongOST
@@ -246,8 +271,9 @@ public static class PromisedEigongModGlobalSettings
         public const float JUMP_BACK_SPEED = 1 + 0.55f;
     }
     
-    public static class EigongLogging
+    public static class EigongDebug
     {
         public const bool EIGONG_STATE_LOG = false;
+        public const bool TEST_YI_INVINCIBLE = true;
     }
 }

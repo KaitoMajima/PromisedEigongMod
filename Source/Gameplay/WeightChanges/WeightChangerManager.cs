@@ -1,4 +1,4 @@
-﻿using PromisedEigong.WeightChanges;
+﻿namespace PromisedEigong.WeightChanges;
 
 public class WeightChangerManager
 {

@@ -1,17 +1,14 @@
-﻿using BlendModes;
+﻿namespace PromisedEigong.LevelChangers;
 
-namespace PromisedEigong;
-
+using BlendModes;
 using UnityEngine;
 using static PromisedEigongModGlobalSettings.EigongBackground;
-using static PromisedEigongModGlobalSettings.EigongColors;
 
 public class RootPinnacleBackgroundChanger : MonoBehaviour
 {
     void Awake ()
     {
         ChangeBackground();
-        ChangeCutsceneEigong();
     }
 
     void ChangeBackground ()
@@ -37,18 +34,5 @@ public class RootPinnacleBackgroundChanger : MonoBehaviour
         blueFade.GetComponent<BlendModeEffect>().BlendMode = BLUE_BLEND_MODE;
         donutFade.GetComponent<SpriteRenderer>().color = DONUT_COLOR;
         platformLightFade.GetComponent<Light>().color = PLATFORM_LIGHT_COLOR;
-    }
-
-    void ChangeCutsceneEigong ()
-    {
-        var eigongCutsceneSword = GameObject.Find(EIGONG_CUTSCENE_SWORD);
-        var swordCutsceneRGBfx = eigongCutsceneSword.AddComponent<_2dxFX_ColorChange>();
-        swordCutsceneRGBfx._HueShift = EIGONG_CHARACTER_SWORD_EFFECT_SHIFT;
-        swordCutsceneRGBfx._ValueBrightness = EIGONG_CHARACTER_SWORD_VALUE_BRIGHTNESS;
-        swordCutsceneRGBfx._Saturation = EIGONG_SWORD_SATURATION;
-
-        var eigongCutsceneBody = GameObject.Find(EIGONG_CUTSCENE_BODY);
-        var burningCutsceneFx = eigongCutsceneBody.AddComponent<_2dxFX_BurningFX>();
-        burningCutsceneFx.Colors = EIGONG_BURNING_FX_STRENGTH;
     }
 }

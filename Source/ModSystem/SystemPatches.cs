@@ -2,19 +2,29 @@
 
 using System;
 using HarmonyLib;
+using LevelChangers;
 using UnityEngine.SceneManagement;
+using Cysharp.Threading.Tasks;
 using static PromisedEigongModGlobalSettings.EigongRefs;
 
 [HarmonyPatch]
 public class SystemPatches
 {
-    public static Action OnTitleScreenMenuLoaded;
+    public static event Action? OnTitleScreenMenuLoaded;
+    public static event Action? OnTitleScreenMenuUnloaded;
 
     [HarmonyPrefix]
     [HarmonyPatch(typeof(StartMenuLogic), "Awake")]
     static void TitleScreenSpawn (StartMenuLogic __instance)
     {
         OnTitleScreenMenuLoaded?.Invoke();
+    }
+    
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(StartMenuLogic), "CreateOrLoadSaveSlotAndPlay")]
+    static void TitleScreenDespawn (StartMenuLogic __instance)
+    {
+        OnTitleScreenMenuUnloaded?.Invoke();
     }
     
     [HarmonyPrefix]

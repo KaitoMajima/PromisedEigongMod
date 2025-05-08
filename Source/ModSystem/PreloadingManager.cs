@@ -12,12 +12,11 @@ public class PreloadingManager (ICoroutineRunner coroutineRunner)
     [Preload(BIG_BAD_SCENE, BIG_BAD_PATH)]
     GameObject? bigBad;
 
-    public Action OnLoadingDone;
+    public event Action? OnLoadingDone;
     
     public GameObject? BigBad => bigBad;
     
     KPreload preloader;
-    bool hasLoaded;
     
     public void Setup ()
     {
@@ -27,16 +26,11 @@ public class PreloadingManager (ICoroutineRunner coroutineRunner)
 
     public void StartPreloading ()
     {
-        if (hasLoaded)
-            return;
         coroutineRunner.StartCoroutine(preloader.Preload(coroutineRunner));
     }
     
     void OnLoadDone ()
     {
-        if (hasLoaded)
-            return;
-        hasLoaded = true;
         OnLoadingDone?.Invoke();
     }
 
@@ -47,7 +41,7 @@ public class PreloadingManager (ICoroutineRunner coroutineRunner)
         OnLoadDone();
     }
 
-    public void OnDestroy ()
+    public void Dispose ()
     {
         preloader.Unload();
     }

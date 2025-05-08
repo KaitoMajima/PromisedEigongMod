@@ -1,4 +1,4 @@
-﻿namespace PromisedEigong;
+﻿namespace PromisedEigong.LevelChangers;
 using Shapes;
 using UnityEngine;
 using static PromisedEigongModGlobalSettings.NewKunlunBackground;

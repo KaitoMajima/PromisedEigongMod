@@ -1,6 +1,4 @@
-﻿using NineSolsAPI;
-
-namespace PromisedEigong.DamageAbsorbers;
+﻿namespace PromisedEigong.DamageAbsorbers;
 using HarmonyLib;
 using static PromisedEigongModGlobalSettings.EigongRefs;
 using static PromisedEigongModGlobalSettings.EigongProperties;

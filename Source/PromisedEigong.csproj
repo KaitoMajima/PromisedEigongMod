@@ -40,6 +40,9 @@
         <Reference Include="2dFX">
             <HintPath>$(DllPath)/2dFx.dll</HintPath>
         </Reference>
+        <Reference Include="UniTask">
+            <HintPath>$(DllPath)/UniTask.dll</HintPath>
+        </Reference>
         <Reference Include="Shapes">
             <HintPath>$(DllPath)/ShapesRuntime.dll</HintPath>
         </Reference>

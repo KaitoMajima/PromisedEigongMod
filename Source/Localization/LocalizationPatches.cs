@@ -1,4 +1,4 @@
-﻿namespace PromisedEigong;
+﻿namespace PromisedEigong.Localization;
 
 using HarmonyLib;
 using I2.Loc;

@@ -22,6 +22,17 @@ public class EffectsManager
         PoolObjectPatches.OnFoundCrimsonGeyserSprite += HandleCrimsonGeyserSpriteFound;
         PoolObjectPatches.OnFoundCrimsonPillarSprite += HandleCrimsonPillarSpriteFound;
     }
+    
+    void RemoveListeners ()
+    {
+        PoolObjectPatches.OnFoundTaiDanger -= HandleTaiDangerFound;
+        PoolObjectPatches.OnFoundJieChuanFireParticles -= HandleJieChuanFireParticlesFound;
+        PoolObjectPatches.OnFoundJieChuanFireImage -= HandleJieChuanFireImageFound;
+        PoolObjectPatches.OnFoundFooExplosionSprite -= HandleFooExplosionSpriteFound;
+        PoolObjectPatches.OnFoundFooSprite -= HandleFooSpriteFound;
+        PoolObjectPatches.OnFoundCrimsonGeyserSprite -= HandleCrimsonGeyserSpriteFound;
+        PoolObjectPatches.OnFoundCrimsonPillarSprite -= HandleCrimsonPillarSpriteFound;
+    }
 
     public void ChangeCharacterEigongColors ()
     {
@@ -31,6 +42,13 @@ public class EffectsManager
 
     public void ChangeFixedEigongColors ()
     {
+        BurningFXApplier.ApplyBurningEffect(EIGONG_CUTSCENE_BODY, EIGONG_BURNING_FX_STRENGTH);
+        ColorChanger.ChangeColors(
+            EIGONG_CUTSCENE_SWORD, 
+            EIGONG_CHARACTER_SWORD_EFFECT_SHIFT, 
+            EIGONG_SWORD_SATURATION,
+            EIGONG_CHARACTER_SWORD_VALUE_BRIGHTNESS
+        );
         ColorChanger.ChangeColors(
             EIGONG_CHARACTER_SWORD, 
             EIGONG_CHARACTER_SWORD_EFFECT_SHIFT, 
@@ -158,5 +176,10 @@ public class EffectsManager
             EIGONG_TAI_DANGER_VALUE_BRIGHTNESS,
             isLit: false
         );
+    }
+
+    public void Dispose ()
+    {
+        RemoveListeners();
     }
 }

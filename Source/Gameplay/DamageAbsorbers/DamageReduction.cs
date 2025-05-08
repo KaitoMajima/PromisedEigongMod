@@ -1,4 +1,4 @@
-namespace PromisedEigong;
+namespace PromisedEigong.DamageAbsorbers;
 
 using static PromisedEigongModGlobalSettings.EigongDamageReduction;
 

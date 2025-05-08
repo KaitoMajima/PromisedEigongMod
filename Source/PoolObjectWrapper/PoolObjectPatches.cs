@@ -11,13 +11,13 @@ using static PromisedEigongModGlobalSettings.EigongRefs;
 [HarmonyPatch]
 public class PoolObjectPatches
 {
-    public static Action<SpriteRenderer> OnFoundTaiDanger;
-    public static Action<ParticleSystem> OnFoundJieChuanFireParticles;
-    public static Action<SpriteRenderer> OnFoundJieChuanFireImage;
-    public static Action<SpriteRenderer> OnFoundFooExplosionSprite;
-    public static Action<SpriteRenderer> OnFoundFooSprite;
-    public static Action<SpriteRenderer> OnFoundCrimsonGeyserSprite;
-    public static Action<SpriteRenderer> OnFoundCrimsonPillarSprite;
+    public static event Action<SpriteRenderer>? OnFoundTaiDanger;
+    public static event Action<ParticleSystem>? OnFoundJieChuanFireParticles;
+    public static event Action<SpriteRenderer>? OnFoundJieChuanFireImage;
+    public static event Action<SpriteRenderer>? OnFoundFooExplosionSprite;
+    public static event Action<SpriteRenderer>? OnFoundFooSprite;
+    public static event Action<SpriteRenderer>? OnFoundCrimsonGeyserSprite;
+    public static event Action<SpriteRenderer>? OnFoundCrimsonPillarSprite;
     
     [HarmonyPostfix]
     [HarmonyPatch(typeof(PoolObject), "EnterLevelAwake")]

@@ -5,6 +5,7 @@ using HarmonyLib;
 using static PromisedEigongModGlobalSettings.EigongAttackAnimationRefs;
 using static PromisedEigongModGlobalSettings.EigongDamageBoost;
 using static PromisedEigongModGlobalSettings.EigongRefs;
+using static PromisedEigongModGlobalSettings.EigongDebug;
 using static DamageBoost;
 
 [HarmonyPatch]
@@ -12,13 +13,16 @@ public class DamageBoostPatches
 {
     [HarmonyPrefix]
     [HarmonyPatch(typeof(PlayerHealth), "ReceiveDamage")]
-    static void EigongBoostDamage (PlayerHealth __instance, ref DamageDealer damageDealer)
+    static bool EigongBoostDamage (PlayerHealth __instance, ref DamageDealer damageDealer)
     {
+        if (TEST_YI_INVINCIBLE)
+            return false;
+        
         if (damageDealer.Owner == null)
-            return;
+            return true;
         
         if (damageDealer.Owner.name != BIND_MONSTER_EIGONG_NAME)
-            return;
+            return true;
         
         switch (damageDealer.Owner.currentPlayingAnimatorState)
         {
@@ -38,12 +42,17 @@ public class DamageBoostPatches
                 break;
             }
         }
+
+        return true;
     }
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(PlayerHealth), "ReceiveDamage")]
     static void RevertBoostedDamage (PlayerHealth __instance, ref DamageDealer damageDealer)
     {
+        if (TEST_YI_INVINCIBLE)
+            return;
+        
         if (damageDealer.Owner == null)
             return;
         
@@ -72,25 +81,35 @@ public class DamageBoostPatches
 
     [HarmonyPrefix]
     [HarmonyPatch(typeof(PlayerHealth), "ReceiveDOT_Damage")]
-    static void EigongBoostFireDamage (ref float damageValue)
+    static bool EigongBoostFireDamage (ref float damageValue)
     {
+        if (TEST_YI_INVINCIBLE)
+            return false;
+        
         Scene activeScene = SceneManager.GetActiveScene();
         
         if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
-            return;
+            return true;
         
         BoostRecoverableDamage(ref damageValue, EIGONG_FIRE_BOOST);
+        
+        return true;
     }
 
     [HarmonyPrefix]
     [HarmonyPatch(typeof(PlayerHealth), "ReceiveRecoverableDamage")]
-    static void EigongBoostRecoverableDamage (PlayerHealth __instance, ref float damage)
+    static bool EigongBoostRecoverableDamage (PlayerHealth __instance, ref float damage)
     {
+        if (TEST_YI_INVINCIBLE)
+            return false;
+        
         Scene activeScene = SceneManager.GetActiveScene();
         
         if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
-            return;
+            return true;
         
         BoostRecoverableDamage(ref damage, EIGONG_EARLY_DEFLECT_BOOST);
+
+        return true;
     }
 }
