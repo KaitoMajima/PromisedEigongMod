@@ -6,7 +6,7 @@ using static PromisedEigongModGlobalSettings.EigongLocs;
 using static PromisedEigongModGlobalSettings.EigongTitle;
 
 [HarmonyPatch]
-public class Patches
+public class LocalizationPatches
 {
     [HarmonyPostfix]
     [HarmonyPatch(typeof(LocalizationManager), "GetTranslation")]

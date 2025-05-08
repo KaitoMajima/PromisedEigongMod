@@ -14,9 +14,12 @@ public class DamageBoostPatches
     [HarmonyPatch(typeof(PlayerHealth), "ReceiveDamage")]
     static void EigongBoostDamage (PlayerHealth __instance, ref DamageDealer damageDealer)
     {
+        if (damageDealer.Owner == null)
+            return;
+        
         if (damageDealer.Owner.name != BIND_MONSTER_EIGONG_NAME)
             return;
-
+        
         switch (damageDealer.Owner.currentPlayingAnimatorState)
         {
             case EIGONG_FOO_ATTACK_1 or EIGONG_FOO_ATTACK_2:
@@ -41,9 +44,12 @@ public class DamageBoostPatches
     [HarmonyPatch(typeof(PlayerHealth), "ReceiveDamage")]
     static void RevertBoostedDamage (PlayerHealth __instance, ref DamageDealer damageDealer)
     {
+        if (damageDealer.Owner == null)
+            return;
+        
         if (damageDealer.Owner.name != BIND_MONSTER_EIGONG_NAME)
             return;
-
+        
         switch (damageDealer.Owner.currentPlayingAnimatorState)
         {
             case EIGONG_FOO_ATTACK_1 or EIGONG_FOO_ATTACK_2:
@@ -69,10 +75,10 @@ public class DamageBoostPatches
     static void EigongBoostFireDamage (ref float damageValue)
     {
         Scene activeScene = SceneManager.GetActiveScene();
-
+        
         if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
             return;
-
+        
         BoostRecoverableDamage(ref damageValue, EIGONG_FIRE_BOOST);
     }
 
@@ -81,10 +87,10 @@ public class DamageBoostPatches
     static void EigongBoostRecoverableDamage (PlayerHealth __instance, ref float damage)
     {
         Scene activeScene = SceneManager.GetActiveScene();
-
+        
         if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
             return;
-
+        
         BoostRecoverableDamage(ref damage, EIGONG_EARLY_DEFLECT_BOOST);
     }
 }

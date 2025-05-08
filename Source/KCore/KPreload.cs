@@ -1,5 +1,7 @@
 ﻿//Thanks to jakobhellermann for the preloading logic!
 
+using PromisedEigong.ModSystem;
+
 namespace PromisedEigong.Core;
 
 using System;
@@ -117,7 +119,7 @@ public class KPreload (Action<float> onProgress)
         }
     }
 
-    IEnumerator DoPreload ()
+    IEnumerator DoPreload (ICoroutineRunner coroutineRunner)
     {
         if (preloadTypes.Count == 0) 
             yield break;
@@ -137,7 +139,7 @@ public class KPreload (Action<float> onProgress)
                 while (preloadOperationQueue.Count < 4 && preloadsToDo.MoveNext())
                 {
                     (string str, List<(string, IPreloadTarget)> scenePreloads) = preloadsToDo.Current;
-                    KCore.Main.StartCoroutine(DoPreloadScene(str, scenePreloads));
+                    coroutineRunner.StartCoroutine(DoPreloadScene(str, scenePreloads));
                     
                     if (inProgressLoads.Count % 4 != 0) 
                         continue;
@@ -173,10 +175,10 @@ public class KPreload (Action<float> onProgress)
         KLog.Info($"Preloading done with {preloadObjs.Count} objects in {watch.ElapsedMilliseconds}ms");
     }
 
-    internal IEnumerator Preload ()
+    internal IEnumerator Preload (ICoroutineRunner coroutineRunner)
     {
         if (!preloaded || SceneManager.GetActiveScene().name == "TitleScreenMenu")
-            yield return DoPreload();
+            yield return DoPreload(coroutineRunner);
         onProgress(1f);
     }
 

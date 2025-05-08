@@ -18,6 +18,14 @@ public class SystemPatches
     }
     
     [HarmonyPrefix]
+    [HarmonyPatch(typeof(StealthGameMonster), "Awake")]
+    static void AddEigongWrapper (StealthGameMonster __instance)
+    {
+        if (__instance.BindMonster.Name == BIND_MONSTER_EIGONG_NAME)
+            __instance.gameObject.AddComponent<EigongWrapper>();
+    }
+    
+    [HarmonyPrefix]
     [HarmonyPatch(typeof(GameLevel), "Awake")]
     static void AddGameLevelComponents (GameLevel __instance)
     {

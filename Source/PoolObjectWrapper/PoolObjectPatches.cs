@@ -1,4 +1,5 @@
 ﻿using System;
+using NineSolsAPI;
 
 namespace PromisedEigong.PoolObjectWrapper;
 
