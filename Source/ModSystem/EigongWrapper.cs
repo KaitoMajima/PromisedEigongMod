@@ -1,7 +1,7 @@
-﻿using System;
-using PromisedEigong.PreloadObjectHandlers;
+﻿namespace PromisedEigong.ModSystem;
 
-namespace PromisedEigong.ModSystem;
+using System;
+using TMPro;
 
 using NineSolsAPI;
 using Effects;
@@ -15,6 +15,7 @@ using static PromisedEigongModGlobalSettings.EigongRefs;
 using static PromisedEigongModGlobalSettings.EigongHealth;
 using static PromisedEigongModGlobalSettings.EigongOST;
 using static PromisedEigongModGlobalSettings.EigongDebug;
+using static PromisedEigongModGlobalSettings.EigongTitle;
 
 public class EigongWrapper : MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class EigongWrapper : MonoBehaviour
         ChangeAttackWeights();
         ChangeAttackSpeeds();
         ChangeFixedEigongColors();
+        ChangeEigongCutsceneTitle();
         currentEigongPhase = 0;
     }
 
@@ -190,6 +192,12 @@ public class EigongWrapper : MonoBehaviour
     void ChangeCharacterEigongColors ()
     {
         EffectsManager.ChangeCharacterEigongColors();
+    }
+    
+    void ChangeEigongCutsceneTitle ()
+    {
+        var cutsceneTitle = GameObject.Find(EIGONG_CUTSCENE_TITLE_NAME_PATH);
+        cutsceneTitle.GetComponent<TextMeshPro>().text = EIGONG_TITLE;
     }
     
     void LogStates ()

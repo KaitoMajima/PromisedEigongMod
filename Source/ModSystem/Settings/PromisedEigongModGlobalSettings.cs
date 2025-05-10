@@ -39,6 +39,9 @@ public static class PromisedEigongModGlobalSettings
         public const string EIGONG_TITLE_NAME_PATH =
             "GameCore(Clone)/RCG LifeCycle/UIManager/GameplayUICamera/MonsterHPRoot/BossHPRoot/UIBossHP(Clone)/Offset(DontKeyAnimationOnThisNode)/AnimationOffset/BossName";
 
+        public const string EIGONG_CUTSCENE_TITLE_NAME_PATH =
+            "GameLevel/Room/Prefab/EventBinder/General Boss Fight FSM Object Variant/FSM Animator/[CutScene] 一進/Boss Intro Acting 字卡/View/Boss_YiGung/Subtitle_Text/Title";
+
         public const string PO_VFX_TAI_DANGER = "Effect_TaiDanger(Clone)";
         public const string PO_VFX_JIECHUAN_FIRE = "Fire_FX_damage_Long jiechuan(Clone)";
         public const string PO_VFX_JIECHUAN_FIRE_IMAGE = "Light";
@@ -328,7 +331,7 @@ public static class PromisedEigongModGlobalSettings
         public const bool TEST_YI_INVINCIBLE = false;
         public const bool IS_PAUSE_MENU_BG_INVISIBLE = true;
         
-        public const float BASE_HEALTH_MULTIPLIER = 0.05f;
+        public const float BASE_HEALTH_MULTIPLIER = 1f;
         public const float PHASE_1_HEALTH_MULTIPLIER = 1f;
         public const float PHASE_2_HEALTH_MULTIPLIER = 1f;
         public const float PHASE_3_HEALTH_MULTIPLIER = 1f;
