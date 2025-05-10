@@ -4,7 +4,6 @@ using System;
 using HarmonyLib;
 using LevelChangers;
 using UnityEngine.SceneManagement;
-using Cysharp.Threading.Tasks;
 using static PromisedEigongModGlobalSettings.EigongRefs;
 
 [HarmonyPatch]
@@ -48,6 +47,7 @@ public class SystemPatches
                 break;
             case SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG:
                 __instance.AddComp(typeof(RootPinnacleBackgroundChanger));
+                __instance.AddComp(typeof(TitleChanger));
                 break;
         }
     }

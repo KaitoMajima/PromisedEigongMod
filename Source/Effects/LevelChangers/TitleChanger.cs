@@ -1,0 +1,57 @@
+﻿using System;
+using NineSolsAPI;
+
+namespace PromisedEigong.LevelChangers;
+
+using TMPro;
+using ModSystem;
+using UnityEngine;
+using static PromisedEigongModGlobalSettings.EigongRefs;
+using static PromisedEigongModGlobalSettings.EigongTitle;
+
+public class TitleChanger : MonoBehaviour
+{
+    PromisedEigongMain MainInstance => PromisedEigongMain.Instance;
+
+    EigongWrapper eigongWrapper;
+
+    void Awake ()
+    {
+        AddListeners();
+    }
+
+    void AddListeners ()
+    {
+        MainInstance.OnEigongWrapperUpdated += HandleEigongWrapperUpdated;
+    }
+
+    void RemoveListeners ()
+    {
+        MainInstance.OnEigongWrapperUpdated -= HandleEigongWrapperUpdated;
+    }
+    
+    void HandleEigongWrapperUpdated ()
+    {
+        if (eigongWrapper != null)
+            eigongWrapper.OnCurrentEigongPhaseChanged -= HandleEigongPhaseUpdated;
+
+        eigongWrapper = MainInstance.EigongWrapper;
+        eigongWrapper.OnCurrentEigongPhaseChanged += HandleEigongPhaseUpdated;
+    }
+
+    void HandleEigongPhaseUpdated (int phase)
+    {
+        if (phase == 2)
+        {
+            var title = GameObject.Find(EIGONG_TITLE_NAME_PATH);
+            var titleComp = title.GetComponent<RubyTextMeshProUGUI>();
+            
+            titleComp.text = EIGONG_PHASE_3_TITLE;
+        }
+    }
+
+    void OnDestroy ()
+    {
+        RemoveListeners();
+    }
+}

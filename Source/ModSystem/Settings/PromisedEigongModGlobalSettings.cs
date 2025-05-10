@@ -24,6 +24,9 @@ public static class PromisedEigongModGlobalSettings
 
         public const string BOSS_AMBIENCE_SOURCE =
             "GameLevel/Room/Prefab/EventBinder/General Boss Fight FSM Object Variant/FSM Animator/LogicRoot/Boss三階BGM/BGM_Boss_A11_P3";
+        
+        public const string EIGONG_TITLE_NAME_PATH =
+            "GameCore(Clone)/RCG LifeCycle/UIManager/GameplayUICamera/MonsterHPRoot/BossHPRoot/UIBossHP(Clone)/Offset(DontKeyAnimationOnThisNode)/AnimationOffset/BossName";
 
         public const string PO_VFX_TAI_DANGER = "Effect_TaiDanger(Clone)";
         public const string PO_VFX_JIECHUAN_FIRE = "Fire_FX_damage_Long jiechuan(Clone)";
@@ -51,24 +54,39 @@ public static class PromisedEigongModGlobalSettings
         public const string PLATFORM_LIGHT_FX =
             "GameLevel/Room/3DBG Master 背景/3D 大背景/3DBG ScaleCompress/Scene BG_YiGungBoosFight/Directional Light";
         public const string ANIMATOR_REF = "GameLevel/CameraCore/DockObj/全畫面遮色";
+        
+        public const string GIANT_BALL =
+            "GameLevel/Room/3DBG Master 背景/3D 大背景/STGiantBall";
+        
+        public const string CORE_VINES_ROOT =
+            "GameLevel/Room/3DBG Master 背景/3D 大背景/3DBG ScaleCompress/Scene BG_YiGungBoosFight/showdownscene3d_Vines";
+        
+        public const string CORE_VINES_PARENT =
+            "GameLevel/Room/3DBG Master 背景/3D 大背景/3DBG ScaleCompress/Scene BG_YiGungBoosFight/showdownscene3d_Vines/COREVINES_脫殼中";
+        
+        public const string CORE_VINES_INFECTED_PARENT =
+            "GameLevel/Room/3DBG Master 背景/3D 大背景/3DBG ScaleCompress/Scene BG_YiGungBoosFight/showdownscene3d_Vines/COREVINES_感染前";
+        
+        public const string CORE_VINES_INFECTED_PARENT_FINAL =
+            "GameLevel/Room/3DBG Master 背景/3D 大背景/3DBG ScaleCompress/Scene BG_YiGungBoosFight/showdownscene3d_Vines/COREVINES_感染後";
 
         public const string BIG_BAD_OBJ =
-            "GameLevel/Room/3DBG Master 背景/3D 大背景/3DBG ScaleCompress/Scene BG_YiGungBoosFight/BIGBAD(Clone)(Clone)/";
+            "GameLevel/Room/3DBG Master 背景/3D 大背景/3DBG ScaleCompress/Scene BG_YiGungBoosFight/BIGBAD(Clone)(Clone)";
         
         public const string BIG_BAD_NECKVINES =
-            BIG_BAD_OBJ + "BIGBAD_ANIM/MORPH_GUYS/NECKVINES";
+            BIG_BAD_OBJ + "/BIGBAD_ANIM/MORPH_GUYS/NECKVINES";
         public const string BIG_BAD_NECKVINES_PARENT =
-            BIG_BAD_OBJ + "BIGBAD_ANIM/MORPH_GUYS";
+            BIG_BAD_OBJ + "/BIGBAD_ANIM/MORPH_GUYS";
         public const string BIG_BAD_STATIC_OBJS =
-            BIG_BAD_OBJ + "BIGBAD_ANIM/STATIC_OBJS";
+            BIG_BAD_OBJ + "/BIGBAD_ANIM/STATIC_OBJS";
         public const string BIG_BAD_STATIC_OBJS_PARENT =
-            BIG_BAD_OBJ + "BIGBAD_ANIM/STATIC_OBJS";
+            BIG_BAD_OBJ + "/BIGBAD_ANIM/STATIC_OBJS";
         public const string BIG_BAD_MEATBALL_1 =
-            BIG_BAD_OBJ + "HighEndFX(Disable for Switch)/P_MeatBall (1)";
+            BIG_BAD_OBJ + "/HighEndFX(Disable for Switch)/P_MeatBall (1)";
         public const string BIG_BAD_MEATBALL_2 =
-            BIG_BAD_OBJ + "HighEndFX(Disable for Switch)/P_MeatBall (2)";
+            BIG_BAD_OBJ + "/HighEndFX(Disable for Switch)/P_MeatBall (2)";
         public const string BIG_BAD_MEATBALL_PARENT =
-            BIG_BAD_OBJ + "HighEndFX(Disable for Switch)";
+            BIG_BAD_OBJ + "/HighEndFX(Disable for Switch)";
 
         public static readonly Color RED_COLOR = new(1f, 0f, 0.0f, 0.3129f);
         public static readonly Color GREEN_COLOR = new( 0.607f, 0f, 0f, 0.4128f);
@@ -86,7 +104,11 @@ public static class PromisedEigongModGlobalSettings
         public static readonly Vector3 BIG_BAD_STATIC_OBJS_ROTATION = new(0, 187.01F, 0);
         public static readonly Vector3 BIG_BAD_MEATBALL_ROTATION = new(0, 180, 0);
         public static readonly Vector3 BIG_BAD_MEATBALL_2_SHAPE_POSITION = new(0, 17, 0);
-        public static readonly Vector3 BIG_BAD_MEATBALL_2_SHAPE_SCALE = new(5.5f, 4, 5.5f);
+        public static readonly Vector3 BIG_BAD_MEATBALL_2_SHAPE_SCALE = new(4.7f, 4, 4.7f);
+
+        public const float GIANT_BALL_SPEED_1 = 25;
+        public const float CORE_VINES_SPEED_1 = 9f;
+        public const float GIANT_BALL_SPEED_2 = 0.25f;
     }
 
     public static class EigongOST
@@ -207,6 +229,7 @@ public static class PromisedEigongModGlobalSettings
     public static class EigongTitle
     {
         public const string EIGONG_TITLE = "Promised Eigong";
+        public const string EIGONG_PHASE_3_TITLE = "Tianhuo Avatar";
         public const string ROOT_PROGRESS_TEXT = "Root Decryption Progress: <color=#FF0000>ERROR ERROR 99% ERROR ERROR</color>";
     }
     
@@ -215,11 +238,6 @@ public static class PromisedEigongModGlobalSettings
         public const int EIGONG_PHASE_1_HEALTH_VALUE = 5555;
         public const int EIGONG_PHASE_2_HEALTH_VALUE = 7777;
         public const int EIGONG_PHASE_3_HEALTH_VALUE = 9999;
-
-        public const float DEBUG_BASE_MULTIPLIER = 1f;
-        public const float DEBUG_PHASE_1_MULTIPLIER = 0.1f;
-        public const float DEBUG_PHASE_2_MULTIPLIER = 0.1f;
-        public const float DEBUG_PHASE_3_MULTIPLIER = 1f;
     }
 
     public static class EigongDamageReduction
@@ -229,6 +247,7 @@ public static class PromisedEigongModGlobalSettings
         public const float EIGONG_CHARGE_ATTACK_DR = 0.66f;
         public const float EIGONG_THIRD_ATTACK_JADE_DR = 0.33f;
         public const float EIGONG_POSTURE_DAMAGE_DR = 0.33f;
+        public const float EIGONG_TAICHI_KICK_DAMAGE_DR = 0.5f;
         public const float EIGONG_COUNTER_JADE_DAMAGE_DR = 0.33f;
         public const float EIGONG_FOO_DR = 0.2f;
         public const float EIGONG_DEFAULT_DR = 0;
@@ -257,7 +276,7 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK5_TELEPORT_TO_BACK_SPEED = 1 + 0.55f;
         public const float ATTACK6_DOUBLE_ATTACK_SPEED = 1 + 0.33f;
         public const float ATTACK7_TELEPORT_FORWARD_SPEED = 1 + 0.55f;
-        public const float ATTACK8_LONG_CHARGE_SPEED = 1 + 0.33f;
+        public const float ATTACK8_LONG_CHARGE_SPEED = 1 + 0.77f;
         public const float ATTACK9_STARTER_SPEED = 1 - 0.11f;
         public const float ATTACK10_FOO_SPEED = 1 + 0.42f;
         public const float ATTACK11_GIANT_CHARGE_WAVE_SPEED = 1 + 0.37f;
@@ -266,7 +285,7 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK14_CRIMSON_BALL_SPEED = 1 + 0.33f;
         public const float ATTACK15_TURN_AROUND_BRIGHT_EYES_SPEED = 1 + 0.5f;
         public const float ATTACK16_QUICK_FOO_SPEED = 1 + 0.17f;
-        public const float ATTACK17_CRIMSON_SLAM_SPEED = 1 + 0.33f;
+        public const float ATTACK17_CRIMSON_SLAM_SPEED = 1 + 0.42f;
         public const float ATTACK18_TELEPORT_TO_BACK_COMBO_SPEED = 1 + 0.55f;
         public const float JUMP_BACK_SPEED = 1 + 0.55f;
     }
@@ -274,6 +293,11 @@ public static class PromisedEigongModGlobalSettings
     public static class EigongDebug
     {
         public const bool EIGONG_STATE_LOG = false;
-        public const bool TEST_YI_INVINCIBLE = true;
+        public const bool TEST_YI_INVINCIBLE = false;
+        
+        public const float BASE_HEALTH_MULTIPLIER = 1f;
+        public const float PHASE_1_HEALTH_MULTIPLIER = 1f;
+        public const float PHASE_2_HEALTH_MULTIPLIER = 1f;
+        public const float PHASE_3_HEALTH_MULTIPLIER = 1f;
     }
 }

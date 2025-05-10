@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using PromisedEigong.LevelChangers;
+using UnityEngine;
 
 namespace PromisedEigong.ModSystem;
 
@@ -19,9 +21,12 @@ using NineSolsAPI;
 ]
 public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
 {
+    public Action? OnEigongWrapperUpdated;
     public static PromisedEigongMain Instance { get; private set; }
     public PreloadingManager PreloadingManager { get; private set; }
     public EffectsManager EffectsManager { get; private set; }
+    public WhiteScreen WhiteScreen { get; private set; }
+    public EigongWrapper EigongWrapper { get; private set; }
     
     Harmony harmony = null!;
 
@@ -38,6 +43,12 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
         AddListeners();
     }
 
+    public void SubscribeEigongWrapper (EigongWrapper eigongWrapper)
+    {
+        EigongWrapper = eigongWrapper;
+        OnEigongWrapperUpdated?.Invoke();
+    }
+
     void Initialize ()
     {
         KLog.Init(Logger);
@@ -47,8 +58,7 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
 
     void DisplayLoadedVersion ()
     {
-        ToastManager.Toast($"{PromisedEigong.MyPluginInfo.PLUGIN_NAME}: Loaded.");
-        ToastManager.Toast($"Version: {PromisedEigong.MyPluginInfo.PLUGIN_VERSION}");
+        ToastManager.Toast($"{PromisedEigong.MyPluginInfo.PLUGIN_NAME} v{PromisedEigong.MyPluginInfo.PLUGIN_VERSION}: Loaded.");
     }
 
     void InitializeSubmodels ()
@@ -57,6 +67,9 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
         PreloadingManager.Setup();
         EffectsManager = new EffectsManager();
         EffectsManager.Setup();
+        var whiteScreenGameObject = Instantiate(new GameObject());
+        RCGLifeCycle.DontDestroyForever(whiteScreenGameObject);
+        WhiteScreen = whiteScreenGameObject.AddComponent<WhiteScreen>();
     }
     
     void ApplyConfig ()

@@ -1,4 +1,5 @@
-﻿using PromisedEigong.PreloadObjectHandlers;
+﻿using System;
+using PromisedEigong.PreloadObjectHandlers;
 
 namespace PromisedEigong.ModSystem;
 
@@ -17,15 +18,15 @@ using static PromisedEigongModGlobalSettings.EigongDebug;
 
 public class EigongWrapper : MonoBehaviour
 {
+    public event Action<int>? OnCurrentEigongPhaseChanged;
+    
+    PromisedEigongMain MainInstance => PromisedEigongMain.Instance;
+    
     bool IsInBossMemoryMode => ApplicationCore.IsInBossMemoryMode;
     MonsterBase LoadedEigong => SingletonBehaviour<MonsterManager>.Instance.ClosetMonster;
-    PreloadingManager PreloadingManager => PromisedEigongMain.Instance.PreloadingManager;
-    EffectsManager EffectsManager => PromisedEigongMain.Instance.EffectsManager;
-    GameObject PreloadingManagerBigBad => PreloadingManager.BigBad;
+    EffectsManager EffectsManager => MainInstance.EffectsManager;
     
     FieldRef<MonsterStat, float> HealthFieldRef => FieldRefAccess<MonsterStat, float>("BaseHealthValue");
-    
-    GameObject instantiatedBigBad;
     
     bool hasInitialized;
     bool hasFinishedInitializing;
@@ -33,20 +34,35 @@ public class EigongWrapper : MonoBehaviour
     ConfigEntry<bool> isUsingHotReload;
     bool hasAlreadyPreloaded;
     AmbienceSource phasesOst;
+    int currentEigongPhase;
     
     void Awake ()
     {
-        SpawnBigBad();
+        MainInstance.SubscribeEigongWrapper(this);
         ChangeAttackWeights();
         ChangeAttackSpeeds();
         ChangeFixedEigongColors();
+        currentEigongPhase = 0;
     }
 
     void Update ()
     {
         WaitForEigongInitialization();
         ChangeOSTPhase3();
+        CheckEigongPhase();
         LogStates();
+    }
+
+    void CheckEigongPhase ()
+    {
+        if (LoadedEigong == null)
+            return;
+        
+        if (currentEigongPhase == LoadedEigong.PhaseIndex)
+            return;
+        
+        currentEigongPhase = LoadedEigong.PhaseIndex;
+        OnCurrentEigongPhaseChanged?.Invoke(currentEigongPhase);
     }
 
     void WaitForEigongInitialization ()
@@ -72,18 +88,6 @@ public class EigongWrapper : MonoBehaviour
         ChangeCharacterEigongColors();
         ChangeOST();
         ChangeEigongHealth();
-    }
-
-    void SpawnBigBad ()
-    {
-        ToastManager.Toast("the preloaded bigbad " + PreloadingManagerBigBad);
-        if (PreloadingManagerBigBad == null)
-            return;
-        Transform bgMasterTransform = 
-            GameObject.Find(BG_MASTER_TRANSFORM).transform;
-        instantiatedBigBad = Instantiate(PreloadingManagerBigBad, bgMasterTransform);
-        instantiatedBigBad.AddComponent<BigBadHandler>();
-        instantiatedBigBad.SetActive(true);
     }
     
     void ChangeOST ()
@@ -118,15 +122,15 @@ public class EigongWrapper : MonoBehaviour
 
     void ChangeEigongHealth ()
     {
-        HealthFieldRef.Invoke(LoadedEigong.monsterStat) = EIGONG_PHASE_1_HEALTH_VALUE * DEBUG_BASE_MULTIPLIER;
+        HealthFieldRef.Invoke(LoadedEigong.monsterStat) = EIGONG_PHASE_1_HEALTH_VALUE * BASE_HEALTH_MULTIPLIER;
         
         if (IsInBossMemoryMode)
-            LoadedEigong.postureSystem.CurrentHealthValue = EIGONG_PHASE_1_HEALTH_VALUE * LoadedEigong.monsterStat.BossMemoryHealthScale * DEBUG_PHASE_1_MULTIPLIER;
+            LoadedEigong.postureSystem.CurrentHealthValue = EIGONG_PHASE_1_HEALTH_VALUE * LoadedEigong.monsterStat.BossMemoryHealthScale * PHASE_1_HEALTH_MULTIPLIER;
         else
-            LoadedEigong.postureSystem.CurrentHealthValue = EIGONG_PHASE_1_HEALTH_VALUE * DEBUG_PHASE_1_MULTIPLIER;
+            LoadedEigong.postureSystem.CurrentHealthValue = EIGONG_PHASE_1_HEALTH_VALUE * PHASE_1_HEALTH_MULTIPLIER;
         
-        LoadedEigong.monsterStat.Phase2HealthRatio = (float)EIGONG_PHASE_2_HEALTH_VALUE / EIGONG_PHASE_1_HEALTH_VALUE * DEBUG_PHASE_2_MULTIPLIER;
-        LoadedEigong.monsterStat.Phase3HealthRatio = (float)EIGONG_PHASE_3_HEALTH_VALUE / EIGONG_PHASE_1_HEALTH_VALUE * DEBUG_PHASE_3_MULTIPLIER;
+        LoadedEigong.monsterStat.Phase2HealthRatio = (float)EIGONG_PHASE_2_HEALTH_VALUE / EIGONG_PHASE_1_HEALTH_VALUE * PHASE_2_HEALTH_MULTIPLIER;
+        LoadedEigong.monsterStat.Phase3HealthRatio = (float)EIGONG_PHASE_3_HEALTH_VALUE / EIGONG_PHASE_1_HEALTH_VALUE * PHASE_3_HEALTH_MULTIPLIER;
     }
 
     void ChangeAttackWeights ()

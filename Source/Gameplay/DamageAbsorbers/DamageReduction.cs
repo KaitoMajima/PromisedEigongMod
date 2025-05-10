@@ -11,10 +11,16 @@ public static class DamageReduction
         var player = Player.i;
         
         bool isPlayerUsingDivineJade = player.mainAbilities.MultipleCounterJade.IsActivated;
+        bool isPlayerParrying = player.IsCurrentState(PlayerStateType.Parry);
+        bool isPlayerSkullKicking = player.IsCurrentState(PlayerStateType.JumpKick);
+        bool isPlayerAirborne = player.IsAirBorne;
         bool isPlayerCurrentlyCountering = player.IsCurrentState(PlayerStateType.ParryCounterDefense);
         
         if (isPlayerUsingDivineJade && isPlayerCurrentlyCountering)
             postureDamageReduction += EIGONG_COUNTER_JADE_DAMAGE_DR;
+        
+        if ((isPlayerParrying || isPlayerSkullKicking) && isPlayerAirborne)
+            postureDamageReduction += EIGONG_TAICHI_KICK_DAMAGE_DR;
 
         return CalculateDamageReduction(postureDamageReduction);
     }

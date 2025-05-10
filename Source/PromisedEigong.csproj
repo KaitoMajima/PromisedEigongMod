@@ -40,6 +40,15 @@
         <Reference Include="2dFX">
             <HintPath>$(DllPath)/2dFx.dll</HintPath>
         </Reference>
+        <Reference Include="RubyTextMeshPro">
+            <HintPath>$(DllPath)/RubyTextMeshPro.dll</HintPath>
+        </Reference>
+        <Reference Include="DOTween">
+            <HintPath>$(DllPath)/DOTween.dll</HintPath>
+        </Reference>
+        <Reference Include="DOTweenPro">
+            <HintPath>$(DllPath)/DOTweenPro.dll</HintPath>
+        </Reference>
         <Reference Include="UniTask">
             <HintPath>$(DllPath)/UniTask.dll</HintPath>
         </Reference>
