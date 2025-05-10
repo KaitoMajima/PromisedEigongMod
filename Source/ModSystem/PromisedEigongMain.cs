@@ -1,8 +1,11 @@
-﻿using System;
+﻿namespace PromisedEigong.ModSystem;
+
+using System;
 using PromisedEigong.LevelChangers;
 using UnityEngine;
+using UnityEngine.UI;
+using static PromisedEigongModGlobalSettings.EigongDebug;
 
-namespace PromisedEigong.ModSystem;
 
 using UnityEngine.SceneManagement;
 using Effects;
@@ -81,14 +84,23 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
 
     void AddListeners ()
     {
+        SystemPatches.OnPauseOpened += HandlePauseOpened;
         SystemPatches.OnTitleScreenMenuLoaded += HandleTitleScreenMenuLoaded;
         SystemPatches.OnTitleScreenMenuUnloaded += HandleTitleScreenMenuUnloaded;
         PreloadingManager.OnLoadingDone += HandlePreloadingDone;
     }
+    
+    void HandlePauseOpened (PauseUIPanel pauseMenu)
+    {
+        if (!IS_PAUSE_MENU_BG_INVISIBLE)
+            return;
+        
+        var pauseMenuImage = pauseMenu.GetComponent<Image>();
+        pauseMenuImage.enabled = false;
+    }
 
     void HandleTitleScreenMenuLoaded ()
     {
-        KLog.Info("Trying to preload, is preload scene? " + canPreload);
         if (!canPreload)
             return;
         

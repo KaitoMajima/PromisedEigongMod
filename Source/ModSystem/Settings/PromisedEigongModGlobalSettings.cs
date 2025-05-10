@@ -21,6 +21,17 @@ public static class PromisedEigongModGlobalSettings
 
         public const string BG_MASTER_TRANSFORM =
             "GameLevel/Room/3DBG Master 背景/3D 大背景/3DBG ScaleCompress/Scene BG_YiGungBoosFight";
+        
+        public const string FX_CAMERA_PATH =
+            "GameLevel/CameraCore/DockObj/OffsetObj/ShakeObj/SceneCamera/AmplifyLightingSystem/FxCamera";
+        
+        public const string BEAUTIFUL_FX_CAMERA_NAME = "BeautifulFxCamera";
+        
+        public const string BEAUTIFUL_FX_CAMERA_PATH =
+            "GameLevel/CameraCore/DockObj/OffsetObj/ShakeObj/SceneCamera/AmplifyLightingSystem/" + BEAUTIFUL_FX_CAMERA_NAME; 
+        
+        public const string CAMERA_FX_MASTER_TRANSFORM =
+            "GameLevel/CameraCore/DockObj/OffsetObj/ShakeObj/SceneCamera/AmplifyLightingSystem";
 
         public const string BOSS_AMBIENCE_SOURCE =
             "GameLevel/Room/Prefab/EventBinder/General Boss Fight FSM Object Variant/FSM Animator/LogicRoot/Boss三階BGM/BGM_Boss_A11_P3";
@@ -41,6 +52,9 @@ public static class PromisedEigongModGlobalSettings
     {
         public const string BIG_BAD_SCENE = "結局演出_大爆炸 P2";
         public const string BIG_BAD_PATH = "GameLevel/Room/3DBG Master 背景/BIGBAD";
+
+        public const string BEAUTIFUL_FX_CAMERA_PRELOAD_PATH =
+            "GameLevel/CameraCore/DockObj/OffsetObj/ShakeObj/SceneCamera/AmplifyLightingSystem/FxCamera";
     }
 
     public static class EigongBackground
@@ -73,11 +87,13 @@ public static class PromisedEigongModGlobalSettings
         public const string BIG_BAD_OBJ =
             "GameLevel/Room/3DBG Master 背景/3D 大背景/3DBG ScaleCompress/Scene BG_YiGungBoosFight/BIGBAD(Clone)(Clone)";
         
+        public const string BIG_BAD_ANIMATION =
+            BIG_BAD_OBJ + "/BIGBAD_ANIM";
         public const string BIG_BAD_NECKVINES =
             BIG_BAD_OBJ + "/BIGBAD_ANIM/MORPH_GUYS/NECKVINES";
         public const string BIG_BAD_NECKVINES_PARENT =
             BIG_BAD_OBJ + "/BIGBAD_ANIM/MORPH_GUYS";
-        public const string BIG_BAD_STATIC_OBJS =
+        public const string BIG_BAD_STATIC_OBJS =   
             BIG_BAD_OBJ + "/BIGBAD_ANIM/STATIC_OBJS";
         public const string BIG_BAD_STATIC_OBJS_PARENT =
             BIG_BAD_OBJ + "/BIGBAD_ANIM/STATIC_OBJS";
@@ -88,16 +104,25 @@ public static class PromisedEigongModGlobalSettings
         public const string BIG_BAD_MEATBALL_PARENT =
             BIG_BAD_OBJ + "/HighEndFX(Disable for Switch)";
 
+        public const string BIG_BAD_HEAD =
+            BIG_BAD_OBJ + "/BIGBAD_ANIM/MORPH_GUYS/HEAD";
+        
+        public const string BIG_BAD_HAIR =
+            BIG_BAD_OBJ + "/BIGBAD_HAIRS";
+
         public static readonly Color RED_COLOR = new(1f, 0f, 0.0f, 0.3129f);
         public static readonly Color GREEN_COLOR = new( 0.607f, 0f, 0f, 0.4128f);
         public static readonly Color BLACK_COLOR = new( 0f, 0f, 0f, 1f);
         public static readonly Color BLACK_2_COLOR = new( 0.2662f, 0.2f, 0f, 0.7128302f);
         public static readonly Color BLUE_COLOR = new( 0.6232f, 0f, 0.4174f, 1f);
+        public static readonly Color BLUE_COLOR_PHASE_2 = new( 0.1032f, 0f, 0.8574001f, 1f);
         public static readonly Color DONUT_COLOR = new( 0.2075f, 0f, 0.1193f, 0.2424f);
+        public static readonly Color DONUT_COLOR_PHASE_2 = new( 0.4675f, 0f, 0.1193f, 0.1424f);
         public static readonly Color PLATFORM_LIGHT_COLOR = new( 0.5664f, 0.5202f, 0.3828f, 1f);
 
         public static readonly BlendMode RED_BLEND_MODE = BlendMode.LinearDodge;
         public static readonly BlendMode BLUE_BLEND_MODE = BlendMode.SoftLight;
+        public static readonly BlendMode BLUE_BLEND_MODE_PHASE_2 = BlendMode.SoftLight;
 
         public static readonly Vector3 BIG_BAD_NECKVINES_ROTATION = new(0, 180, 0);
         public static readonly Vector3 BIG_BAD_STATIC_OBJS_POSITION = new(0, 0, 48.4f);
@@ -105,10 +130,13 @@ public static class PromisedEigongModGlobalSettings
         public static readonly Vector3 BIG_BAD_MEATBALL_ROTATION = new(0, 180, 0);
         public static readonly Vector3 BIG_BAD_MEATBALL_2_SHAPE_POSITION = new(0, 17, 0);
         public static readonly Vector3 BIG_BAD_MEATBALL_2_SHAPE_SCALE = new(4.7f, 4, 4.7f);
+        public static readonly Vector3 BIG_BAD_HEAD_SCALE = new(0.9f, 1f, 0.9f);
 
         public const float GIANT_BALL_SPEED_1 = 25;
         public const float CORE_VINES_SPEED_1 = 9f;
         public const float GIANT_BALL_SPEED_2 = 0.25f;
+        public const float BIG_BAD_HEAD_SPEED = 3.5f;
+        public const float BEAUTIFUL_FX_CAMERA_WEIGHT = 0.72f;
     }
 
     public static class EigongOST
@@ -294,8 +322,9 @@ public static class PromisedEigongModGlobalSettings
     {
         public const bool EIGONG_STATE_LOG = false;
         public const bool TEST_YI_INVINCIBLE = false;
+        public const bool IS_PAUSE_MENU_BG_INVISIBLE = true;
         
-        public const float BASE_HEALTH_MULTIPLIER = 1f;
+        public const float BASE_HEALTH_MULTIPLIER = 0.05f;
         public const float PHASE_1_HEALTH_MULTIPLIER = 1f;
         public const float PHASE_2_HEALTH_MULTIPLIER = 1f;
         public const float PHASE_3_HEALTH_MULTIPLIER = 1f;

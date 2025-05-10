@@ -11,10 +11,14 @@ public class PreloadingManager (ICoroutineRunner coroutineRunner)
 {
     [Preload(BIG_BAD_SCENE, BIG_BAD_PATH)]
     GameObject? bigBad;
+    
+    [Preload(BIG_BAD_SCENE, BEAUTIFUL_FX_CAMERA_PRELOAD_PATH)]
+    GameObject? beautifulFXCamera;
 
     public event Action? OnLoadingDone;
     
     public GameObject? BigBad => bigBad;
+    public GameObject? BeautifulFXCamera => beautifulFXCamera;
     
     KPreload preloader;
     

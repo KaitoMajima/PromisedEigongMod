@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using NineSolsAPI;
+﻿using System.Collections;
 
 namespace PromisedEigong.LevelChangers;
 
@@ -15,15 +13,18 @@ public class RootPinnacleBackgroundChanger : MonoBehaviour
 {
     PromisedEigongMain MainInstance => PromisedEigongMain.Instance;
     WhiteScreen WhiteScreen => MainInstance.WhiteScreen;
-    GameObject? PreloadingManagerBigBad => MainInstance.PreloadingManager.BigBad;
+    GameObject? PreloadedBigBad => MainInstance.PreloadingManager.BigBad;
+    GameObject? PreloadedBeautifulFXCamera => MainInstance.PreloadingManager.BeautifulFXCamera;
 
     EigongWrapper eigongWrapper;
 
     GameObject instantiatedBigBad;
+    GameObject instantiatedBeautifulFXCamera;
     
     void Awake ()
     {
         SpawnBigBad();
+        SpawnBeautifulFXCamera();
         ChangeBackground();
         AddListeners();
     }
@@ -40,13 +41,25 @@ public class RootPinnacleBackgroundChanger : MonoBehaviour
     
     void SpawnBigBad ()
     {
-        if (PreloadingManagerBigBad == null)
+        if (PreloadedBigBad == null)
             return;
         Transform bgMasterTransform = 
             GameObject.Find(BG_MASTER_TRANSFORM).transform;
-        instantiatedBigBad = Instantiate(PreloadingManagerBigBad, bgMasterTransform);
-        instantiatedBigBad.transform.localPosition = Vector3.zero;
+        instantiatedBigBad = Instantiate(PreloadedBigBad, bgMasterTransform);
         instantiatedBigBad.AddComponent<BigBadHandler>();
+        instantiatedBigBad.SetActive(false);
+    }
+    
+    void SpawnBeautifulFXCamera ()
+    {
+        if (PreloadedBeautifulFXCamera == null)
+            return;
+        
+        Transform cameraFXMasterTransform = 
+            GameObject.Find(CAMERA_FX_MASTER_TRANSFORM).transform;
+        instantiatedBeautifulFXCamera = Instantiate(PreloadedBeautifulFXCamera, cameraFXMasterTransform);
+        instantiatedBeautifulFXCamera.AddComponent<BeautifulFXCameraHandler>();
+        instantiatedBeautifulFXCamera.SetActive(false);
     }
 
     void ChangeBackground ()
@@ -63,9 +76,9 @@ public class RootPinnacleBackgroundChanger : MonoBehaviour
         var platformLightFade = GameObject.Find(PLATFORM_LIGHT_FX);
         var giantBall = GameObject.Find(GIANT_BALL);
         var coreVineParent = GameObject.Find(CORE_VINES_PARENT);
-
+        
         donutFade.SetActive(true);
-
+        
         redFade.GetComponent<SpriteRenderer>().color = RED_COLOR;
         redFade.GetComponent<BlendModeEffect>().BlendMode = RED_BLEND_MODE;
         greenFade.GetComponent<SpriteRenderer>().color = GREEN_COLOR;
@@ -125,10 +138,18 @@ public class RootPinnacleBackgroundChanger : MonoBehaviour
         var giantBall = GameObject.Find(GIANT_BALL);
         var infectedVineParent = GameObject.Find(CORE_VINES_INFECTED_PARENT);
         var infectedVineParentFinal = GameObject.Find(CORE_VINES_INFECTED_PARENT_FINAL);
+        var fxCamera = GameObject.Find(FX_CAMERA_PATH);
+        var blueFade = GameObject.Find(BLUE_FX);
+        var donutFade = GameObject.Find(DONUT_FX);
+        fxCamera.SetActive(false);
         giantBall.SetActive(false);
         infectedVineParent.SetActive(false);
         infectedVineParentFinal.SetActive(true);
         instantiatedBigBad.SetActive(true);
+        instantiatedBeautifulFXCamera.SetActive(true);
+        blueFade.GetComponent<SpriteRenderer>().color = BLUE_COLOR_PHASE_2;
+        blueFade.GetComponent<BlendModeEffect>().BlendMode = BLUE_BLEND_MODE_PHASE_2;
+        donutFade.GetComponent<SpriteRenderer>().color = DONUT_COLOR_PHASE_2;
         yield return new WaitForSeconds(WhiteScreen.HideDuration);
         WhiteScreen.Hide();
     }

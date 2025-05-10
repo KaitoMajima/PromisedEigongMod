@@ -1,25 +1,66 @@
-﻿using System;
-using NineSolsAPI;
-
-namespace PromisedEigong.PreloadObjectHandlers;
+﻿namespace PromisedEigong.PreloadObjectHandlers;
 
 using UnityEngine;
 using static PromisedEigongModGlobalSettings.EigongBackground;
 
 public class BigBadHandler : MonoBehaviour
 {
+    Transform playerTransform;
+    Transform bigBadHead;
+    Transform bigBadHair;
+    
     bool waitedForFirstUpdateFrame;
+    bool waitedForFirstBigBadActivationFrame;
+
+    void Awake ()
+    {
+        transform.localPosition = Vector3.zero;
+    }
 
     void Update ()
     {
+        ProcessBigBadRotation();
+        
         if (waitedForFirstUpdateFrame)
             return;
-        
+
+        GetBigBadHeadAndHair();
         DuplicateNeckvines();
         DuplicateStaticObjs();
         // DuplicateMeatball();
         ModifyMeatball();
+        IncreaseSizeAndKillAnimator();
         waitedForFirstUpdateFrame = true;
+    }
+
+    void ProcessBigBadRotation ()
+    {
+        if (!gameObject.activeInHierarchy)
+            return;
+        
+        if (bigBadHead == null || bigBadHair == null || playerTransform == null)
+            return;
+        
+        var direction = transform.position - playerTransform.position;
+
+        var minTolerance = 0.001f;
+        
+        if (direction.sqrMagnitude < minTolerance)
+            return;
+
+        Quaternion currentHeadRotation = bigBadHead.rotation;
+        Quaternion currentHairRotation = bigBadHair.rotation;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        bigBadHead.rotation = waitedForFirstBigBadActivationFrame ? Quaternion.Slerp(currentHeadRotation, targetRotation, Time.deltaTime * BIG_BAD_HEAD_SPEED) : targetRotation;
+        bigBadHair.rotation = waitedForFirstBigBadActivationFrame ? Quaternion.Slerp(currentHairRotation, targetRotation, Time.deltaTime * BIG_BAD_HEAD_SPEED) : targetRotation;
+        waitedForFirstBigBadActivationFrame = true;
+    }
+    
+    void GetBigBadHeadAndHair ()
+    {
+        playerTransform = Player.i.gameObject.transform;
+        bigBadHead = GameObject.Find(BIG_BAD_HEAD).transform;
+        bigBadHair = GameObject.Find(BIG_BAD_HAIR).transform;
     }
 
     void DuplicateNeckvines ()
@@ -55,5 +96,13 @@ public class BigBadHandler : MonoBehaviour
         var meatballShape = meatballParticles.shape;
         meatballShape.position = BIG_BAD_MEATBALL_2_SHAPE_POSITION;
         meatballShape.scale = BIG_BAD_MEATBALL_2_SHAPE_SCALE;
+    }
+    
+    void IncreaseSizeAndKillAnimator ()
+    {
+        var bigBadAnim = GameObject.Find(BIG_BAD_ANIMATION);
+        bigBadAnim.GetComponent<Animator>().enabled = false;
+
+        bigBadHead.transform.localScale = BIG_BAD_HEAD_SCALE;
     }
 }

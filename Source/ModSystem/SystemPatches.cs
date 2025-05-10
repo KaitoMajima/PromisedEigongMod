@@ -9,9 +9,10 @@ using static PromisedEigongModGlobalSettings.EigongRefs;
 [HarmonyPatch]
 public class SystemPatches
 {
+    public static event Action<PauseUIPanel>? OnPauseOpened;
     public static event Action? OnTitleScreenMenuLoaded;
     public static event Action? OnTitleScreenMenuUnloaded;
-
+    
     [HarmonyPrefix]
     [HarmonyPatch(typeof(StartMenuLogic), "Awake")]
     static void TitleScreenSpawn (StartMenuLogic __instance)
@@ -50,5 +51,12 @@ public class SystemPatches
                 __instance.AddComp(typeof(TitleChanger));
                 break;
         }
+    }
+    
+    [HarmonyPostfix]
+    [HarmonyPatch(typeof(PauseUIPanel), "ShowInit")]
+    static void CallPauseOpened (PauseUIPanel __instance)
+    {
+        OnPauseOpened?.Invoke(__instance);
     }
 }
