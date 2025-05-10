@@ -111,13 +111,16 @@ public static class PromisedEigongModGlobalSettings
             BIG_BAD_OBJ + "/BIGBAD_HAIRS";
 
         public static readonly Color RED_COLOR = new(1f, 0f, 0.0f, 0.3129f);
+        public static readonly Color RED_COLOR_PHASE_3 = new(1f, 0f, 0.5856f, 0.2929f);
         public static readonly Color GREEN_COLOR = new( 0.607f, 0f, 0f, 0.4128f);
+        public static readonly Color GREEN_COLOR_PHASE_3 = new( 1f, 0f, 0.6f, 0.4128f);
         public static readonly Color BLACK_COLOR = new( 0f, 0f, 0f, 1f);
         public static readonly Color BLACK_2_COLOR = new( 0.2662f, 0.2f, 0f, 0.7128302f);
+        public static readonly Color BLACK_2_COLOR_PHASE_3 = new( 0f, 0.3956f, 0.1707547f, 0.5528302f);
         public static readonly Color BLUE_COLOR = new( 0.6232f, 0f, 0.4174f, 1f);
-        public static readonly Color BLUE_COLOR_PHASE_2 = new( 0.1032f, 0f, 0.8574001f, 1f);
+        public static readonly Color BLUE_COLOR_PHASE_3 = new( 0.3168f, 0f, 0.5476f, 1f);
         public static readonly Color DONUT_COLOR = new( 0.2075f, 0f, 0.1193f, 0.2424f);
-        public static readonly Color DONUT_COLOR_PHASE_2 = new( 0.4675f, 0f, 0.1193f, 0.1424f);
+        public static readonly Color DONUT_COLOR_PHASE_3 = new( 0.6275f, 0f, 0.1193f, 0.2324f);
         public static readonly Color PLATFORM_LIGHT_COLOR = new( 0.5664f, 0.5202f, 0.3828f, 1f);
 
         public static readonly BlendMode RED_BLEND_MODE = BlendMode.LinearDodge;
@@ -130,13 +133,14 @@ public static class PromisedEigongModGlobalSettings
         public static readonly Vector3 BIG_BAD_MEATBALL_ROTATION = new(0, 180, 0);
         public static readonly Vector3 BIG_BAD_MEATBALL_2_SHAPE_POSITION = new(0, 17, 0);
         public static readonly Vector3 BIG_BAD_MEATBALL_2_SHAPE_SCALE = new(4.7f, 4, 4.7f);
-        public static readonly Vector3 BIG_BAD_HEAD_SCALE = new(0.9f, 1f, 0.9f);
+        public static readonly Vector3 BIG_BAD_HEAD_SCALE = new(0.97f, 1.05f, 0.97f);
+        public static readonly Vector3 BIG_BAD_HEAD_POSITION = new(0, 70, 0);
 
         public const float GIANT_BALL_SPEED_1 = 25;
         public const float CORE_VINES_SPEED_1 = 9f;
         public const float GIANT_BALL_SPEED_2 = 0.25f;
         public const float BIG_BAD_HEAD_SPEED = 3.5f;
-        public const float BEAUTIFUL_FX_CAMERA_WEIGHT = 0.72f;
+        public const float BEAUTIFUL_FX_CAMERA_WEIGHT = 0.77f;
     }
 
     public static class EigongOST

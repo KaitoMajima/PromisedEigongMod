@@ -139,17 +139,23 @@ public class RootPinnacleBackgroundChanger : MonoBehaviour
         var infectedVineParent = GameObject.Find(CORE_VINES_INFECTED_PARENT);
         var infectedVineParentFinal = GameObject.Find(CORE_VINES_INFECTED_PARENT_FINAL);
         var fxCamera = GameObject.Find(FX_CAMERA_PATH);
+        var greenFade = GameObject.Find(GREEN_FX);
+        var redFade = GameObject.Find(RED_FX);
         var blueFade = GameObject.Find(BLUE_FX);
         var donutFade = GameObject.Find(DONUT_FX);
+        var black2Fade = GameObject.Find(BLACK_2_FX);
         fxCamera.SetActive(false);
         giantBall.SetActive(false);
         infectedVineParent.SetActive(false);
         infectedVineParentFinal.SetActive(true);
         instantiatedBigBad.SetActive(true);
         instantiatedBeautifulFXCamera.SetActive(true);
-        blueFade.GetComponent<SpriteRenderer>().color = BLUE_COLOR_PHASE_2;
+        redFade.GetComponent<SpriteRenderer>().color = RED_COLOR_PHASE_3;
+        blueFade.GetComponent<SpriteRenderer>().color = BLUE_COLOR_PHASE_3;
         blueFade.GetComponent<BlendModeEffect>().BlendMode = BLUE_BLEND_MODE_PHASE_2;
-        donutFade.GetComponent<SpriteRenderer>().color = DONUT_COLOR_PHASE_2;
+        donutFade.GetComponent<SpriteRenderer>().color = DONUT_COLOR_PHASE_3;
+        greenFade.GetComponent<SpriteRenderer>().color = GREEN_COLOR_PHASE_3;
+        black2Fade.GetComponent<SpriteRenderer>().color = BLACK_2_COLOR_PHASE_3;
         yield return new WaitForSeconds(WhiteScreen.HideDuration);
         WhiteScreen.Hide();
     }

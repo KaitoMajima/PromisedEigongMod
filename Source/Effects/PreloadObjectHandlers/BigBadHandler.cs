@@ -14,7 +14,7 @@ public class BigBadHandler : MonoBehaviour
 
     void Awake ()
     {
-        transform.localPosition = Vector3.zero;
+        transform.localPosition = BIG_BAD_HEAD_POSITION;
     }
 
     void Update ()
