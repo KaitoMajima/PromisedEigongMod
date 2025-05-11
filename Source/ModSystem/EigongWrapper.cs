@@ -1,4 +1,6 @@
-﻿namespace PromisedEigong.ModSystem;
+﻿using PromisedEigong.Gameplay.AttackFactories;
+
+namespace PromisedEigong.ModSystem;
 
 using System;
 using TMPro;
@@ -40,8 +42,6 @@ public class EigongWrapper : MonoBehaviour
     void Awake ()
     {
         MainInstance.SubscribeEigongWrapper(this);
-        ChangeAttackWeights();
-        ChangeAttackSpeeds();
         ChangeFixedEigongColors();
         ChangeEigongCutsceneTitle();
         currentEigongPhase = 0;
@@ -87,6 +87,9 @@ public class EigongWrapper : MonoBehaviour
 
     void HandleEigongInitialization ()
     {
+        ChangeAttackSpeeds();
+        CreateNewAttacks();
+        ChangeAttackWeights();
         ChangeCharacterEigongColors();
         ChangeOST();
         ChangeEigongHealth();
@@ -140,6 +143,7 @@ public class EigongWrapper : MonoBehaviour
         var weightChangerManager = new WeightChangerManager();
         weightChangerManager.ChangeWeights(
             new _1SlowStarterWeightChanger(),
+            new _2TeleportToTopWeightChanger(),
             new _3ThrustDelayWeightChanger(),
             new _5TeleportToBackWeightChanger(),
             new _7TeleportForwardWeightChanger(),
@@ -150,9 +154,21 @@ public class EigongWrapper : MonoBehaviour
             new _13TriplePokeWeightChanger(),
             new _15TurnAroundWeightChanger(),
             new _17CrimsonSlamWeightChanger(),
+            new _18TeleportToBackComboWeightChanger(),
             new _X1PostureBreakWeightChanger(),
             new _X3AttackParryingWeightChanger()
         );
+    }
+    
+    void CreateNewAttacks ()
+    {
+        var crimsonBallFactory = new InstantCrimsonBallFactory();
+        BossGeneralState[] allBossStates = FindObjectsOfType<BossGeneralState>();
+        foreach (var bossState in allBossStates)
+        {
+            if (bossState.name == crimsonBallFactory.attackToBeCopied)
+                crimsonBallFactory.CopyAttack(bossState);
+        }
     }
     
     void ChangeAttackSpeeds ()

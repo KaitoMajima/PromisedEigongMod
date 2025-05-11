@@ -212,6 +212,7 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK1_SLOW_STARTER_WEIGHT = ATTACK1_SLOW_STARTER + "/phase (0)";
         public const string ATTACK1_SLOW_STARTER_WEIGHT_PHASE_2 = ATTACK1_SLOW_STARTER + "/phase (1)";
         public const string ATTACK2_TELEPORT_TO_TOP = "[2] Teleport To Top";
+        public const string ATTACK2_TELEPORT_TO_TOP_WEIGHT = ATTACK2_TELEPORT_TO_TOP + "/phase (0)";
         public const string ATTACK3_THRUST_DELAY = "[3] Thrust Delay 一閃";
         public const string ATTACK3_THRUST_DELAY_WEIGHT_PHASE_2 = ATTACK3_THRUST_DELAY + "/phase (1)";
         public const string ATTACK4_SLASH_UP = "[4] Slash Up 上撈下打 大反危";
@@ -242,8 +243,10 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK17_CRIMSON_SLAM_WEIGHT = ATTACK17_CRIMSON_SLAM + "/weight";
         public const string ATTACK17_CRIMSON_SLAM_WEIGHT_PHASE_2 = ATTACK17_CRIMSON_SLAM + "/weight (1)";
         public const string ATTACK18_TELEPORT_TO_BACK_COMBO = "[18] Teleport to Back Combo";
+        public const string ATTACK18_TELEPORT_TO_BACK_COMBO_WEIGHT = ATTACK18_TELEPORT_TO_BACK_COMBO + "/weight";
         public const string ATTACK19_THRUST_FULL_SCREEN = "[19] Thrust Full Screen Slash";
         public const string ATTACK20_TELEPORT_OUT = "[20] TeleportOut";
+        public const string ATTACK21_NEW_INSTANT_CRIMSON_BALL = "[21] Instant Crimson Ball";
         public const string POSTURE_BREAK = "PostureBreak";
         public const string POSTURE_BREAK_PHASE_1 = POSTURE_BREAK + "/phase0";
         public const string POSTURE_BREAK_PHASE_2 = POSTURE_BREAK + "/phase1";
@@ -284,7 +287,7 @@ public static class PromisedEigongModGlobalSettings
         public const float EIGONG_POSTURE_DAMAGE_DR = 0.33f;
         public const float EIGONG_TAICHI_KICK_DAMAGE_DR = 0.5f;
         public const float EIGONG_COUNTER_JADE_DAMAGE_DR = 0.33f;
-        public const float EIGONG_FOO_DR = 0.2f;
+        public const float EIGONG_FOO_DR = 0;
         public const float EIGONG_DEFAULT_DR = 0;
     }
     
@@ -322,6 +325,8 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK16_QUICK_FOO_SPEED = 1 + 0.17f;
         public const float ATTACK17_CRIMSON_SLAM_SPEED = 1 + 0.42f;
         public const float ATTACK18_TELEPORT_TO_BACK_COMBO_SPEED = 1 + 0.55f;
+        public const float ATTACK21_NEW_INSTANT_CRIMSON_BALL_SPEED = 1 + 0.27f;
+        public const float ATTACK21_NEW_INSTANT_CRIMSON_BALL_SKIP = 0.21f;
         public const float JUMP_BACK_SPEED = 1 + 0.55f;
     }
     
