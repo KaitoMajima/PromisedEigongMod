@@ -320,7 +320,7 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK11_GIANT_CHARGE_WAVE_SPEED = 1 + 0.37f;
         public const float ATTACK12_SLASH_UP_CRIMSON_SPEED = 1 + 0.22f;
         public const float ATTACK13_TRIPLE_POKE_SPEED = 1 + 0.27f;
-        public const float ATTACK14_CRIMSON_BALL_SPEED = 1 + 0.33f;
+        public const float ATTACK14_CRIMSON_BALL_SPEED = 1 + 0.27f;
         public const float ATTACK15_TURN_AROUND_BRIGHT_EYES_SPEED = 1 + 0.5f;
         public const float ATTACK16_QUICK_FOO_SPEED = 1 + 0.17f;
         public const float ATTACK17_CRIMSON_SLAM_SPEED = 1 + 0.42f;
