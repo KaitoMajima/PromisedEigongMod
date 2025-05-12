@@ -13,7 +13,7 @@ public class _X3AttackParryingWeightChanger : BaseWeightChanger
     {
         SetStateWeight(STATES_PATH + ATTACK_PARRYING_WEIGHT);
         CreateAndAddBossState(ATTACK_PATH + ATTACK5_TELEPORT_TO_BACK);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK7_TELEPORT_FORWARD);
+        CreateAndAddBossState(STATES_PATH + JUMP_BACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
         ProcessCurrentWeight();
     }

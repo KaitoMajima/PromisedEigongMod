@@ -8,7 +8,7 @@ using static PromisedEigongModGlobalSettings.EigongSpeed;
 public class InstantCrimsonBallFactory
 {
     public string attackToBeCopied = ATTACK14_CRIMSON_BALL;
-    public string attackToBeCreated = ATTACK21_NEW_INSTANT_CRIMSON_BALL;
+    public string attackToBeCreated = ATTACK21_NEW_QUICK_CRIMSON_BALL;
 
     public void CopyAttack (BossGeneralState bossGeneralState)
     {

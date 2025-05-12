@@ -14,7 +14,7 @@ public class _15TurnAroundWeightChanger : BaseWeightChanger
     {
         SetStateWeight(ATTACK_PATH + ATTACK15_TURN_AROUND_BRIGHT_EYES_WEIGHT_PHASE_2);
         SetAssociatedBossState(ATTACK_PATH + ATTACK15_TURN_AROUND_BRIGHT_EYES);
-        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK21_NEW_INSTANT_CRIMSON_BALL);
+        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK21_NEW_QUICK_CRIMSON_BALL);
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
         ProcessCurrentWeight();
     }

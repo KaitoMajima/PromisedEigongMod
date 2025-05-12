@@ -28,7 +28,7 @@ public static class PromisedEigongModGlobalSettings
         public const string BEAUTIFUL_FX_CAMERA_NAME = "BeautifulFxCamera";
         
         public const string BEAUTIFUL_FX_CAMERA_PATH =
-            "GameLevel/CameraCore/DockObj/OffsetObj/ShakeObj/SceneCamera/AmplifyLightingSystem/" + BEAUTIFUL_FX_CAMERA_NAME; 
+            "GameLevel/CameraCore/DockObj/OffsetObj/ShakeObj/SceneCamera/AmplifyLightingSystem/" + BEAUTIFUL_FX_CAMERA_NAME;
         
         public const string CAMERA_FX_MASTER_TRANSFORM =
             "GameLevel/CameraCore/DockObj/OffsetObj/ShakeObj/SceneCamera/AmplifyLightingSystem";
@@ -152,6 +152,15 @@ public static class PromisedEigongModGlobalSettings
         public const string PHASE3_OST = "BGM_EndCredit_NineSols";
     }
 
+    public static class EigongSFX
+    {
+        public const string SIMPLE_DANGER_SFX_PATH =
+            "GameLevel/Room/Prefab/EventBinder/General Boss Fight FSM Object Variant/FSM Animator/LogicRoot/---Boss---/" +
+            "Boss_Yi Gung/MonsterCore/Animator(Proxy)/Animator/LogicRoot/Audio/EnemySFX_YiGong_AirSwords_OpenEye";
+
+        public const int SIMPLE_DANGER_SFX_BOOST = 2;
+    }
+
     public static class NewKunlunBackground
     {
         public const string PROGRESS_BAR = 
@@ -246,7 +255,8 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK18_TELEPORT_TO_BACK_COMBO_WEIGHT = ATTACK18_TELEPORT_TO_BACK_COMBO + "/weight";
         public const string ATTACK19_THRUST_FULL_SCREEN = "[19] Thrust Full Screen Slash";
         public const string ATTACK20_TELEPORT_OUT = "[20] TeleportOut";
-        public const string ATTACK21_NEW_INSTANT_CRIMSON_BALL = "[21] Instant Crimson Ball";
+        public const string ATTACK21_NEW_QUICK_CRIMSON_BALL = "[21] Quick Crimson Ball";
+        public const string ATTACK22_NEW_INSTANT_CRIMSON_GEYSER = "[22] Instant Crimson Geyser";
         public const string POSTURE_BREAK = "PostureBreak";
         public const string POSTURE_BREAK_PHASE_1 = POSTURE_BREAK + "/phase0";
         public const string POSTURE_BREAK_PHASE_2 = POSTURE_BREAK + "/phase1";

@@ -18,6 +18,8 @@ using static PromisedEigongModGlobalSettings.EigongHealth;
 using static PromisedEigongModGlobalSettings.EigongOST;
 using static PromisedEigongModGlobalSettings.EigongDebug;
 using static PromisedEigongModGlobalSettings.EigongTitle;
+using static PromisedEigongModGlobalSettings.EigongAttacks;
+using static PromisedEigongModGlobalSettings.EigongSFX;
 
 public class EigongWrapper : MonoBehaviour
 {
@@ -216,14 +218,25 @@ public class EigongWrapper : MonoBehaviour
         cutsceneTitle.GetComponent<TextMeshPro>().text = EIGONG_TITLE;
     }
     
+    void HandleEigongStateChanged ()
+    {
+        if (currentBossState.name == ATTACK9_STARTER)
+        {
+            var simpleDangerSFX = GameObject.Find(SIMPLE_DANGER_SFX_PATH);
+            var soundPlayer = simpleDangerSFX.GetComponent<SoundPlayer>();
+            for (int i = 0; i < SIMPLE_DANGER_SFX_BOOST; i++)
+                soundPlayer.SimplePlay();
+        }
+    }
+    
     void LogStates ()
     {
-        if (!EIGONG_STATE_LOG)
-            return;
-        
         if (currentBossState == (BossGeneralState)LoadedEigong.currentMonsterState)
             return;
         currentBossState = (BossGeneralState)LoadedEigong.currentMonsterState;
-        ToastManager.Toast($"Next state: [{currentBossState.name}]");
+        HandleEigongStateChanged();
+        
+        if (EIGONG_STATE_LOG)
+            ToastManager.Toast($"Next state: [{currentBossState.name}]");
     }
 }

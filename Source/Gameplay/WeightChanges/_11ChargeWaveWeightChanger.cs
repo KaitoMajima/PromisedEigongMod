@@ -16,7 +16,7 @@ public class _11ChargeWaveWeightChanger : BaseWeightChanger
         SetAssociatedBossState(ATTACK_PATH + ATTACK11_GIANT_CHARGE_WAVE);
         CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
-        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK21_NEW_INSTANT_CRIMSON_BALL);
+        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK21_NEW_QUICK_CRIMSON_BALL);
         SetWeightRandomness(true);
         ProcessCurrentWeight();
     }
