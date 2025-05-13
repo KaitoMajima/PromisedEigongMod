@@ -20,6 +20,7 @@ using static PromisedEigongModGlobalSettings.EigongDebug;
 using static PromisedEigongModGlobalSettings.EigongTitle;
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSFX;
+using static PromisedEigongModGlobalSettings.EigongVFX;
 
 public class EigongWrapper : MonoBehaviour
 {
@@ -40,7 +41,7 @@ public class EigongWrapper : MonoBehaviour
     bool hasAlreadyPreloaded;
     AmbienceSource phasesOst;
     int currentEigongPhase;
-    
+   
     void Awake ()
     {
         MainInstance.SubscribeEigongWrapper(this);
@@ -226,7 +227,33 @@ public class EigongWrapper : MonoBehaviour
             var soundPlayer = simpleDangerSFX.GetComponent<SoundPlayer>();
             for (int i = 0; i < SIMPLE_DANGER_SFX_BOOST; i++)
                 soundPlayer.SimplePlay();
+            var dangerVFX = GameObject.Find(DANGER_VFX_PATH);
+            var dangerVFXPoolObj = dangerVFX.GetComponent<FxPlayer>().EmitPoolObject;
+            //TODO: Pool
+            var isEigongFacingRight = LoadedEigong.Facing is Facings.Right;
+            var dangerVFXInstance = Instantiate(dangerVFXPoolObj.gameObject,
+                isEigongFacingRight
+                    ? LoadedEigong.gameObject.transform.position + SIMPLE_DANGER_VFX_OFFSET_L
+                    : LoadedEigong.gameObject.transform.position + SIMPLE_DANGER_VFX_OFFSET_R, 
+                Quaternion.identity);
+            Destroy(dangerVFXInstance.GetComponent<PoolObject>());
+            var dangerVFXPoolObject = dangerVFXInstance.AddComponent<CustomPoolObject>();
+            dangerVFXInstance.transform.localScale = SIMPLE_DANGER_VFX_SCALE;
+            dangerVFXInstance.name = SIMPLE_DANGER_VFX_NAME;
+            var spriteRenderers = dangerVFXInstance.GetComponentsInChildren<SpriteRenderer>();
+            
+            foreach (var spriteRenderer in spriteRenderers)
+                spriteRenderer.forceRenderingOff = true;
+            StartCoroutine(ShowAfterDelay(SIMPLE_DANGER_VFX_HIDE_TIME, dangerVFXPoolObject, spriteRenderers));
         }
+    }
+
+    IEnumerator ShowAfterDelay (float delay, CustomPoolObject customPoolObj, SpriteRenderer[] spriteRenderers)
+    {
+        yield return new WaitForSeconds(delay);
+        foreach (var spriteRenderer in spriteRenderers)
+            spriteRenderer.forceRenderingOff = false;
+        customPoolObj.EnterLevelAwake();
     }
     
     void LogStates ()

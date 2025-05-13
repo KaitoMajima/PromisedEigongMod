@@ -151,6 +151,21 @@ public static class PromisedEigongModGlobalSettings
         public const string PHASE1_2_OST = "BGM_Boss_A11_P3";
         public const string PHASE3_OST = "BGM_EndCredit_NineSols";
     }
+    
+    public static class EigongVFX
+    {
+        public const string DANGER_VFX_PATH =
+            "GameLevel/Room/Prefab/EventBinder/General Boss Fight FSM Object Variant/" +
+            "FSM Animator/LogicRoot/---Boss---/Boss_Yi Gung/MonsterCore/Animator(Proxy)/Animator/LogicRoot/DangerHintEffect";
+
+        public const string SIMPLE_DANGER_VFX_NAME = "SimpleEffect_TaiDanger";
+        public static readonly Vector3 SIMPLE_DANGER_VFX_OFFSET_L = new(-74.7f, 73, 0);
+        public static readonly Vector3 SIMPLE_DANGER_VFX_OFFSET_R = new(74.7f, 73, 0);
+        public static readonly Vector3 SIMPLE_DANGER_VFX_SCALE = new(0.72f, 0.42f, 0.42f);
+        public const float SIMPLE_DANGER_VFX_VALUE_BRIGHTNESS = 9;
+        public const float SIMPLE_DANGER_VFX_SATURATION = 0.42f;
+        public const float SIMPLE_DANGER_VFX_HIDE_TIME = 0.18f;
+    }
 
     public static class EigongSFX
     {

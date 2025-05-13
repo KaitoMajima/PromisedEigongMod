@@ -1,5 +1,6 @@
 ﻿using System;
 using NineSolsAPI;
+using PromisedEigong.ModSystem;
 
 namespace PromisedEigong.PoolObjectWrapper;
 
@@ -7,11 +8,13 @@ using HarmonyLib;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static PromisedEigongModGlobalSettings.EigongRefs;
+using static PromisedEigongModGlobalSettings.EigongVFX;
 
 [HarmonyPatch]
 public class PoolObjectPatches
 {
     public static event Action<SpriteRenderer>? OnFoundTaiDanger;
+    public static event Action<SpriteRenderer>? OnFoundSimpleTaiDanger;
     public static event Action<ParticleSystem>? OnFoundJieChuanFireParticles;
     public static event Action<SpriteRenderer>? OnFoundJieChuanFireImage;
     public static event Action<SpriteRenderer>? OnFoundFooExplosionSprite;
@@ -36,8 +39,20 @@ public class PoolObjectPatches
         InvokeCallbackForComponents(__instance, PO_VFX_JIECHUAN_FIRE, OnFoundJieChuanFireParticles);
         InvokeCallbackForComponents(__instance, PO_VFX_JIECHUAN_FIRE, OnFoundJieChuanFireImage, PO_VFX_JIECHUAN_FIRE_IMAGE);
     }
+    
+    [HarmonyPostfix]
+    [HarmonyPatch(typeof(CustomPoolObject), "EnterLevelAwake")]
+    static void PoolHijack (CustomPoolObject __instance)
+    {
+        Scene activeScene = SceneManager.GetActiveScene();
+        
+        if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
+            return;
+        
+        InvokeCallbackForComponents(__instance, SIMPLE_DANGER_VFX_NAME, OnFoundSimpleTaiDanger);
+    }
 
-    static void InvokeCallbackForComponents <T> (PoolObject instance, string objName, Action<T> callback) where T : Component
+    static void InvokeCallbackForComponents <T> (MonoBehaviour instance, string objName, Action<T> callback) where T : Component
     {
         if (instance.name != objName) 
             return;
@@ -47,7 +62,7 @@ public class PoolObjectPatches
             callback?.Invoke(obj);
     }
     
-    static void InvokeCallbackForComponents <T> (PoolObject instance, string objName, Action<T> callback, string objNameComparison) where T : Component
+    static void InvokeCallbackForComponents <T> (MonoBehaviour instance, string objName, Action<T> callback, string objNameComparison) where T : Component
     {
         if (instance.name != objName) 
             return;

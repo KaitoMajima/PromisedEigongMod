@@ -1,9 +1,9 @@
 ﻿namespace PromisedEigong.Effects;
-using NineSolsAPI;
 using AppearanceChangers;
 using PoolObjectWrapper;
 using UnityEngine;
 using static PromisedEigongModGlobalSettings.EigongColors;
+using static PromisedEigongModGlobalSettings.EigongVFX;
 
 public class EffectsManager
 {
@@ -15,6 +15,7 @@ public class EffectsManager
     void AddListeners ()
     {
         PoolObjectPatches.OnFoundTaiDanger += HandleTaiDangerFound;
+        PoolObjectPatches.OnFoundSimpleTaiDanger += HandleSimpleTaiDangerFound;
         PoolObjectPatches.OnFoundJieChuanFireParticles += HandleJieChuanFireParticlesFound;
         PoolObjectPatches.OnFoundJieChuanFireImage += HandleJieChuanFireImageFound;
         PoolObjectPatches.OnFoundFooExplosionSprite += HandleFooExplosionSpriteFound;
@@ -26,6 +27,7 @@ public class EffectsManager
     void RemoveListeners ()
     {
         PoolObjectPatches.OnFoundTaiDanger -= HandleTaiDangerFound;
+        PoolObjectPatches.OnFoundSimpleTaiDanger -= HandleSimpleTaiDangerFound;
         PoolObjectPatches.OnFoundJieChuanFireParticles -= HandleJieChuanFireParticlesFound;
         PoolObjectPatches.OnFoundJieChuanFireImage -= HandleJieChuanFireImageFound;
         PoolObjectPatches.OnFoundFooExplosionSprite -= HandleFooExplosionSpriteFound;
@@ -120,6 +122,17 @@ public class EffectsManager
             EIGONG_CHARACTER_SWORD_EFFECT_SHIFT,
             null,
             EIGONG_TAI_DANGER_VALUE_BRIGHTNESS,
+            isLit: false
+        );
+    }
+    
+    void HandleSimpleTaiDangerFound (SpriteRenderer sprite)
+    {
+        ColorChanger.ChangeColors(
+            sprite.gameObject, 
+            EIGONG_CHARACTER_SWORD_EFFECT_SHIFT,
+            SIMPLE_DANGER_VFX_SATURATION,
+            SIMPLE_DANGER_VFX_VALUE_BRIGHTNESS,
             isLit: false
         );
     }

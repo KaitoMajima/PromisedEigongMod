@@ -16,7 +16,6 @@ public class _9StarterWeightChanger : BaseWeightChanger
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
         CreateAndAddBossState(ATTACK_PATH + ATTACK16_QUICK_FOO);
         CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK14_CRIMSON_BALL);
         ProcessCurrentWeight();
     }
     
@@ -27,7 +26,6 @@ public class _9StarterWeightChanger : BaseWeightChanger
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
         CreateAndAddBossState(ATTACK_PATH + ATTACK16_QUICK_FOO);
         CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK14_CRIMSON_BALL);
         CreateAndAddBossState(ATTACK_PATH + ATTACK4_SLASH_UP);
         CreateAndAddBossState(ATTACK_PATH + ATTACK12_SLASH_UP_CRIMSON);
         ProcessCurrentWeight();
