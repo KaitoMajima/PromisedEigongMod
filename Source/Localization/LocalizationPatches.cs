@@ -13,7 +13,7 @@ public class LocalizationPatches
     static void ChangeEigongName (string Term, ref string __result)
     {
         if (Term == EIGONG_TITLE_LOC)
-            __result = EIGONG_TITLE;
+            __result = EIGONG_PREFIX + __result;
     }
 
     [HarmonyPostfix]

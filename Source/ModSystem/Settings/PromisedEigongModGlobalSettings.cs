@@ -33,7 +33,7 @@ public static class PromisedEigongModGlobalSettings
         public const string CAMERA_FX_MASTER_TRANSFORM =
             "GameLevel/CameraCore/DockObj/OffsetObj/ShakeObj/SceneCamera/AmplifyLightingSystem";
 
-        public const string BOSS_AMBIENCE_SOURCE =
+        public const string BOSS_AMBIENCE_SOURCE_PATH =
             "GameLevel/Room/Prefab/EventBinder/General Boss Fight FSM Object Variant/FSM Animator/LogicRoot/Boss三階BGM/BGM_Boss_A11_P3";
         
         public const string EIGONG_TITLE_NAME_PATH =
@@ -291,6 +291,7 @@ public static class PromisedEigongModGlobalSettings
     
     public static class EigongTitle
     {
+        public const string EIGONG_PREFIX = "Promised ";
         public const string EIGONG_TITLE = "Promised Eigong";
         public const string EIGONG_PHASE_3_TITLE = "Tianhuo Avatar";
         public const string ROOT_PROGRESS_TEXT = "Root Decryption Progress: <color=#FF0000>ERROR ERROR 99% ERROR ERROR</color>";
@@ -309,7 +310,7 @@ public static class PromisedEigongModGlobalSettings
         public const float EIGONG_NORMAL_AND_ELECTRIC_ARROW_DR = 0.77f;
         public const float EIGONG_CHARGE_ATTACK_DR = 0.66f;
         public const float EIGONG_THIRD_ATTACK_JADE_DR = 0.33f;
-        public const float EIGONG_POSTURE_DAMAGE_DR = 0.33f;
+        public const float EIGONG_POSTURE_DAMAGE_DR = 0.22f;
         public const float EIGONG_TAICHI_KICK_DAMAGE_DR = 0.5f;
         public const float EIGONG_COUNTER_JADE_DAMAGE_DR = 0.33f;
         public const float EIGONG_FOO_DR = 0;
@@ -351,18 +352,17 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK17_CRIMSON_SLAM_SPEED = 1 + 0.42f;
         public const float ATTACK18_TELEPORT_TO_BACK_COMBO_SPEED = 1 + 0.55f;
         public const float ATTACK21_NEW_INSTANT_CRIMSON_BALL_SPEED = 1 + 0.27f;
-        public const float ATTACK21_NEW_INSTANT_CRIMSON_BALL_SKIP = 0.21f;
+        public const float ATTACK21_NEW_INSTANT_CRIMSON_BALL_SKIP = 0.2f;
         public const float JUMP_BACK_SPEED = 1 + 0.55f;
     }
     
     public static class EigongDebug
     {
-        public const bool EIGONG_STATE_LOG = false;
+        public const bool EIGONG_STATE_LOG = true;
         public const bool TEST_YI_INVINCIBLE = false;
         public const bool IS_PAUSE_MENU_BG_INVISIBLE = true;
         
-        public const float BASE_HEALTH_MULTIPLIER = 1f;
-        public const float PHASE_1_HEALTH_MULTIPLIER = 1f;
+        public const float PHASE_1_HEALTH_MULTIPLIER = 0.05f;
         public const float PHASE_2_HEALTH_MULTIPLIER = 1f;
         public const float PHASE_3_HEALTH_MULTIPLIER = 1f;
     }

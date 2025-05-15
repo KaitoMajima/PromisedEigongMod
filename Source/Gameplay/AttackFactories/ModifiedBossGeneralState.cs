@@ -1,18 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using NineSolsAPI;
 using UnityEngine;
 
 namespace PromisedEigong.Gameplay.AttackFactories;
 
 public class ModifiedBossGeneralState : MonoBehaviour
 {
+    public string ModifiedName { get; set; }
     public float ForcePlayAnimAtNormalizeTime { get; set; }
     public float AnimationSpeed { get; set; }
     public BossGeneralState BaseState { get; set; }
 
-    List<BossGeneralState> stateMoveSources = new();
+    List<string> stateMoveSources = new();
     float selectionWeight;
-    
+
+    string originalName;
     float originalForcePlayAnimAtNormalizeTime;
     float originalAnimationSpeed;
 
@@ -26,50 +29,66 @@ public class ModifiedBossGeneralState : MonoBehaviour
         this.name = name;
         BaseState = baseState;
         this.selectionWeight = selectionWeight;
-        ForcePlayAnimAtNormalizeTime = originalForcePlayAnimAtNormalizeTime = baseState.forcePlayAnimAtNormalizeTime;
-        AnimationSpeed = originalAnimationSpeed = baseState.AnimationSpeed;
+        ModifiedName = originalName = BaseState.name;
+        ForcePlayAnimAtNormalizeTime = originalForcePlayAnimAtNormalizeTime = BaseState.forcePlayAnimAtNormalizeTime;
+        AnimationSpeed = originalAnimationSpeed = BaseState.AnimationSpeed;
     }
 
-    public void SubscribeSource (BossGeneralState sourceState)
+    public void SubscribeSource (string sourceStateName)
     {
-        stateMoveSources.Add(sourceState);
+        stateMoveSources.Add(sourceStateName);
     }
     
     void AddListeners ()
     {
         GeneralGameplayPatches.OnAttackEnterCalled += HandleAttackEnterCalled;
+        GeneralGameplayPatches.OnAttackExitCalled += HandleAttackExitCalled;
     }
-    
+
     void RemoveListeners ()
     {
         GeneralGameplayPatches.OnAttackEnterCalled -= HandleAttackEnterCalled;
+        GeneralGameplayPatches.OnAttackExitCalled -= HandleAttackExitCalled;
     }
 
-    void ApplyMoveModification (BossGeneralState state)
+    void ApplyMoveModification ()
     {
-        state.forcePlayAnimAtNormalizeTime = ForcePlayAnimAtNormalizeTime;
-        state.AnimationSpeed = AnimationSpeed;
+        BaseState.forcePlayAnimAtNormalizeTime = ForcePlayAnimAtNormalizeTime;
+        BaseState.AnimationSpeed = AnimationSpeed;
+        BaseState.GetComponent<BossStateIdentifier>().Setup(ModifiedName);
+        ToastManager.Toast("Modified Move: " + BaseState.GetComponent<BossStateIdentifier>().IdName);
     }
     
-    void ApplyMoveRevert (BossGeneralState state)
+    void ApplyMoveRevert ()
     {
-        state.forcePlayAnimAtNormalizeTime = originalForcePlayAnimAtNormalizeTime;
-        state.AnimationSpeed = originalAnimationSpeed;
+        BaseState.forcePlayAnimAtNormalizeTime = originalForcePlayAnimAtNormalizeTime;
+        BaseState.AnimationSpeed = originalAnimationSpeed;
+        BaseState.GetComponent<BossStateIdentifier>().Setup(originalName);
+        ToastManager.Toast("Reverted Move: " + BaseState.GetComponent<BossStateIdentifier>().IdName);
     }
     
-    void HandleAttackEnterCalled (BossGeneralState previousState, BossGeneralState currentState)
+    void HandleAttackEnterCalled (BossStateIdentifier previousState, BossStateIdentifier currentState)
     {
-        if (currentState.name != BaseState.name)
+        if (currentState.IdName != BaseState.name)
             return;
         
-        if (stateMoveSources.Any(x => x.name == previousState.name))
-            ApplyMoveModification(BaseState);
-        else
-            ApplyMoveRevert(BaseState);
+        if (stateMoveSources.Any(x => x == previousState.IdName))
+            ApplyMoveModification();
+    }
+    
+    void HandleAttackExitCalled (BossStateIdentifier currentState)
+    {
+        if (currentState.IdName != ModifiedName)
+            return;
+        
+        ApplyMoveRevert();
     }
 
     void OnDestroy ()
     {
         RemoveListeners();
     }
+    
+    // Ball -> Instant Ball
+    // 
 }

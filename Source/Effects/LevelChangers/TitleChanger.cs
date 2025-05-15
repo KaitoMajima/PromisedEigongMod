@@ -33,10 +33,10 @@ public class TitleChanger : MonoBehaviour
     void HandleEigongWrapperUpdated ()
     {
         if (eigongWrapper != null)
-            eigongWrapper.OnCurrentEigongPhaseChanged -= HandleEigongPhaseUpdated;
+            eigongWrapper.OnCurrentEigongPhaseChangedPostAnimation -= HandleEigongPhaseUpdated;
 
         eigongWrapper = MainInstance.EigongWrapper;
-        eigongWrapper.OnCurrentEigongPhaseChanged += HandleEigongPhaseUpdated;
+        eigongWrapper.OnCurrentEigongPhaseChangedPostAnimation += HandleEigongPhaseUpdated;
     }
 
     void HandleEigongPhaseUpdated (int phase)

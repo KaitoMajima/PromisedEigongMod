@@ -30,6 +30,7 @@ public class _17CrimsonSlamWeightChanger : BaseWeightChanger
         CreateAndAddBossState(ATTACK_PATH + ATTACK12_SLASH_UP_CRIMSON);
         CreateAndAddBossState(ATTACK_PATH + ATTACK16_QUICK_FOO);
         CreateAndAddBossState(ATTACK_PATH + ATTACK8_LONG_CHARGE);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
         ProcessCurrentWeight();
     }
     

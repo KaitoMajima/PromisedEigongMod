@@ -14,9 +14,10 @@ public class InstantCrimsonBallFactory
     {
         var attacksParent = GameObject.Find(ATTACK_PATH);
         var newAttackObj = Object.Instantiate(new GameObject(), attacksParent.transform);
-        ModifiedBossGeneralState newAttack = newAttackObj.AddComponent<ModifiedBossGeneralState>();
-        newAttack.name = attackToBeCreated;
+        var newAttack = newAttackObj.AddComponent<ModifiedBossGeneralState>();
         newAttack.Setup(attackToBeCreated, bossGeneralState, 1);
+        newAttack.name = attackToBeCreated;
+        newAttack.ModifiedName = attackToBeCreated;
         newAttack.ForcePlayAnimAtNormalizeTime = ATTACK21_NEW_INSTANT_CRIMSON_BALL_SKIP;
         newAttack.AnimationSpeed = ATTACK21_NEW_INSTANT_CRIMSON_BALL_SPEED;
     }

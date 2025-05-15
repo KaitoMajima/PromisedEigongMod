@@ -1,4 +1,7 @@
-﻿using PromisedEigong.Gameplay.AttackFactories;
+﻿using PromisedEigong.Effects.MusicPlayers;
+using PromisedEigong.Gameplay;
+using PromisedEigong.Gameplay.AttackFactories;
+using PromisedEigong.Gameplay.HealthChangers;
 
 namespace PromisedEigong.ModSystem;
 
@@ -12,7 +15,6 @@ using BepInEx.Configuration;
 using SpeedChangers;
 using WeightChanges;
 using UnityEngine;
-using static HarmonyLib.AccessTools;
 using static PromisedEigongModGlobalSettings.EigongRefs;
 using static PromisedEigongModGlobalSettings.EigongHealth;
 using static PromisedEigongModGlobalSettings.EigongOST;
@@ -22,54 +24,52 @@ using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSFX;
 using static PromisedEigongModGlobalSettings.EigongVFX;
 
-public class EigongWrapper : MonoBehaviour
+public class EigongWrapper : MonoBehaviour, ICoroutineRunner
 {
-    public event Action<int>? OnCurrentEigongPhaseChanged;
+    public event Action<int>? OnCurrentEigongPhaseChangedPreAnimation;
+    public event Action<int>? OnCurrentEigongPhaseChangedPostAnimation;
     
     PromisedEigongMain MainInstance => PromisedEigongMain.Instance;
     
-    bool IsInBossMemoryMode => ApplicationCore.IsInBossMemoryMode;
     MonsterBase LoadedEigong => SingletonBehaviour<MonsterManager>.Instance.ClosetMonster;
     EffectsManager EffectsManager => MainInstance.EffectsManager;
     
-    FieldRef<MonsterStat, float> HealthFieldRef => FieldRefAccess<MonsterStat, float>("BaseHealthValue");
-    
     bool hasInitialized;
     bool hasFinishedInitializing;
-    BossGeneralState currentBossState;
     ConfigEntry<bool> isUsingHotReload;
     bool hasAlreadyPreloaded;
     AmbienceSource phasesOst;
-    int currentEigongPhase;
+    BossPhaseProvider bossPhaseProvider;
    
     void Awake ()
     {
         MainInstance.SubscribeEigongWrapper(this);
         ChangeFixedEigongColors();
         ChangeEigongCutsceneTitle();
-        currentEigongPhase = 0;
+        bossPhaseProvider = new BossPhaseProvider();
+        AddListeners();
     }
 
     void Update ()
     {
         WaitForEigongInitialization();
-        ChangeOSTPhase3();
-        CheckEigongPhase();
-        LogStates();
+        bossPhaseProvider.HandleUpdateStep();
     }
-
-    void CheckEigongPhase ()
+    
+    void AddListeners ()
     {
-        if (LoadedEigong == null)
-            return;
-        
-        if (currentEigongPhase == LoadedEigong.PhaseIndex)
-            return;
-        
-        currentEigongPhase = LoadedEigong.PhaseIndex;
-        OnCurrentEigongPhaseChanged?.Invoke(currentEigongPhase);
+        bossPhaseProvider.OnPhaseChangePreAnimation += HandlePhaseChangePreAnimation;
+        bossPhaseProvider.OnPhaseChangePostAnimation += HandlePhaseChangePostAnimation;
+        GeneralGameplayPatches.OnAttackStartCalled += HandleEigongStateChanged;
     }
 
+    void RemoveListeners ()
+    {
+        bossPhaseProvider.OnPhaseChangePreAnimation  -= HandlePhaseChangePreAnimation;
+        bossPhaseProvider.OnPhaseChangePostAnimation -= HandlePhaseChangePostAnimation;
+        GeneralGameplayPatches.OnAttackStartCalled -= HandleEigongStateChanged;
+    }
+    
     void WaitForEigongInitialization ()
     {
         hasInitialized = LoadedEigong != null;
@@ -90,55 +90,36 @@ public class EigongWrapper : MonoBehaviour
 
     void HandleEigongInitialization ()
     {
-        ChangeAttackSpeeds();
-        CreateNewAttacks();
+        BossGeneralState[] allBossStates = FindObjectsOfType<BossGeneralState>();
+        ChangeAttackSpeeds(allBossStates);
+        CreateNewAttacks(allBossStates);
+        AddAttackIdentifiers(allBossStates);
         ChangeAttackWeights();
         ChangeCharacterEigongColors();
         ChangeOST();
         ChangeEigongHealth();
+        bossPhaseProvider.Setup(LoadedEigong);
     }
     
     void ChangeOST ()
     {
-        phasesOst = GameObject.Find(BOSS_AMBIENCE_SOURCE).GetComponent<AmbienceSource>();
-        phasesOst.ambPair.sound = PHASE1_2_OST;
-        StartCoroutine(PlayOST(0));
-        if (Player.i.health.CurrentHealthValue <= 0f)
-            StopAllCoroutines();
-    }
-    
-    void ChangeOSTPhase3 ()
-    {
-        if (!hasInitialized)
-            return;
-            
-        if (LoadedEigong.currentMonsterState !=
-            LoadedEigong.GetState(MonsterBase.States.FooStunEnter) ||
-            LoadedEigong.PhaseIndex != 1) 
-            return;
-        phasesOst.ambPair.sound = PHASE3_OST;
-        StartCoroutine(PlayOST(0));
-        if (Player.i.health.CurrentHealthValue <= 0f)
-            StopAllCoroutines();
-    }
-    
-    IEnumerator PlayOST (float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        phasesOst.Play();
+        phasesOst = GameMusicPlayer.GetAmbienceSourceAtPath(BOSS_AMBIENCE_SOURCE_PATH);
+        GameMusicPlayer.ChangeMusic(this, phasesOst, PHASE1_2_OST, 0);
     }
 
     void ChangeEigongHealth ()
     {
-        HealthFieldRef.Invoke(LoadedEigong.monsterStat) = EIGONG_PHASE_1_HEALTH_VALUE * BASE_HEALTH_MULTIPLIER;
-        
-        if (IsInBossMemoryMode)
-            LoadedEigong.postureSystem.CurrentHealthValue = EIGONG_PHASE_1_HEALTH_VALUE * LoadedEigong.monsterStat.BossMemoryHealthScale * PHASE_1_HEALTH_MULTIPLIER;
-        else
-            LoadedEigong.postureSystem.CurrentHealthValue = EIGONG_PHASE_1_HEALTH_VALUE * PHASE_1_HEALTH_MULTIPLIER;
-        
-        LoadedEigong.monsterStat.Phase2HealthRatio = (float)EIGONG_PHASE_2_HEALTH_VALUE / EIGONG_PHASE_1_HEALTH_VALUE * PHASE_2_HEALTH_MULTIPLIER;
-        LoadedEigong.monsterStat.Phase3HealthRatio = (float)EIGONG_PHASE_3_HEALTH_VALUE / EIGONG_PHASE_1_HEALTH_VALUE * PHASE_3_HEALTH_MULTIPLIER;
+        var mainHealthChanger = new MainHealthChanger();
+        mainHealthChanger.ChangeBaseHealthStat(LoadedEigong, EIGONG_PHASE_1_HEALTH_VALUE * PHASE_1_HEALTH_MULTIPLIER);
+        mainHealthChanger.ChangeHealthInPhase1(LoadedEigong, EIGONG_PHASE_1_HEALTH_VALUE * PHASE_1_HEALTH_MULTIPLIER);
+        mainHealthChanger.ChangeHealthInRemainingPhases(LoadedEigong, 1, 
+            EIGONG_PHASE_2_HEALTH_VALUE * PHASE_2_HEALTH_MULTIPLIER,
+            EIGONG_PHASE_1_HEALTH_VALUE
+        );
+        mainHealthChanger.ChangeHealthInRemainingPhases(LoadedEigong, 2, 
+            EIGONG_PHASE_3_HEALTH_VALUE * PHASE_3_HEALTH_MULTIPLIER, 
+            EIGONG_PHASE_1_HEALTH_VALUE
+        );
     }
 
     void ChangeAttackWeights ()
@@ -163,21 +144,27 @@ public class EigongWrapper : MonoBehaviour
         );
     }
     
-    void CreateNewAttacks ()
+    void CreateNewAttacks (BossGeneralState[] allBossStates)
     {
         var crimsonBallFactory = new InstantCrimsonBallFactory();
-        BossGeneralState[] allBossStates = FindObjectsOfType<BossGeneralState>();
         foreach (var bossState in allBossStates)
         {
             if (bossState.name == crimsonBallFactory.attackToBeCopied)
                 crimsonBallFactory.CopyAttack(bossState);
         }
     }
-    
-    void ChangeAttackSpeeds ()
+
+    void AddAttackIdentifiers (BossGeneralState[] allBossStates)
     {
-        BossGeneralState[] allBossStates = FindObjectsOfType<BossGeneralState>();
-        
+        foreach (var bossState in allBossStates)
+        {
+            var bossStateIdentifier = bossState.gameObject.AddComponent<BossStateIdentifier>();
+            bossStateIdentifier.Setup(bossState.name);
+        }
+    }
+    
+    void ChangeAttackSpeeds (BossGeneralState[] allBossStates)
+    {
         var speedChangerManager = new SpeedChangerManager();
         speedChangerManager.SetBossStates(allBossStates);
         speedChangerManager.ChangeSpeedValues(
@@ -219,9 +206,9 @@ public class EigongWrapper : MonoBehaviour
         cutsceneTitle.GetComponent<TextMeshPro>().text = EIGONG_TITLE;
     }
     
-    void HandleEigongStateChanged ()
+    void HandleEigongStateChanged (BossStateIdentifier currentState)
     {
-        if (currentBossState.name == ATTACK9_STARTER)
+        if (currentState.IdName == ATTACK9_STARTER)
         {
             var simpleDangerSFX = GameObject.Find(SIMPLE_DANGER_SFX_PATH);
             var soundPlayer = simpleDangerSFX.GetComponent<SoundPlayer>();
@@ -246,6 +233,19 @@ public class EigongWrapper : MonoBehaviour
                 spriteRenderer.forceRenderingOff = true;
             StartCoroutine(ShowAfterDelay(SIMPLE_DANGER_VFX_HIDE_TIME, dangerVFXPoolObject, spriteRenderers));
         }
+        LogStates(currentState);
+    }
+    
+    void HandlePhaseChangePreAnimation (int phase)
+    {
+        if (phase == 1)
+            GameMusicPlayer.ChangeMusic(this, phasesOst, PHASE3_OST, 0);
+        OnCurrentEigongPhaseChangedPreAnimation?.Invoke(phase);
+    }
+    
+    void HandlePhaseChangePostAnimation (int phase)
+    {
+        OnCurrentEigongPhaseChangedPostAnimation?.Invoke(phase);
     }
 
     IEnumerator ShowAfterDelay (float delay, CustomPoolObject customPoolObj, SpriteRenderer[] spriteRenderers)
@@ -256,14 +256,14 @@ public class EigongWrapper : MonoBehaviour
         customPoolObj.EnterLevelAwake();
     }
     
-    void LogStates ()
+    void LogStates (BossStateIdentifier currentState)
     {
-        if (currentBossState == (BossGeneralState)LoadedEigong.currentMonsterState)
-            return;
-        currentBossState = (BossGeneralState)LoadedEigong.currentMonsterState;
-        HandleEigongStateChanged();
-        
         if (EIGONG_STATE_LOG)
-            ToastManager.Toast($"Next state: [{currentBossState.name}]");
+            ToastManager.Toast($"Next attack state: [{currentState.IdName}]");
+    }
+
+    void OnDestroy ()
+    {
+        RemoveListeners();
     }
 }

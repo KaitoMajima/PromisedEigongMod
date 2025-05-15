@@ -1,33 +1,81 @@
-﻿namespace PromisedEigong.Gameplay;
+﻿using System;
+using NineSolsAPI;
+using PromisedEigong.Gameplay.AttackFactories;
+using UnityEngine.SceneManagement;
+
+namespace PromisedEigong.Gameplay;
 
 using HarmonyLib;
 using static PromisedEigongModGlobalSettings.EigongRefs;
 
-public delegate void OnAttackEnterHandler (BossGeneralState previousState, BossGeneralState currentState);
+public delegate void OnAttackEnterHandler (BossStateIdentifier previousState, BossStateIdentifier currentState);
+public delegate void OnAttackStartHandler (BossStateIdentifier currentState);
+public delegate void OnAttackExitHandler (BossStateIdentifier currentState);
 
 [HarmonyPatch]
 public class GeneralGameplayPatches
 {
     public static OnAttackEnterHandler? OnAttackEnterCalled;
+    public static OnAttackStartHandler? OnAttackStartCalled;
+    public static OnAttackExitHandler? OnAttackExitCalled;
     
-    static MonsterState previousState;
+    static BossStateIdentifier? previousState;
+    static BossStateIdentifier? currentState;
     
     [HarmonyPrefix]
-    [HarmonyPatch(typeof(MonsterState), "OnStateEnter")]
-    public static void OnStateEnterCall (MonsterState __instance)
+    [HarmonyPatch(typeof(BossGeneralState), "OnStateEnter")]
+    public static void OnStateEnterCall (BossGeneralState __instance)
     {
-        if (__instance.monster.name != BIND_MONSTER_EIGONG_NAME)
+        Scene activeScene = SceneManager.GetActiveScene();
+        
+        if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
             return;
         
-        if (previousState == null ||
-            previousState is not BossGeneralState previousBossState ||
-            __instance is not BossGeneralState currentBossState)
+        if (previousState == null)
         {
-            previousState = __instance;
+            previousState = __instance.GetComponent<BossStateIdentifier>();
             return;
         }
         
-        OnAttackEnterCalled?.Invoke(previousBossState, currentBossState);
-        previousState = __instance;
+        currentState = __instance.GetComponent<BossStateIdentifier>();
+
+        if (currentState == null)
+        {
+            previousState = null;
+            return;
+        }
+        
+        OnAttackEnterCalled?.Invoke(previousState, currentState);
+        previousState = currentState;
+    }
+    
+    [HarmonyPostfix]
+    [HarmonyPatch(typeof(BossGeneralState), "OnStateEnter")]
+    public static void OnStateStartCall (BossGeneralState __instance)
+    {
+        Scene activeScene = SceneManager.GetActiveScene();
+        
+        if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
+            return;
+        
+        if (currentState == null)
+            return;
+        
+        OnAttackStartCalled?.Invoke(currentState);
+    }
+    
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(BossGeneralState), "OnStateExit")]
+    public static void OnStateExitCall (BossGeneralState __instance)
+    {
+        Scene activeScene = SceneManager.GetActiveScene();
+        
+        if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
+            return;
+        
+        if (currentState == null)
+            return;
+        
+        OnAttackExitCalled?.Invoke(currentState);
     }
 }

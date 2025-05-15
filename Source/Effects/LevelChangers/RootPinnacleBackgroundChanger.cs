@@ -98,15 +98,15 @@ public class RootPinnacleBackgroundChanger : MonoBehaviour
     void HandleEigongWrapperUpdated ()
     {
         if (eigongWrapper != null)
-            eigongWrapper.OnCurrentEigongPhaseChanged -= HandleEigongPhaseUpdated;
+            eigongWrapper.OnCurrentEigongPhaseChangedPreAnimation -= HandleEigongPhaseUpdated;
 
         eigongWrapper = MainInstance.EigongWrapper;
-        eigongWrapper.OnCurrentEigongPhaseChanged += HandleEigongPhaseUpdated;
+        eigongWrapper.OnCurrentEigongPhaseChangedPreAnimation += HandleEigongPhaseUpdated;
     }
 
     void HandleEigongPhaseUpdated (int phaseIndex)
     {
-        if (phaseIndex == 1)
+        if (phaseIndex == 0)
         {
             var giantBall = GameObject.Find(GIANT_BALL);
             var coreVineRoot = GameObject.Find(CORE_VINES_ROOT);
@@ -125,7 +125,7 @@ public class RootPinnacleBackgroundChanger : MonoBehaviour
             infectedVineParent.SetActive(true);
         }
 
-        if (phaseIndex == 2)
+        if (phaseIndex == 1)
         {
             StopAllCoroutines();
             StartCoroutine(ApplyPhase3Effects());

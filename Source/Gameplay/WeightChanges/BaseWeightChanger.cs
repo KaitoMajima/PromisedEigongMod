@@ -64,7 +64,7 @@ public abstract class BaseWeightChanger
     {
         ModifiedBossGeneralState bossState = GameObject.Find(path).GetComponent<ModifiedBossGeneralState>();
         modifiedBossStates.Add(bossState);
-        bossState.SubscribeSource(associatedBossState);
+        bossState.SubscribeSource(associatedBossState.name);
     }
 
     protected void SetWeightRandomness (bool isRandom)
