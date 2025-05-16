@@ -93,8 +93,8 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         BossGeneralState[] allBossStates = FindObjectsOfType<BossGeneralState>();
         ChangeAttackSpeeds(allBossStates);
         CreateNewAttacks(allBossStates);
-        AddAttackIdentifiers(allBossStates);
         ChangeAttackWeights();
+        AddAttackIdentifiers(allBossStates);
         ChangeCharacterEigongColors();
         ChangeOST();
         ChangeEigongHealth();
@@ -146,12 +146,29 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     
     void CreateNewAttacks (BossGeneralState[] allBossStates)
     {
-        var crimsonBallFactory = new InstantCrimsonBallFactory();
-        foreach (var bossState in allBossStates)
+        BaseAttackFactory[] factories = [
+            new InstantCrimsonBallFactory(), 
+            new SlowStarterPokeChainFactory(),
+            new TriplePokeChainFactory(),
+            new SlashUpCrimsonPokeChainFactory(),
+            new TeleportToBackPokeChainFactory(),
+            new ChargeWavePokeChainFactory()
+        ];
+        
+        foreach (var factory in factories)
         {
-            if (bossState.name == crimsonBallFactory.attackToBeCopied)
-                crimsonBallFactory.CopyAttack(bossState);
+            foreach (var bossState in allBossStates)
+            {
+                if (bossState.name != factory.AttackToBeCopied) 
+                    continue;
+                
+                factory.CopyAttack(bossState);
+                break;
+            }
         }
+        
+        var attacksParent = GameObject.Find(ATTACK_PATH);
+        attacksParent.AddComponent<ModifiedBossGeneralStateManager>();
     }
 
     void AddAttackIdentifiers (BossGeneralState[] allBossStates)
@@ -159,7 +176,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         foreach (var bossState in allBossStates)
         {
             var bossStateIdentifier = bossState.gameObject.AddComponent<BossStateIdentifier>();
-            bossStateIdentifier.Setup(bossState.name);
+            bossStateIdentifier.IdName = bossState.name;
         }
     }
     

@@ -271,7 +271,11 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK19_THRUST_FULL_SCREEN = "[19] Thrust Full Screen Slash";
         public const string ATTACK20_TELEPORT_OUT = "[20] TeleportOut";
         public const string ATTACK21_NEW_QUICK_CRIMSON_BALL = "[21] Quick Crimson Ball";
-        public const string ATTACK22_NEW_INSTANT_CRIMSON_GEYSER = "[22] Instant Crimson Geyser";
+        public const string ATTACK22_NEW_CHAIN_SLOW_STARTER = "[22] Slow Starter (Poke Chain 1)";
+        public const string ATTACK24_NEW_CHAIN_TRIPLE_POKE = "[24] Triple Poke (Poke Chain 3)";
+        public const string ATTACK25_NEW_CHAIN_SLASH_UP_CRIMSON = "[25] Slash Up Crimson (Poke Chain 4)";
+        public const string ATTACK26_NEW_CHAIN_TELEPORT_TO_BACK = "[26] Teleport To Back (Poke Chain 5)";
+        public const string ATTACK27_NEW_CHAIN_CHARGE_WAVE = "[27] Charge Wave (Poke Chain 6)";
         public const string POSTURE_BREAK = "PostureBreak";
         public const string POSTURE_BREAK_PHASE_1 = POSTURE_BREAK + "/phase0";
         public const string POSTURE_BREAK_PHASE_2 = POSTURE_BREAK + "/phase1";
@@ -353,12 +357,16 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK18_TELEPORT_TO_BACK_COMBO_SPEED = 1 + 0.55f;
         public const float ATTACK21_NEW_INSTANT_CRIMSON_BALL_SPEED = 1 + 0.27f;
         public const float ATTACK21_NEW_INSTANT_CRIMSON_BALL_SKIP = 0.2f;
+        public const float ATTACK22_NEW_CHAIN_SLOW_STARTER_SPEED = 1;
+        public const float ATTACK24_NEW_CHAIN_TRIPLE_POKE_SPEED = 1 + 0.27f;
+        public const float ATTACK24_NEW_CHAIN_TRIPLE_POKE_SKIP = 0.1f;
+        public const float ATTACK27_NEW_CHAIN_CHARGE_WAVE_SKIP = 0.208f;
         public const float JUMP_BACK_SPEED = 1 + 0.55f;
     }
     
     public static class EigongDebug
     {
-        public const bool EIGONG_STATE_LOG = true;
+        public const bool EIGONG_STATE_LOG = false;
         public const bool TEST_YI_INVINCIBLE = false;
         public const bool IS_PAUSE_MENU_BG_INVISIBLE = true;
         

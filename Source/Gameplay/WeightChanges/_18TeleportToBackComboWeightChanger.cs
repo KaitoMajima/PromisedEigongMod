@@ -15,6 +15,7 @@ public class _18TeleportToBackComboWeightChanger : BaseWeightChanger
         SetStateWeight(ATTACK_PATH + ATTACK18_TELEPORT_TO_BACK_COMBO_WEIGHT);
         SetAssociatedBossState(ATTACK_PATH + ATTACK18_TELEPORT_TO_BACK_COMBO);
         CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK21_NEW_QUICK_CRIMSON_BALL);
+        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK22_NEW_CHAIN_SLOW_STARTER);
         ProcessCurrentWeight();
     }
 }

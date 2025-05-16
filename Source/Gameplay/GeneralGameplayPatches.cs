@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NineSolsAPI;
 using PromisedEigong.Gameplay.AttackFactories;
 using UnityEngine.SceneManagement;
@@ -10,14 +11,13 @@ using static PromisedEigongModGlobalSettings.EigongRefs;
 
 public delegate void OnAttackEnterHandler (BossStateIdentifier previousState, BossStateIdentifier currentState);
 public delegate void OnAttackStartHandler (BossStateIdentifier currentState);
-public delegate void OnAttackExitHandler (BossStateIdentifier currentState);
+
 
 [HarmonyPatch]
 public class GeneralGameplayPatches
 {
     public static OnAttackEnterHandler? OnAttackEnterCalled;
     public static OnAttackStartHandler? OnAttackStartCalled;
-    public static OnAttackExitHandler? OnAttackExitCalled;
     
     static BossStateIdentifier? previousState;
     static BossStateIdentifier? currentState;
@@ -65,17 +65,14 @@ public class GeneralGameplayPatches
     }
     
     [HarmonyPrefix]
-    [HarmonyPatch(typeof(BossGeneralState), "OnStateExit")]
-    public static void OnStateExitCall (BossGeneralState __instance)
+    [HarmonyPatch(typeof(LinkNextMoveStateWeight), "EnqueueAttacks")]
+    public static void OnAttackSensorPreparingEnqueuedAttacks (LinkNextMoveStateWeight __instance, List<MonsterBase.States> QueuedAttacks)
     {
         Scene activeScene = SceneManager.GetActiveScene();
         
         if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
             return;
         
-        if (currentState == null)
-            return;
-        
-        OnAttackExitCalled?.Invoke(currentState);
+        QueuedAttacks.Clear();
     }
 }

@@ -3,8 +3,6 @@ using static PromisedEigongModGlobalSettings.EigongAttacks;
 
 public class _1SlowStarterWeightChanger : BaseWeightChanger
 {
-    protected override WeightReplaceMode WeightReplaceMode => WeightReplaceMode.Add;
-
     public override void ChangeAttackWeight ()
     {
         ChangePhase1();
@@ -15,6 +13,8 @@ public class _1SlowStarterWeightChanger : BaseWeightChanger
     {
         SetStateWeight(ATTACK_PATH + ATTACK1_SLOW_STARTER_WEIGHT);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK5_TELEPORT_TO_BACK);
         ProcessCurrentWeight();
     }
     
@@ -22,6 +22,9 @@ public class _1SlowStarterWeightChanger : BaseWeightChanger
     {
         SetStateWeight(ATTACK_PATH + ATTACK1_SLOW_STARTER_WEIGHT_PHASE_2);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK5_TELEPORT_TO_BACK);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK18_TELEPORT_TO_BACK_COMBO);
         ProcessCurrentWeight();
     }
 }
