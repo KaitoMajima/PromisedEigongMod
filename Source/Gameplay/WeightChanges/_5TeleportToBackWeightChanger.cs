@@ -5,12 +5,23 @@ public class _5TeleportToBackWeightChanger : BaseWeightChanger
 {
     public override void ChangeAttackWeight ()
     {
+        ChangePhase1();
         ChangePhase2();
+    }
+
+    void ChangePhase1 ()
+    {
+        SetStateWeight(ATTACK_PATH + ATTACK5_TELEPORT_TO_BACK_WEIGHT_PHASE_2);
+        SetAssociatedBossState(ATTACK_PATH + ATTACK5_TELEPORT_TO_BACK);
+        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK22_NEW_CHAIN_SLOW_STARTER);
+        ProcessCurrentWeight();
     }
 
     void ChangePhase2 ()
     {
         SetStateWeight(ATTACK_PATH + ATTACK5_TELEPORT_TO_BACK_WEIGHT_PHASE_2);
+        SetAssociatedBossState(ATTACK_PATH + ATTACK5_TELEPORT_TO_BACK);
+        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK22_NEW_CHAIN_SLOW_STARTER);
         CreateAndAddBossState(ATTACK_PATH + ATTACK10_FOO);
         CreateAndAddBossState(ATTACK_PATH + ATTACK8_LONG_CHARGE);
         CreateAndAddBossState(STATES_PATH + JUMP_BACK);

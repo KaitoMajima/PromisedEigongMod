@@ -14,7 +14,6 @@ public class _X1PostureBreakWeightChanger : BaseWeightChanger
         SetStateWeight(STATES_PATH + POSTURE_BREAK_PHASE_1);
         CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK7_TELEPORT_FORWARD);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
         ProcessCurrentWeight();
     }

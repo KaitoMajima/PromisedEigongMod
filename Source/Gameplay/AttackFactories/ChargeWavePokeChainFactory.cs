@@ -18,6 +18,7 @@ public class ChargeWavePokeChainFactory : BaseAttackFactory
         var attack2NextMove = GameObject.Find(ATTACK18_TELEPORT_TO_BACK_COMBO).GetComponent<BossGeneralState>();
         newAttack.AnimationSpeed = ATTACK11_GIANT_CHARGE_WAVE_SPEED;
         newAttack.ForcePlayAnimAtNormalizeTime = ATTACK27_NEW_CHAIN_CHARGE_WAVE_SKIP;
+        newAttack.IsFromAChain = true;
         
         var phase2Weights = new List<AttackWeight>
         {
@@ -34,7 +35,7 @@ public class ChargeWavePokeChainFactory : BaseAttackFactory
         };
         
         newAttack.Phase2Weights = phase2Weights;
-        newAttack.SubscribeSource(ATTACK26_NEW_CHAIN_TELEPORT_TO_BACK);
+        newAttack.SubscribeSource(ATTACK26_NEW_CHAIN_TELEPORT_TO_BACK_SECOND);
         return newAttack;
     }
 }

@@ -16,6 +16,7 @@ public class SlashUpCrimsonPokeChainFactory : BaseAttackFactory
         var newAttack = base.CopyAttack(bossGeneralState);
         var attack1NextMove = GameObject.Find(ATTACK5_TELEPORT_TO_BACK).GetComponent<BossGeneralState>();
         newAttack.AnimationSpeed = ATTACK12_SLASH_UP_CRIMSON_SPEED;
+        newAttack.IsFromAChain = true;
         
         var phase2Weights = new List<AttackWeight>
         {
@@ -27,7 +28,7 @@ public class SlashUpCrimsonPokeChainFactory : BaseAttackFactory
         };
         
         newAttack.Phase2Weights = phase2Weights;
-        newAttack.SubscribeSource(ATTACK24_NEW_CHAIN_TRIPLE_POKE);
+        newAttack.SubscribeSource(ATTACK29_NEW_CHAIN_TELEPORT_TO_BACK_FIRST);
         return newAttack;
     }
 }

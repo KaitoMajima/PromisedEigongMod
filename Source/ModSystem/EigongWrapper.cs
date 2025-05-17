@@ -93,7 +93,8 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         BossGeneralState[] allBossStates = FindObjectsOfType<BossGeneralState>();
         ChangeAttackSpeeds(allBossStates);
         CreateNewAttacks(allBossStates);
-        ChangeAttackWeights();
+        ModifiedBossGeneralState[] allModifiedBossStates = FindObjectsOfType<ModifiedBossGeneralState>();
+        ChangeAttackWeights(allModifiedBossStates);
         AddAttackIdentifiers(allBossStates);
         ChangeCharacterEigongColors();
         ChangeOST();
@@ -122,7 +123,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         );
     }
 
-    void ChangeAttackWeights ()
+    void ChangeAttackWeights (ModifiedBossGeneralState[] modifiedBossGeneralStates)
     {
         var weightChangerManager = new WeightChangerManager();
         weightChangerManager.ChangeWeights(
@@ -142,6 +143,9 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
             new _X1PostureBreakWeightChanger(),
             new _X3AttackParryingWeightChanger()
         );
+        
+        foreach (var modifiedBossGeneralState in modifiedBossGeneralStates)
+            modifiedBossGeneralState.ResetOriginalWeights();
     }
     
     void CreateNewAttacks (BossGeneralState[] allBossStates)
@@ -150,9 +154,12 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
             new InstantCrimsonBallFactory(), 
             new SlowStarterPokeChainFactory(),
             new TriplePokeChainFactory(),
+            new DoubleAttackPokeChainFactory(),
+            new TeleportToBackFirstPokeChainFactory(),
             new SlashUpCrimsonPokeChainFactory(),
-            new TeleportToBackPokeChainFactory(),
-            new ChargeWavePokeChainFactory()
+            new TeleportToBackSecondPokeChainFactory(),
+            new ChargeWavePokeChainFactory(),
+            new TeleportToBackComboPokeChainFactory()
         ];
         
         foreach (var factory in factories)

@@ -1,11 +1,15 @@
-﻿using System.Linq;
+﻿namespace PromisedEigong.Gameplay.AttackFactories;
+#nullable disable
+
+using System.Linq;
 using NineSolsAPI;
 using UnityEngine;
 
-namespace PromisedEigong.Gameplay.AttackFactories;
 
 public class ModifiedBossGeneralStateManager : MonoBehaviour
 {
+    public static bool IsCurrentAttackAChain { get; private set; }
+    
     ModifiedBossGeneralState[] allModifiedStates;
     
     void Awake ()
@@ -27,20 +31,29 @@ public class ModifiedBossGeneralStateManager : MonoBehaviour
     void HandleAttackEnter (BossStateIdentifier previousState, BossStateIdentifier currentState)
     {
         var previousModifiedAttack = allModifiedStates.FirstOrDefault(x => x.ModifiedName == previousState.IdName);
-        var currentModifiedAttack = allModifiedStates.FirstOrDefault(x => x.OriginalName == currentState.IdName);
+        var attacksThatCanBeModified = allModifiedStates.Where(x => x.OriginalName == currentState.IdName).ToList();
         
-        if (currentModifiedAttack != null)
+        if (attacksThatCanBeModified.Count > 0)
         {
-            ToastManager.Toast($"Previous state was {previousState.IdName} for {currentState.IdName}.");
-            if (currentModifiedAttack.CanBeModified(previousState))
+            bool hasFoundAttack = false;
+            
+            foreach (var attack in attacksThatCanBeModified)
             {
-                ToastManager.Toast($"Seems like I can modify it!");
-                currentModifiedAttack.ApplyMoveModification();
+                if (!attack.CanBeModified(previousState))
+                    continue;
+                
+                attack.ApplyMoveModification();
+                IsCurrentAttackAChain = attack.IsFromAChain;
+                hasFoundAttack = true;
+                break;
             }
-            else
-            {
-                ToastManager.Toast($"...But I can't modify it from here.");
-            }
+
+            if (!hasFoundAttack)
+                IsCurrentAttackAChain = false;
+        }
+        else
+        {
+            IsCurrentAttackAChain = false;
         }
             
         if (previousModifiedAttack != null)

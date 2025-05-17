@@ -73,6 +73,7 @@ public class GeneralGameplayPatches
         if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
             return;
         
+        // if (ModifiedBossGeneralStateManager.IsCurrentAttackAChain)
         QueuedAttacks.Clear();
     }
 }

@@ -13,6 +13,7 @@ public class InstantCrimsonBallFactory : BaseAttackFactory
         var newAttack = base.CopyAttack(bossGeneralState);
         newAttack.ForcePlayAnimAtNormalizeTime = ATTACK21_NEW_INSTANT_CRIMSON_BALL_SKIP;
         newAttack.AnimationSpeed = ATTACK21_NEW_INSTANT_CRIMSON_BALL_SPEED;
+        newAttack.SubscribeSource(ATTACK28_NEW_TELEPORT_TO_BACK_COMBO);
         return newAttack;
     }
 }

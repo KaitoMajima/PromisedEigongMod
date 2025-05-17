@@ -16,6 +16,7 @@ public class SlowStarterPokeChainFactory : BaseAttackFactory
         var newAttack = base.CopyAttack(bossGeneralState);
         var attack1NextMove = GameObject.Find(ATTACK13_TRIPLE_POKE).GetComponent<BossGeneralState>();
         newAttack.AnimationSpeed = ATTACK22_NEW_CHAIN_SLOW_STARTER_SPEED;
+        newAttack.IsFromAChain = true;
         
         var phase1Weights = new List<AttackWeight>
         {

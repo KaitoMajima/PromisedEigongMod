@@ -6,16 +6,17 @@ namespace PromisedEigong.Gameplay.AttackFactories;
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSpeed;
 
-public class TeleportToBackPokeChainFactory : BaseAttackFactory
+public class TeleportToBackSecondPokeChainFactory : BaseAttackFactory
 {
     public override string AttackToBeCopied => ATTACK5_TELEPORT_TO_BACK;
-    public override string AttackToBeCreated => ATTACK26_NEW_CHAIN_TELEPORT_TO_BACK;
+    public override string AttackToBeCreated => ATTACK26_NEW_CHAIN_TELEPORT_TO_BACK_SECOND;
 
     public override ModifiedBossGeneralState CopyAttack (BossGeneralState bossGeneralState)
     {
         var newAttack = base.CopyAttack(bossGeneralState);
         var attack1NextMove = GameObject.Find(ATTACK11_GIANT_CHARGE_WAVE).GetComponent<BossGeneralState>();
         newAttack.AnimationSpeed = ATTACK5_TELEPORT_TO_BACK_SPEED;
+        newAttack.IsFromAChain = true;
         
         var phase2Weights = new List<AttackWeight>
         {

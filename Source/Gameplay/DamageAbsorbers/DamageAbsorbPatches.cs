@@ -1,4 +1,6 @@
 ﻿namespace PromisedEigong.DamageAbsorbers;
+#nullable disable
+
 using HarmonyLib;
 using static PromisedEigongModGlobalSettings.EigongRefs;
 using static PromisedEigongModGlobalSettings.EigongProperties;
