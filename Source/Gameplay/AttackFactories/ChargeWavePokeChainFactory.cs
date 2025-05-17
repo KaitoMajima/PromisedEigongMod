@@ -11,9 +11,9 @@ public class ChargeWavePokeChainFactory : BaseAttackFactory
     public override string AttackToBeCopied => ATTACK11_GIANT_CHARGE_WAVE;
     public override string AttackToBeCreated => ATTACK27_NEW_CHAIN_CHARGE_WAVE;
 
-    public override ModifiedBossGeneralState CopyAttack (BossGeneralState bossGeneralState)
+    public override void CopyAttack (BossGeneralState bossGeneralState)
     {
-        var newAttack = base.CopyAttack(bossGeneralState);
+        var newAttack = SetupAttack(bossGeneralState);
         var attack1NextMove = GameObject.Find(ATTACK3_THRUST_DELAY).GetComponent<BossGeneralState>();
         var attack2NextMove = GameObject.Find(ATTACK18_TELEPORT_TO_BACK_COMBO).GetComponent<BossGeneralState>();
         newAttack.AnimationSpeed = ATTACK11_GIANT_CHARGE_WAVE_SPEED;
@@ -36,6 +36,5 @@ public class ChargeWavePokeChainFactory : BaseAttackFactory
         
         newAttack.Phase2Weights = phase2Weights;
         newAttack.SubscribeSource(ATTACK26_NEW_CHAIN_TELEPORT_TO_BACK_SECOND);
-        return newAttack;
     }
 }

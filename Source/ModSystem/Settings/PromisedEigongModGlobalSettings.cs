@@ -254,6 +254,8 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK9_STARTER_PHASE_1 = ATTACK9_STARTER + "/phase (0)";
         public const string ATTACK9_STARTER_PHASE_2 = ATTACK9_STARTER + "/phase (1)";
         public const string ATTACK10_FOO = "[10] Danger Foo Grab";
+        public const string ATTACK10_FOO_INTERRUPT_WEIGHT = ATTACK10_FOO + "/interrupt weight";
+        public const string ATTACK10_FOO_INTERRUPT_WEIGHT_PHASE_2 = ATTACK10_FOO + "/interrupt weight (1)";
         public const string ATTACK11_GIANT_CHARGE_WAVE = "[11] GiantChargeWave 紅白白紅";
         public const string ATTACK11_GIANT_CHARGE_WAVE_WEIGHT_PHASE_2 = ATTACK11_GIANT_CHARGE_WAVE + "/weight (2)";
         public const string ATTACK12_SLASH_UP_CRIMSON = "[12] UpSlash Down Danger";
@@ -265,6 +267,8 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK15_TURN_AROUND_BRIGHT_EYES = "[15] TurnAroundPrepare";
         public const string ATTACK15_TURN_AROUND_BRIGHT_EYES_WEIGHT_PHASE_2 = ATTACK15_TURN_AROUND_BRIGHT_EYES + "/weight (1)";
         public const string ATTACK16_QUICK_FOO = "[16] QuickFoo";
+        public const string ATTACK16_QUICK_FOO_INTERRUPT_WEIGHT = ATTACK16_QUICK_FOO + "/interrupt weight";
+        public const string ATTACK16_QUICK_FOO_INTERRUPT_WEIGHT_PHASE_2 = ATTACK16_QUICK_FOO + "/interrupt weight (1)";
         public const string ATTACK17_CRIMSON_SLAM = "[17] DownAttack Danger 空中下危";
         public const string ATTACK17_CRIMSON_SLAM_WEIGHT = ATTACK17_CRIMSON_SLAM + "/weight";
         public const string ATTACK17_CRIMSON_SLAM_WEIGHT_PHASE_2 = ATTACK17_CRIMSON_SLAM + "/weight (1)";
@@ -279,8 +283,9 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK25_NEW_CHAIN_SLASH_UP_CRIMSON = "[25] Slash Up Crimson (Poke Chain 4)";
         public const string ATTACK26_NEW_CHAIN_TELEPORT_TO_BACK_SECOND = "[26] Teleport To Back (Poke Chain 5)";
         public const string ATTACK27_NEW_CHAIN_CHARGE_WAVE = "[27] Charge Wave (Poke Chain 6)";
-        public const string ATTACK28_NEW_TELEPORT_TO_BACK_COMBO = "[28] Teleport To Back Combo (Poke Chain 7)";
+        public const string ATTACK28_NEW_CHAIN_TELEPORT_TO_BACK_COMBO = "[28] Teleport To Back Combo (Poke Chain 7)";
         public const string ATTACK29_NEW_CHAIN_TELEPORT_TO_BACK_FIRST = "[29] Teleport To Back (Poke Chain 3.5)";
+        public const string ATTACK30_NEW_CHAIN_JUMP_BACK = "[30] Jump Back (Poke Chain 0)";
         public const string POSTURE_BREAK = "PostureBreak";
         public const string POSTURE_BREAK_PHASE_1 = POSTURE_BREAK + "/phase0";
         public const string POSTURE_BREAK_PHASE_2 = POSTURE_BREAK + "/phase1";
@@ -351,14 +356,14 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK7_TELEPORT_FORWARD_SPEED = 1 + 0.55f;
         public const float ATTACK8_LONG_CHARGE_SPEED = 1 + 0.77f;
         public const float ATTACK9_STARTER_SPEED = 1 - 0.11f;
-        public const float ATTACK10_FOO_SPEED = 1 + 0.42f;
+        public const float ATTACK10_FOO_SPEED = 1 + 0.37f;
         public const float ATTACK11_GIANT_CHARGE_WAVE_SPEED = 1 + 0.37f;
         public const float ATTACK12_SLASH_UP_CRIMSON_SPEED = 1 + 0.22f;
         public const float ATTACK13_TRIPLE_POKE_SPEED = 1 + 0.27f;
         public const float ATTACK14_CRIMSON_BALL_SPEED = 1 + 0.27f;
         public const float ATTACK15_TURN_AROUND_BRIGHT_EYES_SPEED = 1 + 0.5f;
         public const float ATTACK16_QUICK_FOO_SPEED = 1 + 0.17f;
-        public const float ATTACK17_CRIMSON_SLAM_SPEED = 1 + 0.42f;
+        public const float ATTACK17_CRIMSON_SLAM_SPEED = 1 + 0.37f;
         public const float ATTACK18_TELEPORT_TO_BACK_COMBO_SPEED = 1 + 0.55f;
         public const float ATTACK21_NEW_INSTANT_CRIMSON_BALL_SPEED = 1 + 0.27f;
         public const float ATTACK21_NEW_INSTANT_CRIMSON_BALL_SKIP = 0.2f;

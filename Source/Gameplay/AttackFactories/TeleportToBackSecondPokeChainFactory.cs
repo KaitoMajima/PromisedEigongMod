@@ -11,9 +11,9 @@ public class TeleportToBackSecondPokeChainFactory : BaseAttackFactory
     public override string AttackToBeCopied => ATTACK5_TELEPORT_TO_BACK;
     public override string AttackToBeCreated => ATTACK26_NEW_CHAIN_TELEPORT_TO_BACK_SECOND;
 
-    public override ModifiedBossGeneralState CopyAttack (BossGeneralState bossGeneralState)
+    public override void CopyAttack (BossGeneralState bossGeneralState)
     {
-        var newAttack = base.CopyAttack(bossGeneralState);
+        var newAttack = SetupAttack(bossGeneralState);
         var attack1NextMove = GameObject.Find(ATTACK11_GIANT_CHARGE_WAVE).GetComponent<BossGeneralState>();
         newAttack.AnimationSpeed = ATTACK5_TELEPORT_TO_BACK_SPEED;
         newAttack.IsFromAChain = true;
@@ -29,6 +29,5 @@ public class TeleportToBackSecondPokeChainFactory : BaseAttackFactory
         
         newAttack.Phase2Weights = phase2Weights;
         newAttack.SubscribeSource(ATTACK25_NEW_CHAIN_SLASH_UP_CRIMSON);
-        return newAttack;
     }
 }

@@ -11,6 +11,7 @@ public class _8LongChargeWeightChanger : BaseWeightChanger
     void ChangePhase2 ()
     {
         SetStateWeight(ATTACK_PATH + ATTACK8_LONG_CHARGE_WEIGHT_PHASE_2);
+        SetAssociatedBossState(ATTACK_PATH + ATTACK8_LONG_CHARGE);
         CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK5_TELEPORT_TO_BACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK18_TELEPORT_TO_BACK_COMBO);

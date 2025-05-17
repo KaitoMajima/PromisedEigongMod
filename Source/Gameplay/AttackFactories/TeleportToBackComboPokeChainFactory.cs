@@ -9,11 +9,11 @@ using static PromisedEigongModGlobalSettings.EigongSpeed;
 public class TeleportToBackComboPokeChainFactory : BaseAttackFactory
 {
     public override string AttackToBeCopied => ATTACK18_TELEPORT_TO_BACK_COMBO;
-    public override string AttackToBeCreated => ATTACK28_NEW_TELEPORT_TO_BACK_COMBO;
+    public override string AttackToBeCreated => ATTACK28_NEW_CHAIN_TELEPORT_TO_BACK_COMBO;
 
-    public override ModifiedBossGeneralState CopyAttack (BossGeneralState bossGeneralState)
+    public override void CopyAttack (BossGeneralState bossGeneralState)
     {
-        var newAttack = base.CopyAttack(bossGeneralState);
+        var newAttack = SetupAttack(bossGeneralState);
         var attack1NextMove = GameObject.Find(ATTACK14_CRIMSON_BALL).GetComponent<BossGeneralState>();
         var attack2NextMove = GameObject.Find(ATTACK8_LONG_CHARGE).GetComponent<BossGeneralState>();
         var attack3NextMove = GameObject.Find(ATTACK10_FOO).GetComponent<BossGeneralState>();
@@ -48,6 +48,5 @@ public class TeleportToBackComboPokeChainFactory : BaseAttackFactory
         
         newAttack.Phase1Weights = phase1Weights;
         newAttack.SubscribeSource(ATTACK27_NEW_CHAIN_CHARGE_WAVE);
-        return newAttack;
     }
 }

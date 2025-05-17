@@ -11,10 +11,11 @@ public class SlashUpCrimsonPokeChainFactory : BaseAttackFactory
     public override string AttackToBeCopied => ATTACK12_SLASH_UP_CRIMSON;
     public override string AttackToBeCreated => ATTACK25_NEW_CHAIN_SLASH_UP_CRIMSON;
 
-    public override ModifiedBossGeneralState CopyAttack (BossGeneralState bossGeneralState)
+    public override void CopyAttack (BossGeneralState bossGeneralState)
     {
-        var newAttack = base.CopyAttack(bossGeneralState);
+        var newAttack = SetupAttack(bossGeneralState);
         var attack1NextMove = GameObject.Find(ATTACK5_TELEPORT_TO_BACK).GetComponent<BossGeneralState>();
+        var attack2NextMove = GameObject.Find(ATTACK2_TELEPORT_TO_TOP).GetComponent<BossGeneralState>();
         newAttack.AnimationSpeed = ATTACK12_SLASH_UP_CRIMSON_SPEED;
         newAttack.IsFromAChain = true;
         
@@ -24,11 +25,15 @@ public class SlashUpCrimsonPokeChainFactory : BaseAttackFactory
             {
                 state = attack1NextMove,
                 weight = 7
+            },
+            new()
+            {
+                state = attack2NextMove,
+                weight = 6
             }
         };
         
         newAttack.Phase2Weights = phase2Weights;
         newAttack.SubscribeSource(ATTACK29_NEW_CHAIN_TELEPORT_TO_BACK_FIRST);
-        return newAttack;
     }
 }

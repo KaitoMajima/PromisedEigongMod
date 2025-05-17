@@ -13,7 +13,6 @@ public class _3ThrustDelayWeightChanger : BaseWeightChanger
     {
         SetStateWeight(ATTACK_PATH + ATTACK3_THRUST_DELAY_WEIGHT);
         SetAssociatedBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
-        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK22_NEW_CHAIN_SLOW_STARTER);
         CreateAndAddBossState(STATES_PATH + JUMP_BACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK15_TURN_AROUND_BRIGHT_EYES);
         ProcessCurrentWeight();
@@ -21,9 +20,9 @@ public class _3ThrustDelayWeightChanger : BaseWeightChanger
 
     void ChangePhase2 ()
     {
+        ClearBossStates();
         SetStateWeight(ATTACK_PATH + ATTACK3_THRUST_DELAY_WEIGHT_PHASE_2);
         SetAssociatedBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
-        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK22_NEW_CHAIN_SLOW_STARTER);
         CreateAndAddBossState(ATTACK_PATH + ATTACK15_TURN_AROUND_BRIGHT_EYES);
         CreateAndAddBossState(ATTACK_PATH + ATTACK18_TELEPORT_TO_BACK_COMBO);
         CreateAndAddBossState(ATTACK_PATH + ATTACK4_SLASH_UP);

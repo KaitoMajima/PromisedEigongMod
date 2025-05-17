@@ -11,9 +11,9 @@ public class SlowStarterPokeChainFactory : BaseAttackFactory
     public override string AttackToBeCopied => ATTACK1_SLOW_STARTER;
     public override string AttackToBeCreated => ATTACK22_NEW_CHAIN_SLOW_STARTER;
 
-    public override ModifiedBossGeneralState CopyAttack (BossGeneralState bossGeneralState)
+    public override void CopyAttack (BossGeneralState bossGeneralState)
     {
-        var newAttack = base.CopyAttack(bossGeneralState);
+        var newAttack = SetupAttack(bossGeneralState);
         var attack1NextMove = GameObject.Find(ATTACK13_TRIPLE_POKE).GetComponent<BossGeneralState>();
         newAttack.AnimationSpeed = ATTACK22_NEW_CHAIN_SLOW_STARTER_SPEED;
         newAttack.IsFromAChain = true;
@@ -48,6 +48,6 @@ public class SlowStarterPokeChainFactory : BaseAttackFactory
         newAttack.Phase1Weights = phase1Weights;
         newAttack.Phase2Weights = phase2Weights;
         newAttack.Phase3Weights = phase3Weights;
-        return newAttack;
+        newAttack.SubscribeSource(ATTACK30_NEW_CHAIN_JUMP_BACK);
     }
 }

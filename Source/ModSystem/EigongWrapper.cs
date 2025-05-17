@@ -90,15 +90,15 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
 
     void HandleEigongInitialization ()
     {
+        ChangeCharacterEigongColors();
+        ChangeOST();
+        ChangeEigongHealth();
         BossGeneralState[] allBossStates = FindObjectsOfType<BossGeneralState>();
         ChangeAttackSpeeds(allBossStates);
         CreateNewAttacks(allBossStates);
         ModifiedBossGeneralState[] allModifiedBossStates = FindObjectsOfType<ModifiedBossGeneralState>();
         ChangeAttackWeights(allModifiedBossStates);
         AddAttackIdentifiers(allBossStates);
-        ChangeCharacterEigongColors();
-        ChangeOST();
-        ChangeEigongHealth();
         bossPhaseProvider.Setup(LoadedEigong);
     }
     
@@ -111,7 +111,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     void ChangeEigongHealth ()
     {
         var mainHealthChanger = new MainHealthChanger();
-        mainHealthChanger.ChangeBaseHealthStat(LoadedEigong, EIGONG_PHASE_1_HEALTH_VALUE * PHASE_1_HEALTH_MULTIPLIER);
+        mainHealthChanger.ChangeBaseHealthStat(LoadedEigong, EIGONG_PHASE_1_HEALTH_VALUE);
         mainHealthChanger.ChangeHealthInPhase1(LoadedEigong, EIGONG_PHASE_1_HEALTH_VALUE * PHASE_1_HEALTH_MULTIPLIER);
         mainHealthChanger.ChangeHealthInRemainingPhases(LoadedEigong, 1, 
             EIGONG_PHASE_2_HEALTH_VALUE * PHASE_2_HEALTH_MULTIPLIER,
@@ -131,13 +131,16 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
             new _2TeleportToTopWeightChanger(),
             new _3ThrustDelayWeightChanger(),
             new _5TeleportToBackWeightChanger(),
+            new _6DoubleAttackWeightChanger(),
             new _7TeleportForwardWeightChanger(),
             new _8LongChargeWeightChanger(),
             new _9StarterWeightChanger(),
+            new _10FooWeightChanger(),
             new _11ChargeWaveWeightChanger(),
             new _12SlashUpCrimsonWeightChanger(),
             new _13TriplePokeWeightChanger(),
             new _15TurnAroundWeightChanger(),
+            new _16QuickFooWeightChanger(),
             new _17CrimsonSlamWeightChanger(),
             new _18TeleportToBackComboWeightChanger(),
             new _X1PostureBreakWeightChanger(),
@@ -152,6 +155,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     {
         BaseAttackFactory[] factories = [
             new InstantCrimsonBallFactory(), 
+            new JumpBackPokeChainFactory(),
             new SlowStarterPokeChainFactory(),
             new TriplePokeChainFactory(),
             new DoubleAttackPokeChainFactory(),
@@ -174,7 +178,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
             }
         }
         
-        var attacksParent = GameObject.Find(ATTACK_PATH);
+        var attacksParent = GameObject.Find(STATES_PATH);
         attacksParent.AddComponent<ModifiedBossGeneralStateManager>();
     }
 

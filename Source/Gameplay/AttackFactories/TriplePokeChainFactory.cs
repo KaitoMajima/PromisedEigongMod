@@ -11,9 +11,9 @@ public class TriplePokeChainFactory : BaseAttackFactory
     public override string AttackToBeCopied => ATTACK13_TRIPLE_POKE;
     public override string AttackToBeCreated => ATTACK23_NEW_CHAIN_TRIPLE_POKE;
 
-    public override ModifiedBossGeneralState CopyAttack (BossGeneralState bossGeneralState)
+    public override void CopyAttack (BossGeneralState bossGeneralState)
     {
-        var newAttack = base.CopyAttack(bossGeneralState);
+        var newAttack = SetupAttack(bossGeneralState);
         var attack1NextMove = GameObject.Find(ATTACK6_DOUBLE_ATTACK).GetComponent<BossGeneralState>();
        
         newAttack.AnimationSpeed = ATTACK23_NEW_CHAIN_TRIPLE_POKE_SPEED;
@@ -41,6 +41,5 @@ public class TriplePokeChainFactory : BaseAttackFactory
         newAttack.Phase1Weights = phase1Weights;
         newAttack.Phase2Weights = phase2Weights;
         newAttack.SubscribeSource(ATTACK22_NEW_CHAIN_SLOW_STARTER);
-        return newAttack;
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace PromisedEigong.WeightChanges;
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 
-public class _X1PostureBreakWeightChanger : BaseWeightChanger
+public class _16QuickFooWeightChanger : BaseWeightChanger
 {
     public override void ChangeAttackWeight ()
     {
@@ -11,23 +11,26 @@ public class _X1PostureBreakWeightChanger : BaseWeightChanger
 
     void ChangePhase1 ()
     {
-        SetStateWeight(STATES_PATH + POSTURE_BREAK_PHASE_1);
+        SetStateWeight(ATTACK_PATH + ATTACK16_QUICK_FOO_INTERRUPT_WEIGHT);
+        SetAssociatedBossState(ATTACK_PATH + ATTACK16_QUICK_FOO);
         CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
         CreateAndAddBossState(STATES_PATH + JUMP_BACK);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK1_SLOW_STARTER);
         CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
         ProcessCurrentWeight();
     }
     
     void ChangePhase2 ()
     {
         ClearBossStates();
-        SetStateWeight(STATES_PATH + POSTURE_BREAK_PHASE_2);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
+        SetStateWeight(ATTACK_PATH + ATTACK16_QUICK_FOO_INTERRUPT_WEIGHT_PHASE_2);
+        SetAssociatedBossState(ATTACK_PATH + ATTACK16_QUICK_FOO);
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK4_SLASH_UP);
         CreateAndAddBossState(ATTACK_PATH + ATTACK12_SLASH_UP_CRIMSON);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK1_SLOW_STARTER);
         CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
         CreateAndAddBossState(STATES_PATH + JUMP_BACK);
         ProcessCurrentWeight();
