@@ -350,7 +350,7 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK1_SLOW_STARTER_SPEED = 1 + 0.77f;
         public const float ATTACK2_TELEPORT_TO_TOP_SPEED = 1 + 0.55f;
         public const float ATTACK3_THRUST_DELAY_SPEED = 1 + 0.5f;
-        public const float ATTACK4_SLASH_UP_SPEED = 1 + 0.22f;
+        public const float ATTACK4_SLASH_UP_SPEED = 1 + 0.20f;
         public const float ATTACK5_TELEPORT_TO_BACK_SPEED = 1 + 0.55f;
         public const float ATTACK6_DOUBLE_ATTACK_SPEED = 1 + 0.55f;
         public const float ATTACK7_TELEPORT_FORWARD_SPEED = 1 + 0.55f;
@@ -358,7 +358,7 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK9_STARTER_SPEED = 1 - 0.11f;
         public const float ATTACK10_FOO_SPEED = 1 + 0.37f;
         public const float ATTACK11_GIANT_CHARGE_WAVE_SPEED = 1 + 0.37f;
-        public const float ATTACK12_SLASH_UP_CRIMSON_SPEED = 1 + 0.22f;
+        public const float ATTACK12_SLASH_UP_CRIMSON_SPEED = 1 + 0.20f;
         public const float ATTACK13_TRIPLE_POKE_SPEED = 1 + 0.27f;
         public const float ATTACK14_CRIMSON_BALL_SPEED = 1 + 0.27f;
         public const float ATTACK15_TURN_AROUND_BRIGHT_EYES_SPEED = 1 + 0.5f;
