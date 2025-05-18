@@ -1,14 +1,15 @@
-﻿using System;
+﻿namespace PromisedEigong.ModSystem;
+#nullable disable
 
-namespace PromisedEigong.ModSystem;
+using System;
 
 public class BossPhaseProvider
 {
-    public event Action<int>? OnPhaseChangePreAnimation;
-    public event Action<int>? OnPhaseChangePostAnimation;
+    public static event Action<int> OnPhaseChangePreAnimation;
+    public static event Action<int> OnPhaseChangePostAnimation;
 
-    public int CurrentPreAnimationPhase { get; private set; } = -1;
-    public int CurrentPostAnimationPhase { get; private set; }
+    public static int CurrentPreAnimationPhase { get; private set; } = -1;
+    public static int CurrentPostAnimationPhase { get; private set; }
     
     MonsterBase monster;
     

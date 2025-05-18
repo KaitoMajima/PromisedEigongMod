@@ -1,11 +1,11 @@
 ﻿namespace PromisedEigong.ModSystem;
+#nullable disable
 
 using System;
-using PromisedEigong.LevelChangers;
+using LevelChangers;
 using UnityEngine;
 using UnityEngine.UI;
 using static PromisedEigongModGlobalSettings.EigongDebug;
-
 
 using UnityEngine.SceneManagement;
 using Effects;
@@ -24,7 +24,7 @@ using NineSolsAPI;
 ]
 public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
 {
-    public Action? OnEigongWrapperUpdated;
+    public Action OnEigongWrapperUpdated;
     public static PromisedEigongMain Instance { get; private set; }
     public PreloadingManager PreloadingManager { get; private set; }
     public EffectsManager EffectsManager { get; private set; }

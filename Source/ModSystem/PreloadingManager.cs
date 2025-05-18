@@ -1,7 +1,9 @@
-﻿using System;
+﻿namespace PromisedEigong.ModSystem;
+#nullable disable
+
+using System;
 using PromisedEigong.Core;
 
-namespace PromisedEigong.ModSystem;
 
 using NineSolsAPI.Preload;
 using UnityEngine;
@@ -10,15 +12,15 @@ using static PromisedEigongModGlobalSettings.EigongPreloadRefs;
 public class PreloadingManager (ICoroutineRunner coroutineRunner)
 {
     [Preload(BIG_BAD_SCENE, BIG_BAD_PATH)]
-    GameObject? bigBad;
+    GameObject bigBad;
     
     [Preload(BIG_BAD_SCENE, BEAUTIFUL_FX_CAMERA_PRELOAD_PATH)]
-    GameObject? beautifulFXCamera;
+    GameObject beautifulFXCamera;
 
-    public event Action? OnLoadingDone;
+    public event Action OnLoadingDone;
     
-    public GameObject? BigBad => bigBad;
-    public GameObject? BeautifulFXCamera => beautifulFXCamera;
+    public GameObject BigBad => bigBad;
+    public GameObject BeautifulFXCamera => beautifulFXCamera;
     
     KPreload preloader;
     

@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using NineSolsAPI;
+﻿namespace PromisedEigong.LevelChangers;
+#nullable disable
 
-namespace PromisedEigong.LevelChangers;
-
+using System.Collections;
 using ModSystem;
 using PreloadObjectHandlers;
 using BlendModes;
@@ -14,8 +13,8 @@ public class RootPinnacleBackgroundChanger : MonoBehaviour
 {
     PromisedEigongMain MainInstance => PromisedEigongMain.Instance;
     WhiteScreen WhiteScreen => MainInstance.WhiteScreen;
-    GameObject? PreloadedBigBad => MainInstance.PreloadingManager.BigBad;
-    GameObject? PreloadedBeautifulFXCamera => MainInstance.PreloadingManager.BeautifulFXCamera;
+    GameObject PreloadedBigBad => MainInstance.PreloadingManager.BigBad;
+    GameObject PreloadedBeautifulFXCamera => MainInstance.PreloadingManager.BeautifulFXCamera;
 
     EigongWrapper eigongWrapper;
 

@@ -1,7 +1,5 @@
-﻿using System;
-using NineSolsAPI;
-
-namespace PromisedEigong.LevelChangers;
+﻿namespace PromisedEigong.LevelChangers;
+#nullable disable
 
 using TMPro;
 using ModSystem;

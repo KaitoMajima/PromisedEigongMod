@@ -38,8 +38,6 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     
     bool hasInitialized;
     bool hasFinishedInitializing;
-    ConfigEntry<bool> isUsingHotReload;
-    bool hasAlreadyPreloaded;
     AmbienceSource phasesOst;
     BossPhaseProvider bossPhaseProvider;
     GameplayEffectManager gameplayEffectManager;
@@ -62,15 +60,15 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     
     void AddListeners ()
     {
-        bossPhaseProvider.OnPhaseChangePreAnimation += HandlePhaseChangePreAnimation;
-        bossPhaseProvider.OnPhaseChangePostAnimation += HandlePhaseChangePostAnimation;
+        BossPhaseProvider.OnPhaseChangePreAnimation += HandlePhaseChangePreAnimation;
+        BossPhaseProvider.OnPhaseChangePostAnimation += HandlePhaseChangePostAnimation;
         GeneralGameplayPatches.OnAttackStartCalled += HandleEigongStateChanged;
     }
 
     void RemoveListeners ()
     {
-        bossPhaseProvider.OnPhaseChangePreAnimation  -= HandlePhaseChangePreAnimation;
-        bossPhaseProvider.OnPhaseChangePostAnimation -= HandlePhaseChangePostAnimation;
+        BossPhaseProvider.OnPhaseChangePreAnimation  -= HandlePhaseChangePreAnimation;
+        BossPhaseProvider.OnPhaseChangePostAnimation -= HandlePhaseChangePostAnimation;
         GeneralGameplayPatches.OnAttackStartCalled -= HandleEigongStateChanged;
     }
     

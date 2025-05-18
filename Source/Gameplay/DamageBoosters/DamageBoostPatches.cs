@@ -1,4 +1,6 @@
-﻿namespace PromisedEigong.DamageBoosters;
+﻿using PromisedEigong.ModSystem;
+
+namespace PromisedEigong.DamageBoosters;
 
 using UnityEngine.SceneManagement;
 using HarmonyLib;
@@ -24,11 +26,18 @@ public class DamageBoostPatches
         if (damageDealer.Owner.name != BIND_MONSTER_EIGONG_NAME)
             return true;
         
+        int phaseIndex = BossPhaseProvider.CurrentPostAnimationPhase;
+        
         switch (damageDealer.Owner.currentPlayingAnimatorState)
         {
-            case EIGONG_FOO_ATTACK_1 or EIGONG_FOO_ATTACK_2:
+            case EIGONG_FOO_ATTACK_1 or EIGONG_FOO_ATTACK_2 when phaseIndex is 0:
             {
                 BoostAttack(damageDealer, EIGONG_FOO_BOOST);
+                break;
+            }
+            case EIGONG_FOO_ATTACK_1 or EIGONG_FOO_ATTACK_2 when phaseIndex is 1 or 2:
+            {
+                BoostAttack(damageDealer, EIGONG_FOO_BOOST_PHASE_2_3);
                 break;
             }
             case EIGONG_CRIMSON_BALL_ATTACK:
@@ -58,12 +67,19 @@ public class DamageBoostPatches
         
         if (damageDealer.Owner.name != BIND_MONSTER_EIGONG_NAME)
             return;
+
+        int phaseIndex = BossPhaseProvider.CurrentPostAnimationPhase;
         
         switch (damageDealer.Owner.currentPlayingAnimatorState)
         {
-            case EIGONG_FOO_ATTACK_1 or EIGONG_FOO_ATTACK_2:
+            case EIGONG_FOO_ATTACK_1 or EIGONG_FOO_ATTACK_2 when phaseIndex is 0:
             {
                 BoostAttack(damageDealer, EIGONG_FOO_BOOST, revert: true);
+                break;
+            }
+            case EIGONG_FOO_ATTACK_1 or EIGONG_FOO_ATTACK_2 when phaseIndex is 1 or 2:
+            {
+                BoostAttack(damageDealer, EIGONG_FOO_BOOST_PHASE_2_3, revert: true);
                 break;
             }
             case EIGONG_CRIMSON_BALL_ATTACK:

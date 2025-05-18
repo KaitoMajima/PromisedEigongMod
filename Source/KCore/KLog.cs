@@ -1,6 +1,7 @@
-﻿using BepInEx.Logging;
+﻿namespace PromisedEigong.Core;
+#nullable disable
 
-namespace PromisedEigong.Core;
+using BepInEx.Logging;
 
 static class KLog
 {

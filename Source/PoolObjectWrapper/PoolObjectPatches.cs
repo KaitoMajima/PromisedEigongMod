@@ -1,9 +1,8 @@
-﻿using System;
-using NineSolsAPI;
-using PromisedEigong.ModSystem;
+﻿namespace PromisedEigong.PoolObjectWrapper;
+#nullable disable
 
-namespace PromisedEigong.PoolObjectWrapper;
-
+using System;
+using ModSystem;
 using HarmonyLib;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,14 +12,14 @@ using static PromisedEigongModGlobalSettings.EigongVFX;
 [HarmonyPatch]
 public class PoolObjectPatches
 {
-    public static event Action<SpriteRenderer>? OnFoundTaiDanger;
-    public static event Action<SpriteRenderer>? OnFoundSimpleTaiDanger;
-    public static event Action<ParticleSystem>? OnFoundJieChuanFireParticles;
-    public static event Action<SpriteRenderer>? OnFoundJieChuanFireImage;
-    public static event Action<SpriteRenderer>? OnFoundFooExplosionSprite;
-    public static event Action<SpriteRenderer>? OnFoundFooSprite;
-    public static event Action<SpriteRenderer>? OnFoundCrimsonGeyserSprite;
-    public static event Action<SpriteRenderer>? OnFoundCrimsonPillarSprite;
+    public static event Action<SpriteRenderer> OnFoundTaiDanger;
+    public static event Action<SpriteRenderer> OnFoundSimpleTaiDanger;
+    public static event Action<ParticleSystem> OnFoundJieChuanFireParticles;
+    public static event Action<SpriteRenderer> OnFoundJieChuanFireImage;
+    public static event Action<SpriteRenderer> OnFoundFooExplosionSprite;
+    public static event Action<SpriteRenderer> OnFoundFooSprite;
+    public static event Action<SpriteRenderer> OnFoundCrimsonGeyserSprite;
+    public static event Action<SpriteRenderer> OnFoundCrimsonPillarSprite;
     
     [HarmonyPostfix]
     [HarmonyPatch(typeof(PoolObject), "EnterLevelAwake")]

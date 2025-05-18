@@ -1,4 +1,5 @@
 ﻿namespace PromisedEigong.SpeedChangers;
+#nullable disable
 
 public class SpeedChangerManager
 {

@@ -1,9 +1,9 @@
 ﻿//Thanks to jakobhellermann for the preloading logic!
 
-using PromisedEigong.ModSystem;
-
 namespace PromisedEigong.Core;
+#nullable disable
 
+using ModSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,7 +38,7 @@ public class KPreload (Action<float> onProgress)
         valueTupleList.Add((path, target));
     }
 
-    public void AddPreloadList (IEnumerable<(string, string)> paths, List<GameObject?> outList)
+    public void AddPreloadList (IEnumerable<(string, string)> paths, List<GameObject> outList)
     {
         IPreloadTarget.ListPreloadTarget target = new IPreloadTarget.ListPreloadTarget(outList);
         foreach ((string, string) path in paths)

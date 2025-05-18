@@ -1,4 +1,6 @@
-﻿namespace PromisedEigong.DamageBoosters;
+﻿using NineSolsAPI;
+
+namespace PromisedEigong.DamageBoosters;
 
 using HarmonyLib;
 
@@ -9,6 +11,8 @@ public static class DamageBoost
         var parentScalarSource = damageDealer.GetComponentInParent<DamageScalarSource>();
         var invoker = AccessTools.FieldRefAccess<MonsterStat, float>("BaseAttackValue");
         var valueGet = invoker.Invoke(parentScalarSource.BindMonster.monsterStat);
+        
+        ToastManager.Toast("Damage: " + valueGet * damageBoost + "Revert: " + revert);
 
         if (revert)
             invoker.Invoke(parentScalarSource.BindMonster.monsterStat) = valueGet / damageBoost;

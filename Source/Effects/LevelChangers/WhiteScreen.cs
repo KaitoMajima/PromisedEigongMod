@@ -1,8 +1,9 @@
-﻿using DG.Tweening;
+﻿namespace PromisedEigong.LevelChangers;
+#nullable disable
+
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-
-namespace PromisedEigong.LevelChangers;
 
 public class WhiteScreen : MonoBehaviour
 {

@@ -1,7 +1,9 @@
-﻿using System.Collections;
-using PromisedEigong.ModSystem;
+﻿namespace PromisedEigong.Effects.MusicPlayers;
+#nullable disable
 
-namespace PromisedEigong.Effects.MusicPlayers;
+using System.Collections;
+using ModSystem;
+
 using UnityEngine;
 
 public class GameMusicPlayer

@@ -348,6 +348,7 @@ public static class PromisedEigongModGlobalSettings
     {
         public const float EIGONG_FIRE_BOOST = 1 + 3.33f;
         public const float EIGONG_FOO_BOOST = 1 + 1.33f;
+        public const float EIGONG_FOO_BOOST_PHASE_2_3 = 1 + 0.35f;
         public const float EIGONG_CRIMSON_BALL_BOOST = 1 + 7.77f;
         public const float EIGONG_DEFAULT_ATTACK_BOOST = 1 + 0.33f;
         public const float EIGONG_EARLY_DEFLECT_BOOST = 1 + 1.77f;

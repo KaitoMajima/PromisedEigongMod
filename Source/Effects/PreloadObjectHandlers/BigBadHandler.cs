@@ -1,4 +1,5 @@
 ﻿namespace PromisedEigong.PreloadObjectHandlers;
+#nullable disable
 
 using UnityEngine;
 using static PromisedEigongModGlobalSettings.EigongBackground;

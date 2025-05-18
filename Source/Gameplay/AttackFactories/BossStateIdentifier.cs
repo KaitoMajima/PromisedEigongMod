@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿namespace PromisedEigong.Gameplay.AttackFactories;
+#nullable disable
 
-namespace PromisedEigong.Gameplay.AttackFactories;
+using UnityEngine;
+
 
 public class BossStateIdentifier : MonoBehaviour
 {
