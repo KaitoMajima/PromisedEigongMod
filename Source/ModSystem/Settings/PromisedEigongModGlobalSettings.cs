@@ -159,8 +159,14 @@ public static class PromisedEigongModGlobalSettings
             "FSM Animator/LogicRoot/---Boss---/Boss_Yi Gung/MonsterCore/Animator(Proxy)/Animator/LogicRoot/DangerHintEffect";
 
         public const string SIMPLE_DANGER_VFX_NAME = "SimpleEffect_TaiDanger";
-        public static readonly Vector3 SIMPLE_DANGER_VFX_OFFSET_L = new(-74.7f, 73, 0);
-        public static readonly Vector3 SIMPLE_DANGER_VFX_OFFSET_R = new(74.7f, 73, 0);
+        public static readonly Vector3 STARTER_SIMPLE_DANGER_VFX_OFFSET_L = new(-74.7f, 73, 0);
+        public static readonly Vector3 STARTER_SIMPLE_DANGER_VFX_OFFSET_R = new(74.7f, 73, 0);
+        public static readonly Vector3 SLOW_STARTER_SIMPLE_DANGER_VFX_OFFSET_L_1 = new(-15.5f, 25, 0);
+        public static readonly Vector3 SLOW_STARTER_SIMPLE_DANGER_VFX_OFFSET_R_1 = new(15.5f, 25, 0);
+        public static readonly Vector3 SLOW_STARTER_SIMPLE_DANGER_VFX_OFFSET_L_2 = new(-18f, 47, 0);
+        public static readonly Vector3 SLOW_STARTER_SIMPLE_DANGER_VFX_OFFSET_R_2 = new(18f, 47, 0);
+        public static readonly Vector3 SLOW_STARTER_SIMPLE_DANGER_VFX_OFFSET_L_3 = new(-74.7f, 73, 0);
+        public static readonly Vector3 SLOW_STARTER_SIMPLE_DANGER_VFX_OFFSET_R_3 = new(74.7f, 73, 0);
         public static readonly Vector3 SIMPLE_DANGER_VFX_SCALE = new(0.72f, 0.42f, 0.42f);
         public const float SIMPLE_DANGER_VFX_VALUE_BRIGHTNESS = 9;
         public const float SIMPLE_DANGER_VFX_SATURATION = 0.42f;
@@ -173,7 +179,9 @@ public static class PromisedEigongModGlobalSettings
             "GameLevel/Room/Prefab/EventBinder/General Boss Fight FSM Object Variant/FSM Animator/LogicRoot/---Boss---/" +
             "Boss_Yi Gung/MonsterCore/Animator(Proxy)/Animator/LogicRoot/Audio/EnemySFX_YiGong_AirSwords_OpenEye";
 
-        public const int SIMPLE_DANGER_SFX_BOOST = 2;
+        public const int STARTER_SIMPLE_DANGER_SFX_BOOST = 2;
+        public const int SLOW_STARTER_SIMPLE_DANGER_SFX_BOOST_1 = 1;
+        public const int SLOW_STARTER_SIMPLE_DANGER_SFX_BOOST_2 = 2;
     }
 
     public static class NewKunlunBackground
@@ -371,6 +379,7 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK23_NEW_CHAIN_TRIPLE_POKE_SPEED = 1 + 0.27f;
         public const float ATTACK23_NEW_CHAIN_TRIPLE_POKE_SKIP = 0.12f;
         public const float ATTACK24_NEW_CHAIN_DOUBLE_ATTACK_SPEED = 1 + 0.55f;
+        public const float ATTACK26_TELEPORT_TO_BACK_SPEED = 1f;
         public const float ATTACK27_NEW_CHAIN_CHARGE_WAVE_SKIP = 0.208f;
         public const float JUMP_BACK_SPEED = 1 + 0.55f;
     }

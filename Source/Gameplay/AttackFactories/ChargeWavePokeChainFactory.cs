@@ -25,7 +25,7 @@ public class ChargeWavePokeChainFactory : BaseAttackFactory
             new()
             {
                 state = attack1NextMove,
-                weight = 7
+                weight = 3
             },
             new()
             {

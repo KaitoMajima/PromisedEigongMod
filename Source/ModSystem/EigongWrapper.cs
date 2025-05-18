@@ -1,9 +1,11 @@
-﻿using PromisedEigong.Effects.MusicPlayers;
-using PromisedEigong.Gameplay;
-using PromisedEigong.Gameplay.AttackFactories;
-using PromisedEigong.Gameplay.HealthChangers;
+﻿namespace PromisedEigong.ModSystem;
+#nullable disable
 
-namespace PromisedEigong.ModSystem;
+using Effects.GameplayEffects;
+using Effects.MusicPlayers;
+using Gameplay;
+using Gameplay.AttackFactories;
+using Gameplay.HealthChangers;
 
 using System;
 using TMPro;
@@ -26,8 +28,8 @@ using static PromisedEigongModGlobalSettings.EigongVFX;
 
 public class EigongWrapper : MonoBehaviour, ICoroutineRunner
 {
-    public event Action<int>? OnCurrentEigongPhaseChangedPreAnimation;
-    public event Action<int>? OnCurrentEigongPhaseChangedPostAnimation;
+    public event Action<int> OnCurrentEigongPhaseChangedPreAnimation;
+    public event Action<int> OnCurrentEigongPhaseChangedPostAnimation;
     
     PromisedEigongMain MainInstance => PromisedEigongMain.Instance;
     
@@ -40,6 +42,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     bool hasAlreadyPreloaded;
     AmbienceSource phasesOst;
     BossPhaseProvider bossPhaseProvider;
+    GameplayEffectManager gameplayEffectManager;
    
     void Awake ()
     {
@@ -47,6 +50,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         ChangeFixedEigongColors();
         ChangeEigongCutsceneTitle();
         bossPhaseProvider = new BossPhaseProvider();
+        gameplayEffectManager = new GameplayEffectManager();
         AddListeners();
     }
 
@@ -100,6 +104,8 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         ChangeAttackWeights(allModifiedBossStates);
         AddAttackIdentifiers(allBossStates);
         bossPhaseProvider.Setup(LoadedEigong);
+        gameplayEffectManager.Setup(LoadedEigong, this);
+        gameplayEffectManager.Initialize();
     }
     
     void ChangeOST ()
@@ -240,7 +246,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         {
             var simpleDangerSFX = GameObject.Find(SIMPLE_DANGER_SFX_PATH);
             var soundPlayer = simpleDangerSFX.GetComponent<SoundPlayer>();
-            for (int i = 0; i < SIMPLE_DANGER_SFX_BOOST; i++)
+            for (int i = 0; i < STARTER_SIMPLE_DANGER_SFX_BOOST; i++)
                 soundPlayer.SimplePlay();
             var dangerVFX = GameObject.Find(DANGER_VFX_PATH);
             var dangerVFXPoolObj = dangerVFX.GetComponent<FxPlayer>().EmitPoolObject;
@@ -248,8 +254,8 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
             var isEigongFacingRight = LoadedEigong.Facing is Facings.Right;
             var dangerVFXInstance = Instantiate(dangerVFXPoolObj.gameObject,
                 isEigongFacingRight
-                    ? LoadedEigong.gameObject.transform.position + SIMPLE_DANGER_VFX_OFFSET_L
-                    : LoadedEigong.gameObject.transform.position + SIMPLE_DANGER_VFX_OFFSET_R, 
+                    ? LoadedEigong.gameObject.transform.position + STARTER_SIMPLE_DANGER_VFX_OFFSET_L
+                    : LoadedEigong.gameObject.transform.position + STARTER_SIMPLE_DANGER_VFX_OFFSET_R, 
                 Quaternion.identity);
             Destroy(dangerVFXInstance.GetComponent<PoolObject>());
             var dangerVFXPoolObject = dangerVFXInstance.AddComponent<CustomPoolObject>();
@@ -293,5 +299,6 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     void OnDestroy ()
     {
         RemoveListeners();
+        gameplayEffectManager?.Dispose();
     }
 }

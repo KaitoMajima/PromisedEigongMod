@@ -29,7 +29,7 @@ public class SlashUpCrimsonPokeChainFactory : BaseAttackFactory
             new()
             {
                 state = attack2NextMove,
-                weight = 6
+                weight = 3
             }
         };
         

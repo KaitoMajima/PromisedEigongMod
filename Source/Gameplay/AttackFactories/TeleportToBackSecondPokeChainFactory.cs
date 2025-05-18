@@ -15,7 +15,7 @@ public class TeleportToBackSecondPokeChainFactory : BaseAttackFactory
     {
         var newAttack = SetupAttack(bossGeneralState);
         var attack1NextMove = GameObject.Find(ATTACK11_GIANT_CHARGE_WAVE).GetComponent<BossGeneralState>();
-        newAttack.AnimationSpeed = ATTACK5_TELEPORT_TO_BACK_SPEED;
+        newAttack.AnimationSpeed = ATTACK26_TELEPORT_TO_BACK_SPEED;
         newAttack.IsFromAChain = true;
         
         var phase2Weights = new List<AttackWeight>
