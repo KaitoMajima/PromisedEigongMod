@@ -49,6 +49,12 @@ public static class PromisedEigongModGlobalSettings
         public const string PO_VFX_EIGONG_FOO = "Fx_YiGong 貼符(Clone)";
         public const string PO_VFX_EIGONG_CRIMSON_GEYSER = "Fx_YiGong Upper12_pool obj(Clone)";
         public const string PO_VFX_EIGONG_CRIMSON_PILLAR = "FireExplosionPillar_FX_damage(Clone)";
+        public const string PO_VFX_EIGONG_JUDGMENT_CUT = "白2 FullScreen Slash FX Damage(Clone)";
+        public const string PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON = "紅閃 FullScreen Slash FX Damage Danger(Clone)";
+        public const string PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON_LINE = "Line";
+        public const string PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON_SHAPE_1 = "SHape";
+        public const string PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON_SHAPE_2 = "SHape 2";
+
     }
 
     public static class EigongPreloadRefs
@@ -98,14 +104,8 @@ public static class PromisedEigongModGlobalSettings
             BIG_BAD_OBJ + "/BIGBAD_ANIM/MORPH_GUYS";
         public const string BIG_BAD_STATIC_OBJS =   
             BIG_BAD_OBJ + "/BIGBAD_ANIM/STATIC_OBJS";
-        public const string BIG_BAD_STATIC_OBJS_PARENT =
-            BIG_BAD_OBJ + "/BIGBAD_ANIM/STATIC_OBJS";
-        public const string BIG_BAD_MEATBALL_1 =
-            BIG_BAD_OBJ + "/HighEndFX(Disable for Switch)/P_MeatBall (1)";
         public const string BIG_BAD_MEATBALL_2 =
             BIG_BAD_OBJ + "/HighEndFX(Disable for Switch)/P_MeatBall (2)";
-        public const string BIG_BAD_MEATBALL_PARENT =
-            BIG_BAD_OBJ + "/HighEndFX(Disable for Switch)";
 
         public const string BIG_BAD_HEAD =
             BIG_BAD_OBJ + "/BIGBAD_ANIM/MORPH_GUYS/HEAD";
@@ -130,10 +130,9 @@ public static class PromisedEigongModGlobalSettings
         public static readonly BlendMode BLUE_BLEND_MODE = BlendMode.SoftLight;
         public static readonly BlendMode BLUE_BLEND_MODE_PHASE_2 = BlendMode.SoftLight;
 
+        public static readonly Vector3 BIG_BAD_HAIR_SCALE = new(0.93f, 0.93f, 0.93f);
         public static readonly Vector3 BIG_BAD_NECKVINES_ROTATION = new(0, 180, 0);
-        public static readonly Vector3 BIG_BAD_STATIC_OBJS_POSITION = new(0, 0, 48.4f);
-        public static readonly Vector3 BIG_BAD_STATIC_OBJS_ROTATION = new(0, 187.01F, 0);
-        public static readonly Vector3 BIG_BAD_MEATBALL_ROTATION = new(0, 180, 0);
+        public static readonly Vector3 BIG_BAD_NECK_VINES_OFFSET = new(0, -3, 0);
         public static readonly Vector3 BIG_BAD_MEATBALL_2_SHAPE_POSITION = new(0, 17, 0);
         public static readonly Vector3 BIG_BAD_MEATBALL_2_SHAPE_SCALE = new(4.7f, 4, 4.7f);
         public static readonly Vector3 BIG_BAD_HEAD_SCALE = new(0.97f, 1.05f, 0.97f);
@@ -231,6 +230,7 @@ public static class PromisedEigongModGlobalSettings
         public const float EIGONG_SWORD_SATURATION = 5f;
         public const float EIGONG_CHARACTER_SWORD_VALUE_BRIGHTNESS = 2.2f;
         public const float EIGONG_TAI_DANGER_VALUE_BRIGHTNESS = 5f;
+        public const float EIGONG_CRIMSON_CUT_VALUE_BRIGHTNESS = 8.5f;
     }
     
     public static class EigongAttacks
@@ -259,8 +259,9 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK8_LONG_CHARGE = "[8] Long Charge (2階才有";
         public const string ATTACK8_LONG_CHARGE_WEIGHT_PHASE_2 = ATTACK8_LONG_CHARGE + "/weight (1)";
         public const string ATTACK9_STARTER = "[9] Starter";
-        public const string ATTACK9_STARTER_PHASE_1 = ATTACK9_STARTER + "/phase (0)";
-        public const string ATTACK9_STARTER_PHASE_2 = ATTACK9_STARTER + "/phase (1)";
+        public const string ATTACK9_STARTER_WEIGHT_PHASE_1 = ATTACK9_STARTER + "/phase (0)";
+        public const string ATTACK9_STARTER_WEIGHT_PHASE_2 = ATTACK9_STARTER + "/phase (1)";
+        public const string ATTACK9_STARTER_WEIGHT_PHASE_3_NAME = "phase (2)";
         public const string ATTACK10_FOO = "[10] Danger Foo Grab";
         public const string ATTACK10_FOO_INTERRUPT_WEIGHT = ATTACK10_FOO + "/interrupt weight";
         public const string ATTACK10_FOO_INTERRUPT_WEIGHT_PHASE_2 = ATTACK10_FOO + "/interrupt weight (1)";
@@ -294,6 +295,7 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK28_NEW_CHAIN_TELEPORT_TO_BACK_COMBO = "[28] Teleport To Back Combo (Poke Chain 7)";
         public const string ATTACK29_NEW_CHAIN_TELEPORT_TO_BACK_FIRST = "[29] Teleport To Back (Poke Chain 3.5)";
         public const string ATTACK30_NEW_CHAIN_JUMP_BACK = "[30] Jump Back (Poke Chain 0)";
+        public const string ATTACK31_NEW_CHAIN_REVERSE_TURN_AROUND = "[23] Reverse Turn Around (Poke Chain 2.5)";
         public const string POSTURE_BREAK = "PostureBreak";
         public const string POSTURE_BREAK_PHASE_1 = POSTURE_BREAK + "/phase0";
         public const string POSTURE_BREAK_PHASE_2 = POSTURE_BREAK + "/phase1";
@@ -347,6 +349,7 @@ public static class PromisedEigongModGlobalSettings
     public static class EigongDamageBoost
     {
         public const float EIGONG_FIRE_BOOST = 1 + 3.33f;
+        public const float EIGONG_FIRE_BOOST_LVL_0 = 1 - 0.9f;
         public const float EIGONG_FOO_BOOST = 1 + 1.33f;
         public const float EIGONG_FOO_BOOST_PHASE_2_3 = 1 + 0.35f;
         public const float EIGONG_CRIMSON_BALL_BOOST = 1 + 7.77f;
@@ -387,12 +390,13 @@ public static class PromisedEigongModGlobalSettings
     
     public static class EigongDebug
     {
-        public const bool EIGONG_STATE_LOG = false;
-        public const bool TEST_YI_INVINCIBLE = false;
-        public const bool IS_PAUSE_MENU_BG_INVISIBLE = true;
+        public const bool IS_DEBUG_ACTIVATED = true;
+        public const bool EIGONG_STATE_LOG = IS_DEBUG_ACTIVATED && true;
+        public const bool TEST_YI_INVINCIBLE = IS_DEBUG_ACTIVATED && false;
+        public const bool IS_PAUSE_MENU_BG_INVISIBLE = IS_DEBUG_ACTIVATED && true;
         
-        public const float PHASE_1_HEALTH_MULTIPLIER = 0.05f;
-        public const float PHASE_2_HEALTH_MULTIPLIER = 1f;
-        public const float PHASE_3_HEALTH_MULTIPLIER = 1f;
+        public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.05f : 1;
+        public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.05f : 1;
+        public const float PHASE_3_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
     }
 }

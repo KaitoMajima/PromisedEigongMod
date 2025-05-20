@@ -22,8 +22,11 @@ public class EffectsManager
         PoolObjectPatches.OnFoundFooSprite += HandleFooSpriteFound;
         PoolObjectPatches.OnFoundCrimsonGeyserSprite += HandleCrimsonGeyserSpriteFound;
         PoolObjectPatches.OnFoundCrimsonPillarSprite += HandleCrimsonPillarSpriteFound;
+        PoolObjectPatches.OnFoundJudgmentCutLine += HandleJudgmentCutLineFound;
+        PoolObjectPatches.OnFoundJudgmentCutShape1 += HandleJudgmentCutShape1Found;
+        PoolObjectPatches.OnFoundJudgmentCutShape2 += HandleJudgmentCutShape2Found;
+
     }
-    
     void RemoveListeners ()
     {
         PoolObjectPatches.OnFoundTaiDanger -= HandleTaiDangerFound;
@@ -34,6 +37,9 @@ public class EffectsManager
         PoolObjectPatches.OnFoundFooSprite -= HandleFooSpriteFound;
         PoolObjectPatches.OnFoundCrimsonGeyserSprite -= HandleCrimsonGeyserSpriteFound;
         PoolObjectPatches.OnFoundCrimsonPillarSprite -= HandleCrimsonPillarSpriteFound;
+        PoolObjectPatches.OnFoundJudgmentCutLine -= HandleJudgmentCutLineFound;
+        PoolObjectPatches.OnFoundJudgmentCutShape1 -= HandleJudgmentCutShape1Found;
+        PoolObjectPatches.OnFoundJudgmentCutShape2 -= HandleJudgmentCutShape2Found;
     }
 
     public void ChangeCharacterEigongColors ()
@@ -187,6 +193,39 @@ public class EffectsManager
             EIGONG_CHARACTER_SWORD_EFFECT_SHIFT, 
             null,
             EIGONG_TAI_DANGER_VALUE_BRIGHTNESS,
+            isLit: false
+        );
+    }
+    
+    void HandleJudgmentCutLineFound (SpriteRenderer sprite)
+    {
+        ColorChanger.ChangeColors(
+            sprite.gameObject, 
+            EIGONG_CHARACTER_SWORD_EFFECT_SHIFT, 
+            null,
+            EIGONG_CRIMSON_CUT_VALUE_BRIGHTNESS,
+            isLit: false
+        );
+    }
+    
+    void HandleJudgmentCutShape1Found (SpriteRenderer sprite)
+    {
+        ColorChanger.ChangeColors(
+            sprite.gameObject, 
+            EIGONG_CHARACTER_SWORD_EFFECT_SHIFT, 
+            null,
+            EIGONG_CRIMSON_CUT_VALUE_BRIGHTNESS,
+            isLit: false
+        );
+    }
+
+    void HandleJudgmentCutShape2Found (SpriteRenderer sprite)
+    {
+        ColorChanger.ChangeColors(
+            sprite.gameObject, 
+            EIGONG_CHARACTER_SWORD_EFFECT_SHIFT, 
+            null,
+            EIGONG_CRIMSON_CUT_VALUE_BRIGHTNESS,
             isLit: false
         );
     }

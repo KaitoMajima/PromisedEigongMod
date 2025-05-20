@@ -18,8 +18,8 @@ public delegate void OnAttackStartHandler (BossStateIdentifier currentState);
 [HarmonyPatch]
 public class GeneralGameplayPatches
 {
-    public static OnAttackEnterHandler OnAttackEnterCalled;
-    public static OnAttackStartHandler OnAttackStartCalled;
+    public static event OnAttackEnterHandler OnAttackEnterCalled;
+    public static event OnAttackStartHandler OnAttackStartCalled;
     
     static BossStateIdentifier previousState;
     static BossStateIdentifier currentState;

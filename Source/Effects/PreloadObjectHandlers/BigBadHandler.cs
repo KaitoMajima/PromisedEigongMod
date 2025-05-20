@@ -26,9 +26,9 @@ public class BigBadHandler : MonoBehaviour
             return;
 
         GetBigBadHeadAndHair();
+        AdjustHairSize();
         DuplicateNeckvines();
-        DuplicateStaticObjs();
-        // DuplicateMeatball();
+        DeactivateStaticObjs();
         ModifyMeatball();
         IncreaseSizeAndKillAnimator();
         waitedForFirstUpdateFrame = true;
@@ -63,6 +63,11 @@ public class BigBadHandler : MonoBehaviour
         bigBadHead = GameObject.Find(BIG_BAD_HEAD).transform;
         bigBadHair = GameObject.Find(BIG_BAD_HAIR).transform;
     }
+    
+    void AdjustHairSize ()
+    {
+        bigBadHair.localScale = BIG_BAD_HAIR_SCALE;
+    }
 
     void DuplicateNeckvines ()
     {
@@ -70,24 +75,14 @@ public class BigBadHandler : MonoBehaviour
         var neckvinesParent = GameObject.Find(BIG_BAD_NECKVINES_PARENT);
         var newNeckvines = Instantiate(neckvines, neckvinesParent.transform);
         newNeckvines.transform.SetLocalPositionAndRotation(neckvines.transform.localPosition, Quaternion.Euler(BIG_BAD_NECKVINES_ROTATION));
+        neckvines.transform.localPosition += BIG_BAD_NECK_VINES_OFFSET;
+        newNeckvines.transform.localPosition += BIG_BAD_NECK_VINES_OFFSET;
     }
     
-    void DuplicateStaticObjs ()
+    void DeactivateStaticObjs ()
     {
         var staticObjs = GameObject.Find(BIG_BAD_STATIC_OBJS);
-        var staticObjsParent = GameObject.Find(BIG_BAD_STATIC_OBJS_PARENT);
-        var newStaticObjs  = Instantiate(staticObjs, staticObjsParent.transform);
-        newStaticObjs.transform.SetLocalPositionAndRotation(BIG_BAD_STATIC_OBJS_POSITION, Quaternion.Euler(BIG_BAD_STATIC_OBJS_ROTATION));
-        staticObjs.transform.localScale = new Vector3(0.92f, 0.92f, 0.92f);
-        newStaticObjs.transform.localScale = new Vector3(0.92f, 0.92f, 0.92f);
-    }
-
-    void DuplicateMeatball ()
-    {
-        var meatball = GameObject.Find(BIG_BAD_MEATBALL_1);
-        var meatballParent = GameObject.Find(BIG_BAD_MEATBALL_PARENT);
-        var newMeatball  = Instantiate(meatball, meatballParent.transform);
-        newMeatball.transform.SetLocalPositionAndRotation(meatball.transform.localPosition, Quaternion.Euler(BIG_BAD_MEATBALL_ROTATION));
+        staticObjs.SetActive(false);
     }
     
     void ModifyMeatball ()

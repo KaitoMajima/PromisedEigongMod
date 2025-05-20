@@ -1,4 +1,5 @@
 ﻿namespace PromisedEigong.WeightChanges;
+#nullable disable
 
 using System;
 using System.Collections.Generic;
@@ -80,6 +81,16 @@ public abstract class BaseWeightChanger
             default:
                 throw new ArgumentOutOfRangeException();
         }
+    }
+    
+    protected void CreateStateWeight (string parentPath, string objClonePath, string name)
+    {
+        var cloneObj = GameObject.Find(objClonePath).GetComponent<LinkNextMoveStateWeight>();
+        var parentPathObj = GameObject.Find(parentPath).transform;
+        var createdObj = GameObject.Instantiate(cloneObj, parentPathObj);
+        createdObj.name = name;
+        targetStateWeight = createdObj;
+        associatedBossState.linkNextMoveStateWeights.Add(createdObj);
     }
     
     protected void SetStateWeight (string path)

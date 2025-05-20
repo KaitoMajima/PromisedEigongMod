@@ -20,6 +20,10 @@ public class PoolObjectPatches
     public static event Action<SpriteRenderer> OnFoundFooSprite;
     public static event Action<SpriteRenderer> OnFoundCrimsonGeyserSprite;
     public static event Action<SpriteRenderer> OnFoundCrimsonPillarSprite;
+    public static event Action<SpriteRenderer> OnFoundJudgmentCutLine;
+    public static event Action<SpriteRenderer> OnFoundJudgmentCutShape1;
+    public static event Action<SpriteRenderer> OnFoundJudgmentCutShape2;
+
     
     [HarmonyPostfix]
     [HarmonyPatch(typeof(PoolObject), "EnterLevelAwake")]
@@ -37,6 +41,9 @@ public class PoolObjectPatches
         InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_CRIMSON_PILLAR, OnFoundCrimsonPillarSprite);
         InvokeCallbackForComponents(__instance, PO_VFX_JIECHUAN_FIRE, OnFoundJieChuanFireParticles);
         InvokeCallbackForComponents(__instance, PO_VFX_JIECHUAN_FIRE, OnFoundJieChuanFireImage, PO_VFX_JIECHUAN_FIRE_IMAGE);
+        InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON, OnFoundJudgmentCutLine, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON_LINE);
+        InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON, OnFoundJudgmentCutShape1, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON_SHAPE_1);
+        InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON, OnFoundJudgmentCutShape2, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON_SHAPE_2);
     }
     
     [HarmonyPostfix]
