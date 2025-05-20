@@ -41,6 +41,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     AmbienceSource phasesOst;
     BossPhaseProvider bossPhaseProvider;
     GameplayEffectManager gameplayEffectManager;
+    SpeedChangerManager speedChangerManager;
    
     void Awake ()
     {
@@ -96,7 +97,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         ChangeOST();
         ChangeEigongHealth();
         BossGeneralState[] allBossStates = FindObjectsOfType<BossGeneralState>();
-        ChangeAttackSpeeds(allBossStates);
+        ChangeAttackSpeedsPhase1(allBossStates);
         CreateNewAttacks(allBossStates);
         ModifiedBossGeneralState[] allModifiedBossStates = FindObjectsOfType<ModifiedBossGeneralState>();
         ChangeAttackWeights(allModifiedBossStates);
@@ -195,11 +196,12 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         }
     }
     
-    void ChangeAttackSpeeds (BossGeneralState[] allBossStates)
+    void ChangeAttackSpeedsPhase1 (BossGeneralState[] allBossStates)
     {
-        var speedChangerManager = new SpeedChangerManager();
+        speedChangerManager = new SpeedChangerManager();
         speedChangerManager.SetBossStates(allBossStates);
-        speedChangerManager.ChangeSpeedValues(
+        speedChangerManager.SetPhase(0);
+        speedChangerManager.SetupSpeedChangers(
             new _1SlowStarterSpeedChanger(), 
             new _2TeleportToTopSpeedChanger(),
             new _3ThrustDelaySpeedChanger(),
@@ -220,6 +222,13 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
             new _18TeleportToBackComboSpeedChanger(),
             new _X2JumpBackSpeedChanger()
         );
+        speedChangerManager.ProcessSpeeds();
+    }
+    
+    void ChangeAttackSpeedsPhase3 ()
+    {
+        speedChangerManager.SetPhase(2);
+        speedChangerManager.ProcessSpeeds();
     }
     
     void ChangeFixedEigongColors ()
@@ -277,6 +286,8 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     
     void HandlePhaseChangePostAnimation (int phase)
     {
+        if (phase == 2)
+            ChangeAttackSpeedsPhase3();
         OnCurrentEigongPhaseChangedPostAnimation?.Invoke(phase);
     }
 

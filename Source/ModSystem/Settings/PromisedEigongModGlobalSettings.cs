@@ -361,11 +361,14 @@ public static class PromisedEigongModGlobalSettings
     {
         public const float ATTACK1_SLOW_STARTER_SPEED = 1 + 0.77f;
         public const float ATTACK2_TELEPORT_TO_TOP_SPEED = 1 + 0.55f;
+        public const float ATTACK2_TELEPORT_TO_TOP_SPEED_PHASE_3 = 1 + 1f;
         public const float ATTACK3_THRUST_DELAY_SPEED = 1 + 0.5f;
         public const float ATTACK4_SLASH_UP_SPEED = 1 + 0.20f;
         public const float ATTACK5_TELEPORT_TO_BACK_SPEED = 1 + 0.55f;
+        public const float ATTACK5_TELEPORT_TO_BACK_SPEED_PHASE_3 = 1 + 1f;
         public const float ATTACK6_DOUBLE_ATTACK_SPEED = 1 + 0.55f;
         public const float ATTACK7_TELEPORT_FORWARD_SPEED = 1 + 0.55f;
+        public const float ATTACK7_TELEPORT_FORWARD_SPEED_PHASE_3 = 1 + 1f;
         public const float ATTACK8_LONG_CHARGE_SPEED = 1 + 0.77f;
         public const float ATTACK9_STARTER_SPEED = 1 - 0.11f;
         public const float ATTACK10_FOO_SPEED = 1 + 0.37f;
@@ -377,6 +380,7 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK16_QUICK_FOO_SPEED = 1 + 0.17f;
         public const float ATTACK17_CRIMSON_SLAM_SPEED = 1 + 0.37f;
         public const float ATTACK18_TELEPORT_TO_BACK_COMBO_SPEED = 1 + 0.55f;
+        public const float ATTACK18_TELEPORT_TO_BACK_COMBO_SPEED_PHASE_3 = 1 + 1f;
         public const float ATTACK21_NEW_INSTANT_CRIMSON_BALL_SPEED = 1 + 0.27f;
         public const float ATTACK21_NEW_INSTANT_CRIMSON_BALL_SKIP = 0.2f;
         public const float ATTACK22_NEW_CHAIN_SLOW_STARTER_SPEED = 1;
@@ -386,6 +390,7 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK26_TELEPORT_TO_BACK_SPEED = 1f;
         public const float ATTACK27_NEW_CHAIN_CHARGE_WAVE_SKIP = 0.208f;
         public const float JUMP_BACK_SPEED = 1 + 0.55f;
+        public const float JUMP_BACK_SPEED_PHASE_3 = 1 + 1f;
     }
     
     public static class EigongDebug

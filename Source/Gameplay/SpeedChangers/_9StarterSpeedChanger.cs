@@ -7,6 +7,6 @@ public class _9StarterSpeedChanger : BaseSpeedChanger
     public override bool IsSpecifiedAttack (string attack) 
         => attack == ATTACK9_STARTER;
 
-    public override float GetSpeed (BossGeneralState state)
+    public override float GetSpeed (int phase) 
         => ATTACK9_STARTER_SPEED;
 }

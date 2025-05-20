@@ -4,13 +4,25 @@
 public class SpeedChangerManager
 {
     BossGeneralState[] allBossStates;
+    BaseSpeedChanger[] speedChangers;
+    int currentPhase;
     
     public void SetBossStates (BossGeneralState[] allBossStates)
     {
         this.allBossStates = allBossStates;
     }
+
+    public void SetPhase (int phase)
+    {
+        currentPhase = phase;
+    }
     
-    public void ChangeSpeedValues (params BaseSpeedChanger[] speedChangers)
+    public void SetupSpeedChangers (params BaseSpeedChanger[] speedChangers)
+    {
+        this.speedChangers = speedChangers;
+    }
+
+    public void ProcessSpeeds ()
     {
         foreach (var bossState in allBossStates)
         {
@@ -22,7 +34,7 @@ public class SpeedChangerManager
                 if (!speedChanger.IsSpecifiedAttack(bossState.name)) 
                     continue;
                 
-                var newSpeed = speedChanger.GetSpeed(bossState);
+                var newSpeed = speedChanger.GetSpeed(currentPhase);
                 bossState.AnimationSpeed = newSpeed;
                 foundAlteredSpeed = true;
                 break;

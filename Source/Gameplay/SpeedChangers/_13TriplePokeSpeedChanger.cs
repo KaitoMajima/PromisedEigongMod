@@ -7,6 +7,6 @@ public class _13TriplePokeSpeedChanger : BaseSpeedChanger
     public override bool IsSpecifiedAttack (string attack) 
         => attack == ATTACK13_TRIPLE_POKE;
 
-    public override float GetSpeed (BossGeneralState state)
+    public override float GetSpeed (int phase) 
         => ATTACK13_TRIPLE_POKE_SPEED;
 }

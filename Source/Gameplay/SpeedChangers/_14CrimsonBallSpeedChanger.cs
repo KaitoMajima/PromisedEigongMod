@@ -7,6 +7,6 @@ public class _14CrimsonBallSpeedChanger : BaseSpeedChanger
     public override bool IsSpecifiedAttack (string attack) 
         => attack == ATTACK14_CRIMSON_BALL;
 
-    public override float GetSpeed (BossGeneralState state) 
+    public override float GetSpeed (int phase) 
         => ATTACK14_CRIMSON_BALL_SPEED;
 }

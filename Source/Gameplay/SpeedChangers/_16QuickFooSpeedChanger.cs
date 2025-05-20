@@ -7,6 +7,6 @@ public class _16QuickFooSpeedChanger : BaseSpeedChanger
     public override bool IsSpecifiedAttack (string attack) 
         => attack == ATTACK16_QUICK_FOO;
 
-    public override float GetSpeed (BossGeneralState state)
+    public override float GetSpeed (int phase) 
         => ATTACK16_QUICK_FOO_SPEED;
 }

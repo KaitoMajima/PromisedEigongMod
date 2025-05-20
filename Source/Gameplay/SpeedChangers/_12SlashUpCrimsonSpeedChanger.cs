@@ -7,6 +7,6 @@ public class _12SlashUpCrimsonSpeedChanger : BaseSpeedChanger
     public override bool IsSpecifiedAttack (string attack) 
         => attack == ATTACK12_SLASH_UP_CRIMSON;
 
-    public override float GetSpeed (BossGeneralState state)
+    public override float GetSpeed (int phase) 
         => ATTACK12_SLASH_UP_CRIMSON_SPEED;
 }

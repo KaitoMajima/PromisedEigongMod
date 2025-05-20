@@ -7,6 +7,6 @@ public class _4SlashUpSpeedChanger : BaseSpeedChanger
     public override bool IsSpecifiedAttack (string attack) 
         => attack == ATTACK4_SLASH_UP;
 
-    public override float GetSpeed (BossGeneralState state)
+    public override float GetSpeed (int phase) 
         => ATTACK4_SLASH_UP_SPEED;
 }

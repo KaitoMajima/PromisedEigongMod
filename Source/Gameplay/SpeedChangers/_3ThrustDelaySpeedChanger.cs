@@ -7,6 +7,6 @@ public class _3ThrustDelaySpeedChanger : BaseSpeedChanger
     public override bool IsSpecifiedAttack (string attack) 
         => attack == ATTACK3_THRUST_DELAY;
 
-    public override float GetSpeed (BossGeneralState state)
+    public override float GetSpeed (int phase) 
         => ATTACK3_THRUST_DELAY_SPEED;
 }
