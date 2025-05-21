@@ -7,6 +7,7 @@ public class _5TeleportToBackWeightChanger : BaseWeightChanger
     {
         ChangePhase1();
         ChangePhase2();
+        ChangePhase3();
     }
 
     void ChangePhase1 ()
@@ -20,6 +21,18 @@ public class _5TeleportToBackWeightChanger : BaseWeightChanger
     {
         ClearBossStates();
         SetStateWeight(ATTACK_PATH + ATTACK5_TELEPORT_TO_BACK_WEIGHT_PHASE_2);
+        SetAssociatedBossState(ATTACK_PATH + ATTACK5_TELEPORT_TO_BACK);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK10_FOO);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK8_LONG_CHARGE);
+        CreateAndAddBossState(STATES_PATH + JUMP_BACK);
+        ProcessCurrentWeight();
+    }
+
+    void ChangePhase3 ()
+    {
+        ClearBossStates();
+        WeightReplaceMode = WeightReplaceMode.Add;
+        SetStateWeight(ATTACK_PATH + ATTACK5_TELEPORT_TO_BACK_WEIGHT_PHASE_3);
         SetAssociatedBossState(ATTACK_PATH + ATTACK5_TELEPORT_TO_BACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK10_FOO);
         CreateAndAddBossState(ATTACK_PATH + ATTACK8_LONG_CHARGE);

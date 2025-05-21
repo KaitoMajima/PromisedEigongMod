@@ -14,11 +14,13 @@ public class ModifiedBossGeneralState : MonoBehaviour
     public string OriginalName { get; private set; }
     public float ForcePlayAnimAtNormalizeTime { get; set; }
     public float AnimationSpeed { get; set; }
+    public Vector3 StartOffset { get; set; }
     public List<AttackWeight> Phase1Weights { get; set; }
     public List<AttackWeight> Phase2Weights { get; set; }
     public List<AttackWeight> Phase3Weights { get; set; }
     public bool ShouldClearGroupingNodes { get; set; }
     public bool IsFromAChain { get; set; }
+    public int PhaseIndexLock { get; set; }
 
     public BossGeneralState BaseState { get; set; }
 
@@ -27,10 +29,12 @@ public class ModifiedBossGeneralState : MonoBehaviour
 
     float originalForcePlayAnimAtNormalizeTime;
     float originalAnimationSpeed;
+    Vector3 originalStartOffset = Vector3.zero;
     List<AttackWeight> originalPhase1Weights = new();
     List<AttackWeight> originalPhase2Weights = new();
     List<AttackWeight> originalPhase3Weights = new();
     LinkMoveGroupingNode[] originalGroupingNodes;
+    int originalPhaseIndexLock = -1;
     
     FieldRef<BossGeneralState, LinkMoveGroupingNode[]> groupingNodesRef 
         = FieldRefAccess<BossGeneralState, LinkMoveGroupingNode[]>("groupingNodes");
@@ -46,6 +50,8 @@ public class ModifiedBossGeneralState : MonoBehaviour
         ModifiedName = OriginalName = BaseState.name;
         ForcePlayAnimAtNormalizeTime = originalForcePlayAnimAtNormalizeTime = BaseState.forcePlayAnimAtNormalizeTime;
         AnimationSpeed = originalAnimationSpeed = BaseState.AnimationSpeed;
+        StartOffset = originalStartOffset;
+        PhaseIndexLock = originalPhaseIndexLock;
     }
     
     public void SubscribeSource (string sourceStateName)
@@ -56,9 +62,7 @@ public class ModifiedBossGeneralState : MonoBehaviour
     public void ResetOriginalWeights ()
     {
         if (ShouldClearGroupingNodes)
-        {
             originalGroupingNodes = groupingNodesRef.Invoke(BaseState);
-        }
         else
         {
             UpdateOriginalStateWeightList(
@@ -76,6 +80,9 @@ public class ModifiedBossGeneralState : MonoBehaviour
     
     public void ApplyMoveModification ()
     {
+        if (StartOffset != Vector3.zero)
+            BaseState.monster.transform.localPosition += StartOffset;
+        
         BaseState.forcePlayAnimAtNormalizeTime = ForcePlayAnimAtNormalizeTime;
         BaseState.AnimationSpeed = AnimationSpeed;
         
@@ -140,7 +147,10 @@ public class ModifiedBossGeneralState : MonoBehaviour
     }
 
     public bool CanBeModified (BossStateIdentifier previousState)
-    {
+    { 
+        if (PhaseIndexLock > -1 && PhaseIndexLock != BaseState.monster.PhaseIndex)
+            return false;
+        
         return stateMoveSources.Any(x => x == previousState.IdName);
     }
     

@@ -51,6 +51,19 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         bossPhaseProvider = new BossPhaseProvider();
         gameplayEffectManager = new GameplayEffectManager();
         AddListeners();
+
+        //TODO: lvl 1 challenge logic
+        // Player.i.mainAbilities.AirJumpAbility.IsAcquired = false;
+        // Player.i.mainAbilities.ParryJumpKickAbility.IsAcquired = false;
+        // Player.i.mainAbilities.ChargedAttackAbility.IsAcquired = false;
+        // Player.i.mainAbilities.ArrowAbility.IsAcquired = false;
+        // Player.i.mainAbilities.RollDodgeInAirUpgrade.IsAcquired = false;
+        // Player.i.mainAbilities.ParryCounterAbility.IsAcquired = false;
+        // Player.i.potion.potionMaxCountData.Stat.BaseValue = 2;
+        // Player.i.potion.potionMaxCountData.Stat.Clear();
+        // Player.i.chiContainer.MaxValueStatData.Stat.BaseValue = 1;
+        // Player.i.chiContainer.MaxValueStatData.Stat.Clear();
+        // var test = Player.i.potion.potionMaxCountData.Stat.Value;
     }
 
     void Update ()
@@ -149,6 +162,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
             new _17CrimsonSlamWeightChanger(),
             new _18TeleportToBackComboWeightChanger(),
             new _X1PostureBreakWeightChanger(),
+            new _X2JumpBackWeightChanger(),
             new _X3AttackParryingWeightChanger()
         );
         
@@ -159,16 +173,18 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     void CreateNewAttacks (BossGeneralState[] allBossStates)
     {
         BaseAttackFactory[] factories = [
-            new InstantCrimsonBallFactory(), 
-            new JumpBackPokeChainFactory(),
-            new SlowStarterPokeChainFactory(),
-            new TriplePokeChainFactory(),
-            new DoubleAttackPokeChainFactory(),
-            new TeleportToBackFirstPokeChainFactory(),
-            new SlashUpCrimsonPokeChainFactory(),
-            new TeleportToBackSecondPokeChainFactory(),
-            new ChargeWavePokeChainFactory(),
-            new TeleportToBackComboPokeChainFactory()
+            new _21InstantCrimsonBallFactory(), 
+            new _30JumpBackPokeChainFactory(),
+            new _22SlowStarterPokeChainFactory(),
+            new _23TriplePokeChainFactory(),
+            new _24DoubleAttackPokeChainFactory(),
+            new _29TeleportToBackFirstPokeChainFactory(),
+            new _25SlashUpCrimsonPokeChainFactory(),
+            new _26TeleportToBackSecondPokeChainFactory(),
+            new _27ChargeWavePokeChainFactory(),
+            new _28TeleportToBackComboPokeChainFactory(),
+            new _32TeleportToBackSpecialCrimsonSlamPhase3Factory(),
+            new _33SpecialCrimsonSlamPhase3Factory()
         ];
         
         foreach (var factory in factories)
@@ -220,7 +236,9 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
             new _16QuickFooSpeedChanger(),
             new _17CrimsonSlamSpeedChanger(),
             new _18TeleportToBackComboSpeedChanger(),
-            new _X2JumpBackSpeedChanger()
+            new _X1PostureBreakSpeedChanger(),
+            new _X2JumpBackSpeedChanger(),
+            new _X3AttackParryingSpeedChanger()
         );
         speedChangerManager.ProcessSpeeds();
     }

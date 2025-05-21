@@ -6,7 +6,7 @@ namespace PromisedEigong.Gameplay.AttackFactories;
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSpeed;
 
-public class SlashUpCrimsonPokeChainFactory : BaseAttackFactory
+public class _25SlashUpCrimsonPokeChainFactory : BaseAttackFactory
 {
     public override string AttackToBeCopied => ATTACK12_SLASH_UP_CRIMSON;
     public override string AttackToBeCreated => ATTACK25_NEW_CHAIN_SLASH_UP_CRIMSON;

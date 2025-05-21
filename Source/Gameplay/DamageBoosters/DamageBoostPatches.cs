@@ -107,7 +107,7 @@ public class DamageBoostPatches
         if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
             return true;
         
-        BoostRecoverableDamage(ref damageValue, EIGONG_FIRE_BOOST);
+        BoostRecoverableDamage(ref damageValue, PromisedEigongMain.isLvl0Challenge.Value ? EIGONG_FIRE_BOOST_LVL_0 : EIGONG_FIRE_BOOST);
         
         return true;
     }

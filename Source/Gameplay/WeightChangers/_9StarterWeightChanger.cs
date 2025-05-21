@@ -39,7 +39,11 @@ public class _9StarterWeightChanger : BaseWeightChanger
     {
         ClearBossStates();
         SetAssociatedBossState(ATTACK_PATH + ATTACK9_STARTER);
-        CreateStateWeight(ATTACK_PATH + ATTACK9_STARTER, ATTACK_PATH + ATTACK9_STARTER_WEIGHT_PHASE_2, ATTACK9_STARTER_WEIGHT_PHASE_3_NAME);
+        CreateStateWeight(
+            ATTACK_PATH + ATTACK9_STARTER, 
+            ATTACK_PATH + ATTACK9_STARTER_WEIGHT_PHASE_2,
+            ATTACK9_STARTER_WEIGHT_PHASE_3_NAME
+        );
         CreateAndAddBossState(ATTACK_PATH + ATTACK19_THRUST_FULL_SCREEN);
         CreateAndAddBossState(ATTACK_PATH + ATTACK20_TELEPORT_OUT);
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);

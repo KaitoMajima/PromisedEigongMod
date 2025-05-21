@@ -6,16 +6,16 @@ namespace PromisedEigong.Gameplay.AttackFactories;
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSpeed;
 
-public class SlowStarterPokeChainFactory : BaseAttackFactory
+public class _30JumpBackPokeChainFactory : BaseAttackFactory
 {
-    public override string AttackToBeCopied => ATTACK1_SLOW_STARTER;
-    public override string AttackToBeCreated => ATTACK22_NEW_CHAIN_SLOW_STARTER;
+    public override string AttackToBeCopied => JUMP_BACK;
+    public override string AttackToBeCreated => ATTACK30_NEW_CHAIN_JUMP_BACK;
 
     public override void CopyAttack (BossGeneralState bossGeneralState)
     {
-        var newAttack = SetupAttack(bossGeneralState);
-        var attack1NextMove = GameObject.Find(ATTACK13_TRIPLE_POKE).GetComponent<BossGeneralState>();
-        newAttack.AnimationSpeed = ATTACK22_NEW_CHAIN_SLOW_STARTER_SPEED;
+        var newAttack = SetupAttack(bossGeneralState, true);
+        var attack1NextMove = GameObject.Find(ATTACK1_SLOW_STARTER).GetComponent<BossGeneralState>();
+        newAttack.AnimationSpeed = ATTACK24_NEW_CHAIN_DOUBLE_ATTACK_SPEED;
         newAttack.IsFromAChain = true;
         
         var phase1Weights = new List<AttackWeight>
@@ -48,6 +48,6 @@ public class SlowStarterPokeChainFactory : BaseAttackFactory
         newAttack.Phase1Weights = phase1Weights;
         newAttack.Phase2Weights = phase2Weights;
         newAttack.Phase3Weights = phase3Weights;
-        newAttack.SubscribeSource(ATTACK30_NEW_CHAIN_JUMP_BACK);
+        newAttack.SubscribeSource(ATTACK33_NEW_CRIMSON_SLAM_SPECIAL);
     }
 }

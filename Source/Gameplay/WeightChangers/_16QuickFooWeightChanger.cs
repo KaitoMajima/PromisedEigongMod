@@ -7,6 +7,7 @@ public class _16QuickFooWeightChanger : BaseWeightChanger
     {
         ChangePhase1();
         ChangePhase2();
+        ChangePhase3();
     }
 
     void ChangePhase1 ()
@@ -31,6 +32,21 @@ public class _16QuickFooWeightChanger : BaseWeightChanger
         CreateAndAddBossState(ATTACK_PATH + ATTACK4_SLASH_UP);
         CreateAndAddBossState(ATTACK_PATH + ATTACK12_SLASH_UP_CRIMSON);
         CreateAndAddBossState(ATTACK_PATH + ATTACK1_SLOW_STARTER);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
+        CreateAndAddBossState(STATES_PATH + JUMP_BACK);
+        ProcessCurrentWeight();
+    }
+    
+    void ChangePhase3 ()
+    {
+        ClearBossStates();
+        WeightReplaceMode = WeightReplaceMode.Add;
+        SetStateWeight(ATTACK_PATH + ATTACK16_QUICK_FOO_INTERRUPT_WEIGHT_PHASE_3);
+        SetAssociatedBossState(ATTACK_PATH + ATTACK10_FOO);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK4_SLASH_UP);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK12_SLASH_UP_CRIMSON);
         CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
         CreateAndAddBossState(STATES_PATH + JUMP_BACK);
         ProcessCurrentWeight();

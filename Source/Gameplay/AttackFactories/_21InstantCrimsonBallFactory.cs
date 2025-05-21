@@ -3,7 +3,7 @@
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSpeed;
 
-public class InstantCrimsonBallFactory : BaseAttackFactory
+public class _21InstantCrimsonBallFactory : BaseAttackFactory
 {
     public override string AttackToBeCopied => ATTACK14_CRIMSON_BALL;
     public override string AttackToBeCreated => ATTACK21_NEW_QUICK_CRIMSON_BALL;

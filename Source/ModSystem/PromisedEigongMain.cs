@@ -31,6 +31,8 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
     public WhiteScreen WhiteScreen { get; private set; }
     public EigongWrapper EigongWrapper { get; private set; }
     
+    public static ConfigEntry<bool> isLvl0Challenge;
+    
     Harmony harmony = null!;
 
     ConfigEntry<bool> isUsingHotReload;
@@ -78,6 +80,7 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
     void ApplyConfig ()
     {
         isUsingHotReload = Config.Bind("Debug", "IsUsingHotReload", false, "Only Enable this to true if you're developing this mod with Hot Reload.");
+        isLvl0Challenge = Config.Bind("Debug", "LVL0Challenge", false, "Any Eigong");
         if (isUsingHotReload.Value)
             HandleTitleScreenMenuLoaded();
     }

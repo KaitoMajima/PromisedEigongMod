@@ -7,6 +7,7 @@ public class _X3AttackParryingWeightChanger : BaseWeightChanger
     {
         ChangePhase1();
         ChangePhase2();
+        ChangePhase3();
     }
 
     void ChangePhase1 ()
@@ -25,6 +26,18 @@ public class _X3AttackParryingWeightChanger : BaseWeightChanger
         SetStateWeight(STATES_PATH + ATTACK_PARRYING_WEIGHT_PHASE_2);
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
         CreateAndAddBossState(ATTACK_PATH + ATTACK8_LONG_CHARGE);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
+        ProcessCurrentWeight();
+    }
+    
+    void ChangePhase3 ()
+    {
+        ClearBossStates();
+        WeightReplaceMode = WeightReplaceMode.Replace;
+        SetStateWeight(STATES_PATH + ATTACK_PARRYING_WEIGHT_PHASE_3);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK8_LONG_CHARGE);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
         ProcessCurrentWeight();

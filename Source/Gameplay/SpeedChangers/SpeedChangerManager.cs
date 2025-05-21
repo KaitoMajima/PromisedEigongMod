@@ -1,4 +1,6 @@
-﻿namespace PromisedEigong.SpeedChangers;
+﻿using NineSolsAPI;
+
+namespace PromisedEigong.SpeedChangers;
 #nullable disable
 
 public class SpeedChangerManager
@@ -33,9 +35,17 @@ public class SpeedChangerManager
             {
                 if (!speedChanger.IsSpecifiedAttack(bossState.name)) 
                     continue;
+
+                if (speedChanger.ShouldChangeClearEnterSpeedValue)
+                    bossState.EnterClearSpeed = speedChanger.ClearEnterSpeedValue;
+                
+                if (speedChanger.ShouldChangeClearExitSpeedValue)
+                    bossState.ClearSpeedWhenExit = speedChanger.ClearExitSpeedValue;
                 
                 var newSpeed = speedChanger.GetSpeed(currentPhase);
                 bossState.AnimationSpeed = newSpeed;
+                if (bossState.name == "AttackParrying")
+                    ToastManager.Toast($"Changed the animation speed to {bossState.AnimationSpeed}!");
                 foundAlteredSpeed = true;
                 break;
             }

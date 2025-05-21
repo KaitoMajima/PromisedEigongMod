@@ -6,7 +6,7 @@ namespace PromisedEigong.Gameplay.AttackFactories;
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSpeed;
 
-public class TeleportToBackComboPokeChainFactory : BaseAttackFactory
+public class _28TeleportToBackComboPokeChainFactory : BaseAttackFactory
 {
     public override string AttackToBeCopied => ATTACK18_TELEPORT_TO_BACK_COMBO;
     public override string AttackToBeCreated => ATTACK28_NEW_CHAIN_TELEPORT_TO_BACK_COMBO;

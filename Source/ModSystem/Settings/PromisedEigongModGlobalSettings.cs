@@ -243,21 +243,28 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK1_SLOW_STARTER = "[1] Starter  Slow Attack 慢刀前揮";
         public const string ATTACK1_SLOW_STARTER_WEIGHT = ATTACK1_SLOW_STARTER + "/phase (0)";
         public const string ATTACK1_SLOW_STARTER_WEIGHT_PHASE_2 = ATTACK1_SLOW_STARTER + "/phase (1)";
+        public const string ATTACK1_SLOW_STARTER_WEIGHT_PHASE_3_NAME = ATTACK1_SLOW_STARTER + "phase (2)";
         public const string ATTACK2_TELEPORT_TO_TOP = "[2] Teleport To Top";
         public const string ATTACK2_TELEPORT_TO_TOP_WEIGHT = ATTACK2_TELEPORT_TO_TOP + "/phase (0)";
+        public const string ATTACK2_TELEPORT_TO_TOP_WEIGHT_PHASE_2 = ATTACK2_TELEPORT_TO_TOP + "/phase (1)";
+        public const string ATTACK2_TELEPORT_TO_TOP_WEIGHT_PHASE_3 = ATTACK2_TELEPORT_TO_TOP + "/phase (2)";
         public const string ATTACK3_THRUST_DELAY = "[3] Thrust Delay 一閃";
         public const string ATTACK3_THRUST_DELAY_WEIGHT = ATTACK3_THRUST_DELAY + "/phase (0)";
         public const string ATTACK3_THRUST_DELAY_WEIGHT_PHASE_2 = ATTACK3_THRUST_DELAY + "/phase (1)";
+        public const string ATTACK3_THRUST_DELAY_WEIGHT_PHASE_3 = ATTACK3_THRUST_DELAY + "/phase (2)";
         public const string ATTACK4_SLASH_UP = "[4] Slash Up 上撈下打 大反危";
         public const string ATTACK5_TELEPORT_TO_BACK = "[5] Teleport to Back";
         public const string ATTACK5_TELEPORT_TO_BACK_WEIGHT = ATTACK5_TELEPORT_TO_BACK + "/weight";
         public const string ATTACK5_TELEPORT_TO_BACK_WEIGHT_PHASE_2 = ATTACK5_TELEPORT_TO_BACK + "/weight (1)";
+        public const string ATTACK5_TELEPORT_TO_BACK_WEIGHT_PHASE_3 = ATTACK5_TELEPORT_TO_BACK + "/weight (2)";
         public const string ATTACK6_DOUBLE_ATTACK = "[6] Double Attack";
         public const string ATTACK6_DOUBLE_ATTACK_WEIGHT = ATTACK6_DOUBLE_ATTACK + "/weight";
         public const string ATTACK7_TELEPORT_FORWARD = "[7] Teleport Dash Forward";
         public const string ATTACK7_TELEPORT_FORWARD_WEIGHT_PHASE_2 = ATTACK7_TELEPORT_FORWARD + "/weight (1)";
+        public const string ATTACK7_TELEPORT_FORWARD_WEIGHT_PHASE_3 = ATTACK7_TELEPORT_FORWARD + "/weight (2)";
         public const string ATTACK8_LONG_CHARGE = "[8] Long Charge (2階才有";
         public const string ATTACK8_LONG_CHARGE_WEIGHT_PHASE_2 = ATTACK8_LONG_CHARGE + "/weight (1)";
+        public const string ATTACK8_LONG_CHARGE_WEIGHT_PHASE_3 = ATTACK8_LONG_CHARGE + "/weight (2)";
         public const string ATTACK9_STARTER = "[9] Starter";
         public const string ATTACK9_STARTER_WEIGHT_PHASE_1 = ATTACK9_STARTER + "/phase (0)";
         public const string ATTACK9_STARTER_WEIGHT_PHASE_2 = ATTACK9_STARTER + "/phase (1)";
@@ -265,10 +272,13 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK10_FOO = "[10] Danger Foo Grab";
         public const string ATTACK10_FOO_INTERRUPT_WEIGHT = ATTACK10_FOO + "/interrupt weight";
         public const string ATTACK10_FOO_INTERRUPT_WEIGHT_PHASE_2 = ATTACK10_FOO + "/interrupt weight (1)";
+        public const string ATTACK10_FOO_INTERRUPT_WEIGHT_PHASE_3 = ATTACK10_FOO + "/interrupt weight (2)";
         public const string ATTACK11_GIANT_CHARGE_WAVE = "[11] GiantChargeWave 紅白白紅";
         public const string ATTACK11_GIANT_CHARGE_WAVE_WEIGHT_PHASE_2 = ATTACK11_GIANT_CHARGE_WAVE + "/weight (2)";
+        public const string ATTACK11_GIANT_CHARGE_WAVE_WEIGHT_PHASE_3 = ATTACK11_GIANT_CHARGE_WAVE + "/weight (3)";
         public const string ATTACK12_SLASH_UP_CRIMSON = "[12] UpSlash Down Danger";
         public const string ATTACK12_SLASH_UP_CRIMSON_WEIGHT_PHASE_2 = ATTACK12_SLASH_UP_CRIMSON + "/weight (1)";
+        public const string ATTACK12_SLASH_UP_CRIMSON_WEIGHT_PHASE_3 = ATTACK12_SLASH_UP_CRIMSON + "/weight (2)";
         public const string ATTACK13_TRIPLE_POKE = "[13] Tripple Poke 三連";
         public const string ATTACK13_TRIPLE_POKE_WEIGHT = ATTACK13_TRIPLE_POKE + "/weight";
         public const string ATTACK13_TRIPLE_POKE_WEIGHT_PHASE_2 = ATTACK13_TRIPLE_POKE + "/weight (1)";
@@ -278,9 +288,11 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK16_QUICK_FOO = "[16] QuickFoo";
         public const string ATTACK16_QUICK_FOO_INTERRUPT_WEIGHT = ATTACK16_QUICK_FOO + "/interrupt weight";
         public const string ATTACK16_QUICK_FOO_INTERRUPT_WEIGHT_PHASE_2 = ATTACK16_QUICK_FOO + "/interrupt weight (1)";
+        public const string ATTACK16_QUICK_FOO_INTERRUPT_WEIGHT_PHASE_3 = ATTACK16_QUICK_FOO + "/interrupt weight (2)";
         public const string ATTACK17_CRIMSON_SLAM = "[17] DownAttack Danger 空中下危";
         public const string ATTACK17_CRIMSON_SLAM_WEIGHT = ATTACK17_CRIMSON_SLAM + "/weight";
         public const string ATTACK17_CRIMSON_SLAM_WEIGHT_PHASE_2 = ATTACK17_CRIMSON_SLAM + "/weight (1)";
+        public const string ATTACK17_CRIMSON_SLAM_WEIGHT_PHASE_3 = ATTACK17_CRIMSON_SLAM + "/weight (2)";
         public const string ATTACK18_TELEPORT_TO_BACK_COMBO = "[18] Teleport to Back Combo";
         public const string ATTACK18_TELEPORT_TO_BACK_COMBO_WEIGHT = ATTACK18_TELEPORT_TO_BACK_COMBO + "/weight";
         public const string ATTACK19_THRUST_FULL_SCREEN = "[19] Thrust Full Screen Slash";
@@ -295,15 +307,19 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK28_NEW_CHAIN_TELEPORT_TO_BACK_COMBO = "[28] Teleport To Back Combo (Poke Chain 7)";
         public const string ATTACK29_NEW_CHAIN_TELEPORT_TO_BACK_FIRST = "[29] Teleport To Back (Poke Chain 3.5)";
         public const string ATTACK30_NEW_CHAIN_JUMP_BACK = "[30] Jump Back (Poke Chain 0)";
-        public const string ATTACK31_NEW_CHAIN_REVERSE_TURN_AROUND = "[23] Reverse Turn Around (Poke Chain 2.5)";
+        public const string ATTACK31_NEW_CHAIN_REVERSE_TURN_AROUND = "[31] Reverse Turn Around (Poke Chain 2.5)";
+        public const string ATTACK32_NEW_TELEPORT_TO_BACK_TO_CS = "[32] Teleport To Back To Crimson Slam";
+        public const string ATTACK33_NEW_CRIMSON_SLAM_SPECIAL = "[33] Special Crimson Slam";
         public const string POSTURE_BREAK = "PostureBreak";
         public const string POSTURE_BREAK_PHASE_1 = POSTURE_BREAK + "/phase0";
         public const string POSTURE_BREAK_PHASE_2 = POSTURE_BREAK + "/phase1";
+        public const string POSTURE_BREAK_PHASE_3 = POSTURE_BREAK + "/phase2";
         public const string JUMP_BACK = "JumpBack";
-        public const string JUMP_BACK_WEIGHT = JUMP_BACK + "/weight";
+        public const string JUMP_BACK_WEIGHT_PHASE_3 = JUMP_BACK + "/weight 2";
         public const string ATTACK_PARRYING = "AttackParrying";
         public const string ATTACK_PARRYING_WEIGHT = ATTACK_PARRYING + "/weight";
         public const string ATTACK_PARRYING_WEIGHT_PHASE_2 = ATTACK_PARRYING + "/weight (1)";
+        public const string ATTACK_PARRYING_WEIGHT_PHASE_3 = ATTACK_PARRYING + "/weight (2)";
     }
     
     public static class EigongAttackAnimationRefs
@@ -325,7 +341,7 @@ public static class PromisedEigongModGlobalSettings
     {
         public const int EIGONG_PHASE_1_HEALTH_VALUE = 5555;
         public const int EIGONG_PHASE_2_HEALTH_VALUE = 7777;
-        public const int EIGONG_PHASE_3_HEALTH_VALUE = 9999;
+        public const int EIGONG_PHASE_3_HEALTH_VALUE = 3333;
     }
 
     public static class EigongDamageReduction
@@ -361,7 +377,6 @@ public static class PromisedEigongModGlobalSettings
     {
         public const float ATTACK1_SLOW_STARTER_SPEED = 1 + 0.77f;
         public const float ATTACK2_TELEPORT_TO_TOP_SPEED = 1 + 0.55f;
-        public const float ATTACK2_TELEPORT_TO_TOP_SPEED_PHASE_3 = 1 + 1f;
         public const float ATTACK3_THRUST_DELAY_SPEED = 1 + 0.5f;
         public const float ATTACK4_SLASH_UP_SPEED = 1 + 0.20f;
         public const float ATTACK5_TELEPORT_TO_BACK_SPEED = 1 + 0.55f;
@@ -389,8 +404,14 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK24_NEW_CHAIN_DOUBLE_ATTACK_SPEED = 1 + 0.55f;
         public const float ATTACK26_TELEPORT_TO_BACK_SPEED = 1f;
         public const float ATTACK27_NEW_CHAIN_CHARGE_WAVE_SKIP = 0.208f;
+        public const float ATTACK32_NEW_CHAIN_TELEPORT_TO_BACK_TO_CS_SKIP = 0.45f;
+        public static readonly Vector3 ATTACK33_NEW_CRIMSON_SLAM_OFFSET = new(0, 86, 0);
         public const float JUMP_BACK_SPEED = 1 + 0.55f;
         public const float JUMP_BACK_SPEED_PHASE_3 = 1 + 1f;
+        public const float POSTURE_BREAK_SPEED = 1f;
+        public const float POSTURE_BREAK_SPEED_PHASE_3 = 1 + 7.7f;
+        public const float ATTACK_PARRYING_SPEED = 1f;
+        public const float ATTACK_PARRYING_SPEED_PHASE_3 = 1 + 7.7f;
     }
     
     public static class EigongDebug

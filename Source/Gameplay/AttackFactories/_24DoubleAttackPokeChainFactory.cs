@@ -6,7 +6,7 @@ namespace PromisedEigong.Gameplay.AttackFactories;
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSpeed;
 
-public class DoubleAttackPokeChainFactory : BaseAttackFactory
+public class _24DoubleAttackPokeChainFactory : BaseAttackFactory
 {
     public override string AttackToBeCopied => ATTACK6_DOUBLE_ATTACK;
     public override string AttackToBeCreated => ATTACK24_NEW_CHAIN_DOUBLE_ATTACK;
