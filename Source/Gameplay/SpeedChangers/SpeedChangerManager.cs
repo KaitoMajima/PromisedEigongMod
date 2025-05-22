@@ -44,8 +44,6 @@ public class SpeedChangerManager
                 
                 var newSpeed = speedChanger.GetSpeed(currentPhase);
                 bossState.AnimationSpeed = newSpeed;
-                if (bossState.name == "AttackParrying")
-                    ToastManager.Toast($"Changed the animation speed to {bossState.AnimationSpeed}!");
                 foundAlteredSpeed = true;
                 break;
             }

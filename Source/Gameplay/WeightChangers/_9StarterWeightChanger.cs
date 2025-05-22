@@ -45,7 +45,6 @@ public class _9StarterWeightChanger : BaseWeightChanger
             ATTACK9_STARTER_WEIGHT_PHASE_3_NAME
         );
         CreateAndAddBossState(ATTACK_PATH + ATTACK19_THRUST_FULL_SCREEN);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK20_TELEPORT_OUT);
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
         CreateAndAddBossState(ATTACK_PATH + ATTACK16_QUICK_FOO);
         CreateAndAddBossState(ATTACK_PATH + ATTACK4_SLASH_UP);

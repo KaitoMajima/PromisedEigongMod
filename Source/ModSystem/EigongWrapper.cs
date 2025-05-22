@@ -30,6 +30,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
 {
     public event Action<int> OnCurrentEigongPhaseChangedPreAnimation;
     public event Action<int> OnCurrentEigongPhaseChangedPostAnimation;
+    public event Action OnEigongTransformed;
     
     PromisedEigongMain MainInstance => PromisedEigongMain.Instance;
     
@@ -116,7 +117,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         ChangeAttackWeights(allModifiedBossStates);
         AddAttackIdentifiers(allBossStates);
         bossPhaseProvider.Setup(LoadedEigong);
-        gameplayEffectManager.Setup(LoadedEigong, this);
+        gameplayEffectManager.Setup(LoadedEigong, this, this);
         gameplayEffectManager.Initialize();
     }
     
@@ -238,7 +239,8 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
             new _18TeleportToBackComboSpeedChanger(),
             new _X1PostureBreakSpeedChanger(),
             new _X2JumpBackSpeedChanger(),
-            new _X3AttackParryingSpeedChanger()
+            new _X3AttackParryingSpeedChanger(),
+            new _X4RollThroughSpeedChanger()
         );
         speedChangerManager.ProcessSpeeds();
     }
@@ -267,54 +269,29 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     
     void HandleEigongStateChanged (BossStateIdentifier currentState)
     {
-        if (currentState.IdName == ATTACK9_STARTER)
-        {
-            var simpleDangerSFX = GameObject.Find(SIMPLE_DANGER_SFX_PATH);
-            var soundPlayer = simpleDangerSFX.GetComponent<SoundPlayer>();
-            for (int i = 0; i < STARTER_SIMPLE_DANGER_SFX_BOOST; i++)
-                soundPlayer.SimplePlay();
-            var dangerVFX = GameObject.Find(DANGER_VFX_PATH);
-            var dangerVFXPoolObj = dangerVFX.GetComponent<FxPlayer>().EmitPoolObject;
-            //TODO: Pool
-            var isEigongFacingRight = LoadedEigong.Facing is Facings.Right;
-            var dangerVFXInstance = Instantiate(dangerVFXPoolObj.gameObject,
-                isEigongFacingRight
-                    ? LoadedEigong.gameObject.transform.position + STARTER_SIMPLE_DANGER_VFX_OFFSET_L
-                    : LoadedEigong.gameObject.transform.position + STARTER_SIMPLE_DANGER_VFX_OFFSET_R, 
-                Quaternion.identity);
-            Destroy(dangerVFXInstance.GetComponent<PoolObject>());
-            var dangerVFXPoolObject = dangerVFXInstance.AddComponent<CustomPoolObject>();
-            dangerVFXInstance.transform.localScale = SIMPLE_DANGER_VFX_SCALE;
-            dangerVFXInstance.name = SIMPLE_DANGER_VFX_NAME;
-            var spriteRenderers = dangerVFXInstance.GetComponentsInChildren<SpriteRenderer>();
-            
-            foreach (var spriteRenderer in spriteRenderers)
-                spriteRenderer.forceRenderingOff = true;
-            StartCoroutine(ShowAfterDelay(SIMPLE_DANGER_VFX_HIDE_TIME, dangerVFXPoolObject, spriteRenderers));
-        }
         LogStates(currentState);
     }
     
     void HandlePhaseChangePreAnimation (int phase)
     {
         if (phase == 1)
+        {
             GameMusicPlayer.ChangeMusic(this, phasesOst, PHASE3_OST, 0);
+            ChangeAttackSpeedsPhase3();
+            StartCoroutine(WaitForEigongTransformation());
+        }
         OnCurrentEigongPhaseChangedPreAnimation?.Invoke(phase);
     }
-    
+
     void HandlePhaseChangePostAnimation (int phase)
     {
-        if (phase == 2)
-            ChangeAttackSpeedsPhase3();
         OnCurrentEigongPhaseChangedPostAnimation?.Invoke(phase);
     }
-
-    IEnumerator ShowAfterDelay (float delay, CustomPoolObject customPoolObj, SpriteRenderer[] spriteRenderers)
+    
+    IEnumerator WaitForEigongTransformation ()
     {
-        yield return new WaitForSeconds(delay);
-        foreach (var spriteRenderer in spriteRenderers)
-            spriteRenderer.forceRenderingOff = false;
-        customPoolObj.EnterLevelAwake();
+        yield return new WaitForSeconds(EIGONG_TRANSFORM_PHASE_3_DELAY);
+        OnEigongTransformed?.Invoke();
     }
     
     void LogStates (BossStateIdentifier currentState)

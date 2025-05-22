@@ -170,6 +170,7 @@ public static class PromisedEigongModGlobalSettings
         public const float SIMPLE_DANGER_VFX_VALUE_BRIGHTNESS = 9;
         public const float SIMPLE_DANGER_VFX_SATURATION = 0.42f;
         public const float SIMPLE_DANGER_VFX_HIDE_TIME = 0.18f;
+        public const float EIGONG_TRANSFORM_PHASE_3_DELAY = 6.648f;
     }
 
     public static class EigongSFX
@@ -320,6 +321,7 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK_PARRYING_WEIGHT = ATTACK_PARRYING + "/weight";
         public const string ATTACK_PARRYING_WEIGHT_PHASE_2 = ATTACK_PARRYING + "/weight (1)";
         public const string ATTACK_PARRYING_WEIGHT_PHASE_3 = ATTACK_PARRYING + "/weight (2)";
+        public const string ROLL_THROUGH = "RollThrough (PhaseChange Start";
     }
     
     public static class EigongAttackAnimationRefs
@@ -377,6 +379,7 @@ public static class PromisedEigongModGlobalSettings
     {
         public const float ATTACK1_SLOW_STARTER_SPEED = 1 + 0.77f;
         public const float ATTACK2_TELEPORT_TO_TOP_SPEED = 1 + 0.55f;
+        public const float ATTACK2_TELEPORT_TO_TOP_SPEED_PHASE_3 = 1 + 0.25f;
         public const float ATTACK3_THRUST_DELAY_SPEED = 1 + 0.5f;
         public const float ATTACK4_SLASH_UP_SPEED = 1 + 0.20f;
         public const float ATTACK5_TELEPORT_TO_BACK_SPEED = 1 + 0.55f;
@@ -412,17 +415,19 @@ public static class PromisedEigongModGlobalSettings
         public const float POSTURE_BREAK_SPEED_PHASE_3 = 1 + 7.7f;
         public const float ATTACK_PARRYING_SPEED = 1f;
         public const float ATTACK_PARRYING_SPEED_PHASE_3 = 1 + 7.7f;
+        public const float ROLL_THROUGH_SPEED = 1f;
+        public const float ROLL_THROUGH_SPEED_PHASE_3 = 1 + 3.3f;
     }
     
     public static class EigongDebug
     {
         public const bool IS_DEBUG_ACTIVATED = true;
-        public const bool EIGONG_STATE_LOG = IS_DEBUG_ACTIVATED && true;
+        public const bool EIGONG_STATE_LOG = IS_DEBUG_ACTIVATED && false;
         public const bool TEST_YI_INVINCIBLE = IS_DEBUG_ACTIVATED && false;
         public const bool IS_PAUSE_MENU_BG_INVISIBLE = IS_DEBUG_ACTIVATED && true;
         
-        public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.05f : 1;
-        public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.05f : 1;
+        public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.01f : 1;
+        public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.01f : 1;
         public const float PHASE_3_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
     }
 }

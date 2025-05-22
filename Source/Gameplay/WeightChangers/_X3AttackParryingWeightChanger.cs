@@ -40,6 +40,7 @@ public class _X3AttackParryingWeightChanger : BaseWeightChanger
         CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
         ProcessCurrentWeight();
     }
 }

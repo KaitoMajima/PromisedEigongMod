@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using NineSolsAPI;
+using PromisedEigong.AppearanceChangers;
 
 namespace PromisedEigong.Effects.GameplayEffects;
 #nullable disable
@@ -11,16 +13,19 @@ using UnityEngine;
 using static PromisedEigongModGlobalSettings.EigongVFX;
 using static PromisedEigongModGlobalSettings.EigongSFX;
 using static PromisedEigongModGlobalSettings.EigongAttacks;
+using static PromisedEigongModGlobalSettings.EigongColors;
 
 public class GameplayEffectManager : IDisposable
 {
     MonsterBase loadedEigong;
     ICoroutineRunner runner;
+    EigongWrapper wrapper;
     
-    public void Setup (MonsterBase loadedEigong, ICoroutineRunner runner)
+    public void Setup (MonsterBase loadedEigong, EigongWrapper wrapper, ICoroutineRunner runner)
     {
         this.loadedEigong = loadedEigong;
         this.runner = runner;
+        this.wrapper = wrapper;
     }
     
     public void Initialize ()
@@ -31,11 +36,13 @@ public class GameplayEffectManager : IDisposable
     void AddListeners ()
     {
         GeneralGameplayPatches.OnAttackStartCalled += HandleEigongStateChanged;
+        wrapper.OnEigongTransformed += HandleEigongTransformed;
     }
 
     void RemoveListeners ()
     {
         GeneralGameplayPatches.OnAttackStartCalled -= HandleEigongStateChanged;
+        wrapper.OnEigongTransformed -= HandleEigongTransformed;
     }
     
     void HandleEigongStateChanged (BossStateIdentifier currentState)
@@ -56,6 +63,29 @@ public class GameplayEffectManager : IDisposable
         {
             runner.StartCoroutine(SlowStarterMultipleVFX(0.15f));
         }
+    }
+    
+    void HandleEigongTransformed ()
+    {
+        var eigongBody = GameObject.Find(EIGONG_CHARACTER_BODY);
+        GameObject.Destroy(eigongBody.GetComponent<_2dxFX_BurningFX>());
+        var eigongBodyRenderer = eigongBody.GetComponent<SpriteRenderer>();
+        var eigongTransformOverlayObj = GameObject.Instantiate(new GameObject(), eigongBody.transform);
+        var spriteFollower = eigongTransformOverlayObj.AddComponent<SpriteFollower>();
+        var spriteSetter = eigongTransformOverlayObj.AddComponent<SpriteSetter>();
+        var colorChange = eigongBody.AddComponent<_2dxFX_AL_ColorChange>();
+        var overlay = eigongTransformOverlayObj.AddComponent<_2dxFX_AL_4Gradients>();
+        spriteFollower.followRenderer = eigongBodyRenderer;
+        spriteSetter.ReferenceSpriteRenderer = eigongBodyRenderer;
+        colorChange._Saturation = 0;
+        colorChange._ValueBrightness = 4.7f;
+        //TODO: Change Saturation
+        overlay._Color1 = new Color(1, 0, 0, 1);
+        overlay._Color2 = new Color(1, 0, 0, 1);
+        overlay._Color3 = new Color(1, 0, 0.5f, 1);
+        overlay._Color4 = new Color(1, 0, 0.5, 1);
+        overlay.BlendMode = 3;
+        overlay._Alpha = 2.7f;
     }
     
     void PlaySoundEffect (string sfxPath, int boost)

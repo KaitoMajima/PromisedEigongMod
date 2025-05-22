@@ -14,7 +14,7 @@ public class _2TeleportToTopSpeedChanger : BaseSpeedChanger
         return phase switch
         {
             0 or 1 => ATTACK2_TELEPORT_TO_TOP_SPEED,
-            2 => ATTACK2_TELEPORT_TO_TOP_SPEED,
+            2 => ATTACK2_TELEPORT_TO_TOP_SPEED_PHASE_3,
             _ => throw new InvalidOperationException()
         };
     }

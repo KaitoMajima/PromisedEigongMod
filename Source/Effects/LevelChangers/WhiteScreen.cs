@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class WhiteScreen : MonoBehaviour
 {
-    public float ShowDuration => 0.02f;
-    public float HideDuration => 0.1f;
+    public float ShowDuration => 0.07f;
+    public float HideDuration => 0.007f;
 
     Canvas canvas;
     CanvasScaler canvasScaler;

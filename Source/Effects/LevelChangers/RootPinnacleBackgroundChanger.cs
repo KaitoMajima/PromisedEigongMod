@@ -97,10 +97,20 @@ public class RootPinnacleBackgroundChanger : MonoBehaviour
     void HandleEigongWrapperUpdated ()
     {
         if (eigongWrapper != null)
+        {
             eigongWrapper.OnCurrentEigongPhaseChangedPreAnimation -= HandleEigongPhaseUpdated;
+            eigongWrapper.OnEigongTransformed -= HandleEigongTransformed;
+        }
 
         eigongWrapper = MainInstance.EigongWrapper;
         eigongWrapper.OnCurrentEigongPhaseChangedPreAnimation += HandleEigongPhaseUpdated;
+        eigongWrapper.OnEigongTransformed += HandleEigongTransformed;
+    }
+
+    void HandleEigongTransformed ()
+    {
+        StopAllCoroutines();
+        StartCoroutine(ApplyPhase3Effects());
     }
 
     void HandleEigongPhaseUpdated (int phaseIndex)
@@ -122,12 +132,6 @@ public class RootPinnacleBackgroundChanger : MonoBehaviour
             coreVineRoot.GetComponent<Animator>().enabled = false;
             coreVineParent.SetActive(false);
             infectedVineParent.SetActive(true);
-        }
-
-        if (phaseIndex == 1)
-        {
-            StopAllCoroutines();
-            StartCoroutine(ApplyPhase3Effects());
         }
     }
 
