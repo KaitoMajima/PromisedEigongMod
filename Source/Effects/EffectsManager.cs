@@ -172,6 +172,13 @@ public class EffectsManager
         ApplyTransformationColorChange(spriteFollower, eigongHairRenderer, spriteSetter, colorChange, overlay);
         overlaySpriteRenderer.sortingOrder = EIGONG_OVERLAY_SORTING_ORDER;
         overlaySpriteRenderer.sortingLayerName = "Monster";
+        var sprites = spriteRenderer.GetComponentsInChildren<SpriteRenderer>();
+        
+        foreach (var sprite in sprites)
+        {
+            if (sprite.name == EIGONG_TIANHUO_HAIR_GLOW)
+                sprite.enabled = false;
+        }
     }
 
     void GetTransformationComponents (
@@ -205,11 +212,11 @@ public class EffectsManager
         spriteFollower.followRenderer = eigongHairRenderer;
         spriteSetter.ReferenceSpriteRenderer = eigongHairRenderer;
         colorChange._Saturation = EIGONG_TRANSFORM_COLORCHANGE_SATURATION;
-        colorChange._ValueBrightness = EIGONG_TRANSFORM_COLORCHANGE_VALUE_BRIGHTNESS;
-        overlay._Color1 = EIGONG_TRANSFORM_OVERLAY_COLOR_UPPER;
-        overlay._Color2 = EIGONG_TRANSFORM_OVERLAY_COLOR_LOWER;
-        overlay._Color3 = EIGONG_TRANSFORM_OVERLAY_COLOR_LOWER;
-        overlay._Color4 = EIGONG_TRANSFORM_OVERLAY_COLOR_LOWER;
+        colorChange._ValueBrightness = EIGONG_TRANSFORM_SHADOW_COLORCHANGE_VALUE_BRIGHTNESS;
+        overlay._Color1 = EIGONG_TRANSFORM_SHADOW_OVERLAY_COLOR_UPPER;
+        overlay._Color2 = EIGONG_TRANSFORM_SHADOW_OVERLAY_COLOR_LOWER;
+        overlay._Color3 = EIGONG_TRANSFORM_SHADOW_OVERLAY_COLOR_LOWER;
+        overlay._Color4 = EIGONG_TRANSFORM_SHADOW_OVERLAY_COLOR_LOWER;
         overlay.BlendMode = EIGONG_TRANSFORM_OVERLAY_BLEND_MODE;
         overlay._Alpha = EIGONG_TRANSFORM_OVERLAY_ALPHA;
     }

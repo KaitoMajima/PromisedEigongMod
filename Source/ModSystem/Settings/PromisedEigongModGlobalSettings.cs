@@ -215,6 +215,7 @@ public static class PromisedEigongModGlobalSettings
         public const string EIGONG_CHARACTER_HAIR_SPRITE_NAME = "YiGong_Hair";
         public const string EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE = EIGONG_CHARACTER_VIEW_PATH + "/Head/Virus (2階段後開)/YiGong_Virus";
         public const string EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE_NAME = "YiGong_Virus";
+        public const string EIGONG_TIANHUO_HAIR_GLOW = "Glow";
         public const string EIGONG_CHARACTER_BODY_SHADOW = EIGONG_CHARACTER_BODY + "/Shadow";
         public const string EIGONG_CHARACTER_SWORD = EIGONG_CHARACTER_VIEW_PATH + "/Weapon/Sword/Sword Sprite";
         public const string EIGONG_CHARACTER_SWORD_EFFECT = EIGONG_CHARACTER_VIEW_PATH + "/Weapon/Sword/Effect";
@@ -234,8 +235,12 @@ public static class PromisedEigongModGlobalSettings
         public static readonly Color FIRE_LIGHT_COLOR = new(0f, 0.77f, 0.99f);
         public static readonly Color EIGONG_TRANSFORM_OVERLAY_COLOR_UPPER = new(0.9f, 0, 0.1f, 1);
         public static readonly Color EIGONG_TRANSFORM_OVERLAY_COLOR_LOWER = new(1, 0, 0, 1);
+        public static readonly Color EIGONG_TRANSFORM_SHADOW_OVERLAY_COLOR_UPPER = new(0.1f, 0, 0.01f, 1);
+        public static readonly Color EIGONG_TRANSFORM_SHADOW_OVERLAY_COLOR_LOWER = new(0.2f, 0, 0, 1);
+
         public const float EIGONG_TRANSFORM_COLORCHANGE_SATURATION = 0;
         public const float EIGONG_TRANSFORM_COLORCHANGE_VALUE_BRIGHTNESS = 3.3f;
+        public const float EIGONG_TRANSFORM_SHADOW_COLORCHANGE_VALUE_BRIGHTNESS = 0f;
         public const int EIGONG_TRANSFORM_OVERLAY_BLEND_MODE = 7;
         public const float EIGONG_TRANSFORM_OVERLAY_ALPHA = 2.3f;
         public const float EIGONG_BURNING_FX_STRENGTH = 0.53f;
@@ -439,8 +444,8 @@ public static class PromisedEigongModGlobalSettings
         public const bool TEST_YI_INVINCIBLE = IS_DEBUG_ACTIVATED && false;
         public const bool IS_PAUSE_MENU_BG_INVISIBLE = IS_DEBUG_ACTIVATED && true;
         
-        public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
-        public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
+        public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.05f : 1;
+        public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.05f : 1;
         public const float PHASE_3_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
     }
 }
