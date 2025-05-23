@@ -72,7 +72,7 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
         PreloadingManager.Setup();
         EffectsManager = new EffectsManager();
         EffectsManager.Setup();
-        var whiteScreenGameObject = Instantiate(new GameObject());
+        var whiteScreenGameObject = new GameObject();
         RCGLifeCycle.DontDestroyForever(whiteScreenGameObject);
         WhiteScreen = whiteScreenGameObject.AddComponent<WhiteScreen>();
     }

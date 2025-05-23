@@ -60,32 +60,99 @@ public class GameplayEffectManager : IDisposable
             );
         }
         if (currentState.IdName == ATTACK22_NEW_CHAIN_SLOW_STARTER)
-        {
             runner.StartCoroutine(SlowStarterMultipleVFX(0.15f));
-        }
     }
     
     void HandleEigongTransformed ()
     {
-        var eigongBody = GameObject.Find(EIGONG_CHARACTER_BODY);
-        GameObject.Destroy(eigongBody.GetComponent<_2dxFX_BurningFX>());
-        var eigongBodyRenderer = eigongBody.GetComponent<SpriteRenderer>();
-        var eigongTransformOverlayObj = GameObject.Instantiate(new GameObject(), eigongBody.transform);
-        var spriteFollower = eigongTransformOverlayObj.AddComponent<SpriteFollower>();
-        var spriteSetter = eigongTransformOverlayObj.AddComponent<SpriteSetter>();
-        var colorChange = eigongBody.AddComponent<_2dxFX_AL_ColorChange>();
-        var overlay = eigongTransformOverlayObj.AddComponent<_2dxFX_AL_4Gradients>();
-        spriteFollower.followRenderer = eigongBodyRenderer;
-        spriteSetter.ReferenceSpriteRenderer = eigongBodyRenderer;
-        colorChange._Saturation = 0;
-        colorChange._ValueBrightness = 4.7f;
-        //TODO: Change Saturation
-        overlay._Color1 = new Color(1, 0, 0, 1);
-        overlay._Color2 = new Color(1, 0, 0, 1);
-        overlay._Color3 = new Color(1, 0, 0.5f, 1);
-        overlay._Color4 = new Color(1, 0, 0.5, 1);
-        overlay.BlendMode = 3;
-        overlay._Alpha = 2.7f;
+        ChangeBodyColor();
+        ChangeHairColor();
+        ChangeTianhuoHairColor();
+    }
+
+    void ChangeBodyColor ()
+    {
+        GetTransformationComponents(
+            EIGONG_CHARACTER_BODY,
+            out var eigongBodyRenderer, 
+            out _, 
+            out var spriteFollower,
+            out var spriteSetter, 
+            out var colorChange, 
+            out var overlay
+        );
+        ApplyTransformationColorChange(spriteFollower, eigongBodyRenderer, spriteSetter, colorChange, overlay);
+    }
+    
+    void ChangeHairColor ()
+    {
+        GetTransformationComponents(
+            EIGONG_CHARACTER_HAIR_SPRITE,
+            out var eigongHairRenderer, 
+            out var overlaySpriteRenderer, 
+            out var spriteFollower,
+            out var spriteSetter, 
+            out var colorChange, 
+            out var overlay
+        );
+        ApplyTransformationColorChange(spriteFollower, eigongHairRenderer, spriteSetter, colorChange, overlay);
+        wrapper.StartCoroutine(UpdateSortingOrderNextFrame(overlaySpriteRenderer, EIGONG_OVERLAY_SORTING_ORDER));
+    }
+    
+    void ChangeTianhuoHairColor ()
+    {
+        GetTransformationComponents(
+            EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE,
+            out var eigongHairRenderer, 
+            out var overlaySpriteRenderer, 
+            out var spriteFollower,
+            out var spriteSetter, 
+            out var colorChange, 
+            out var overlay
+        );
+        ApplyTransformationColorChange(spriteFollower, eigongHairRenderer, spriteSetter, colorChange, overlay);
+        wrapper.StartCoroutine(UpdateSortingOrderNextFrame(overlaySpriteRenderer, EIGONG_OVERLAY_SORTING_ORDER));
+    }
+
+    void GetTransformationComponents (
+        string targetPath,
+        out SpriteRenderer eigongPieceRenderer,
+        out SpriteRenderer overlaySpriteRenderer, 
+        out SpriteFollower spriteFollower, 
+        out SpriteSetter spriteSetter,
+        out _2dxFX_AL_ColorChange colorChange, 
+        out _2dxFX_AL_4Gradients overlay
+    )
+    {
+        var eigongTargetPiece = GameObject.Find(targetPath);
+        eigongPieceRenderer = eigongTargetPiece.GetComponent<SpriteRenderer>();
+        var eigongTransformOverlayObj = new GameObject();
+        eigongTransformOverlayObj.transform.SetParent(eigongTargetPiece.transform);
+        overlaySpriteRenderer = eigongTransformOverlayObj.AddComponent<SpriteRenderer>();
+        spriteFollower = eigongTransformOverlayObj.AddComponent<SpriteFollower>();
+        spriteSetter = eigongTransformOverlayObj.AddComponent<SpriteSetter>();
+        colorChange = eigongTargetPiece.AddComponent<_2dxFX_AL_ColorChange>();
+        overlay = eigongTransformOverlayObj.AddComponent<_2dxFX_AL_4Gradients>();
+    }
+
+    void ApplyTransformationColorChange (
+        SpriteFollower spriteFollower, 
+        SpriteRenderer eigongHairRenderer,
+        SpriteSetter spriteSetter, 
+        _2dxFX_AL_ColorChange colorChange, 
+        _2dxFX_AL_4Gradients overlay
+    )
+    {
+        spriteFollower.followRenderer = eigongHairRenderer;
+        spriteSetter.ReferenceSpriteRenderer = eigongHairRenderer;
+        colorChange._Saturation = EIGONG_TRANSFORM_COLORCHANGE_SATURATION;
+        colorChange._ValueBrightness = EIGONG_TRANSFORM_COLORCHANGE_VALUE_BRIGHTNESS;
+        overlay._Color1 = EIGONG_TRANSFORM_OVERLAY_COLOR_UPPER;
+        overlay._Color2 = EIGONG_TRANSFORM_OVERLAY_COLOR_LOWER;
+        overlay._Color3 = EIGONG_TRANSFORM_OVERLAY_COLOR_LOWER;
+        overlay._Color4 = EIGONG_TRANSFORM_OVERLAY_COLOR_LOWER;
+        overlay.BlendMode = EIGONG_TRANSFORM_OVERLAY_BLEND_MODE;
+        overlay._Alpha = EIGONG_TRANSFORM_OVERLAY_ALPHA;
     }
     
     void PlaySoundEffect (string sfxPath, int boost)
@@ -117,6 +184,19 @@ public class GameplayEffectManager : IDisposable
             spriteRenderer.forceRenderingOff = true;
         runner.StartCoroutine(ShowAfterDelay(hideTime, dangerVFXPoolObject, spriteRenderers));
     }
+    
+    IEnumerator UpdateSortingOrderNextFrame (SpriteRenderer spriteRenderer, int value)
+    {
+        var spriteRendererObj = spriteRenderer.gameObject;
+        while (!spriteRendererObj.activeInHierarchy)
+        {
+            yield return null;
+        }
+        yield return null;
+        spriteRenderer.sortingOrder = value;
+        spriteRenderer.sortingLayerName = "Monster";
+    }
+
 
     IEnumerator SlowStarterMultipleVFX (float interval)
     {

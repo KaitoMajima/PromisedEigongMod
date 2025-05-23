@@ -13,7 +13,8 @@ public abstract class BaseAttackFactory
     protected ModifiedBossGeneralState SetupAttack (BossGeneralState bossGeneralState, bool isNotAnAttack = false)
     {
         var attacksParent = GameObject.Find(isNotAnAttack ? STATES_PATH : ATTACK_PATH);
-        var newAttackObj = Object.Instantiate(new GameObject(), attacksParent.transform);
+        var newAttackObj = new GameObject();
+        newAttackObj.transform.SetParent(attacksParent.transform);
         var newAttack = newAttackObj.AddComponent<ModifiedBossGeneralState>();
         newAttack.Setup(AttackToBeCreated, bossGeneralState, 1);
         newAttack.name = AttackToBeCreated;
