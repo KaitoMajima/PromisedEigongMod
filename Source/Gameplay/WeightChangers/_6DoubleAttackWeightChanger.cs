@@ -30,7 +30,6 @@ public class _6DoubleAttackWeightChanger : BaseWeightChanger
         CreateAndAddBossState(ATTACK_PATH + ATTACK1_SLOW_STARTER);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
         CreateAndAddBossState(ATTACK_PATH + ATTACK18_TELEPORT_TO_BACK_COMBO);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK13_TRIPLE_POKE);
         ProcessCurrentGroupNodeWeight(1, 1);
     }

@@ -34,10 +34,10 @@ public class _X3AttackParryingWeightChanger : BaseWeightChanger
     void ChangePhase3 ()
     {
         ClearBossStates();
-        WeightReplaceMode = WeightReplaceMode.Replace;
         SetStateWeight(STATES_PATH + ATTACK_PARRYING_WEIGHT_PHASE_3);
         CreateAndAddBossState(ATTACK_PATH + ATTACK8_LONG_CHARGE);
         CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK13_TRIPLE_POKE);
         CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);

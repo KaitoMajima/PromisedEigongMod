@@ -1,4 +1,6 @@
-﻿namespace PromisedEigong.PoolObjectWrapper;
+﻿using NineSolsAPI;
+
+namespace PromisedEigong.PoolObjectWrapper;
 #nullable disable
 
 using System;
@@ -8,6 +10,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using static PromisedEigongModGlobalSettings.EigongRefs;
 using static PromisedEigongModGlobalSettings.EigongVFX;
+using static PromisedEigongModGlobalSettings.EigongColors;
 
 [HarmonyPatch]
 public class PoolObjectPatches
@@ -23,6 +26,9 @@ public class PoolObjectPatches
     public static event Action<SpriteRenderer> OnFoundJudgmentCutLine;
     public static event Action<SpriteRenderer> OnFoundJudgmentCutShape1;
     public static event Action<SpriteRenderer> OnFoundJudgmentCutShape2;
+    public static event Action<SpriteRenderer> OnFoundJudgmentCutEigongBody; 
+    public static event Action<SpriteRenderer> OnFoundJudgmentCutEigongHair; 
+    public static event Action<SpriteRenderer> OnFoundJudgmentCutEigongTianhuoHair; 
 
     
     [HarmonyPostfix]
@@ -44,6 +50,15 @@ public class PoolObjectPatches
         InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON, OnFoundJudgmentCutLine, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON_LINE);
         InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON, OnFoundJudgmentCutShape1, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON_SHAPE_1);
         InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON, OnFoundJudgmentCutShape2, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON_SHAPE_2);
+        InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT, OnFoundJudgmentCutEigongBody, EIGONG_CHARACTER_BODY_NAME);
+        InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT, OnFoundJudgmentCutEigongHair, EIGONG_CHARACTER_HAIR_SPRITE_NAME);
+        InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT, OnFoundJudgmentCutEigongTianhuoHair, EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE_NAME);
+        InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_PART_2, OnFoundJudgmentCutEigongBody, EIGONG_CHARACTER_BODY_NAME);
+        InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_PART_2, OnFoundJudgmentCutEigongHair, EIGONG_CHARACTER_HAIR_SPRITE_NAME);
+        InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_PART_2, OnFoundJudgmentCutEigongTianhuoHair, EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE_NAME);
+        InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON, OnFoundJudgmentCutEigongBody, EIGONG_CHARACTER_BODY_NAME);
+        InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON, OnFoundJudgmentCutEigongHair, EIGONG_CHARACTER_HAIR_SPRITE_NAME);
+        InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON, OnFoundJudgmentCutEigongTianhuoHair, EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE_NAME);
     }
     
     [HarmonyPostfix]
@@ -58,7 +73,8 @@ public class PoolObjectPatches
         InvokeCallbackForComponents(__instance, SIMPLE_DANGER_VFX_NAME, OnFoundSimpleTaiDanger);
     }
 
-    static void InvokeCallbackForComponents <T> (MonoBehaviour instance, string objName, Action<T> callback) where T : Component
+    static void InvokeCallbackForComponents <T> (MonoBehaviour instance, string objName, Action<T> callback) 
+        where T : Component
     {
         if (instance.name != objName) 
             return;
@@ -68,7 +84,8 @@ public class PoolObjectPatches
             callback?.Invoke(obj);
     }
     
-    static void InvokeCallbackForComponents <T> (MonoBehaviour instance, string objName, Action<T> callback, string objNameComparison) where T : Component
+    static void InvokeCallbackForComponents <T> (MonoBehaviour instance, string objName, Action<T> callback, string objNameComparison) 
+        where T : Component
     {
         if (instance.name != objName) 
             return;

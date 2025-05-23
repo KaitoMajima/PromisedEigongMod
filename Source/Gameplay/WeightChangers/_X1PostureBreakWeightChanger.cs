@@ -37,13 +37,10 @@ public class _X1PostureBreakWeightChanger : BaseWeightChanger
     void ChangePhase3 ()
     {
         ClearBossStates();
-        WeightReplaceMode = WeightReplaceMode.Add;
         SetStateWeight(STATES_PATH + POSTURE_BREAK_PHASE_3);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
         CreateAndAddBossState(ATTACK_PATH + ATTACK4_SLASH_UP);
         CreateAndAddBossState(ATTACK_PATH + ATTACK12_SLASH_UP_CRIMSON);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
         CreateAndAddBossState(STATES_PATH + JUMP_BACK);
         ProcessCurrentWeight();
     }

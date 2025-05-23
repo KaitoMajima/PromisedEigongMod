@@ -50,11 +50,12 @@ public static class PromisedEigongModGlobalSettings
         public const string PO_VFX_EIGONG_CRIMSON_GEYSER = "Fx_YiGong Upper12_pool obj(Clone)";
         public const string PO_VFX_EIGONG_CRIMSON_PILLAR = "FireExplosionPillar_FX_damage(Clone)";
         public const string PO_VFX_EIGONG_JUDGMENT_CUT = "白2 FullScreen Slash FX Damage(Clone)";
+        public const string PO_VFX_EIGONG_JUDGMENT_CUT_PART_2 = "白閃 FullScreen Slash FX Damage(Clone)";
         public const string PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON = "紅閃 FullScreen Slash FX Damage Danger(Clone)";
         public const string PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON_LINE = "Line";
         public const string PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON_SHAPE_1 = "SHape";
         public const string PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON_SHAPE_2 = "SHape 2";
-
+        
     }
 
     public static class EigongPreloadRefs
@@ -209,8 +210,11 @@ public static class PromisedEigongModGlobalSettings
             "FSM Animator/LogicRoot/---Boss---/Boss_Yi Gung/MonsterCore/Animator(Proxy)/Animator/LogicRoot/Phase1 Activator/FireFX _ Fxplayer";
             
         public const string EIGONG_CHARACTER_BODY = EIGONG_CHARACTER_VIEW_PATH + "/Body";
+        public const string EIGONG_CHARACTER_BODY_NAME = "Body";
         public const string EIGONG_CHARACTER_HAIR_SPRITE = EIGONG_CHARACTER_VIEW_PATH + "/Head/Hair/YiGong_Hair";
+        public const string EIGONG_CHARACTER_HAIR_SPRITE_NAME = "YiGong_Hair";
         public const string EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE = EIGONG_CHARACTER_VIEW_PATH + "/Head/Virus (2階段後開)/YiGong_Virus";
+        public const string EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE_NAME = "YiGong_Virus";
         public const string EIGONG_CHARACTER_BODY_SHADOW = EIGONG_CHARACTER_BODY + "/Shadow";
         public const string EIGONG_CHARACTER_SWORD = EIGONG_CHARACTER_VIEW_PATH + "/Weapon/Sword/Sword Sprite";
         public const string EIGONG_CHARACTER_SWORD_EFFECT = EIGONG_CHARACTER_VIEW_PATH + "/Weapon/Sword/Effect";
@@ -435,8 +439,8 @@ public static class PromisedEigongModGlobalSettings
         public const bool TEST_YI_INVINCIBLE = IS_DEBUG_ACTIVATED && false;
         public const bool IS_PAUSE_MENU_BG_INVISIBLE = IS_DEBUG_ACTIVATED && true;
         
-        public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.01f : 1;
-        public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.01f : 1;
+        public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
+        public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
         public const float PHASE_3_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
     }
 }

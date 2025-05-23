@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using NineSolsAPI;
 using PromisedEigong.AppearanceChangers;
+using PromisedEigong.PoolObjectWrapper;
 
 namespace PromisedEigong.Effects.GameplayEffects;
 #nullable disable
@@ -15,6 +16,7 @@ using static PromisedEigongModGlobalSettings.EigongSFX;
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongColors;
 
+//TODO: Join this class and EffectsManager class that I separated for some reason
 public class GameplayEffectManager : IDisposable
 {
     MonsterBase loadedEigong;
@@ -43,6 +45,9 @@ public class GameplayEffectManager : IDisposable
     {
         GeneralGameplayPatches.OnAttackStartCalled -= HandleEigongStateChanged;
         wrapper.OnEigongTransformed -= HandleEigongTransformed;
+        PoolObjectPatches.OnFoundJudgmentCutEigongBody -= HandleFoundJudgmentCutBody;
+        PoolObjectPatches.OnFoundJudgmentCutEigongHair -= HandleFoundJudgmentCutHair;
+        PoolObjectPatches.OnFoundJudgmentCutEigongTianhuoHair -= HandleFoundJudgmentCutTianhuoHair;
     }
     
     void HandleEigongStateChanged (BossStateIdentifier currentState)
@@ -69,11 +74,58 @@ public class GameplayEffectManager : IDisposable
         ChangeHairColor();
         ChangeTianhuoHairColor();
     }
+    
+    void HandleFoundJudgmentCutBody (SpriteRenderer spriteRenderer)
+    {
+        GetTransformationComponents(
+            spriteRenderer.gameObject,
+            out var eigongBodyRenderer,
+            out _,
+            out var spriteFollower,
+            out var spriteSetter,
+            out var colorChange,
+            out var overlay
+        );
+        ApplyTransformationColorChange(spriteFollower, eigongBodyRenderer, spriteSetter, colorChange, overlay);
+    }
+    
+    void HandleFoundJudgmentCutHair (SpriteRenderer spriteRenderer)
+    {
+        GetTransformationComponents(
+            spriteRenderer.gameObject,
+            out var eigongHairRenderer,
+            out var overlaySpriteRenderer,
+            out var spriteFollower,
+            out var spriteSetter,
+            out var colorChange,
+            out var overlay
+        );
+        ApplyTransformationColorChange(spriteFollower, eigongHairRenderer, spriteSetter, colorChange, overlay);
+        wrapper.StartCoroutine(UpdateSortingOrderNextFrame(overlaySpriteRenderer,
+            EIGONG_OVERLAY_SORTING_ORDER));
+    }
+    
+    void HandleFoundJudgmentCutTianhuoHair (SpriteRenderer spriteRenderer)
+    {
+        GetTransformationComponents(
+            spriteRenderer.gameObject,
+            out var eigongHairRenderer,
+            out var overlaySpriteRenderer,
+            out var spriteFollower,
+            out var spriteSetter,
+            out var colorChange,
+            out var overlay
+        );
+        ApplyTransformationColorChange(spriteFollower, eigongHairRenderer, spriteSetter, colorChange, overlay);
+        wrapper.StartCoroutine(UpdateSortingOrderNextFrame(overlaySpriteRenderer,
+            EIGONG_OVERLAY_SORTING_ORDER));
+    }
 
     void ChangeBodyColor ()
     {
+        var eigongTargetPiece = GameObject.Find(EIGONG_CHARACTER_BODY);
         GetTransformationComponents(
-            EIGONG_CHARACTER_BODY,
+            eigongTargetPiece,
             out var eigongBodyRenderer, 
             out _, 
             out var spriteFollower,
@@ -86,8 +138,9 @@ public class GameplayEffectManager : IDisposable
     
     void ChangeHairColor ()
     {
+        var eigongTargetPiece = GameObject.Find(EIGONG_CHARACTER_HAIR_SPRITE);
         GetTransformationComponents(
-            EIGONG_CHARACTER_HAIR_SPRITE,
+            eigongTargetPiece,
             out var eigongHairRenderer, 
             out var overlaySpriteRenderer, 
             out var spriteFollower,
@@ -101,8 +154,9 @@ public class GameplayEffectManager : IDisposable
     
     void ChangeTianhuoHairColor ()
     {
+        var eigongTargetPiece = GameObject.Find(EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE);
         GetTransformationComponents(
-            EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE,
+            eigongTargetPiece,
             out var eigongHairRenderer, 
             out var overlaySpriteRenderer, 
             out var spriteFollower,
@@ -115,7 +169,7 @@ public class GameplayEffectManager : IDisposable
     }
 
     void GetTransformationComponents (
-        string targetPath,
+        GameObject eigongTargetPiece,
         out SpriteRenderer eigongPieceRenderer,
         out SpriteRenderer overlaySpriteRenderer, 
         out SpriteFollower spriteFollower, 
@@ -124,7 +178,6 @@ public class GameplayEffectManager : IDisposable
         out _2dxFX_AL_4Gradients overlay
     )
     {
-        var eigongTargetPiece = GameObject.Find(targetPath);
         eigongPieceRenderer = eigongTargetPiece.GetComponent<SpriteRenderer>();
         var eigongTransformOverlayObj = new GameObject();
         eigongTransformOverlayObj.transform.SetParent(eigongTargetPiece.transform);

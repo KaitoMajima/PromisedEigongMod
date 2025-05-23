@@ -1,4 +1,6 @@
-﻿namespace PromisedEigong.Effects;
+﻿using NineSolsAPI;
+
+namespace PromisedEigong.Effects;
 using AppearanceChangers;
 using PoolObjectWrapper;
 using UnityEngine;
@@ -25,7 +27,9 @@ public class EffectsManager
         PoolObjectPatches.OnFoundJudgmentCutLine += HandleJudgmentCutLineFound;
         PoolObjectPatches.OnFoundJudgmentCutShape1 += HandleJudgmentCutShape1Found;
         PoolObjectPatches.OnFoundJudgmentCutShape2 += HandleJudgmentCutShape2Found;
-
+        PoolObjectPatches.OnFoundJudgmentCutEigongBody += HandleFoundJudgmentCutBody;
+        PoolObjectPatches.OnFoundJudgmentCutEigongHair += HandleFoundJudgmentCutHair;
+        PoolObjectPatches.OnFoundJudgmentCutEigongTianhuoHair += HandleFoundJudgmentCutTianhuoHair;
     }
     void RemoveListeners ()
     {
@@ -40,6 +44,9 @@ public class EffectsManager
         PoolObjectPatches.OnFoundJudgmentCutLine -= HandleJudgmentCutLineFound;
         PoolObjectPatches.OnFoundJudgmentCutShape1 -= HandleJudgmentCutShape1Found;
         PoolObjectPatches.OnFoundJudgmentCutShape2 -= HandleJudgmentCutShape2Found;
+        PoolObjectPatches.OnFoundJudgmentCutEigongBody -= HandleFoundJudgmentCutBody;
+        PoolObjectPatches.OnFoundJudgmentCutEigongHair -= HandleFoundJudgmentCutHair;
+        PoolObjectPatches.OnFoundJudgmentCutEigongTianhuoHair -= HandleFoundJudgmentCutTianhuoHair;
     }
 
     public void ChangeCharacterEigongColors ()
@@ -119,6 +126,92 @@ public class EffectsManager
         );
         ParticleColorSetter.ChangeColors(EIGONG_CHARACTER_FOO_EFFECT_1, FIRE_COLOR);
         ParticleColorSetter.ChangeColors(EIGONG_CHARACTER_FOO_EFFECT_2, FIRE_COLOR);
+    }
+    
+    void HandleFoundJudgmentCutBody (SpriteRenderer spriteRenderer)
+    {
+        GetTransformationComponents(
+            spriteRenderer.gameObject,
+            out var eigongBodyRenderer,
+            out _,
+            out var spriteFollower,
+            out var spriteSetter,
+            out var colorChange,
+            out var overlay
+        );
+        ApplyTransformationColorChange(spriteFollower, eigongBodyRenderer, spriteSetter, colorChange, overlay);
+    }
+    
+    void HandleFoundJudgmentCutHair (SpriteRenderer spriteRenderer)
+    {
+        GetTransformationComponents(
+            spriteRenderer.gameObject,
+            out var eigongHairRenderer,
+            out var overlaySpriteRenderer,
+            out var spriteFollower,
+            out var spriteSetter,
+            out var colorChange,
+            out var overlay
+        );
+        ApplyTransformationColorChange(spriteFollower, eigongHairRenderer, spriteSetter, colorChange, overlay);
+        overlaySpriteRenderer.sortingOrder = EIGONG_OVERLAY_SORTING_ORDER;
+        overlaySpriteRenderer.sortingLayerName = "Monster";
+    }
+    
+    void HandleFoundJudgmentCutTianhuoHair (SpriteRenderer spriteRenderer)
+    {
+        GetTransformationComponents(
+            spriteRenderer.gameObject,
+            out var eigongHairRenderer,
+            out var overlaySpriteRenderer,
+            out var spriteFollower,
+            out var spriteSetter,
+            out var colorChange,
+            out var overlay
+        );
+        ApplyTransformationColorChange(spriteFollower, eigongHairRenderer, spriteSetter, colorChange, overlay);
+        overlaySpriteRenderer.sortingOrder = EIGONG_OVERLAY_SORTING_ORDER;
+        overlaySpriteRenderer.sortingLayerName = "Monster";
+    }
+
+    void GetTransformationComponents (
+        GameObject eigongTargetPiece,
+        out SpriteRenderer eigongPieceRenderer,
+        out SpriteRenderer overlaySpriteRenderer, 
+        out SpriteFollower spriteFollower, 
+        out SpriteSetter spriteSetter,
+        out _2dxFX_AL_ColorChange colorChange, 
+        out _2dxFX_AL_4Gradients overlay
+    )
+    {
+        eigongPieceRenderer = eigongTargetPiece.GetComponent<SpriteRenderer>();
+        var eigongTransformOverlayObj = new GameObject();
+        eigongTransformOverlayObj.transform.SetParent(eigongTargetPiece.transform);
+        overlaySpriteRenderer = eigongTransformOverlayObj.AddComponent<SpriteRenderer>();
+        spriteFollower = eigongTransformOverlayObj.AddComponent<SpriteFollower>();
+        spriteSetter = eigongTransformOverlayObj.AddComponent<SpriteSetter>();
+        colorChange = eigongTargetPiece.AddComponent<_2dxFX_AL_ColorChange>();
+        overlay = eigongTransformOverlayObj.AddComponent<_2dxFX_AL_4Gradients>();
+    }
+
+    void ApplyTransformationColorChange (
+        SpriteFollower spriteFollower, 
+        SpriteRenderer eigongHairRenderer,
+        SpriteSetter spriteSetter, 
+        _2dxFX_AL_ColorChange colorChange, 
+        _2dxFX_AL_4Gradients overlay
+    )
+    {
+        spriteFollower.followRenderer = eigongHairRenderer;
+        spriteSetter.ReferenceSpriteRenderer = eigongHairRenderer;
+        colorChange._Saturation = EIGONG_TRANSFORM_COLORCHANGE_SATURATION;
+        colorChange._ValueBrightness = EIGONG_TRANSFORM_COLORCHANGE_VALUE_BRIGHTNESS;
+        overlay._Color1 = EIGONG_TRANSFORM_OVERLAY_COLOR_UPPER;
+        overlay._Color2 = EIGONG_TRANSFORM_OVERLAY_COLOR_LOWER;
+        overlay._Color3 = EIGONG_TRANSFORM_OVERLAY_COLOR_LOWER;
+        overlay._Color4 = EIGONG_TRANSFORM_OVERLAY_COLOR_LOWER;
+        overlay.BlendMode = EIGONG_TRANSFORM_OVERLAY_BLEND_MODE;
+        overlay._Alpha = EIGONG_TRANSFORM_OVERLAY_ALPHA;
     }
     
     void HandleTaiDangerFound (SpriteRenderer sprite)
