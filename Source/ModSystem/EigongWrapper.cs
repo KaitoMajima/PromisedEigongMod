@@ -1,4 +1,6 @@
-﻿namespace PromisedEigong.ModSystem;
+﻿using PromisedEigong.LevelChangers;
+
+namespace PromisedEigong.ModSystem;
 #nullable disable
 
 using Effects.GameplayEffects;
@@ -29,10 +31,9 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     public event Action<int> OnCurrentEigongPhaseChangedPreAnimation;
     public event Action<int> OnCurrentEigongPhaseChangedPostAnimation;
     public event Action OnEigongTransformed;
+    public MonsterBase LoadedEigong => SingletonBehaviour<MonsterManager>.Instance.ClosetMonster;
     
     PromisedEigongMain MainInstance => PromisedEigongMain.Instance;
-    
-    MonsterBase LoadedEigong => SingletonBehaviour<MonsterManager>.Instance.ClosetMonster;
     EffectsManager EffectsManager => MainInstance.EffectsManager;
     
     bool hasInitialized;
@@ -41,6 +42,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     BossPhaseProvider bossPhaseProvider;
     GameplayEffectManager gameplayEffectManager;
     SpeedChangerManager speedChangerManager;
+    AttackEventManager attackEventManager;
    
     void Awake ()
     {
@@ -49,6 +51,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         ChangeEigongCutsceneTitle();
         bossPhaseProvider = new BossPhaseProvider();
         gameplayEffectManager = new GameplayEffectManager();
+        attackEventManager = new AttackEventManager();
         AddListeners();
         
         //TODO: lvl 1 challenge logic
@@ -116,7 +119,9 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         AddAttackIdentifiers(allBossStates);
         bossPhaseProvider.Setup(LoadedEigong);
         gameplayEffectManager.Setup(LoadedEigong, this, this);
+        attackEventManager.Setup(this, FindObjectOfType<JudgmentCutSpawners>());
         gameplayEffectManager.Initialize();
+        attackEventManager.Initialize();
     }
     
     void ChangeOST ()
@@ -303,5 +308,6 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         RemoveListeners();
         gameplayEffectManager?.Dispose();
         bossPhaseProvider?.Dispose();
+        attackEventManager?.Dispose();
     }
 }

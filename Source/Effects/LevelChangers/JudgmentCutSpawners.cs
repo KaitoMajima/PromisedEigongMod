@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
 using System.Linq;
 using NineSolsAPI;
+using PromisedEigong.Core;
 using PromisedEigong.ModSystem;
 using RCGMaker.Core;
+using RCGMaker.Runtime.Sprite;
 using UnityEngine;
 
 namespace PromisedEigong.LevelChangers;
@@ -12,7 +14,7 @@ using static PromisedEigongModGlobalSettings.EigongRefs;
 
 public class JudgmentCutSpawners : MonoBehaviour
 {
-    static readonly string[] judgmentCutNames =
+    static readonly string[] judgmentCutRefNames =
     [
         JUDGMENT_CUT_PREFAB_HOLDER_NAME, 
         JUDGMENT_CUT_PART_2_PREFAB_HOLDER_NAME,
@@ -20,6 +22,8 @@ public class JudgmentCutSpawners : MonoBehaviour
         JUDGMENT_CUT_CRIMSON_PART_2_PREFAB_HOLDER_NAME
     ];
 
+    public DualStatePool<GameObject> JudgmentCutPart2Pool => judgmentCutPart2Pool;
+    
     FxPlayer[] initialFxPlayers;
         
     FxPlayer judgmentCutPrefab;
@@ -27,13 +31,12 @@ public class JudgmentCutSpawners : MonoBehaviour
     FxPlayer judgmentCutCrimsonPrefab;
     FxPlayer judgmentCutCrimsonPart2Prefab;
 
-    GameObject spawnedJudgmentCutObj;
-    GameObject spawnedJudgmentCutPart2Obj;
-    GameObject spawnedJudgmentCutCrimsonObj;
-    GameObject spawnedJudgmentCutCrimsonPart2Obj;
-    
-    float spawnDelay = 0.5f;
-    bool revertedCamera;
+    DualStatePool<GameObject> judgmentCutPool;
+    DualStatePool<GameObject> judgmentCutPart2Pool;
+    DualStatePool<GameObject> judgmentCutCrimsonPool;
+    DualStatePool<GameObject> judgmentCutCrimsonPart2Pool;
+
+    bool hasUpdatedPools;
 
     void Awake ()
     {
@@ -45,100 +48,71 @@ public class JudgmentCutSpawners : MonoBehaviour
             {
                 case JUDGMENT_CUT_PREFAB_HOLDER_NAME:
                     judgmentCutPrefab = fxplayer;
-                    judgmentCutPrefab.EmitPoolObject.SetActive(false);
-                    CameraInvokerActivator(judgmentCutPrefab, false);
                     break;
                 case JUDGMENT_CUT_PART_2_PREFAB_HOLDER_NAME:
                     judgmentCutPart2Prefab = fxplayer;
-                    judgmentCutPart2Prefab.EmitPoolObject.SetActive(false);
-                    CameraInvokerActivator(judgmentCutPart2Prefab, false);
                     break;
                 case JUDGMENT_CUT_CRIMSON_PREFAB_HOLDER_NAME:
                     judgmentCutCrimsonPrefab = fxplayer;
-                    judgmentCutCrimsonPrefab.EmitPoolObject.SetActive(false);
-                    CameraInvokerActivator(judgmentCutCrimsonPrefab, false);
                     break;
                 case JUDGMENT_CUT_CRIMSON_PART_2_PREFAB_HOLDER_NAME:
                     judgmentCutCrimsonPart2Prefab = fxplayer;
-                    judgmentCutCrimsonPart2Prefab.EmitPoolObject.SetActive(false);
-                    CameraInvokerActivator(judgmentCutCrimsonPart2Prefab, false);
                     break;
             }
         }
-
-        StartCoroutine(SpawnJudgmentCut());
     }
 
     void Update ()
     {
-        if (spawnDelay > 0)
-        {
-            spawnDelay -= Time.deltaTime;
-            return;
-        }
-        TryInstantiatePrefabInstance(ref spawnedJudgmentCutObj, judgmentCutPrefab);
-        TryInstantiatePrefabInstance(ref spawnedJudgmentCutPart2Obj, judgmentCutPart2Prefab);
-        TryInstantiatePrefabInstance(ref spawnedJudgmentCutCrimsonObj, judgmentCutCrimsonPrefab);
-        TryInstantiatePrefabInstance(ref spawnedJudgmentCutCrimsonPart2Obj, judgmentCutCrimsonPart2Prefab);
-        TryRevertingCameraInvokers();
-    }
-
-    IEnumerator SpawnJudgmentCut ()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(0.7f);
-            
-            if (BossPhaseProvider.CurrentPostAnimationPhase < 2)
-                continue;
-            
-            if (spawnedJudgmentCutPart2Obj == null)
-                continue;
-            
-            spawnedJudgmentCutPart2Obj.gameObject.SetActive(false);
-            spawnedJudgmentCutPart2Obj.gameObject.SetActive(true);
-        }
-    }
-
-    void TryInstantiatePrefabInstance (ref GameObject prefabInstance, FxPlayer prefabPlayer)
-    {
-        if (prefabInstance == null)
-        {
-            prefabInstance = prefabPlayer.PlayCustomAt(Vector3.zero);
-            prefabInstance.SetActive(false);
-        }
-    }
-
-    void TryRevertingCameraInvokers ()
-    {
-        if (revertedCamera)
+        if (hasUpdatedPools)
             return;
         
-        if (spawnedJudgmentCutObj == null || 
-            spawnedJudgmentCutPart2Obj == null || 
-            spawnedJudgmentCutCrimsonObj == null || 
-            spawnedJudgmentCutPart2Obj == null
-           )
-            return;
+        judgmentCutPool = CreatePool(judgmentCutPrefab, JUDGMENT_CUT_NEW_NAME);
+        judgmentCutPart2Pool = CreatePool(judgmentCutPart2Prefab, JUDGMENT_CUT_PART_2_NEW_NAME);
+        judgmentCutCrimsonPool = CreatePool(judgmentCutCrimsonPrefab, JUDGMENT_CUT_CRIMSON_NEW_NAME);
+        judgmentCutCrimsonPart2Pool = CreatePool(judgmentCutCrimsonPart2Prefab, JUDGMENT_CUT_CRIMSON_PART_2_NEW_NAME);
+        hasUpdatedPools = true;
+    }
+
+    DualStatePool<GameObject> CreatePool (FxPlayer prefabPlayer, string objName)
+    {
+        var pool = new DualStatePool<GameObject>();
+        var emitPoolObj = prefabPlayer.EmitPoolObject;
+        emitPoolObj.SetActive(false);
         
-        foreach (var fxplayer in initialFxPlayers)
+        for (int i = 0; i < 10; i++)
         {
-            if (judgmentCutNames.Contains(fxplayer.name))
-                CameraInvokerActivator(fxplayer, true);
+            var obj = prefabPlayer.PlayCustomAt(Vector3.zero);
+            obj.name = objName;
+            CameraInvokerActivator(obj, false);
+            Destroy(obj.GetComponent<PoolObject>());
+            obj.AddComponent<CustomPoolObject>();
+            obj.SetActive(false);
+            pool.InsertAsInactive(obj);
+            var rootShadow = obj.GetComponentInChildren<PositionConstraintConsumer>(true);
+            if (rootShadow != null)
+                rootShadow.SetActive(false);
         }
-        revertedCamera = true;
+        return pool;
     }
     
-    void CameraInvokerActivator (FxPlayer prefabPlayer, bool active)
+    void CameraInvokerActivator (GameObject gameObj, bool active)
     {
-        var invokers = prefabPlayer.EmitPoolObject
-            .GetComponentsInChildren<CameraFollowTargetInvoker>(true);
+        var invokers = gameObj.GetComponentsInChildren<CameraFollowTargetInvoker>(true);
         foreach (var invoker in invokers)
-            invoker.SetActive(active);
+            invoker.enabled = active;
     }
 
     void OnDestroy ()
     {
         StopAllCoroutines();
+        foreach (var judgmentCut in judgmentCutPool.AllItemsSet)
+            Destroy(judgmentCut);
+        foreach (var judgmentCut in judgmentCutCrimsonPool.AllItemsSet)
+            Destroy(judgmentCut);
+        foreach (var judgmentCut in judgmentCutPart2Pool.AllItemsSet)
+            Destroy(judgmentCut);
+        foreach (var judgmentCut in judgmentCutCrimsonPart2Pool.AllItemsSet)
+            Destroy(judgmentCut);
     }
 }

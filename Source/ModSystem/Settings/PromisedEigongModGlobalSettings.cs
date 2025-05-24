@@ -49,6 +49,12 @@ public static class PromisedEigongModGlobalSettings
         public const string JUDGMENT_CUT_CRIMSON_PREFAB_HOLDER_NAME = "FX Full Screen Danger";
         
         public const string JUDGMENT_CUT_CRIMSON_PART_2_PREFAB_HOLDER_NAME = "紅一閃FX Full Screen Danger";
+
+        public const string JUDGMENT_CUT_NEW_NAME = "(Spawned) Judgment Cut";
+        public const string JUDGMENT_CUT_PART_2_NEW_NAME = "(Spawned) Judgment Cut Part 2";
+        public const string JUDGMENT_CUT_CRIMSON_NEW_NAME = "(Spawned) Judgment Cut Crimson";
+        public const string JUDGMENT_CUT_CRIMSON_PART_2_NEW_NAME = "(Spawned) Judgment Cut Crimson Part 2";
+
         
         public const string PO_VFX_TAI_DANGER = "Effect_TaiDanger(Clone)";
         public const string PO_VFX_JIECHUAN_FIRE = "Fire_FX_damage_Long jiechuan(Clone)";

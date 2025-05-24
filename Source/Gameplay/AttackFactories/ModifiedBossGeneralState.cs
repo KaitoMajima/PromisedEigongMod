@@ -1,6 +1,4 @@
-﻿using NineSolsAPI;
-
-namespace PromisedEigong.Gameplay.AttackFactories;
+﻿namespace PromisedEigong.Gameplay.AttackFactories;
 #nullable disable
 
 using System.Collections.Generic;
