@@ -42,7 +42,7 @@ public static class PromisedEigongModGlobalSettings
         public const string EIGONG_CUTSCENE_TITLE_NAME_PATH =
             "GameLevel/Room/Prefab/EventBinder/General Boss Fight FSM Object Variant/FSM Animator/[CutScene] 一進/Boss Intro Acting 字卡/View/Boss_YiGung/Subtitle_Text/Title";
 
-        public const string JUDGMENT_CUT_PREFAB_HOLDER_NAME = "FX Full Screen Slash";
+        public const string JUDGMENT_CUT_PREFAB_HOLDER_NAME = "FX Full Screen Slash ";
         
         public const string JUDGMENT_CUT_PART_2_PREFAB_HOLDER_NAME = "白一閃FX Full Screen";
         
