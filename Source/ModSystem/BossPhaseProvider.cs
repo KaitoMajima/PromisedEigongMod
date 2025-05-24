@@ -48,4 +48,10 @@ public class BossPhaseProvider
         CurrentPostAnimationPhase = monster.PhaseIndex;
         OnPhaseChangePostAnimation?.Invoke(CurrentPostAnimationPhase);
     }
+
+    public void Dispose ()
+    {
+        CurrentPreAnimationPhase = -1;
+        CurrentPostAnimationPhase = 0;
+    }
 }

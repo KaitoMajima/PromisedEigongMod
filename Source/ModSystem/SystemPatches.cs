@@ -49,6 +49,7 @@ public class SystemPatches
             case SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG:
                 __instance.AddComp(typeof(RootPinnacleBackgroundChanger));
                 __instance.AddComp(typeof(TitleChanger));
+                __instance.AddComp(typeof(JudgmentCutSpawners));
                 break;
         }
     }

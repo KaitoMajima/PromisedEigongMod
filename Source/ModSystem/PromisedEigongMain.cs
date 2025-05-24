@@ -30,10 +30,10 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
     public EffectsManager EffectsManager { get; private set; }
     public WhiteScreen WhiteScreen { get; private set; }
     public EigongWrapper EigongWrapper { get; private set; }
+    public Harmony Harmony = null!;
     
     public static ConfigEntry<bool> isLvl0Challenge;
     
-    Harmony harmony = null!;
 
     ConfigEntry<bool> isUsingHotReload;
     bool canPreload = true;
@@ -58,7 +58,7 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
     {
         KLog.Init(Logger);
         RCGLifeCycle.DontDestroyForever(gameObject);
-        harmony = Harmony.CreateAndPatchAll(typeof(PromisedEigongMain).Assembly);
+        Harmony = Harmony.CreateAndPatchAll(typeof(PromisedEigongMain).Assembly);
     }
 
     void DisplayLoadedVersion ()
@@ -123,7 +123,7 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
 
     void OnDestroy () 
     {
-        harmony.UnpatchSelf();
+        Harmony.UnpatchSelf();
         PreloadingManager.Dispose();
         EffectsManager.Dispose();
     }

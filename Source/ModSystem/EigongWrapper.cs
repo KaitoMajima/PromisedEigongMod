@@ -13,7 +13,6 @@ using TMPro;
 using NineSolsAPI;
 using Effects;
 using System.Collections;
-using BepInEx.Configuration;
 using SpeedChangers;
 using WeightChanges;
 using UnityEngine;
@@ -23,7 +22,6 @@ using static PromisedEigongModGlobalSettings.EigongOST;
 using static PromisedEigongModGlobalSettings.EigongDebug;
 using static PromisedEigongModGlobalSettings.EigongTitle;
 using static PromisedEigongModGlobalSettings.EigongAttacks;
-using static PromisedEigongModGlobalSettings.EigongSFX;
 using static PromisedEigongModGlobalSettings.EigongVFX;
 
 public class EigongWrapper : MonoBehaviour, ICoroutineRunner
@@ -52,7 +50,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         bossPhaseProvider = new BossPhaseProvider();
         gameplayEffectManager = new GameplayEffectManager();
         AddListeners();
-
+        
         //TODO: lvl 1 challenge logic
         // Player.i.mainAbilities.AirJumpAbility.IsAcquired = false;
         // Player.i.mainAbilities.ParryJumpKickAbility.IsAcquired = false;
@@ -304,5 +302,6 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     {
         RemoveListeners();
         gameplayEffectManager?.Dispose();
+        bossPhaseProvider?.Dispose();
     }
 }

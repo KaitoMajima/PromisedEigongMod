@@ -83,6 +83,9 @@
         <Reference Include="AK.Wwise.Unity.Timeline">
             <HintPath>$(DllPath)/AK.Wwise.Unity.Timeline.dll</HintPath>
         </Reference>
+        <Reference Include="Sirenix.OdinInspector.Attributes">
+            <HintPath>$(DllPath)/Sirenix.OdinInspector.Attributes.dll</HintPath>
+        </Reference>
 
     </ItemGroup>
 
