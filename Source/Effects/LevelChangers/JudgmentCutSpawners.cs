@@ -13,7 +13,6 @@ public class JudgmentCutSpawners : MonoBehaviour
     public DualStatePool<GameObject> JudgmentCutPart2Pool => judgmentCutPart2Pool;
     public DualStatePool<GameObject> JudgmentCutCrimsonPool => judgmentCutCrimsonPool;
     public DualStatePool<GameObject> JudgmentCutCrimsonPart2Pool => judgmentCutCrimsonPart2Pool;
-
     
     FxPlayer[] initialFxPlayers;
         
@@ -76,7 +75,7 @@ public class JudgmentCutSpawners : MonoBehaviour
             var obj = prefabPlayer.PlayCustomAt(Vector3.zero);
             obj.name = objName;
             CameraInvokerActivator(obj, false);
-            Destroy(obj.GetComponent<PoolObject>());
+            obj.GetComponent<PoolObject>().enabled = false;
             obj.AddComponent<CustomPoolObject>();
             obj.SetActive(false);
             pool.InsertAsInactive(obj);
@@ -93,7 +92,6 @@ public class JudgmentCutSpawners : MonoBehaviour
 
     void OnDestroy ()
     {
-        StopAllCoroutines();
         foreach (var judgmentCut in judgmentCutPool.AllItemsSet)
             Destroy(judgmentCut);
         foreach (var judgmentCut in judgmentCutCrimsonPool.AllItemsSet)

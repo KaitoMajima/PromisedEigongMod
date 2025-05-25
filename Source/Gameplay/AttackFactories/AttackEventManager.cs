@@ -40,8 +40,6 @@ public class AttackEventManager
     void HandleAttackChanged (BossStateIdentifier currentState)
     {
         var loadedEigong = wrapper.LoadedEigong;
-        if (wrapper?.LoadedEigong == null)
-            return;
         
         switch (currentState.IdName)
         {
