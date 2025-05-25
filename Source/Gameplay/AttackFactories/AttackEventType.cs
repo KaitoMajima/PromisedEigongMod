@@ -7,5 +7,6 @@ public enum AttackEventType
     JCMirroredAfterJC,
     JCCrimsonOnTeleportOut,
     JCInterruptSlashUp,
-    JCDoubleCrimsonEnder
+    JCDoubleCrimsonEnder,
+    JCCrimsonAboveChargeWaveCombo
 }

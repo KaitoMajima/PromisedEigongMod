@@ -82,7 +82,7 @@ public class AttackEventManager
                     loadedEigong, 
                     judgmentCutSpawner.JudgmentCutCrimsonPart2Pool,
                     AttackEventType.JCCrimsonOnTeleportOut,
-                    SpawningTarget.Player, 
+                    SpawningTarget.Eigong, 
                     new Vector3(-70, 0, 0), 
                     new Vector3(70, 0, 0),
                     1f,
@@ -98,6 +98,18 @@ public class AttackEventManager
                     new Vector3(-20, -20, 0), 
                     new Vector3(20, -20, 0),
                     1.07f,
+                    1f)
+                );
+                break;
+            case ATTACK27_NEW_CHAIN_CHARGE_WAVE when BossPhaseProvider.CurrentPostAnimationPhase is 2:
+                wrapper.StartCoroutine(SpawnAttackWithDelay(
+                    loadedEigong, 
+                    judgmentCutSpawner.JudgmentCutCrimsonPart2Pool,
+                    AttackEventType.JCCrimsonAboveChargeWaveCombo,
+                    SpawningTarget.Eigong, 
+                    new Vector3(0, 120, 0), 
+                    new Vector3(0, 120, 0),
+                    0f,
                     1f)
                 );
                 break;
@@ -163,6 +175,9 @@ public class AttackEventManager
             case AttackEventType.JCDoubleCrimsonEnder:
                 HandleJCDoubleCrimsonLogic(attack, loadedEigong);
                 break;
+            case AttackEventType.JCCrimsonAboveChargeWaveCombo:
+                HandleJCCrimsonAboveChargeWaveComboLogic(attack, loadedEigong);
+                break;
         }
 
         attack.SetActive(false);
@@ -208,15 +223,15 @@ public class AttackEventManager
     void HandleJCTeleportOutLogic (GameObject attack, MonsterBase loadedEigong)
     {
         var randomRotater = attack.GetComponent<RandomRotater>();
-        randomRotater.minRotation = 22;
-        randomRotater.maxRotation = 33;
+        randomRotater.minRotation = loadedEigong.Facing is Facings.Left ? 335 : 25;
+        randomRotater.maxRotation = loadedEigong.Facing is Facings.Left ? 335 : 25;
         randomRotater.RandomRotate();
         
         var rootShadow = attack.GetComponentInChildren<PositionConstraintConsumer>(true);
         rootShadow.SetActive(false);
 
         var chaser = attack.GetComponentInChildren<PlayerPosChaser>(true);
-        chaser.SetActive(false);
+        chaser.enabled = false;
     }
     
     void HandleJCInterruptSlashUpLogic (GameObject attack, MonsterBase loadedEigong)
@@ -239,16 +254,9 @@ public class AttackEventManager
     
     void HandleJCDoubleCrimsonLogic (GameObject attack, MonsterBase loadedEigong)
     {
-        attack.transform.localScale =
-            new Vector3(
-                loadedEigong.Facing is Facings.Left
-                    ? 1
-                    : -1, attack.transform.localScale.y, attack.transform.localScale.z
-            );
-        
         var randomRotater = attack.GetComponent<RandomRotater>();
-        randomRotater.minRotation = 133;
-        randomRotater.maxRotation = 133;
+        randomRotater.minRotation = loadedEigong.Facing is Facings.Left ? 277 : 133;
+        randomRotater.maxRotation = loadedEigong.Facing is Facings.Left ? 277 : 133;
         randomRotater.RandomRotate();
         
         var rootShadow = attack.GetComponentInChildren<PositionConstraintConsumer>(true);
@@ -256,6 +264,27 @@ public class AttackEventManager
 
         var chaser = attack.GetComponentInChildren<PlayerPosChaser>(true);
         chaser.SetActive(false);
+    }
+    
+    void HandleJCCrimsonAboveChargeWaveComboLogic (GameObject attack, MonsterBase loadedEigong)
+    {
+        attack.transform.localScale =
+            new Vector3(
+                loadedEigong.Facing is Facings.Left
+                    ? -1
+                    : 1, attack.transform.localScale.y, attack.transform.localScale.z
+            );
+        
+        var randomRotater = attack.GetComponent<RandomRotater>();
+        randomRotater.minRotation = loadedEigong.Facing is Facings.Left ? 350 : 10;
+        randomRotater.maxRotation = loadedEigong.Facing is Facings.Left ? 350 : 10;
+        randomRotater.RandomRotate();
+        
+        var rootShadow = attack.GetComponentInChildren<PositionConstraintConsumer>(true);
+        rootShadow.SetActive(false);
+
+        var chaser = attack.GetComponentInChildren<PlayerPosChaser>(true);
+        chaser.enabled = false;
     }
 
     public void Dispose ()
