@@ -1,4 +1,5 @@
-﻿using PromisedEigong.ModSystem;
+﻿using PromisedEigong.LevelChangers;
+using PromisedEigong.ModSystem;
 
 namespace PromisedEigong.DamageBoosters;
 
@@ -100,6 +101,9 @@ public class DamageBoostPatches
     static bool EigongBoostFireDamage (ref float damageValue)
     {
         if (TEST_YI_INVINCIBLE)
+            return false;
+
+        if (PlayerWrapper.IsPlayerJustAirborne || PlayerWrapper.IsPlayerJustDashing)
             return false;
         
         Scene activeScene = SceneManager.GetActiveScene();

@@ -54,6 +54,13 @@ public class SystemPatches
         }
     }
     
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(Player), "Awake")]
+    static void AddPlayerComponents (Player __instance)
+    {
+        __instance.AddComp(typeof(PlayerWrapper));
+    }
+    
     [HarmonyPostfix]
     [HarmonyPatch(typeof(PauseUIPanel), "ShowInit")]
     static void CallPauseOpened (PauseUIPanel __instance)
