@@ -1,10 +1,5 @@
-﻿using System;
-using System.Linq;
-using NineSolsAPI;
-using PromisedEigong.Core;
-using PromisedEigong.ModSystem;
+﻿using PromisedEigong.ModSystem;
 using RCGMaker.Core;
-using RCGMaker.Runtime.Sprite;
 using UnityEngine;
 
 namespace PromisedEigong.LevelChangers;
@@ -14,14 +9,6 @@ using static PromisedEigongModGlobalSettings.EigongRefs;
 
 public class JudgmentCutSpawners : MonoBehaviour
 {
-    static readonly string[] judgmentCutRefNames =
-    [
-        JUDGMENT_CUT_PREFAB_HOLDER_NAME, 
-        JUDGMENT_CUT_PART_2_PREFAB_HOLDER_NAME,
-        JUDGMENT_CUT_CRIMSON_PREFAB_HOLDER_NAME, 
-        JUDGMENT_CUT_CRIMSON_PART_2_PREFAB_HOLDER_NAME
-    ];
-
     public DualStatePool<GameObject> JudgmentCutPool => judgmentCutPool;
     public DualStatePool<GameObject> JudgmentCutPart2Pool => judgmentCutPart2Pool;
     public DualStatePool<GameObject> JudgmentCutCrimsonPool => judgmentCutCrimsonPool;

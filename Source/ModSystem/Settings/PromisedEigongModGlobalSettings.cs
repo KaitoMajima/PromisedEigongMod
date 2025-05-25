@@ -285,6 +285,8 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK3_THRUST_DELAY_WEIGHT_PHASE_2 = ATTACK3_THRUST_DELAY + "/phase (1)";
         public const string ATTACK3_THRUST_DELAY_WEIGHT_PHASE_3 = ATTACK3_THRUST_DELAY + "/phase (2)";
         public const string ATTACK4_SLASH_UP = "[4] Slash Up 上撈下打 大反危";
+        public const string ATTACK4_SLASH_UP_WEIGHT_PHASE_1 = ATTACK3_THRUST_DELAY + "/phase (0)";
+        public const string ATTACK4_SLASH_UP_WEIGHT_PHASE_2 = ATTACK3_THRUST_DELAY + "/phase (1)";
         public const string ATTACK5_TELEPORT_TO_BACK = "[5] Teleport to Back";
         public const string ATTACK5_TELEPORT_TO_BACK_WEIGHT = ATTACK5_TELEPORT_TO_BACK + "/weight";
         public const string ATTACK5_TELEPORT_TO_BACK_WEIGHT_PHASE_2 = ATTACK5_TELEPORT_TO_BACK + "/weight (1)";
@@ -412,17 +414,17 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK2_TELEPORT_TO_TOP_SPEED = 1 + 0.55f;
         public const float ATTACK2_TELEPORT_TO_TOP_SPEED_PHASE_3 = 1 + 0.25f;
         public const float ATTACK3_THRUST_DELAY_SPEED = 1 + 0.5f;
-        public const float ATTACK4_SLASH_UP_SPEED = 1 + 0.20f;
+        public const float ATTACK4_SLASH_UP_SPEED = 1 + 0.17f;
         public const float ATTACK5_TELEPORT_TO_BACK_SPEED = 1 + 0.55f;
         public const float ATTACK5_TELEPORT_TO_BACK_SPEED_PHASE_3 = 1 + 1f;
-        public const float ATTACK6_DOUBLE_ATTACK_SPEED = 1 + 0.55f;
+        public const float ATTACK6_DOUBLE_ATTACK_SPEED = 1 + 0.5f;
         public const float ATTACK7_TELEPORT_FORWARD_SPEED = 1 + 0.55f;
         public const float ATTACK7_TELEPORT_FORWARD_SPEED_PHASE_3 = 1 + 1f;
         public const float ATTACK8_LONG_CHARGE_SPEED = 1 + 0.77f;
         public const float ATTACK9_STARTER_SPEED = 1 - 0.11f;
         public const float ATTACK10_FOO_SPEED = 1 + 0.37f;
         public const float ATTACK11_GIANT_CHARGE_WAVE_SPEED = 1 + 0.37f;
-        public const float ATTACK12_SLASH_UP_CRIMSON_SPEED = 1 + 0.20f;
+        public const float ATTACK12_SLASH_UP_CRIMSON_SPEED = 1 + 0.17f;
         public const float ATTACK13_TRIPLE_POKE_SPEED = 1 + 0.27f;
         public const float ATTACK14_CRIMSON_BALL_SPEED = 1 + 0.27f;
         public const float ATTACK15_TURN_AROUND_BRIGHT_EYES_SPEED = 1 + 0.5f;
@@ -438,7 +440,8 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK24_NEW_CHAIN_DOUBLE_ATTACK_SPEED = 1 + 0.55f;
         public const float ATTACK26_TELEPORT_TO_BACK_SPEED = 1f;
         public const float ATTACK27_NEW_CHAIN_CHARGE_WAVE_SKIP = 0.208f;
-        public const float ATTACK32_NEW_CHAIN_TELEPORT_TO_BACK_TO_CS_SKIP = 0.45f;
+        public const float ATTACK32_NEW_CHAIN_TELEPORT_TO_BACK_TO_CS_SKIP = 0.451f;
+        public const float ATTACK33_NEW_CRIMSON_SLAM_SPECIAL_SPEED = 1 + 0.33f;
         public static readonly Vector3 ATTACK33_NEW_CRIMSON_SLAM_OFFSET = new(0, 86, 0);
         public const float JUMP_BACK_SPEED = 1 + 0.55f;
         public const float JUMP_BACK_SPEED_PHASE_3 = 1 + 1f;
@@ -457,8 +460,8 @@ public static class PromisedEigongModGlobalSettings
         public const bool TEST_YI_INVINCIBLE = IS_DEBUG_ACTIVATED && false;
         public const bool IS_PAUSE_MENU_BG_INVISIBLE = IS_DEBUG_ACTIVATED && true;
         
-        public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
-        public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
-        public const float PHASE_3_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
+        public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.05f : 1;
+        public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.05f : 1;
+        public const float PHASE_3_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.5f : 1;
     }
 }

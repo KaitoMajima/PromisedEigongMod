@@ -21,7 +21,7 @@ public class _33SpecialCrimsonSlamPhase3Factory : BaseAttackFactory
         var attack5NextMove = GameObject.Find(ATTACK8_LONG_CHARGE).GetComponent<BossGeneralState>();
         var attack6NextMove = GameObject.Find(ATTACK9_STARTER).GetComponent<BossGeneralState>();
 
-        newAttack.AnimationSpeed = ATTACK17_CRIMSON_SLAM_SPEED;
+        newAttack.AnimationSpeed = ATTACK33_NEW_CRIMSON_SLAM_SPECIAL_SPEED;
         newAttack.StartOffset = ATTACK33_NEW_CRIMSON_SLAM_OFFSET;
         newAttack.PhaseIndexLock = 2;
         

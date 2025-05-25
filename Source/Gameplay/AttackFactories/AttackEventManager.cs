@@ -40,6 +40,8 @@ public class AttackEventManager
     void HandleAttackChanged (BossStateIdentifier currentState)
     {
         var loadedEigong = wrapper.LoadedEigong;
+        if (wrapper?.LoadedEigong == null)
+            return;
         
         switch (currentState.IdName)
         {
@@ -51,7 +53,7 @@ public class AttackEventManager
                     SpawningTarget.Eigong, 
                     new Vector3(10, 0, 0), 
                     new Vector3(-10, 0, 0),
-                    0.7f,
+                    0.75f,
                     0.7f)
                 );
                 break;
@@ -71,8 +73,8 @@ public class AttackEventManager
                     judgmentCutSpawner.JudgmentCutCrimsonPart2Pool,
                     AttackEventType.JCDoubleCrimsonEnder,
                     SpawningTarget.Eigong, 
-                    new Vector3(0, 70, 0), 
-                    new Vector3(-0, 0, 0),
+                    new Vector3(0, 120, 0), 
+                    new Vector3(-0, 120, 0),
                     1.5f,
                     1f)
                 );
@@ -83,8 +85,8 @@ public class AttackEventManager
                     judgmentCutSpawner.JudgmentCutCrimsonPart2Pool,
                     AttackEventType.JCCrimsonOnTeleportOut,
                     SpawningTarget.Player, 
-                    Vector3.zero, 
-                    Vector3.zero,
+                    new Vector3(-70, 0, 0), 
+                    new Vector3(70, 0, 0),
                     1f,
                     1f)
                 );
@@ -247,8 +249,8 @@ public class AttackEventManager
             );
         
         var randomRotater = attack.GetComponent<RandomRotater>();
-        randomRotater.minRotation = 172;
-        randomRotater.maxRotation = 172;
+        randomRotater.minRotation = 133;
+        randomRotater.maxRotation = 133;
         randomRotater.RandomRotate();
         
         var rootShadow = attack.GetComponentInChildren<PositionConstraintConsumer>(true);

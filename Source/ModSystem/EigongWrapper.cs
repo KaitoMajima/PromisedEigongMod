@@ -152,6 +152,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
             new _1SlowStarterWeightChanger(),
             new _2TeleportToTopWeightChanger(),
             new _3ThrustDelayWeightChanger(),
+            new _4SlashUpWeightChanger(),
             new _5TeleportToBackWeightChanger(),
             new _6DoubleAttackWeightChanger(),
             new _7TeleportForwardWeightChanger(),
