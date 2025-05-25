@@ -29,6 +29,7 @@ public class PoolObjectPatches
     public static event Action<SpriteRenderer> OnFoundJudgmentCutEigongBody; 
     public static event Action<SpriteRenderer> OnFoundJudgmentCutEigongHair; 
     public static event Action<SpriteRenderer> OnFoundJudgmentCutEigongTianhuoHair; 
+    public static event Action<SpriteRenderer> OnFoundJudgmentCutEigongSword; 
 
     
     [HarmonyPostfix]
@@ -53,12 +54,13 @@ public class PoolObjectPatches
         InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT, OnFoundJudgmentCutEigongBody, EIGONG_CHARACTER_BODY_NAME);
         InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT, OnFoundJudgmentCutEigongHair, EIGONG_CHARACTER_HAIR_SPRITE_NAME);
         InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT, OnFoundJudgmentCutEigongTianhuoHair, EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE_NAME);
+        InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT, OnFoundJudgmentCutEigongTianhuoHair, EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE_NAME);
+        InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT, OnFoundJudgmentCutEigongSword, EIGONG_CHARACTER_SWORD_SPRITE_NAME);
         InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_PART_2, OnFoundJudgmentCutEigongBody, EIGONG_CHARACTER_BODY_NAME);
         InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_PART_2, OnFoundJudgmentCutEigongHair, EIGONG_CHARACTER_HAIR_SPRITE_NAME);
         InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_PART_2, OnFoundJudgmentCutEigongTianhuoHair, EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE_NAME);
         InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON, OnFoundJudgmentCutEigongBody, EIGONG_CHARACTER_BODY_NAME);
         InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON, OnFoundJudgmentCutEigongHair, EIGONG_CHARACTER_HAIR_SPRITE_NAME);
-        InvokeCallbackForComponents(__instance, PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON, OnFoundJudgmentCutEigongTianhuoHair, EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE_NAME);
     }
     
     [HarmonyPostfix]

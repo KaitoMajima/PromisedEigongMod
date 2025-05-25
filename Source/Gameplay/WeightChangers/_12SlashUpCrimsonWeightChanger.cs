@@ -33,6 +33,7 @@ public class _12SlashUpCrimsonWeightChanger : BaseWeightChanger
         CreateAndAddBossState(ATTACK_PATH + ATTACK18_TELEPORT_TO_BACK_COMBO);
         CreateAndAddBossState(ATTACK_PATH + ATTACK8_LONG_CHARGE);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK19_THRUST_FULL_SCREEN);
         SetWeightRandomness(true);
         ProcessCurrentWeight();
     }

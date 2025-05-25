@@ -30,7 +30,9 @@ public class EffectsManager
         PoolObjectPatches.OnFoundJudgmentCutEigongBody += HandleFoundJudgmentCutBody;
         PoolObjectPatches.OnFoundJudgmentCutEigongHair += HandleFoundJudgmentCutHair;
         PoolObjectPatches.OnFoundJudgmentCutEigongTianhuoHair += HandleFoundJudgmentCutTianhuoHair;
+        PoolObjectPatches.OnFoundJudgmentCutEigongSword += HandleFoundJudgmentCutEigongSword;
     }
+
     void RemoveListeners ()
     {
         PoolObjectPatches.OnFoundTaiDanger -= HandleTaiDangerFound;
@@ -47,6 +49,7 @@ public class EffectsManager
         PoolObjectPatches.OnFoundJudgmentCutEigongBody -= HandleFoundJudgmentCutBody;
         PoolObjectPatches.OnFoundJudgmentCutEigongHair -= HandleFoundJudgmentCutHair;
         PoolObjectPatches.OnFoundJudgmentCutEigongTianhuoHair -= HandleFoundJudgmentCutTianhuoHair;
+        PoolObjectPatches.OnFoundJudgmentCutEigongSword -= HandleFoundJudgmentCutEigongSword;
     }
 
     public void ChangeCharacterEigongColors ()
@@ -327,6 +330,16 @@ public class EffectsManager
             null,
             EIGONG_CRIMSON_CUT_VALUE_BRIGHTNESS,
             isLit: false
+        );
+    }
+    
+    void HandleFoundJudgmentCutEigongSword (SpriteRenderer sprite)
+    {
+        ColorChanger.ChangeColors(
+            sprite.gameObject, 
+            EIGONG_CHARACTER_SWORD_EFFECT_SHIFT, 
+            EIGONG_SWORD_SATURATION,
+            EIGONG_CHARACTER_SWORD_VALUE_BRIGHTNESS
         );
     }
 

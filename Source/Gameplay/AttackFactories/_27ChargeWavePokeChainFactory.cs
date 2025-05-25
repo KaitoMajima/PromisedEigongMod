@@ -52,7 +52,7 @@ public class _27ChargeWavePokeChainFactory : BaseAttackFactory
             new()
             {
                 state = attack4NextMove,
-                weight = 7
+                weight = 4
             }
         };
         

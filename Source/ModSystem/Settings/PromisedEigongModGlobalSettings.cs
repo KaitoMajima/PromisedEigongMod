@@ -54,7 +54,6 @@ public static class PromisedEigongModGlobalSettings
         public const string JUDGMENT_CUT_PART_2_NEW_NAME = "(Spawned) Judgment Cut Part 2";
         public const string JUDGMENT_CUT_CRIMSON_NEW_NAME = "(Spawned) Judgment Cut Crimson";
         public const string JUDGMENT_CUT_CRIMSON_PART_2_NEW_NAME = "(Spawned) Judgment Cut Crimson Part 2";
-
         
         public const string PO_VFX_TAI_DANGER = "Effect_TaiDanger(Clone)";
         public const string PO_VFX_JIECHUAN_FIRE = "Fire_FX_damage_Long jiechuan(Clone)";
@@ -69,7 +68,6 @@ public static class PromisedEigongModGlobalSettings
         public const string PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON_LINE = "Line";
         public const string PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON_SHAPE_1 = "SHape";
         public const string PO_VFX_EIGONG_JUDGMENT_CUT_CRIMSON_SHAPE_2 = "SHape 2";
-        
     }
 
     public static class EigongPreloadRefs
@@ -229,6 +227,7 @@ public static class PromisedEigongModGlobalSettings
         public const string EIGONG_CHARACTER_HAIR_SPRITE_NAME = "YiGong_Hair";
         public const string EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE = EIGONG_CHARACTER_VIEW_PATH + "/Head/Virus (2階段後開)/YiGong_Virus";
         public const string EIGONG_CHARACTER_TIANHUO_HAIR_SPRITE_NAME = "YiGong_Virus";
+        public const string EIGONG_CHARACTER_SWORD_SPRITE_NAME = "Sword Sprite"; 
         public const string EIGONG_TIANHUO_HAIR_GLOW = "Glow";
         public const string EIGONG_CHARACTER_BODY_SHADOW = EIGONG_CHARACTER_BODY + "/Shadow";
         public const string EIGONG_CHARACTER_SWORD = EIGONG_CHARACTER_VIEW_PATH + "/Weapon/Sword/Sword Sprite";
@@ -375,7 +374,7 @@ public static class PromisedEigongModGlobalSettings
     {
         public const int EIGONG_PHASE_1_HEALTH_VALUE = 5555;
         public const int EIGONG_PHASE_2_HEALTH_VALUE = 7777;
-        public const int EIGONG_PHASE_3_HEALTH_VALUE = 3333;
+        public const int EIGONG_PHASE_3_HEALTH_VALUE = 4444;
     }
 
     public static class EigongDamageReduction
@@ -458,8 +457,8 @@ public static class PromisedEigongModGlobalSettings
         public const bool TEST_YI_INVINCIBLE = IS_DEBUG_ACTIVATED && false;
         public const bool IS_PAUSE_MENU_BG_INVISIBLE = IS_DEBUG_ACTIVATED && true;
         
-        public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.05f : 1;
-        public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.05f : 1;
+        public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
+        public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
         public const float PHASE_3_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
     }
 }

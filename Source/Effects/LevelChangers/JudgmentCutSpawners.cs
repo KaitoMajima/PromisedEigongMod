@@ -22,7 +22,11 @@ public class JudgmentCutSpawners : MonoBehaviour
         JUDGMENT_CUT_CRIMSON_PART_2_PREFAB_HOLDER_NAME
     ];
 
+    public DualStatePool<GameObject> JudgmentCutPool => judgmentCutPool;
     public DualStatePool<GameObject> JudgmentCutPart2Pool => judgmentCutPart2Pool;
+    public DualStatePool<GameObject> JudgmentCutCrimsonPool => judgmentCutCrimsonPool;
+    public DualStatePool<GameObject> JudgmentCutCrimsonPart2Pool => judgmentCutCrimsonPart2Pool;
+
     
     FxPlayer[] initialFxPlayers;
         
@@ -89,9 +93,6 @@ public class JudgmentCutSpawners : MonoBehaviour
             obj.AddComponent<CustomPoolObject>();
             obj.SetActive(false);
             pool.InsertAsInactive(obj);
-            var rootShadow = obj.GetComponentInChildren<PositionConstraintConsumer>(true);
-            if (rootShadow != null)
-                rootShadow.SetActive(false);
         }
         return pool;
     }
