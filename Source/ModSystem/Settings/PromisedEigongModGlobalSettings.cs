@@ -117,6 +117,8 @@ public static class PromisedEigongModGlobalSettings
             BIG_BAD_OBJ + "/BIGBAD_ANIM/MORPH_GUYS";
         public const string BIG_BAD_STATIC_OBJS =   
             BIG_BAD_OBJ + "/BIGBAD_ANIM/STATIC_OBJS";
+        public const string BIG_BAD_MEATBALL =
+            BIG_BAD_OBJ + "/HighEndFX(Disable for Switch)/P_MeatBall";
         public const string BIG_BAD_MEATBALL_2 =
             BIG_BAD_OBJ + "/HighEndFX(Disable for Switch)/P_MeatBall (2)";
 
@@ -344,6 +346,8 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK31_NEW_CHAIN_REVERSE_TURN_AROUND = "[31] Reverse Turn Around (Poke Chain 2.5)";
         public const string ATTACK32_NEW_TELEPORT_TO_BACK_TO_CS = "[32] Teleport To Back To Crimson Slam";
         public const string ATTACK33_NEW_CRIMSON_SLAM_SPECIAL = "[33] Special Crimson Slam";
+        public const string ATTACK34_NEW_SAFEGUARD_TELEPORT_TO_TOP = "[34] Safeguard Teleport To Top Phase 3";
+        public const string ATTACK35_NEW_SAFEGUARD_JUMP_BACK = "[35] Safeguard Jump Back Phase 3";
         public const string POSTURE_BREAK = "PostureBreak";
         public const string POSTURE_BREAK_PHASE_1 = POSTURE_BREAK + "/phase0";
         public const string POSTURE_BREAK_PHASE_2 = POSTURE_BREAK + "/phase1";
@@ -458,7 +462,7 @@ public static class PromisedEigongModGlobalSettings
         public const bool IS_DEBUG_ACTIVATED = true;
         public const bool EIGONG_STATE_LOG = IS_DEBUG_ACTIVATED && false;
         public const bool TEST_YI_INVINCIBLE = IS_DEBUG_ACTIVATED && false;
-        public const bool IS_PAUSE_MENU_BG_INVISIBLE = IS_DEBUG_ACTIVATED && true;
+        public const bool IS_PAUSE_MENU_BG_INVISIBLE = !IS_DEBUG_ACTIVATED || true;
         
         public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.05f : 1;
         public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.05f : 1;

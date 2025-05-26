@@ -8,5 +8,6 @@ public enum AttackEventType
     JCCrimsonOnTeleportOut,
     JCInterruptSlashUp,
     JCDoubleCrimsonEnder,
-    JCCrimsonAboveChargeWaveCombo
+    JCCrimsonAboveChargeWaveCombo,
+    JCOnPhaseStart
 }

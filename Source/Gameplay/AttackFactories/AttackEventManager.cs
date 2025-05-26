@@ -1,4 +1,5 @@
-﻿using System;
+﻿//TODO: Refactor this whole class eventually
+using System;
 using System.Collections;
 using NineSolsAPI;
 using PromisedEigong.LevelChangers;
@@ -30,11 +31,13 @@ public class AttackEventManager
     void AddListeners ()
     {
         GeneralGameplayPatches.OnAttackStartCalled += HandleAttackChanged;
+        BossPhaseProvider.OnPhaseChangePreAnimation += HandlePhaseChanged;
     }
 
     void RemoveListeners ()
     {
         GeneralGameplayPatches.OnAttackStartCalled -= HandleAttackChanged;
+        BossPhaseProvider.OnPhaseChangePreAnimation -= HandlePhaseChanged;
     }
 
     void HandleAttackChanged (BossStateIdentifier currentState)
@@ -82,10 +85,10 @@ public class AttackEventManager
                     loadedEigong, 
                     judgmentCutSpawner.JudgmentCutCrimsonPart2Pool,
                     AttackEventType.JCCrimsonOnTeleportOut,
-                    SpawningTarget.Eigong, 
-                    new Vector3(-70, 0, 0), 
-                    new Vector3(70, 0, 0),
-                    1f,
+                    SpawningTarget.Player, 
+                    new Vector3(0, 0, 0), 
+                    new Vector3(0, 0, 0),
+                    0.9f,
                     1f)
                 );
                 break;
@@ -97,7 +100,7 @@ public class AttackEventManager
                     SpawningTarget.Player, 
                     new Vector3(-20, -20, 0), 
                     new Vector3(20, -20, 0),
-                    1.07f,
+                    1.11f,
                     1f)
                 );
                 break;
@@ -107,13 +110,35 @@ public class AttackEventManager
                     judgmentCutSpawner.JudgmentCutCrimsonPart2Pool,
                     AttackEventType.JCCrimsonAboveChargeWaveCombo,
                     SpawningTarget.Eigong, 
-                    new Vector3(0, 120, 0), 
-                    new Vector3(0, 120, 0),
+                    new Vector3(177, 120, 0), 
+                    new Vector3(-177, 120, 0),
                     0f,
                     1f)
                 );
                 break;
         }
+    }
+    
+    void HandlePhaseChanged (int phase)
+    {
+        var loadedEigong = wrapper.LoadedEigong;
+
+        switch (phase)
+        {
+            case 1:
+                wrapper.StartCoroutine(SpawnAttackWithDelay(
+                    loadedEigong, 
+                    judgmentCutSpawner.JudgmentCutPart2Pool,
+                    AttackEventType.JCOnPhaseStart,
+                    SpawningTarget.Eigong, 
+                    new Vector3(0, 0, 0), 
+                    new Vector3(-0, 0, 0),
+                    5.97f,
+                    1f)
+                );
+                break;  
+        }
+        throw new NotImplementedException();
     }
 
     IEnumerator SpawnAttackWithDelay (
@@ -161,7 +186,7 @@ public class AttackEventManager
         switch (attackEventType)
         {
             case AttackEventType.JCAfterDoubleAttack:
-                HandleJCDoubleAttackLogic(attack);
+                HandleJCDoubleAttackLogic(attack, Player.i);
                 break;
             case AttackEventType.JCMirroredAfterJC:
                 HandleMirroredJCAttackLogic(attack, loadedEigong);
@@ -178,6 +203,9 @@ public class AttackEventManager
             case AttackEventType.JCCrimsonAboveChargeWaveCombo:
                 HandleJCCrimsonAboveChargeWaveComboLogic(attack, loadedEigong);
                 break;
+            case AttackEventType.JCOnPhaseStart:
+                HandleJCOnPhaseStartLogic(attack, loadedEigong, Player.i);
+                break;
         }
 
         attack.SetActive(false);
@@ -187,12 +215,18 @@ public class AttackEventManager
         attack.SetActive(false);
         attackPool.InsertAsInactive(attack);
     }
-
-    void HandleJCDoubleAttackLogic (GameObject attack)
+    
+    void HandleJCDoubleAttackLogic (GameObject attack, Player player)
     {
+        attack.transform.localScale =
+            new Vector3(
+                player.Facing is Facings.Left
+                    ? 1
+                    : -1, attack.transform.localScale.y, attack.transform.localScale.z
+            );
         var randomRotater = attack.GetComponent<RandomRotater>();
-        randomRotater.minRotation = 172;
-        randomRotater.maxRotation = 188;
+        randomRotater.minRotation = 0;
+        randomRotater.maxRotation = 20;
         randomRotater.RandomRotate();
         
         var rootShadow = attack.GetComponentInChildren<PositionConstraintConsumer>(true);
@@ -222,16 +256,23 @@ public class AttackEventManager
     
     void HandleJCTeleportOutLogic (GameObject attack, MonsterBase loadedEigong)
     {
+        attack.transform.localScale =
+            new Vector3(
+                loadedEigong.Facing is Facings.Left
+                    ? -1
+                    : 1, attack.transform.localScale.y, attack.transform.localScale.z
+            );
+        
         var randomRotater = attack.GetComponent<RandomRotater>();
-        randomRotater.minRotation = loadedEigong.Facing is Facings.Left ? 335 : 25;
-        randomRotater.maxRotation = loadedEigong.Facing is Facings.Left ? 335 : 25;
+        randomRotater.minRotation = loadedEigong.Facing is Facings.Left ? 260 : 280;
+        randomRotater.maxRotation = loadedEigong.Facing is Facings.Left ? 260 : 280;
         randomRotater.RandomRotate();
         
         var rootShadow = attack.GetComponentInChildren<PositionConstraintConsumer>(true);
         rootShadow.SetActive(false);
-
+        
         var chaser = attack.GetComponentInChildren<PlayerPosChaser>(true);
-        chaser.enabled = false;
+        chaser.enabled = true;
     }
     
     void HandleJCInterruptSlashUpLogic (GameObject attack, MonsterBase loadedEigong)
@@ -261,9 +302,6 @@ public class AttackEventManager
         
         var rootShadow = attack.GetComponentInChildren<PositionConstraintConsumer>(true);
         rootShadow.SetActive(false);
-
-        var chaser = attack.GetComponentInChildren<PlayerPosChaser>(true);
-        chaser.SetActive(false);
     }
     
     void HandleJCCrimsonAboveChargeWaveComboLogic (GameObject attack, MonsterBase loadedEigong)
@@ -286,6 +324,27 @@ public class AttackEventManager
         var chaser = attack.GetComponentInChildren<PlayerPosChaser>(true);
         chaser.enabled = false;
     }
+    
+    void HandleJCOnPhaseStartLogic (GameObject attack, MonsterBase loadedEigong, Player player)
+    {
+        attack.transform.localScale =
+            new Vector3(
+                player.Facing is Facings.Left
+                    ? 1
+                    : -1, attack.transform.localScale.y, attack.transform.localScale.z
+            );
+        var randomRotater = attack.GetComponent<RandomRotater>();
+        randomRotater.minRotation = 0;
+        randomRotater.maxRotation = 0;
+        randomRotater.RandomRotate();
+        
+        var rootShadow = attack.GetComponentInChildren<PositionConstraintConsumer>(true);
+        rootShadow.SetActive(false);
+
+        var chaser = attack.GetComponentInChildren<PlayerPosChaser>(true);
+        chaser.SetActive(false);
+    }
+
 
     public void Dispose ()
     {

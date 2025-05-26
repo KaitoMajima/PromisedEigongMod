@@ -30,6 +30,7 @@ public class BigBadHandler : MonoBehaviour
         DuplicateNeckvines();
         DeactivateStaticObjs();
         ModifyMeatball();
+        DisableMeatball();
         IncreaseSizeAndKillAnimator();
         waitedForFirstUpdateFrame = true;
     }
@@ -83,6 +84,12 @@ public class BigBadHandler : MonoBehaviour
     {
         var staticObjs = GameObject.Find(BIG_BAD_STATIC_OBJS);
         staticObjs.SetActive(false);
+    }
+
+    void DisableMeatball ()
+    {
+        var meatball = GameObject.Find(BIG_BAD_MEATBALL);
+        meatball.SetActive(false);
     }
     
     void ModifyMeatball ()
