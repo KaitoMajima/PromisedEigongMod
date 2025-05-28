@@ -46,7 +46,7 @@ public class AttackEventManager
         
         switch (currentState.IdName)
         {
-            case ATTACK6_DOUBLE_ATTACK when BossPhaseProvider.CurrentPostAnimationPhase is 2:
+            case ATTACK38_SPECIAL_DOUBLE_ATTACK when BossPhaseProvider.CurrentPostAnimationPhase is 2:
                 wrapper.StartCoroutine(SpawnAttackWithDelay(
                     loadedEigong, 
                     judgmentCutSpawner.JudgmentCutPart2Pool,
@@ -138,7 +138,6 @@ public class AttackEventManager
                 );
                 break;  
         }
-        throw new NotImplementedException();
     }
 
     IEnumerator SpawnAttackWithDelay (

@@ -12,8 +12,9 @@ public class _X2JumpBackWeightChanger : BaseWeightChanger
     {
         ClearBossStates();
         SetStateWeight(STATES_PATH + JUMP_BACK_WEIGHT_PHASE_3);
+        SetAssociatedBossState(STATES_PATH + JUMP_BACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK1_SLOW_STARTER);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
+        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK38_SPECIAL_DOUBLE_ATTACK);
         ProcessCurrentWeight();
     }
 }

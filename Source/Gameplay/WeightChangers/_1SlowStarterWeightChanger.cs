@@ -43,8 +43,8 @@ public class _1SlowStarterWeightChanger : BaseWeightChanger
         );
         CreateAndAddModifiedBossState(STATES_PATH + ATTACK30_NEW_CHAIN_JUMP_BACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK18_TELEPORT_TO_BACK_COMBO);
+        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK38_SPECIAL_DOUBLE_ATTACK);
+        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK40_TELEPORT_TO_BACK_COMBO_PHASE_3);
         ProcessCurrentWeight();
     }
 }

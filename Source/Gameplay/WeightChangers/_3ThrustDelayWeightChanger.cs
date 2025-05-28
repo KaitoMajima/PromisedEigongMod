@@ -26,8 +26,7 @@ public class _3ThrustDelayWeightChanger : BaseWeightChanger
         SetAssociatedBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK15_TURN_AROUND_BRIGHT_EYES);
         CreateAndAddBossState(ATTACK_PATH + ATTACK18_TELEPORT_TO_BACK_COMBO);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK4_SLASH_UP);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK12_SLASH_UP_CRIMSON);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
         CreateAndAddBossState(STATES_PATH + JUMP_BACK);
         ProcessCurrentWeight();
     }
@@ -39,10 +38,9 @@ public class _3ThrustDelayWeightChanger : BaseWeightChanger
         SetStateWeight(ATTACK_PATH + ATTACK3_THRUST_DELAY_WEIGHT_PHASE_3);
         SetAssociatedBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK15_TURN_AROUND_BRIGHT_EYES);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK18_TELEPORT_TO_BACK_COMBO);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK4_SLASH_UP);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK12_SLASH_UP_CRIMSON);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
+        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK40_TELEPORT_TO_BACK_COMBO_PHASE_3);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
+        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK38_SPECIAL_DOUBLE_ATTACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK19_THRUST_FULL_SCREEN);
         CreateAndAddBossState(STATES_PATH + JUMP_BACK);
         ProcessCurrentWeight();

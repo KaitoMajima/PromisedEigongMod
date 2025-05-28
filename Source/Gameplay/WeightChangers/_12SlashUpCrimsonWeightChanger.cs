@@ -6,7 +6,6 @@ public class _12SlashUpCrimsonWeightChanger : BaseWeightChanger
     public override void ChangeAttackWeight ()
     {
         ChangePhase2();
-        
     }
 
     void ChangePhase2 ()
@@ -18,22 +17,6 @@ public class _12SlashUpCrimsonWeightChanger : BaseWeightChanger
         CreateAndAddBossState(ATTACK_PATH + ATTACK18_TELEPORT_TO_BACK_COMBO);
         CreateAndAddBossState(ATTACK_PATH + ATTACK8_LONG_CHARGE);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
-        SetWeightRandomness(true);
-        ProcessCurrentWeight();
-    }
-    
-    void ChangePhase3 ()
-    {
-        ClearBossStates();
-        WeightReplaceMode = WeightReplaceMode.Add;
-        SetStateWeight(ATTACK_PATH + ATTACK12_SLASH_UP_CRIMSON_WEIGHT_PHASE_3);
-        SetAssociatedBossState(ATTACK_PATH + ATTACK12_SLASH_UP_CRIMSON);
-        CreateAndAddBossState(STATES_PATH + JUMP_BACK);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK18_TELEPORT_TO_BACK_COMBO);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK8_LONG_CHARGE);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK19_THRUST_FULL_SCREEN);
         SetWeightRandomness(true);
         ProcessCurrentWeight();
     }

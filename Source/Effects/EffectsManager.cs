@@ -253,7 +253,13 @@ public class EffectsManager
     
     void HandleJieChuanFireImageFound (SpriteRenderer sprite)
     {
-        RGBColorSetter.SetRGB(sprite.gameObject, FIRE_LIGHT_COLOR);
+        ColorChanger.ChangeColors(
+            sprite.gameObject, 
+            EIGONG_CHARACTER_SWORD_EFFECT_SHIFT,
+            FIRE_VFX_SATURATION,
+            FIRE_VFX_VALUE_BRIGHTNESS,
+            isLit: false
+        );
     }
 
     void HandleFooExplosionSpriteFound (SpriteRenderer sprite)

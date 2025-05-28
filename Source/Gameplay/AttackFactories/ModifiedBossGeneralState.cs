@@ -79,7 +79,12 @@ public class ModifiedBossGeneralState : MonoBehaviour
     public void ApplyMoveModification ()
     {
         if (StartOffset != Vector3.zero)
-            BaseState.monster.transform.localPosition += StartOffset;
+        {
+            if (BaseState.monster.Facing is Facings.Right)
+                BaseState.monster.transform.localPosition += StartOffset;
+            else
+                BaseState.monster.transform.localPosition += new Vector3(StartOffset.x * -1, StartOffset.y, StartOffset.z);
+        }
         
         BaseState.forcePlayAnimAtNormalizeTime = ForcePlayAnimAtNormalizeTime;
         BaseState.AnimationSpeed = AnimationSpeed;

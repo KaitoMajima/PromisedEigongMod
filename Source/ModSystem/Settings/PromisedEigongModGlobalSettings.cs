@@ -42,6 +42,8 @@ public static class PromisedEigongModGlobalSettings
         public const string EIGONG_CUTSCENE_TITLE_NAME_PATH =
             "GameLevel/Room/Prefab/EventBinder/General Boss Fight FSM Object Variant/FSM Animator/[CutScene] 一進/Boss Intro Acting 字卡/View/Boss_YiGung/Subtitle_Text/Title";
 
+        public const string CUTSCENE_SCENE_CHANGER_PATH =
+            "GameLevel/Room/Prefab/EventBinder/General Boss Fight FSM Object Variant/FSM Animator/[CutScene] 易公死亡/演出結束換景 (要自己拉)";
         public const string JUDGMENT_CUT_PREFAB_HOLDER_NAME = "FX Full Screen Slash ";
         
         public const string JUDGMENT_CUT_PART_2_PREFAB_HOLDER_NAME = "白一閃FX Full Screen";
@@ -155,7 +157,7 @@ public static class PromisedEigongModGlobalSettings
 
         public const float GIANT_BALL_SPEED_1 = 25;
         public const float CORE_VINES_SPEED_1 = 9f;
-        public const float GIANT_BALL_SPEED_2 = 0.25f;
+        public const float GIANT_BALL_SPEED_2 = 0.1f;
         public const float BIG_BAD_HEAD_SPEED = 3.5f;
         public const float BEAUTIFUL_FX_CAMERA_WEIGHT = 0.77f;
     }
@@ -183,6 +185,8 @@ public static class PromisedEigongModGlobalSettings
         public static readonly Vector3 SLOW_STARTER_SIMPLE_DANGER_VFX_OFFSET_R_3 = new(74.7f, 73, 0);
         public static readonly Vector3 SIMPLE_DANGER_VFX_SCALE = new(0.72f, 0.42f, 0.42f);
         public const float SIMPLE_DANGER_VFX_VALUE_BRIGHTNESS = 9;
+        public const float FIRE_VFX_VALUE_BRIGHTNESS = 4.1f;
+        public const float FIRE_VFX_SATURATION = 1.1f;
         public const float SIMPLE_DANGER_VFX_SATURATION = 0.42f;
         public const float SIMPLE_DANGER_VFX_HIDE_TIME = 0.18f;
         public const float EIGONG_TRANSFORM_PHASE_3_DELAY = 6.648f;
@@ -246,8 +250,8 @@ public static class PromisedEigongModGlobalSettings
         public const string EIGONG_CUTSCENE_BODY = EIGONG_CUTSCENE_VIEW_PATH + "/Body";
         public const string EIGONG_CUTSCENE_SWORD = EIGONG_CUTSCENE_VIEW_PATH + "/Weapon/Sword/Sword Sprite";
 
-        public static readonly Color FIRE_COLOR = new(0f, 0.77f, 0.99f);
-        public static readonly Color FIRE_LIGHT_COLOR = new(0f, 0.77f, 0.99f);
+        public static readonly Color FIRE_COLOR = new(0.26f, 0.77f, 0.99f);
+        public static readonly Color FIRE_LIGHT_COLOR = new(0f, 0.1f, 0.99f);
         public static readonly Color EIGONG_TRANSFORM_OVERLAY_COLOR_UPPER = new(0.9f, 0, 0.1f, 1);
         public static readonly Color EIGONG_TRANSFORM_OVERLAY_COLOR_LOWER = new(1, 0, 0, 1);
         public static readonly Color EIGONG_TRANSFORM_SHADOW_OVERLAY_COLOR_UPPER = new(0.1f, 0, 0.01f, 1);
@@ -343,11 +347,15 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK28_NEW_CHAIN_TELEPORT_TO_BACK_COMBO = "[28] Teleport To Back Combo (Poke Chain 7)";
         public const string ATTACK29_NEW_CHAIN_TELEPORT_TO_BACK_FIRST = "[29] Teleport To Back (Poke Chain 3.5)";
         public const string ATTACK30_NEW_CHAIN_JUMP_BACK = "[30] Jump Back (Poke Chain 0)";
-        public const string ATTACK31_NEW_CHAIN_REVERSE_TURN_AROUND = "[31] Reverse Turn Around (Poke Chain 2.5)";
         public const string ATTACK32_NEW_TELEPORT_TO_BACK_TO_CS = "[32] Teleport To Back To Crimson Slam";
         public const string ATTACK33_NEW_CRIMSON_SLAM_SPECIAL = "[33] Special Crimson Slam";
         public const string ATTACK34_NEW_SAFEGUARD_TELEPORT_TO_TOP = "[34] Safeguard Teleport To Top Phase 3";
         public const string ATTACK35_NEW_SAFEGUARD_JUMP_BACK = "[35] Safeguard Jump Back Phase 3";
+        public const string ATTACK36_NEW_CHAIN_ALTERNATE_SLASH_UP_CRIMSON = "[36] Alternate Slash Up Crimson (Poke Chain 4)";
+        public const string ATTACK37_NEW_CHAIN_ALTERNATE_JUMP_BACK = "[37] Alternate Jump Back (Poke Chain 3.5)";
+        public const string ATTACK38_SPECIAL_DOUBLE_ATTACK = "[38] Special Double Attack";
+        public const string ATTACK39_SPECIAL_DOUBLE_ATTACK_JUMP_BACK = "[39] Special Jump Back into Double Attack";
+        public const string ATTACK40_TELEPORT_TO_BACK_COMBO_PHASE_3 = "[40] Teleport To Back Combo Phase 3";
         public const string POSTURE_BREAK = "PostureBreak";
         public const string POSTURE_BREAK_PHASE_1 = POSTURE_BREAK + "/phase0";
         public const string POSTURE_BREAK_PHASE_2 = POSTURE_BREAK + "/phase1";
@@ -380,7 +388,7 @@ public static class PromisedEigongModGlobalSettings
     {
         public const int EIGONG_PHASE_1_HEALTH_VALUE = 5555;
         public const int EIGONG_PHASE_2_HEALTH_VALUE = 7777;
-        public const int EIGONG_PHASE_3_HEALTH_VALUE = 4444;
+        public const int EIGONG_PHASE_3_HEALTH_VALUE = 6666;
     }
 
     public static class EigongDamageReduction
@@ -426,14 +434,14 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK7_TELEPORT_FORWARD_SPEED_PHASE_3 = 1 + 1f;
         public const float ATTACK8_LONG_CHARGE_SPEED = 1 + 0.77f;
         public const float ATTACK9_STARTER_SPEED = 1 - 0.11f;
-        public const float ATTACK10_FOO_SPEED = 1 + 0.37f;
+        public const float ATTACK10_FOO_SPEED = 1 + 0.33f;
         public const float ATTACK11_GIANT_CHARGE_WAVE_SPEED = 1 + 0.37f;
         public const float ATTACK12_SLASH_UP_CRIMSON_SPEED = 1 + 0.17f;
         public const float ATTACK13_TRIPLE_POKE_SPEED = 1 + 0.27f;
         public const float ATTACK14_CRIMSON_BALL_SPEED = 1 + 0.27f;
-        public const float ATTACK15_TURN_AROUND_BRIGHT_EYES_SPEED = 1 + 0.5f;
+        public const float ATTACK15_TURN_AROUND_BRIGHT_EYES_SPEED = 1 + 0.4f;
         public const float ATTACK16_QUICK_FOO_SPEED = 1 + 0.17f;
-        public const float ATTACK17_CRIMSON_SLAM_SPEED = 1 + 0.37f;
+        public const float ATTACK17_CRIMSON_SLAM_SPEED = 1 + 0.34f;
         public const float ATTACK18_TELEPORT_TO_BACK_COMBO_SPEED = 1 + 0.55f;
         public const float ATTACK18_TELEPORT_TO_BACK_COMBO_SPEED_PHASE_3 = 1 + 1f;
         public const float ATTACK21_NEW_INSTANT_CRIMSON_BALL_SPEED = 1 + 0.27f;
@@ -442,6 +450,7 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK23_NEW_CHAIN_TRIPLE_POKE_SPEED = 1 + 0.27f;
         public const float ATTACK23_NEW_CHAIN_TRIPLE_POKE_SKIP = 0.12f;
         public const float ATTACK24_NEW_CHAIN_DOUBLE_ATTACK_SPEED = 1 + 0.55f;
+        public const float ATTACK25_SLASH_UP_CRIMSON_SPEED = 1 + 0.34f;
         public const float ATTACK26_TELEPORT_TO_BACK_SPEED = 1f;
         public const float ATTACK27_NEW_CHAIN_CHARGE_WAVE_SKIP = 0.208f;
         public const float ATTACK32_NEW_CHAIN_TELEPORT_TO_BACK_TO_CS_SKIP = 0.451f;
@@ -464,8 +473,8 @@ public static class PromisedEigongModGlobalSettings
         public const bool TEST_YI_INVINCIBLE = IS_DEBUG_ACTIVATED && false;
         public const bool IS_PAUSE_MENU_BG_INVISIBLE = !IS_DEBUG_ACTIVATED || true;
         
-        public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.05f : 1;
-        public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.05f : 1;
-        public const float PHASE_3_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.5f : 1;
+        public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
+        public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
+        public const float PHASE_3_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
     }
 }

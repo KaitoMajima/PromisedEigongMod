@@ -29,7 +29,7 @@ public class _8LongChargeWeightChanger : BaseWeightChanger
         SetAssociatedBossState(ATTACK_PATH + ATTACK8_LONG_CHARGE);
         CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK5_TELEPORT_TO_BACK);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK18_TELEPORT_TO_BACK_COMBO);
+        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK40_TELEPORT_TO_BACK_COMBO_PHASE_3);
         CreateAndAddBossState(ATTACK_PATH + ATTACK11_GIANT_CHARGE_WAVE);
         SetWeightRandomness(true);
         ProcessCurrentWeight();

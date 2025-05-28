@@ -16,6 +16,7 @@ public class _24DoubleAttackPokeChainFactory : BaseAttackFactory
         var newAttack = SetupAttack(bossGeneralState);
         var attack1NextMove = GameObject.Find(ATTACK3_THRUST_DELAY).GetComponent<BossGeneralState>();
         var attack2NextMove = GameObject.Find(ATTACK5_TELEPORT_TO_BACK).GetComponent<BossGeneralState>();
+        var attack3NextMove = GameObject.Find(JUMP_BACK).GetComponent<BossGeneralState>();
         newAttack.AnimationSpeed = ATTACK24_NEW_CHAIN_DOUBLE_ATTACK_SPEED;
         newAttack.ShouldClearGroupingNodes = true;
         newAttack.IsFromAChain = true;
@@ -39,6 +40,11 @@ public class _24DoubleAttackPokeChainFactory : BaseAttackFactory
             new()
             {
                 state = attack2NextMove,
+                weight = 7
+            },
+            new()
+            {
+                state = attack3NextMove,
                 weight = 7
             }
         };

@@ -13,6 +13,7 @@ public class _X3AttackParryingWeightChanger : BaseWeightChanger
     void ChangePhase1 ()
     {
         SetStateWeight(STATES_PATH + ATTACK_PARRYING_WEIGHT);
+        SetAssociatedBossState(STATES_PATH + ATTACK_PARRYING);
         CreateAndAddBossState(ATTACK_PATH + ATTACK5_TELEPORT_TO_BACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK7_TELEPORT_FORWARD);
         CreateAndAddBossState(STATES_PATH + JUMP_BACK);
@@ -24,6 +25,7 @@ public class _X3AttackParryingWeightChanger : BaseWeightChanger
     {
         ClearBossStates();
         SetStateWeight(STATES_PATH + ATTACK_PARRYING_WEIGHT_PHASE_2);
+        SetAssociatedBossState(STATES_PATH + ATTACK_PARRYING);
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
         CreateAndAddBossState(ATTACK_PATH + ATTACK8_LONG_CHARGE);
         CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
@@ -35,9 +37,9 @@ public class _X3AttackParryingWeightChanger : BaseWeightChanger
     {
         ClearBossStates();
         SetStateWeight(STATES_PATH + ATTACK_PARRYING_WEIGHT_PHASE_3);
+        SetAssociatedBossState(STATES_PATH + ATTACK_PARRYING);
         CreateAndAddBossState(ATTACK_PATH + ATTACK8_LONG_CHARGE);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK13_TRIPLE_POKE);
+        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK38_SPECIAL_DOUBLE_ATTACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);

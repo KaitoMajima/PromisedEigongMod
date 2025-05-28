@@ -16,7 +16,7 @@ public class _29TeleportToBackFirstPokeChainFactory : BaseAttackFactory
         var newAttack = SetupAttack(bossGeneralState);
         var attack1NextMove = GameObject.Find(ATTACK16_QUICK_FOO).GetComponent<BossGeneralState>();
         var attack2NextMove = GameObject.Find(ATTACK12_SLASH_UP_CRIMSON).GetComponent<BossGeneralState>();
-        newAttack.AnimationSpeed = ATTACK24_NEW_CHAIN_DOUBLE_ATTACK_SPEED;
+        newAttack.AnimationSpeed = ATTACK5_TELEPORT_TO_BACK_SPEED;
         newAttack.IsFromAChain = true;
         
         var phase1Weights = new List<AttackWeight>

@@ -35,14 +35,17 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     
     PromisedEigongMain MainInstance => PromisedEigongMain.Instance;
     EffectsManager EffectsManager => MainInstance.EffectsManager;
+    WhiteScreen WhiteScreen => MainInstance.WhiteScreen;
     
     bool hasInitialized;
     bool hasFinishedInitializing;
+    bool hasEigongDied;
     AmbienceSource phasesOst;
     BossPhaseProvider bossPhaseProvider;
     GameplayEffectManager gameplayEffectManager;
     SpeedChangerManager speedChangerManager;
     AttackEventManager attackEventManager;
+    SceneConnectionPoint cutsceneConnectionPoint;
    
     void Awake ()
     {
@@ -108,6 +111,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
 
     void HandleEigongInitialization ()
     {
+        cutsceneConnectionPoint = GameObject.Find(CUTSCENE_SCENE_CHANGER_PATH).GetComponent<SceneConnectionPoint>();
         ChangeCharacterEigongColors();
         ChangeOST();
         ChangeEigongHealth();
@@ -122,8 +126,10 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         attackEventManager.Setup(this, FindObjectOfType<JudgmentCutSpawners>());
         gameplayEffectManager.Initialize();
         attackEventManager.Initialize();
+        LoadedEigong.postureSystem.OnPostureEmpty.AddListener(HandlePostureEmpty);
     }
     
+
     void ChangeOST ()
     {
         phasesOst = GameMusicPlayer.GetAmbienceSourceAtPath(BOSS_AMBIENCE_SOURCE_PATH);
@@ -178,20 +184,25 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     void CreateNewAttacks (BossGeneralState[] allBossStates)
     {
         BaseAttackFactory[] factories = [
-            new _21InstantCrimsonBallFactory(), 
-            new _30JumpBackPokeChainFactory(),
+            new _21QuickCrimsonBallFactory(), 
             new _22SlowStarterPokeChainFactory(),
             new _23TriplePokeChainFactory(),
             new _24DoubleAttackPokeChainFactory(),
-            new _29TeleportToBackFirstPokeChainFactory(),
             new _25SlashUpCrimsonPokeChainFactory(),
             new _26TeleportToBackSecondPokeChainFactory(),
             new _27ChargeWavePokeChainFactory(),
             new _28TeleportToBackComboPokeChainFactory(),
+            new _29TeleportToBackFirstPokeChainFactory(),
+            new _30JumpBackPokeChainFactory(),
             new _32TeleportToBackSpecialCrimsonSlamPhase3Factory(),
             new _33SpecialCrimsonSlamPhase3Factory(),
             new _34TeleportToTopSafeguardPhase3Factory(),
-            new _35JumpBackSafeguardPhase3Factory()
+            new _35JumpBackSafeguardPhase3Factory(),
+            new _36AlternateSlashUpCrimsonPokeChainFactory(),
+            new _37AlternateSlashUpCrimsonPokeChainFactory(),
+            new _38SpecialDoubleAttackFactory(),
+            new _39SpecialDAJumpBackPhase3Factory(),
+            new _40TeleportToBackComboPhase3Changer()
         ];
         
         foreach (var factory in factories)
@@ -278,6 +289,18 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         LogStates(currentState);
     }
     
+    void HandlePostureEmpty ()
+    {
+        if (hasEigongDied)
+            return;
+
+        if (BossPhaseProvider.CurrentPostAnimationPhase == 2)
+        {
+            MainInstance.StartCoroutine(BlinkWhiteScreenOnEigongDeath(!ApplicationCore.IsInBossMemoryMode));
+            hasEigongDied = true;   
+        }
+    }
+    
     void HandlePhaseChangePreAnimation (int phase)
     {
         if (phase == 1)
@@ -298,6 +321,23 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     {
         yield return new WaitForSeconds(EIGONG_TRANSFORM_PHASE_3_DELAY);
         OnEigongTransformed?.Invoke();
+    }
+
+    IEnumerator BlinkWhiteScreenOnEigongDeath (bool transitionIntoCutscene)
+    {
+        float timer = 2.5f;
+        WhiteScreen.Show();
+        yield return new WaitForSeconds(WhiteScreen.ShowDuration);
+        if (transitionIntoCutscene)
+            cutsceneConnectionPoint.ForceChangeScene();
+        
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        
+        WhiteScreen.Hide();
     }
     
     void LogStates (BossStateIdentifier currentState)

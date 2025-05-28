@@ -49,6 +49,7 @@ public class _9StarterWeightChanger : BaseWeightChanger
         CreateAndAddBossState(ATTACK_PATH + ATTACK16_QUICK_FOO);
         CreateAndAddBossState(ATTACK_PATH + ATTACK4_SLASH_UP);
         CreateAndAddBossState(ATTACK_PATH + ATTACK12_SLASH_UP_CRIMSON);
+        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK38_SPECIAL_DOUBLE_ATTACK);
         ProcessCurrentWeight();
     }
 }

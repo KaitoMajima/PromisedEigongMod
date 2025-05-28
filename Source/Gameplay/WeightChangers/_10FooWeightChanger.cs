@@ -45,7 +45,7 @@ public class _10FooWeightChanger : BaseWeightChanger
         CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK4_SLASH_UP);
         CreateAndAddBossState(ATTACK_PATH + ATTACK12_SLASH_UP_CRIMSON);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
+        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK38_SPECIAL_DOUBLE_ATTACK);
         CreateAndAddBossState(STATES_PATH + JUMP_BACK);
         ProcessCurrentWeight();
     }
