@@ -40,7 +40,6 @@ public class _3ThrustDelayWeightChanger : BaseWeightChanger
         CreateAndAddBossState(ATTACK_PATH + ATTACK15_TURN_AROUND_BRIGHT_EYES);
         CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK40_TELEPORT_TO_BACK_COMBO_PHASE_3);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
-        CreateAndAddModifiedBossState(ATTACK_PATH + ATTACK38_SPECIAL_DOUBLE_ATTACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK19_THRUST_FULL_SCREEN);
         CreateAndAddBossState(STATES_PATH + JUMP_BACK);
         ProcessCurrentWeight();

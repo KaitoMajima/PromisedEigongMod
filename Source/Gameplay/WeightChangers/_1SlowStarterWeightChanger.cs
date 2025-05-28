@@ -17,6 +17,7 @@ public class _1SlowStarterWeightChanger : BaseWeightChanger
         CreateAndAddModifiedBossState(STATES_PATH + ATTACK30_NEW_CHAIN_JUMP_BACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
         CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
         ProcessCurrentWeight();
     }
     
