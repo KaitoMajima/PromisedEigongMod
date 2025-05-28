@@ -15,7 +15,7 @@ public class _39SpecialDAJumpBackPhase3Factory : BaseAttackFactory
     {
         var newAttack = SetupAttack(bossGeneralState, true);
         var attack1NextMove = GameObject.Find(ATTACK6_DOUBLE_ATTACK).GetComponent<BossGeneralState>();
-        newAttack.AnimationSpeed = JUMP_BACK_SPEED;
+        newAttack.AnimationSpeed = 1;
         newAttack.PhaseIndexLock = 2;
         
         var phase3Weights = new List<AttackWeight>

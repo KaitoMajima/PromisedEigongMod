@@ -17,8 +17,10 @@ public class _X1PostureBreakWeightChanger : BaseWeightChanger
         CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
         CreateAndAddBossState(STATES_PATH + JUMP_BACK);
-        CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
+        CreateAndAddBossState(STATES_PATH + JUMP_BACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
         ProcessCurrentWeight();
     }
     
@@ -29,9 +31,11 @@ public class _X1PostureBreakWeightChanger : BaseWeightChanger
         SetAssociatedBossState(STATES_PATH + POSTURE_BREAK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK3_THRUST_DELAY);
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
         CreateAndAddBossState(ATTACK_PATH + ATTACK4_SLASH_UP);
         CreateAndAddBossState(ATTACK_PATH + ATTACK12_SLASH_UP_CRIMSON);
         CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
+        CreateAndAddBossState(STATES_PATH + JUMP_BACK);
         CreateAndAddBossState(STATES_PATH + JUMP_BACK);
         ProcessCurrentWeight();
     }

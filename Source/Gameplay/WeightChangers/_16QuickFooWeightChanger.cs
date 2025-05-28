@@ -19,6 +19,7 @@ public class _16QuickFooWeightChanger : BaseWeightChanger
         CreateAndAddBossState(STATES_PATH + JUMP_BACK);
         CreateAndAddBossState(ATTACK_PATH + ATTACK1_SLOW_STARTER);
         CreateAndAddBossState(ATTACK_PATH + ATTACK6_DOUBLE_ATTACK);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
         ProcessCurrentWeight();
     }
     

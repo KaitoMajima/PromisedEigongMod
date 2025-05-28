@@ -300,6 +300,7 @@ public static class PromisedEigongModGlobalSettings
         public const string ATTACK6_DOUBLE_ATTACK = "[6] Double Attack";
         public const string ATTACK6_DOUBLE_ATTACK_WEIGHT = ATTACK6_DOUBLE_ATTACK + "/weight";
         public const string ATTACK7_TELEPORT_FORWARD = "[7] Teleport Dash Forward";
+        public const string ATTACK7_TELEPORT_FORWARD_WEIGHT= ATTACK7_TELEPORT_FORWARD + "/weight";
         public const string ATTACK7_TELEPORT_FORWARD_WEIGHT_PHASE_2 = ATTACK7_TELEPORT_FORWARD + "/weight (1)";
         public const string ATTACK7_TELEPORT_FORWARD_WEIGHT_PHASE_3 = ATTACK7_TELEPORT_FORWARD + "/weight (2)";
         public const string ATTACK8_LONG_CHARGE = "[8] Long Charge (2階才有";
@@ -386,8 +387,8 @@ public static class PromisedEigongModGlobalSettings
     
     public static class EigongHealth
     {
-        public const int EIGONG_PHASE_1_HEALTH_VALUE = 5555;
-        public const int EIGONG_PHASE_2_HEALTH_VALUE = 7777;
+        public const int EIGONG_PHASE_1_HEALTH_VALUE = 4444;
+        public const int EIGONG_PHASE_2_HEALTH_VALUE = 5555;
         public const int EIGONG_PHASE_3_HEALTH_VALUE = 6666;
     }
 
@@ -396,7 +397,7 @@ public static class PromisedEigongModGlobalSettings
         public const float EIGONG_SPIKED_ARROW_DR = 0.9f;
         public const float EIGONG_NORMAL_AND_ELECTRIC_ARROW_DR = 0.77f;
         public const float EIGONG_CHARGE_ATTACK_DR = 0.66f;
-        public const float EIGONG_THIRD_ATTACK_JADE_DR = 0.33f;
+        public const float EIGONG_THIRD_ATTACK_JADE_DR = 0.22f;
         public const float EIGONG_POSTURE_DAMAGE_DR = 0.22f;
         public const float EIGONG_TAICHI_KICK_DAMAGE_DR = 0.5f;
         public const float EIGONG_COUNTER_JADE_DAMAGE_DR = 0.33f;
@@ -439,7 +440,7 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK12_SLASH_UP_CRIMSON_SPEED = 1 + 0.17f;
         public const float ATTACK13_TRIPLE_POKE_SPEED = 1 + 0.27f;
         public const float ATTACK14_CRIMSON_BALL_SPEED = 1 + 0.27f;
-        public const float ATTACK15_TURN_AROUND_BRIGHT_EYES_SPEED = 1 + 0.4f;
+        public const float ATTACK15_TURN_AROUND_BRIGHT_EYES_SPEED = 1 + 0.33f;
         public const float ATTACK16_QUICK_FOO_SPEED = 1 + 0.17f;
         public const float ATTACK17_CRIMSON_SLAM_SPEED = 1 + 0.34f;
         public const float ATTACK18_TELEPORT_TO_BACK_COMBO_SPEED = 1 + 0.55f;
@@ -449,7 +450,7 @@ public static class PromisedEigongModGlobalSettings
         public const float ATTACK22_NEW_CHAIN_SLOW_STARTER_SPEED = 1;
         public const float ATTACK23_NEW_CHAIN_TRIPLE_POKE_SPEED = 1 + 0.27f;
         public const float ATTACK23_NEW_CHAIN_TRIPLE_POKE_SKIP = 0.12f;
-        public const float ATTACK24_NEW_CHAIN_DOUBLE_ATTACK_SPEED = 1 + 0.55f;
+        public const float ATTACK24_NEW_CHAIN_DOUBLE_ATTACK_SPEED = 1 + 0.5f;
         public const float ATTACK25_SLASH_UP_CRIMSON_SPEED = 1 + 0.34f;
         public const float ATTACK26_TELEPORT_TO_BACK_SPEED = 1f;
         public const float ATTACK27_NEW_CHAIN_CHARGE_WAVE_SKIP = 0.208f;
@@ -473,8 +474,8 @@ public static class PromisedEigongModGlobalSettings
         public const bool TEST_YI_INVINCIBLE = IS_DEBUG_ACTIVATED && false;
         public const bool IS_PAUSE_MENU_BG_INVISIBLE = !IS_DEBUG_ACTIVATED || true;
         
-        public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
-        public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
+        public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.01f : 1;
+        public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.01f : 1;
         public const float PHASE_3_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
     }
 }

@@ -16,6 +16,8 @@ public class _13TriplePokeWeightChanger : BaseWeightChanger
         SetStateWeight(ATTACK_PATH + ATTACK13_TRIPLE_POKE_WEIGHT);
         SetAssociatedBossState(ATTACK_PATH + ATTACK13_TRIPLE_POKE);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
+        CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
+        CreateAndAddBossState(STATES_PATH + JUMP_BACK);
         ProcessCurrentWeight();
     }
     
@@ -26,6 +28,7 @@ public class _13TriplePokeWeightChanger : BaseWeightChanger
         SetAssociatedBossState(ATTACK_PATH + ATTACK13_TRIPLE_POKE);
         CreateAndAddBossState(ATTACK_PATH + ATTACK9_STARTER);
         CreateAndAddBossState(ATTACK_PATH + ATTACK2_TELEPORT_TO_TOP);
+        CreateAndAddBossState(STATES_PATH + JUMP_BACK);
         ProcessCurrentWeight();
     }
 }
