@@ -10,6 +10,15 @@
 serve as a new challenge for people who love the challenge that Eigong brings.
 ---
 
+# Installation
+
+You can download this mod via Thunderstore's Mod Manager and run it automatically by selecting this mod, or you can install it manually by:
+
+1. Downloading the last version of BepInEx in https://github.com/BepInEx/BepInEx/releases
+2. Extracting BepInEx to the root of your game's folder, the one which NineSols.exe is in.
+3. Starting the game to generate the cache needed for the mod.
+4. Placing both NineSolsAPI and Promised Eigong dll files in the BepInEx/plugins folder, the same folder you have extracted in the root of your game.
+
 ## Features
 
 - Recoloring of Eigong's clothes, swords, effects and more.
