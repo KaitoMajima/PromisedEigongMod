@@ -379,10 +379,51 @@ public static class PromisedEigongModGlobalSettings
     
     public static class EigongTitle
     {
-        public const string EIGONG_PREFIX = "Promised ";
         public const string EIGONG_TITLE = "Promised Eigong";
         public const string EIGONG_PHASE_3_TITLE = "Tianhuo Avatar";
         public const string ROOT_PROGRESS_TEXT = "Root Decryption Progress: <color=#FF0000>ERROR ERROR 99% ERROR ERROR</color>";
+
+        public static string GetEigongName (string languageCode, string originalName)
+        {
+            switch (languageCode)
+            {
+                case "en-US": return $"Promised {originalName}";
+                case "es-ES" or "es-US": return $"{originalName} Prometida";
+                case "de-DE": return $"Versprochene {originalName}";
+                case "fr-FR": return $"{originalName} Promise";
+                case "it": return $"{originalName} Promessa";
+                case "ja": return $"約束された{originalName}";
+                case "ko": return $"약속된{originalName}";
+                case "pl": return $"Obiecany {originalName}";
+                case "pt-BR": return $"{originalName} Prometida";
+                case "ru": return $"Обещанный {originalName}";
+                case "uk": return $"Обіцяний {originalName}";
+                case "zh-CN": return $"约定之{originalName}"; 
+                case "zh-TW": return $"約定之{originalName}";
+                default: return $"Promised {originalName}";
+            }
+        }
+        
+        public static string GetTianhuoAvatarName (string languageCode)
+        {
+            switch (languageCode)
+            {
+                case "en-US": return "Tianhuo Avatar";
+                case "es-ES" or "es-US": return "Avatar de Tianhuo";
+                case "de-DE": return "Tianhuo-Avatar";
+                case "fr-FR": return "Avatar de Tianhuo";
+                case "it": return "Avatar di Tianhuo";
+                case "ja": return "天禍の化身";
+                case "ko": return "천화 화신";
+                case "pl": return "Awatar Tianhuo";
+                case "pt-BR": return "Avatar do Tianhuo";
+                case "ru": return "Аватар Тяньхо";
+                case "uk": return "Аватар Тяньхо";
+                case "zh-CN": return "天禍化身"; 
+                case "zh-TW": return "天禍化身";
+                default: return $"Tianhuo Avatar";
+            }
+        }
     }
     
     public static class EigongHealth
@@ -476,6 +517,6 @@ public static class PromisedEigongModGlobalSettings
         
         public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.01f : 1;
         public const float PHASE_2_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.01f : 1;
-        public const float PHASE_3_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 1f : 1;
+        public const float PHASE_3_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.01f : 1;
     }
 }

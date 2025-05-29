@@ -9,6 +9,7 @@ public class MainHealthChanger
 
     public void ChangeBaseHealthStat (MonsterBase monsterTarget, float healthValue)
     {
+        monsterTarget.monsterStat.BossMemoryHealthScale = 1;
         HealthFieldRef.Invoke(monsterTarget.monsterStat) = healthValue;
     }
 

@@ -1,4 +1,6 @@
-﻿namespace PromisedEigong.LevelChangers;
+﻿using I2.Loc;
+
+namespace PromisedEigong.LevelChangers;
 #nullable disable
 
 using TMPro;
@@ -44,7 +46,7 @@ public class TitleChanger : MonoBehaviour
             var title = GameObject.Find(EIGONG_TITLE_NAME_PATH);
             var titleComp = title.GetComponent<RubyTextMeshProUGUI>();
             
-            titleComp.text = EIGONG_PHASE_3_TITLE;
+            titleComp.text = GetTianhuoAvatarName(LocalizationManager.CurrentLanguageCode);
         }
     }
 

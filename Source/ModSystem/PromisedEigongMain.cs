@@ -80,7 +80,7 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
     void ApplyConfig ()
     {
         isUsingHotReload = Config.Bind("Debug", "IsUsingHotReload", false, "Only Enable this to true if you're developing this mod with Hot Reload.");
-        isLvl0Challenge = Config.Bind("Debug", "LVL0Challenge", false, "Any Eigong");
+        isLvl0Challenge = Config.Bind("Debug", "LVL0Challenge", false, "(STILL WIP) For now, all this does is make the fire damage more forgiving. Makes lvl 0 challenges a little more bearable.");
         if (isUsingHotReload.Value)
             HandleTitleScreenMenuLoaded();
     }

@@ -12,8 +12,10 @@ public class LocalizationPatches
     [HarmonyPatch(typeof(LocalizationManager), "GetTranslation")]
     static void ChangeEigongName (string Term, ref string __result)
     {
-        if (Term == EIGONG_TITLE_LOC)
-            __result = EIGONG_PREFIX + __result;
+        if (Term != EIGONG_TITLE_LOC)
+            return;
+
+        __result = GetEigongName(LocalizationManager.CurrentLanguageCode, __result);
     }
 
     [HarmonyPostfix]
