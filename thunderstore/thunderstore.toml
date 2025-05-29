@@ -2,11 +2,11 @@
 schemaVersion = "0.0.1"
 
 [package]
-namespace = "yournamespace"
-name = "YourModName"
-versionNumber = "0.1.0"
-description = "your mod description"
-websiteUrl = "link to the git repo"
+namespace = "PromisedEigong"
+name = "KaitoMajima"
+versionNumber = "1.0.0"
+description = "A retelling of Eigong's fight at the height of her determination and abilities in her quest to reach immortality."
+websiteUrl = "https://github.com/KaitoMajima/PromisedEigongMod"
 containsNsfwContent = false
 
 [package.dependencies]
