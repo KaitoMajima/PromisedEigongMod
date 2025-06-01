@@ -27,6 +27,7 @@ You can download this mod via Thunderstore's Mod Manager and run it automaticall
 - Fixes a bug in the original game's code that did not properly set attack weights when the boss is interrupted when performing a certain attack.
 - Eigong can no longer be stunned by strong attacks such as the Cloud Piercer Arrows and Talismans.
 - Added name translations for every supported language.
+- Unique golden title above Eigong's name for those attempting Promised Eigong using a Lvl 0 save.
 - Promised Eigong has a new and unique transformation in Phase 3.
 
 ### Root Pinnacle Domain
