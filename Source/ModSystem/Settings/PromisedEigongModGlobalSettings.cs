@@ -426,6 +426,11 @@ public static class PromisedEigongModGlobalSettings
                 default: return $"Tianhuo Avatar";
             }
         }
+
+        public const string LVL_O_CHALLENGE_TEXT = "Lvl 0 Challenge";
+        public const float LVL_0_CHALLENGE_FONT_SIZE = 20;
+        public static readonly Color LVL_O_CHALLENGE_TEXT_COLOR = new(0.53f, 0.39f, 0.33f);
+        public static readonly Vector3 LVL_0_CHALLENGE_LOCAL_POS = new(2, 153, 0);
     }
     
     public static class EigongHealth
