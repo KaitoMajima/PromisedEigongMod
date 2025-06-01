@@ -128,7 +128,6 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         attackEventManager.Initialize();
         LoadedEigong.postureSystem.OnPostureEmpty.AddListener(HandlePostureEmpty);
     }
-    
 
     void ChangeOST ()
     {
@@ -305,8 +304,8 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     {
         if (phase == 1)
         {
-            GameMusicPlayer.ChangeMusic(this, phasesOst, PHASE3_OST, 0);
             ChangeAttackSpeedsPhase3();
+            StartCoroutine(LoopPhase3Music());
             StartCoroutine(WaitForEigongTransformation());
         }
         OnCurrentEigongPhaseChangedPreAnimation?.Invoke(phase);
@@ -340,6 +339,18 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         WhiteScreen.Hide();
     }
     
+    IEnumerator LoopPhase3Music ()
+    {
+        while (true)
+        {
+            ToastManager.Toast("Changing");
+            GameMusicPlayer.ChangeMusic(this, phasesOst, "", 0);
+            yield return null;
+            GameMusicPlayer.ChangeMusic(this, phasesOst, PHASE3_OST, 0);
+            yield return new WaitForSeconds(PHASE3_LOOP_DELAY);
+        }
+    }
+    
     void LogStates (BossStateIdentifier currentState)
     {
         if (EIGONG_STATE_LOG)
@@ -352,5 +363,6 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
         gameplayEffectManager?.Dispose();
         bossPhaseProvider?.Dispose();
         attackEventManager?.Dispose();
+        StopAllCoroutines();
     }
 }

@@ -19,7 +19,10 @@ public class DamageBoostPatches
     static bool EigongBoostDamage (PlayerHealth __instance, ref DamageDealer damageDealer)
     {
         if (TEST_YI_INVINCIBLE)
-            return false;
+        {
+            BoostAttack(damageDealer, 0);
+            return true;
+        }
         
         if (damageDealer.Owner == null)
             return true;
@@ -61,7 +64,10 @@ public class DamageBoostPatches
     static void RevertBoostedDamage (PlayerHealth __instance, ref DamageDealer damageDealer)
     {
         if (TEST_YI_INVINCIBLE)
+        {
+            BoostAttack(damageDealer, 0, revert: true);
             return;
+        }
         
         if (damageDealer.Owner == null)
             return;
@@ -121,7 +127,10 @@ public class DamageBoostPatches
     static bool EigongBoostRecoverableDamage (PlayerHealth __instance, ref float damage)
     {
         if (TEST_YI_INVINCIBLE)
-            return false;
+        {
+            BoostRecoverableDamage(ref damage, 0);
+            return true;
+        }
         
         Scene activeScene = SceneManager.GetActiveScene();
         

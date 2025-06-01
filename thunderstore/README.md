@@ -29,7 +29,6 @@ You can download this mod via Thunderstore's Mod Manager and run it automaticall
 - Added name translations for every supported language.
 - Promised Eigong has a new and unique transformation in Phase 3.
 
-
 ### Root Pinnacle Domain
 
 - Fire Damage Increased by 333% to the player (Except if Lvl 0 Challenge Mode is on, which in turn it decreases by 90% instead).
@@ -49,6 +48,7 @@ You can download this mod via Thunderstore's Mod Manager and run it automaticall
 - 77% Damage Reduction against Cloud Piercer Arrows.
 - 66% Damage Reduction against Charged Attacks.
 - 33% Damage Reduction against any Internal Damage.
+- 50% Additional Damage Reduction against Tai-Chi Kicks and Skull Kicks
 - 33% Additional Damage Reduction against Unbound Counters if Divine Jade is equipped.
 - 22% Damage Reduction against the last hit of the Triple Slash attack if Qi Blade Jade is equipped.
 
@@ -73,7 +73,14 @@ You can download this mod via Thunderstore's Mod Manager and run it automaticall
 - Teleport To Top can now transition into Crimson Slam.
 - All teleports are double as fast (With the exception of Teleport To Top).
 - Eigong's combo is extended once more.
+- 777% Speed Increase to Eigong's Stun Animation after Tai-Chi kicked
+- 777% Speed Increase to Eigong's Stun Animation after Unbound Countered
 
 # BGM
 The theme for Phase 1 and 2 is now replaced by Yi's theme.
 The theme for Phase 3 is now replaced by the Nine Sols main theme.
+
+# Config Settings
+- **LVL0Challenge** : (STILL WIP) For now, all this does is make the fire damage more forgiving. Makes lvl 0 challenges a little more bearable. Full lvl 0 support coming soon.
+- **AutoSkipHub** : Auto skip New Kunlun Control Hub if you're playing an Eigong save outside of MoB.
+- **IsUsingHotReload** : Do not turn this on unless you are developing on this mod.

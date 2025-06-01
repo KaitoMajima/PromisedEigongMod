@@ -166,6 +166,7 @@ public static class PromisedEigongModGlobalSettings
     {
         public const string PHASE1_2_OST = "BGM_Boss_A11_P3";
         public const string PHASE3_OST = "BGM_EndCredit_NineSols";
+        public const float PHASE3_LOOP_DELAY = 249;
     }
     
     public static class EigongVFX
@@ -211,6 +212,7 @@ public static class PromisedEigongModGlobalSettings
 
         public const float BAR_WIDTH = 89;
         public static readonly Color BAR_COLOR = new(1, 0.3f, 0.3f);
+        public static readonly Vector3 SKIP_POSITION = new(2695, -3968, 0.1f);
     }
 
     public static class EigongColors
@@ -396,8 +398,8 @@ public static class PromisedEigongModGlobalSettings
                 case "ko": return $"약속된{originalName}";
                 case "pl": return $"Obiecany {originalName}";
                 case "pt-BR": return $"{originalName} Prometida";
-                case "ru": return $"Обещанный {originalName}";
-                case "uk": return $"Обіцяний {originalName}";
+                case "ru": return $"Будущий {originalName}";
+                case "uk": return $"Майбутній {originalName}";
                 case "zh-CN": return $"约定之{originalName}"; 
                 case "zh-TW": return $"約定之{originalName}";
                 default: return $"Promised {originalName}";
@@ -510,9 +512,9 @@ public static class PromisedEigongModGlobalSettings
     
     public static class EigongDebug
     {
-        public const bool IS_DEBUG_ACTIVATED = false;
+        public const bool IS_DEBUG_ACTIVATED = true;
         public const bool EIGONG_STATE_LOG = IS_DEBUG_ACTIVATED && false;
-        public const bool TEST_YI_INVINCIBLE = IS_DEBUG_ACTIVATED && false;
+        public const bool TEST_YI_INVINCIBLE = IS_DEBUG_ACTIVATED && true;
         public const bool IS_PAUSE_MENU_BG_INVISIBLE = !IS_DEBUG_ACTIVATED || true;
         
         public const float PHASE_1_HEALTH_MULTIPLIER = IS_DEBUG_ACTIVATED ? 0.01f : 1;

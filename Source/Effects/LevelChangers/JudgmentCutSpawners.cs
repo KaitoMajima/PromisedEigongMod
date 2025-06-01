@@ -1,4 +1,5 @@
-﻿using PromisedEigong.ModSystem;
+﻿using NineSolsAPI;
+using PromisedEigong.ModSystem;
 using RCGMaker.Core;
 using UnityEngine;
 
