@@ -4,7 +4,7 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "KaitoMajima"
 name = "PromisedEigong"
-versionNumber = "1.0.0"
+versionNumber = "1.0.1"
 description = "A retelling of Eigong's fight at the height of her determination and abilities in her quest to reach immortality."
 websiteUrl = "https://github.com/KaitoMajima/PromisedEigongMod"
 containsNsfwContent = false

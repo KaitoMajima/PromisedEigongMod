@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using NineSolsAPI;
+﻿using System.Collections;
 using PromisedEigong.ModSystem;
 
 namespace PromisedEigong.LevelChangers;

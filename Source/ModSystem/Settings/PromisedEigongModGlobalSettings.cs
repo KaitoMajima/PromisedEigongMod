@@ -512,7 +512,7 @@ public static class PromisedEigongModGlobalSettings
     
     public static class EigongDebug
     {
-        public const bool IS_DEBUG_ACTIVATED = true;
+        public const bool IS_DEBUG_ACTIVATED = false;
         public const bool EIGONG_STATE_LOG = IS_DEBUG_ACTIVATED && false;
         public const bool TEST_YI_INVINCIBLE = IS_DEBUG_ACTIVATED && true;
         public const bool IS_PAUSE_MENU_BG_INVISIBLE = !IS_DEBUG_ACTIVATED || true;

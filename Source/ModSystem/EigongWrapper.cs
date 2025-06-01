@@ -343,7 +343,6 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
     {
         while (true)
         {
-            ToastManager.Toast("Changing");
             GameMusicPlayer.ChangeMusic(this, phasesOst, "", 0);
             yield return null;
             GameMusicPlayer.ChangeMusic(this, phasesOst, PHASE3_OST, 0);
