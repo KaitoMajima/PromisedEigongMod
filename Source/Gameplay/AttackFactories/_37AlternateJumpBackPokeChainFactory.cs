@@ -6,7 +6,7 @@ namespace PromisedEigong.Gameplay.AttackFactories;
 using static PromisedEigongModGlobalSettings.EigongAttacks;
 using static PromisedEigongModGlobalSettings.EigongSpeed;
 
-public class _37AlternateSlashUpCrimsonPokeChainFactory : BaseAttackFactory
+public class _37AlternateJumpBackPokeChainFactory : BaseAttackFactory
 {
     public override string AttackToBeCopied => JUMP_BACK;
     public override string AttackToBeCreated => ATTACK37_NEW_CHAIN_ALTERNATE_JUMP_BACK;
