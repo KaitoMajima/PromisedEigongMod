@@ -1,3 +1,8 @@
+## 1.1.0
+- New Challenge: Shuffler - When turned on, Promised Eigong's transitions after attacks are shuffled, preventing AI manipulation tactics and enforcing adaptation skills.
+- New Graphics Settings: High Contrast - When turned on, Eigong will have darker colors in Phase 3, making it easier to tell her from the background.
+- New Graphics Settings: General Graphics Settings - This settings controls the graphics quality for better performance depending on your device.
+
 ## 1.0.2
 - Fixed attack scaling in MoB. Scaling was affecting the talisman, which in turn was one-shotting at full health in phase 1 - This was not intended.
 - Fixed inconsistent crimson slam speeds after Cross Up in phases 1 and 2.

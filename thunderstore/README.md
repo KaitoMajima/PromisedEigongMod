@@ -82,6 +82,14 @@ The theme for Phase 1 and 2 is now replaced by Yi's theme.
 The theme for Phase 3 is now replaced by the Nine Sols main theme.
 
 # Config Settings
+## Challenge
 - **LVL0Challenge** : (STILL WIP) For now, all this does is make the fire damage more forgiving. Makes lvl 0 challenges a little more bearable. Full lvl 0 support coming soon.
+- **ShufflerChallenge** : Shuffles every attack transition as an added challenge to prevent AI manipulation.
+
+## Debug
 - **AutoSkipHub** : Auto skip New Kunlun Control Hub if you're playing an Eigong save outside of MoB.
 - **IsUsingHotReload** : Do not turn this on unless you are developing on this mod.
+
+## Graphics
+- **High Contrast Eigong**: If you're having trouble with Eigong's visibility in Phase 3, toggle this ON and she should have more contrast with the background.
+- **General Mod Graphics**: Change here the settings of the mod's graphics if you're having performance issues.

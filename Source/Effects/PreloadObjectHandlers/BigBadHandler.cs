@@ -65,7 +65,8 @@ public class BigBadHandler : MonoBehaviour
                 minTolerance = 0.1f;
                 break;
             default:
-                throw new ArgumentOutOfRangeException();
+                minTolerance = 0.001f;
+                break;
         }
         
         if (direction.sqrMagnitude < minTolerance)
