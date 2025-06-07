@@ -23,6 +23,8 @@ public class GeneralGameplayPatches
     
     static BossStateIdentifier previousState;
     static BossStateIdentifier currentState;
+
+    static System.Random systemRandom;
     
     [HarmonyPrefix]
     [HarmonyPatch(typeof(BossGeneralState), "OnStateEnter")]
@@ -84,8 +86,8 @@ public class GeneralGameplayPatches
         LinkNextMoveStateWeight currentLinkMoveSet =
             __instance.linkNextMoveStateWeights[__instance.monster.PhaseIndex];
 
-        var systemRandomTest = new System.Random();
-        List<AttackWeight> newStateWeights = currentLinkMoveSet.stateWeightList.OrderBy(_ => systemRandomTest.NextDouble()).ToList();
+        systemRandom ??= new System.Random();
+        List<AttackWeight> newStateWeights = currentLinkMoveSet.stateWeightList.OrderBy(_ => systemRandom.NextDouble()).ToList();
         currentLinkMoveSet.stateWeightList = newStateWeights;
         return true;
     }
