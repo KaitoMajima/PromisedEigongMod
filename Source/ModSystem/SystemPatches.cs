@@ -1,4 +1,5 @@
 ﻿namespace PromisedEigong.ModSystem;
+#nullable disable
 
 using System;
 using HarmonyLib;
@@ -9,9 +10,9 @@ using static PromisedEigongModGlobalSettings.EigongRefs;
 [HarmonyPatch]
 public class SystemPatches
 {
-    public static event Action<PauseUIPanel>? OnPauseOpened;
-    public static event Action? OnTitleScreenMenuLoaded;
-    public static event Action? OnTitleScreenMenuUnloaded;
+    public static event Action<PauseUIPanel> OnPauseOpened;
+    public static event Action OnTitleScreenMenuLoaded;
+    public static event Action OnTitleScreenMenuUnloaded;
     
     [HarmonyPrefix]
     [HarmonyPatch(typeof(StartMenuLogic), "Awake")]

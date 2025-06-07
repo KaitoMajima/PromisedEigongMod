@@ -1,4 +1,6 @@
-﻿namespace PromisedEigong.ModSystem;
+﻿using PromisedEigong.Effects.GameplayEffects;
+
+namespace PromisedEigong.ModSystem;
 #nullable disable
 
 using System;
@@ -35,6 +37,8 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
     public static ConfigEntry<bool> isLvl0Challenge;
     public static ConfigEntry<bool> shufflerChallenge;
     public static ConfigEntry<bool> shouldSkipHub;
+    public static ConfigEntry<bool> highContrastEigong;
+    public static ConfigEntry<GraphicsSettingsType> graphicsSettings;
 
     ConfigEntry<bool> isUsingHotReload;
     bool canPreload = true;
@@ -80,10 +84,14 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
     
     void ApplyConfig ()
     {
-        isLvl0Challenge = Config.Bind("Debug", "LVL0Challenge", false,
+        isLvl0Challenge = Config.Bind("Challenge", "LVL0Challenge", false,
             "(STILL WIP) For now, all this does is make the fire damage more forgiving. Makes lvl 0 challenges a little more bearable.");
-        shufflerChallenge = Config.Bind("Debug", "ShufflerChallenge", true,
+        shufflerChallenge = Config.Bind("Challenge", "ShufflerChallenge", true,
             "Shuffles every attack transition as an added challenge to prevent AI manipulation.");
+        highContrastEigong = Config.Bind("Graphics", "High Contrast Eigong", false,
+            "If you're having trouble with Eigong's visibility in Phase 3, toggle this ON and she should have more contrast with the background.");
+        graphicsSettings = Config.Bind("Graphics", "General Mod Graphics", GraphicsSettingsType.High,
+            "Change here the settings of the mod's graphics if you're having performance issues.");
         shouldSkipHub = Config.Bind("Debug", "AutoSkipHub", false,
             "Auto skip New Kunlun Control Hub if you're playing an Eigong save outside of MoB.");
         isUsingHotReload = Config.Bind("Debug", "IsUsingHotReload", false,

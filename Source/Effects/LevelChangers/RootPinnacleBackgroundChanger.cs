@@ -1,4 +1,6 @@
-﻿namespace PromisedEigong.LevelChangers;
+﻿using PromisedEigong.Effects.GameplayEffects;
+
+namespace PromisedEigong.LevelChangers;
 #nullable disable
 
 using System.Collections;
@@ -11,6 +13,8 @@ using static PromisedEigongModGlobalSettings.EigongRefs;
 
 public class RootPinnacleBackgroundChanger : MonoBehaviour
 {
+    GraphicsSettingsType graphicsSettings => PromisedEigongMain.graphicsSettings.Value;
+    
     PromisedEigongMain MainInstance => PromisedEigongMain.Instance;
     WhiteScreen WhiteScreen => MainInstance.WhiteScreen;
     GameObject PreloadedBigBad => MainInstance.PreloadingManager.BigBad;
@@ -153,7 +157,10 @@ public class RootPinnacleBackgroundChanger : MonoBehaviour
         infectedVineParent.SetActive(false);
         infectedVineParentFinal.SetActive(true);
         instantiatedBigBad.SetActive(true);
-        instantiatedBeautifulFXCamera.SetActive(true);
+        
+        if (graphicsSettings is not GraphicsSettingsType.Low)
+            instantiatedBeautifulFXCamera.SetActive(true);
+        
         redFade.GetComponent<SpriteRenderer>().color = RED_COLOR_PHASE_3;
         blueFade.GetComponent<SpriteRenderer>().color = BLUE_COLOR_PHASE_3;
         blueFade.GetComponent<BlendModeEffect>().BlendMode = BLUE_BLEND_MODE_PHASE_2;

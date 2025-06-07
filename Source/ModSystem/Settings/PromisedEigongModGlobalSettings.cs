@@ -111,7 +111,7 @@ public static class PromisedEigongModGlobalSettings
         public const string BIG_BAD_OBJ =
             "GameLevel/Room/3DBG Master 背景/3D 大背景/3DBG ScaleCompress/Scene BG_YiGungBoosFight/BIGBAD(Clone)(Clone)";
         
-        public const string BIG_BAD_ANIMATION =
+        public const string BIG_BAD_ANIMATOR =
             BIG_BAD_OBJ + "/BIGBAD_ANIM";
         public const string BIG_BAD_NECKVINES =
             BIG_BAD_OBJ + "/BIGBAD_ANIM/MORPH_GUYS/NECKVINES";
@@ -121,6 +121,8 @@ public static class PromisedEigongModGlobalSettings
             BIG_BAD_OBJ + "/BIGBAD_ANIM/STATIC_OBJS";
         public const string BIG_BAD_MEATBALL =
             BIG_BAD_OBJ + "/HighEndFX(Disable for Switch)/P_MeatBall";
+        public const string BIG_BAD_MEATBALL_1 =
+            BIG_BAD_OBJ + "/HighEndFX(Disable for Switch)/P_MeatBall (1)";
         public const string BIG_BAD_MEATBALL_2 =
             BIG_BAD_OBJ + "/HighEndFX(Disable for Switch)/P_MeatBall (2)";
 
@@ -261,9 +263,11 @@ public static class PromisedEigongModGlobalSettings
 
         public const float EIGONG_TRANSFORM_COLORCHANGE_SATURATION = 0;
         public const float EIGONG_TRANSFORM_COLORCHANGE_VALUE_BRIGHTNESS = 3.3f;
+        public const float EIGONG_TRANSFORM_COLORCHANGE_VALUE_BRIGHTNESS_HC = 1.9f;
         public const float EIGONG_TRANSFORM_SHADOW_COLORCHANGE_VALUE_BRIGHTNESS = 0f;
         public const int EIGONG_TRANSFORM_OVERLAY_BLEND_MODE = 7;
         public const float EIGONG_TRANSFORM_OVERLAY_ALPHA = 2.3f;
+        public const float EIGONG_TRANSFORM_OVERLAY_ALPHA_HC = 1.7f;
         public const float EIGONG_BURNING_FX_STRENGTH = 0.53f;
         public const float EIGONG_CHARACTER_SWORD_EFFECT_SHIFT = 522;
         public const float EIGONG_SWORD_SATURATION = 5f;

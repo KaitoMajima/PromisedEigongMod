@@ -19,6 +19,8 @@ using static PromisedEigongModGlobalSettings.EigongColors;
 //TODO: Join this class and EffectsManager class that I separated for some reason
 public class GameplayEffectManager : IDisposable
 {
+    bool IsHighContrast => PromisedEigongMain.highContrastEigong.Value;
+    
     MonsterBase loadedEigong;
     ICoroutineRunner runner;
     EigongWrapper wrapper;
@@ -199,13 +201,13 @@ public class GameplayEffectManager : IDisposable
         spriteFollower.followRenderer = eigongHairRenderer;
         spriteSetter.ReferenceSpriteRenderer = eigongHairRenderer;
         colorChange._Saturation = EIGONG_TRANSFORM_COLORCHANGE_SATURATION;
-        colorChange._ValueBrightness = EIGONG_TRANSFORM_COLORCHANGE_VALUE_BRIGHTNESS;
+        colorChange._ValueBrightness = IsHighContrast ? EIGONG_TRANSFORM_COLORCHANGE_VALUE_BRIGHTNESS_HC : EIGONG_TRANSFORM_COLORCHANGE_VALUE_BRIGHTNESS;
         overlay._Color1 = EIGONG_TRANSFORM_OVERLAY_COLOR_UPPER;
         overlay._Color2 = EIGONG_TRANSFORM_OVERLAY_COLOR_LOWER;
         overlay._Color3 = EIGONG_TRANSFORM_OVERLAY_COLOR_LOWER;
         overlay._Color4 = EIGONG_TRANSFORM_OVERLAY_COLOR_LOWER;
         overlay.BlendMode = EIGONG_TRANSFORM_OVERLAY_BLEND_MODE;
-        overlay._Alpha = EIGONG_TRANSFORM_OVERLAY_ALPHA;
+        overlay._Alpha = IsHighContrast ? EIGONG_TRANSFORM_OVERLAY_ALPHA_HC : EIGONG_TRANSFORM_OVERLAY_ALPHA;
     }
     
     void PlaySoundEffect (string sfxPath, int boost)

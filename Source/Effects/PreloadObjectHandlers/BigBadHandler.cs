@@ -1,4 +1,8 @@
-﻿namespace PromisedEigong.PreloadObjectHandlers;
+﻿using System;
+using PromisedEigong.Effects.GameplayEffects;
+using PromisedEigong.ModSystem;
+
+namespace PromisedEigong.PreloadObjectHandlers;
 #nullable disable
 
 using UnityEngine;
@@ -6,6 +10,8 @@ using static PromisedEigongModGlobalSettings.EigongBackground;
 
 public class BigBadHandler : MonoBehaviour
 {
+    GraphicsSettingsType graphicsSettings = PromisedEigongMain.graphicsSettings.Value;
+    
     Transform playerTransform;
     Transform bigBadHead;
     Transform bigBadHair;
@@ -45,7 +51,22 @@ public class BigBadHandler : MonoBehaviour
         
         var direction = transform.position - playerTransform.position;
 
-        var minTolerance = 0.001f;
+        float minTolerance;
+
+        switch (graphicsSettings)
+        {
+            case GraphicsSettingsType.High:
+                minTolerance = 0.001f;
+                break;
+            case GraphicsSettingsType.Medium:
+                minTolerance = 0.01f;
+                break;
+            case GraphicsSettingsType.Low:
+                minTolerance = 0.1f;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
         
         if (direction.sqrMagnitude < minTolerance)
             return;
@@ -94,8 +115,17 @@ public class BigBadHandler : MonoBehaviour
     
     void ModifyMeatball ()
     {
-        var meatball = GameObject.Find(BIG_BAD_MEATBALL_2);
-        var meatballParticles = meatball.GetComponent<ParticleSystem>();
+        var meatball1 = GameObject.Find(BIG_BAD_MEATBALL_1);
+        var meatball2 = GameObject.Find(BIG_BAD_MEATBALL_2);
+        
+        if (graphicsSettings is GraphicsSettingsType.Medium or GraphicsSettingsType.Low)
+        {
+            meatball1.SetActive(false);
+            meatball2.SetActive(false);
+            return;
+        }
+        
+        var meatballParticles = meatball2.GetComponent<ParticleSystem>();
         var meatballShape = meatballParticles.shape;
         meatballShape.position = BIG_BAD_MEATBALL_2_SHAPE_POSITION;
         meatballShape.scale = BIG_BAD_MEATBALL_2_SHAPE_SCALE;
@@ -103,7 +133,7 @@ public class BigBadHandler : MonoBehaviour
     
     void IncreaseSizeAndKillAnimator ()
     {
-        var bigBadAnim = GameObject.Find(BIG_BAD_ANIMATION);
+        var bigBadAnim = GameObject.Find(BIG_BAD_ANIMATOR);
         bigBadAnim.GetComponent<Animator>().enabled = false;
 
         bigBadHead.transform.localScale = BIG_BAD_HEAD_SCALE;
