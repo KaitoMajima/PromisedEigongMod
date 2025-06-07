@@ -198,7 +198,7 @@ public class EigongWrapper : MonoBehaviour, ICoroutineRunner
             new _34TeleportToTopSafeguardPhase3Factory(),
             new _35JumpBackSafeguardPhase3Factory(),
             new _36AlternateSlashUpCrimsonPokeChainFactory(),
-            new _37AlternateSlashUpCrimsonPokeChainFactory(),
+            new _37AlternateJumpBackPokeChainFactory(),
             new _38SpecialDoubleAttackFactory(),
             new _39SpecialDAJumpBackPhase3Factory(),
             new _40TeleportToBackComboPhase3Changer()
