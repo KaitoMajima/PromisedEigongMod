@@ -33,6 +33,7 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
     public Harmony Harmony = null!;
     
     public static ConfigEntry<bool> isLvl0Challenge;
+    public static ConfigEntry<bool> shufflerChallenge;
     public static ConfigEntry<bool> shouldSkipHub;
 
     ConfigEntry<bool> isUsingHotReload;
@@ -81,6 +82,8 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
     {
         isLvl0Challenge = Config.Bind("Debug", "LVL0Challenge", false,
             "(STILL WIP) For now, all this does is make the fire damage more forgiving. Makes lvl 0 challenges a little more bearable.");
+        shufflerChallenge = Config.Bind("Debug", "ShufflerChallenge", true,
+            "Shuffles every attack transition as an added challenge to prevent AI manipulation.");
         shouldSkipHub = Config.Bind("Debug", "AutoSkipHub", false,
             "Auto skip New Kunlun Control Hub if you're playing an Eigong save outside of MoB.");
         isUsingHotReload = Config.Bind("Debug", "IsUsingHotReload", false,

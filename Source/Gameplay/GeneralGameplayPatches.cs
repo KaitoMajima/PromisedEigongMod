@@ -1,4 +1,5 @@
-﻿using NineSolsAPI;
+﻿using System.Linq;
+using PromisedEigong.ModSystem;
 using UnityEngine;
 
 namespace PromisedEigong.Gameplay;
@@ -9,7 +10,6 @@ using AttackFactories;
 using UnityEngine.SceneManagement;
 using HarmonyLib;
 using static PromisedEigongModGlobalSettings.EigongRefs;
-using static HarmonyLib.AccessTools;
 
 public delegate void OnAttackEnterHandler (BossStateIdentifier previousState, BossStateIdentifier currentState);
 public delegate void OnAttackStartHandler (BossStateIdentifier currentState);
@@ -67,6 +67,30 @@ public class GeneralGameplayPatches
     }
     
     [HarmonyPrefix]
+    [HarmonyPatch(typeof(BossGeneralState), "LinkMove")]
+    public static bool MoveShuffle (BossGeneralState __instance)
+    {
+        if (!PromisedEigongMain.shufflerChallenge.Value)
+            return true;
+        
+        Scene activeScene = SceneManager.GetActiveScene();
+        
+        if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
+            return true;
+
+        if (__instance.linkNextMoveStateWeights.Count < __instance.monster.PhaseIndex + 1)
+            return true;
+        
+        LinkNextMoveStateWeight currentLinkMoveSet =
+            __instance.linkNextMoveStateWeights[__instance.monster.PhaseIndex];
+
+        var systemRandomTest = new System.Random();
+        List<AttackWeight> newStateWeights = currentLinkMoveSet.stateWeightList.OrderBy(_ => systemRandomTest.NextDouble()).ToList();
+        currentLinkMoveSet.stateWeightList = newStateWeights;
+        return true;
+    }
+    
+    [HarmonyPrefix]
     [HarmonyPatch(typeof(BossGeneralState), "LinkMoveInterruptConditional")]
     public static bool FixInterruptMoves (BossGeneralState __instance)
     {
@@ -77,12 +101,12 @@ public class GeneralGameplayPatches
         
         if (Player.i.CurrentStateType == PlayerStateType.HurtGrabbed)
             return false;
+        
+        if (__instance.linkInterruptMoveConditionalWeights.Count < __instance.monster.PhaseIndex + 1)
+            return false;
 
         LinkNextMoveStateWeight currentInterruptLinkMoveSet =
             __instance.linkInterruptMoveConditionalWeights[__instance.monster.PhaseIndex];
-        
-        if (currentInterruptLinkMoveSet == null)
-            return false;
         
         List<AttackWeight> stateWeightList = currentInterruptLinkMoveSet.stateWeightList;
 
@@ -102,7 +126,8 @@ public class GeneralGameplayPatches
         
         AttackWeight selectedStateWeight = selectedStateWeights[Random.Range(0, selectedStateWeights.Count)];
         MonsterBase.States selectedStateType = selectedStateWeight.StateType;
-        BossGeneralState selectedState = __instance.monster.ChangeStateIfValid(selectedStateType) as BossGeneralState;
+        var selectedState = __instance.monster.ChangeStateIfValid(selectedStateType) as BossGeneralState;
+        
         if (selectedState != null)
         {
             selectedState.bindSensor = __instance.bindSensor;
@@ -123,7 +148,6 @@ public class GeneralGameplayPatches
         if (activeScene.name is not (SCENE_NORMAL_ENDING_EIGONG or SCENE_TRUE_ENDING_EIGONG))
             return;
         
-        // if (ModifiedBossGeneralStateManager.IsCurrentAttackAChain)
         QueuedAttacks.Clear();
     }
 }
