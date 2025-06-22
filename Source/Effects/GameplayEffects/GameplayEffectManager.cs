@@ -57,7 +57,6 @@ public class GameplayEffectManager : IDisposable
     {
         var eigongTargetPiece = GameObject.Find(EIGONG_CHARACTER_BODY);
         var spriteFlasherObj = GameObject.Find(EIGONG_SPRITE_FLASHER);
-        ToastManager.Toast(spriteFlasherObj);
         var spriteFlasher = spriteFlasherObj.GetComponent<SpriteFlasher>();
         var eigongPieceRenderer = eigongTargetPiece.GetComponent<SpriteRenderer>();
         var eigongFlashOverlayObj = new GameObject();
