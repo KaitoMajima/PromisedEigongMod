@@ -97,7 +97,7 @@ The theme for Phase 3 is now replaced by the Nine Sols main theme.
 
 # Hall of Fame
 
-## Top 10 Public Clears:
+## Top 10 Public Clears
 1. Miyumi
 2. Dex
 3. classyy
@@ -109,12 +109,12 @@ The theme for Phase 3 is now replaced by the Nine Sols main theme.
 9. 回响Vessel
 10. Neto
 
-## First Hitless Clear:
+## First Hitless Clear
 classyy
 
-## First Damageless Clear:
+## First Damageless Clear
 Adorn
 
-## First Lvl 0 Clear:
+## First Lvl 0 Clear
 ???
 (Spot still open for the first lvl 0 clear)
