@@ -1,3 +1,7 @@
+## 1.1.1
+- Sprite Flasher Fix: Now Eigong flashes her sprite as she used to in the original fight. It's strength can be adjustable in the config file settings.
+- Added Hall of Fame in the Mod Description
+
 ## 1.1.0
 - New Challenge: Shuffler - When turned on, Promised Eigong's transitions after attacks are shuffled, preventing AI manipulation tactics and enforcing adaptation skills.
 - New Graphics Settings: High Contrast - When turned on, Eigong will have darker colors in Phase 3, making it easier to tell her from the background.

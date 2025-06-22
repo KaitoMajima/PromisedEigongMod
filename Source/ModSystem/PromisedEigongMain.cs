@@ -39,6 +39,7 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
     public static ConfigEntry<bool> shouldSkipHub;
     public static ConfigEntry<bool> highContrastEigong;
     public static ConfigEntry<GraphicsSettingsType> graphicsSettings;
+    public static ConfigEntry<float> spriteFlasherStrength;
 
     ConfigEntry<bool> isUsingHotReload;
     bool canPreload = true;
@@ -92,6 +93,8 @@ public class PromisedEigongMain : BaseUnityPlugin, ICoroutineRunner
             "If you're having trouble with Eigong's visibility in Phase 3, toggle this ON and she should have more contrast with the background.");
         graphicsSettings = Config.Bind("Graphics", "General Mod Graphics", GraphicsSettingsType.High,
             "Change here the settings of the mod's graphics if you're having performance issues.");
+        spriteFlasherStrength = Config.Bind("Graphics", "Sprite Flasher Strength", 0.7f,
+            "The strength value in which Eigong's sprite will flash when hit. From 0 to 1, 0 does not flash at all, while 1 flashes the strongest.");
         shouldSkipHub = Config.Bind("Debug", "AutoSkipHub", false,
             "Auto skip New Kunlun Control Hub if you're playing an Eigong save outside of MoB.");
         isUsingHotReload = Config.Bind("Debug", "IsUsingHotReload", false,

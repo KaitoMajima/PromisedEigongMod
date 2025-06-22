@@ -35,6 +35,7 @@ public class GameplayEffectManager : IDisposable
     public void Initialize ()
     {
         AddListeners();
+        AddSpriteFlasherSubstitute();
     }
 
     void AddListeners ()
@@ -50,6 +51,29 @@ public class GameplayEffectManager : IDisposable
         PoolObjectPatches.OnFoundJudgmentCutEigongBody -= HandleFoundJudgmentCutBody;
         PoolObjectPatches.OnFoundJudgmentCutEigongHair -= HandleFoundJudgmentCutHair;
         PoolObjectPatches.OnFoundJudgmentCutEigongTianhuoHair -= HandleFoundJudgmentCutTianhuoHair;
+    }
+    
+    void AddSpriteFlasherSubstitute ()
+    {
+        var eigongTargetPiece = GameObject.Find(EIGONG_CHARACTER_BODY);
+        var spriteFlasherObj = GameObject.Find(EIGONG_SPRITE_FLASHER);
+        ToastManager.Toast(spriteFlasherObj);
+        var spriteFlasher = spriteFlasherObj.GetComponent<SpriteFlasher>();
+        var eigongPieceRenderer = eigongTargetPiece.GetComponent<SpriteRenderer>();
+        var eigongFlashOverlayObj = new GameObject();
+        eigongFlashOverlayObj.transform.SetParent(eigongTargetPiece.transform);
+        var overlaySpriteRenderer = eigongFlashOverlayObj.AddComponent<SpriteRenderer>();
+        var spriteFollower = eigongFlashOverlayObj.AddComponent<SpriteFollower>();
+        var spriteSetter = eigongFlashOverlayObj.AddComponent<SpriteSetter>();
+        var spriteFlasherSubstitute = eigongFlashOverlayObj.AddComponent<SpriteFlasherSubstitute>();
+        var colorChanger = eigongFlashOverlayObj.AddComponent<_2dxFX_ColorRGB>();
+        colorChanger._ColorR = EIGONG_SPRITE_FLASH_COLOR.r;
+        colorChanger._ColorG = EIGONG_SPRITE_FLASH_COLOR.g;
+        colorChanger._ColorB = EIGONG_SPRITE_FLASH_COLOR.b;
+        colorChanger._Alpha = PromisedEigongMain.spriteFlasherStrength.Value;
+        spriteFlasherSubstitute.Setup(spriteFlasher, overlaySpriteRenderer);
+        spriteFollower.followRenderer = eigongPieceRenderer;
+        spriteSetter.ReferenceSpriteRenderer = eigongPieceRenderer;
     }
     
     void HandleEigongStateChanged (BossStateIdentifier currentState)
@@ -192,14 +216,14 @@ public class GameplayEffectManager : IDisposable
 
     void ApplyTransformationColorChange (
         SpriteFollower spriteFollower, 
-        SpriteRenderer eigongHairRenderer,
+        SpriteRenderer eigongRenderer,
         SpriteSetter spriteSetter, 
         _2dxFX_AL_ColorChange colorChange, 
         _2dxFX_AL_4Gradients overlay
     )
     {
-        spriteFollower.followRenderer = eigongHairRenderer;
-        spriteSetter.ReferenceSpriteRenderer = eigongHairRenderer;
+        spriteFollower.followRenderer = eigongRenderer;
+        spriteSetter.ReferenceSpriteRenderer = eigongRenderer;
         colorChange._Saturation = EIGONG_TRANSFORM_COLORCHANGE_SATURATION;
         colorChange._ValueBrightness = IsHighContrast ? EIGONG_TRANSFORM_COLORCHANGE_VALUE_BRIGHTNESS_HC : EIGONG_TRANSFORM_COLORCHANGE_VALUE_BRIGHTNESS;
         overlay._Color1 = EIGONG_TRANSFORM_OVERLAY_COLOR_UPPER;
@@ -251,7 +275,6 @@ public class GameplayEffectManager : IDisposable
         spriteRenderer.sortingOrder = value;
         spriteRenderer.sortingLayerName = "Monster";
     }
-
 
     IEnumerator SlowStarterMultipleVFX (float interval)
     {

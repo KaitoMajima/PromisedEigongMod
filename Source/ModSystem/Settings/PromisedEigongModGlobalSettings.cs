@@ -230,7 +230,11 @@ public static class PromisedEigongModGlobalSettings
         public const string FIRE_TRAIL_PATH =
             "GameLevel/Room/Prefab/EventBinder/General Boss Fight FSM Object Variant/" +
             "FSM Animator/LogicRoot/---Boss---/Boss_Yi Gung/MonsterCore/Animator(Proxy)/Animator/LogicRoot/Phase1 Activator/FireFX _ Fxplayer";
-            
+
+        public const string EIGONG_SPRITE_FLASHER =
+            "GameLevel/Room/Prefab/EventBinder/General Boss Fight FSM Object Variant/" +
+            "FSM Animator/LogicRoot/---Boss---/Boss_Yi Gung/MonsterCore/Animator(Proxy)/Animator";
+        
         public const string EIGONG_CHARACTER_BODY = EIGONG_CHARACTER_VIEW_PATH + "/Body";
         public const string EIGONG_CHARACTER_BODY_NAME = "Body";
         public const string EIGONG_CHARACTER_HAIR_SPRITE = EIGONG_CHARACTER_VIEW_PATH + "/Head/Hair/YiGong_Hair";
@@ -260,6 +264,7 @@ public static class PromisedEigongModGlobalSettings
         public static readonly Color EIGONG_TRANSFORM_OVERLAY_COLOR_LOWER = new(1, 0, 0, 1);
         public static readonly Color EIGONG_TRANSFORM_SHADOW_OVERLAY_COLOR_UPPER = new(0.1f, 0, 0.01f, 1);
         public static readonly Color EIGONG_TRANSFORM_SHADOW_OVERLAY_COLOR_LOWER = new(0.2f, 0, 0, 1);
+        public static readonly Color EIGONG_SPRITE_FLASH_COLOR = new(1, 1, 1);
 
         public const float EIGONG_TRANSFORM_COLORCHANGE_SATURATION = 0;
         public const float EIGONG_TRANSFORM_COLORCHANGE_VALUE_BRIGHTNESS = 3.3f;

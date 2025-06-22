@@ -93,3 +93,28 @@ The theme for Phase 3 is now replaced by the Nine Sols main theme.
 ## Graphics
 - **High Contrast Eigong**: If you're having trouble with Eigong's visibility in Phase 3, toggle this ON and she should have more contrast with the background.
 - **General Mod Graphics**: Change here the settings of the mod's graphics if you're having performance issues.
+- **Sprite Flasher Strength**: The strength value in which Eigong's sprite will flash when hit. From 0 to 1, 0 does not flash at all, while 1 flashes the strongest.
+
+# Hall of Fame
+
+## Top 10 Public Clears:
+1. Miyumi
+2. Dex
+3. classyy
+4. Adorn
+5. Starlynn
+6. The One who Games
+7. SharZz
+8. 小颽
+9. 回响Vessel
+10. Neto
+
+## First Hitless Clear:
+classyy
+
+## First Damageless Clear:
+Adorn
+
+## First Lvl 0 Clear:
+???
+(Spot still open for the first lvl 0 clear)
